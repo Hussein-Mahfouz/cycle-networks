@@ -1,0 +1,1570 @@
+{
+  "weighting_profiles": [
+    {
+      "name": "foot",
+      "way": "motorway",
+      "value": 0
+    },
+    {
+      "name": "foot",
+      "way": "trunk",
+      "value": 0.4
+    },
+    {
+      "name": "foot",
+      "way": "primary",
+      "value": 0.5,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "secondary",
+      "value": 0.6,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "unclassified",
+      "value": 0.8,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "residential",
+      "value": 0.9,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "service",
+      "value": 0.9,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "track",
+      "value": 0.95,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "cycleway",
+      "value": 0.95,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "path",
+      "value": 1,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "steps",
+      "value": 0.8,
+      "max_speed": 2
+    },
+    {
+      "name": "foot",
+      "way": "ferry",
+      "value": 0.2,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "living_street",
+      "value": 0.95,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "bridleway",
+      "value": 1,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "footway",
+      "value": 1,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "pedestrian",
+      "value": 1,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "motorway_link",
+      "value": 0
+    },
+    {
+      "name": "foot",
+      "way": "trunk_link",
+      "value": 0.4
+    },
+    {
+      "name": "foot",
+      "way": "primary_link",
+      "value": 0.5,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "secondary_link",
+      "value": 0.6,
+      "max_speed": 5
+    },
+    {
+      "name": "foot",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 5
+    },
+    {
+      "name": "horse",
+      "way": "motorway",
+      "value": 0
+    },
+    {
+      "name": "horse",
+      "way": "trunk",
+      "value": 0.25
+    },
+    {
+      "name": "horse",
+      "way": "primary",
+      "value": 0.5,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "secondary",
+      "value": 0.5,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "tertiary",
+      "value": 0.75,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "unclassified",
+      "value": 0.75,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "residential",
+      "value": 0.75,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "service",
+      "value": 0.75,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "track",
+      "value": 1,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "cycleway",
+      "value": 0.9,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "path",
+      "value": 1,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "steps",
+      "value": 0,
+      "max_speed": 2
+    },
+    {
+      "name": "horse",
+      "way": "ferry",
+      "value": 0.2,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "living_street",
+      "value": 0.8,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "bridleway",
+      "value": 1,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "footway",
+      "value": 1,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "pedestrian",
+      "value": 0.2,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "motorway_link",
+      "value": 0
+    },
+    {
+      "name": "horse",
+      "way": "trunk_link",
+      "value": 0.25
+    },
+    {
+      "name": "horse",
+      "way": "primary_link",
+      "value": 0.5,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "secondary_link",
+      "value": 0.5,
+      "max_speed": 6.4
+    },
+    {
+      "name": "horse",
+      "way": "tertiary_link",
+      "value": 0.75,
+      "max_speed": 6.4
+    },
+    {
+      "name": "wheelchair",
+      "way": "motorway",
+      "value": 0
+    },
+    {
+      "name": "wheelchair",
+      "way": "trunk",
+      "value": 0.4
+    },
+    {
+      "name": "wheelchair",
+      "way": "primary",
+      "value": 0.5,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "secondary",
+      "value": 0.6,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "unclassified",
+      "value": 0.8,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "residential",
+      "value": 0.9,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "service",
+      "value": 0.9,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "track",
+      "value": 0.95,
+      "max_speed": 2
+    },
+    {
+      "name": "wheelchair",
+      "way": "cycleway",
+      "value": 0.95,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "path",
+      "value": 1,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "wheelchair",
+      "way": "ferry",
+      "value": 0.2,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "living_street",
+      "value": 0.95,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "bridleway",
+      "value": 0.5
+    },
+    {
+      "name": "wheelchair",
+      "way": "footway",
+      "value": 1,
+      "max_speed": 4
+    },
+    {
+      "name": "wheelchair",
+      "way": "pedestrian",
+      "value": 1,
+      "max_speed": 4
+    },
+    {
+      "name": "wheelchair",
+      "way": "motorway_link",
+      "value": 0
+    },
+    {
+      "name": "wheelchair",
+      "way": "trunk_link",
+      "value": 0.4
+    },
+    {
+      "name": "wheelchair",
+      "way": "primary_link",
+      "value": 0.5,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "secondary_link",
+      "value": 0.6,
+      "max_speed": 5
+    },
+    {
+      "name": "wheelchair",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 5
+    },
+    {
+      "name": "bicycle",
+      "way": "motorway",
+      "value": 0
+    },
+    {
+      "name": "bicycle",
+      "way": "trunk",
+      "value": 0
+    },
+    {
+      "name": "bicycle",
+      "way": "primary",
+      "value": 0,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "tertiary",
+      "value": 0.9,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "unclassified",
+      "value": 0.9,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "residential",
+      "value": 0.9,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "service",
+      "value": 0.9,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "track",
+      "value": 0.9,
+      "max_speed": 12
+    },
+    {
+      "name": "bicycle",
+      "way": "cycleway",
+      "value": 1,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "path",
+      "value": 0.9,
+      "max_speed": 12
+    },
+    {
+      "name": "bicycle",
+      "way": "steps",
+      "value": 0.5,
+      "max_speed": 4
+    },
+    {
+      "name": "bicycle",
+      "way": "ferry",
+      "value": 0.2,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "living_street",
+      "value": 0.95,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "bridleway",
+      "value": 0.7,
+      "max_speed": 8
+    },
+    {
+      "name": "bicycle",
+      "way": "footway",
+      "value": 0.9,
+      "max_speed": 4
+    },
+    {
+      "name": "bicycle",
+      "way": "pedestrian",
+      "value": 0.8,
+      "max_speed": 4
+    },
+    {
+      "name": "bicycle",
+      "way": "motorway_link",
+      "value": 0
+    },
+    {
+      "name": "bicycle",
+      "way": "trunk_link",
+      "value": 0.6
+    },
+    {
+      "name": "bicycle",
+      "way": "primary_link",
+      "value": 0.7,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 15
+    },
+    {
+      "name": "bicycle",
+      "way": "tertiary_link",
+      "value": 0.9,
+      "max_speed": 15
+    },
+    {
+      "name": "moped",
+      "way": "motorway",
+      "value": 0,
+      "max_speed": 50
+    },
+    {
+      "name": "moped",
+      "way": "trunk",
+      "value": 0.9,
+      "max_speed": 50
+    },
+    {
+      "name": "moped",
+      "way": "primary",
+      "value": 1,
+      "max_speed": 50
+    },
+    {
+      "name": "moped",
+      "way": "secondary",
+      "value": 0.9,
+      "max_speed": 50
+    },
+    {
+      "name": "moped",
+      "way": "tertiary",
+      "value": 0.8,
+      "max_speed": 40
+    },
+    {
+      "name": "moped",
+      "way": "unclassified",
+      "value": 0.7,
+      "max_speed": 25
+    },
+    {
+      "name": "moped",
+      "way": "residential",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "moped",
+      "way": "service",
+      "value": 0.5,
+      "max_speed": 15
+    },
+    {
+      "name": "moped",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "moped",
+      "way": "living_street",
+      "value": 0.6,
+      "max_speed": 10
+    },
+    {
+      "name": "moped",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "moped",
+      "way": "motorway_link",
+      "value": 0,
+      "max_speed": 45
+    },
+    {
+      "name": "moped",
+      "way": "trunk_link",
+      "value": 0.9,
+      "max_speed": 40
+    },
+    {
+      "name": "moped",
+      "way": "primary_link",
+      "value": 1,
+      "max_speed": 30
+    },
+    {
+      "name": "moped",
+      "way": "secondary_link",
+      "value": 0.9,
+      "max_speed": 25
+    },
+    {
+      "name": "moped",
+      "way": "tertiary_link",
+      "value": 0.8,
+      "max_speed": 20
+    },
+    {
+      "name": "motorcycle",
+      "way": "motorway",
+      "value": 1,
+      "max_speed": 90
+    },
+    {
+      "name": "motorcycle",
+      "way": "trunk",
+      "value": 1,
+      "max_speed": 85
+    },
+    {
+      "name": "motorcycle",
+      "way": "primary",
+      "value": 0.9,
+      "max_speed": 65
+    },
+    {
+      "name": "motorcycle",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 55
+    },
+    {
+      "name": "motorcycle",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 40
+    },
+    {
+      "name": "motorcycle",
+      "way": "unclassified",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcycle",
+      "way": "residential",
+      "value": 0.5,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcycle",
+      "way": "service",
+      "value": 0.4,
+      "max_speed": 15
+    },
+    {
+      "name": "motorcycle",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "motorcycle",
+      "way": "living_street",
+      "value": 0.5,
+      "max_speed": 10
+    },
+    {
+      "name": "motorcycle",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "motorcycle",
+      "way": "motorway_link",
+      "value": 1,
+      "max_speed": 45
+    },
+    {
+      "name": "motorcycle",
+      "way": "trunk_link",
+      "value": 1,
+      "max_speed": 40
+    },
+    {
+      "name": "motorcycle",
+      "way": "primary_link",
+      "value": 0.9,
+      "max_speed": 30
+    },
+    {
+      "name": "motorcycle",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcycle",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 20
+    },
+    {
+      "name": "motorcar",
+      "way": "motorway",
+      "value": 1,
+      "max_speed": 90
+    },
+    {
+      "name": "motorcar",
+      "way": "trunk",
+      "value": 1,
+      "max_speed": 85
+    },
+    {
+      "name": "motorcar",
+      "way": "primary",
+      "value": 0.9,
+      "max_speed": 65
+    },
+    {
+      "name": "motorcar",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 55
+    },
+    {
+      "name": "motorcar",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "way": "unclassified",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcar",
+      "way": "residential",
+      "value": 0.5,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcar",
+      "way": "service",
+      "value": 0.4,
+      "max_speed": 15
+    },
+    {
+      "name": "motorcar",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "motorcar",
+      "way": "living_street",
+      "value": 0.4,
+      "max_speed": 10
+    },
+    {
+      "name": "motorcar",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "motorcar",
+      "way": "motorway_link",
+      "value": 1,
+      "max_speed": 45
+    },
+    {
+      "name": "motorcar",
+      "way": "trunk_link",
+      "value": 1,
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "way": "primary_link",
+      "value": 0.9,
+      "max_speed": 30
+    },
+    {
+      "name": "motorcar",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 25
+    },
+    {
+      "name": "motorcar",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 20
+    },
+    {
+      "name": "goods",
+      "way": "motorway",
+      "value": 1,
+      "max_speed": 90
+    },
+    {
+      "name": "goods",
+      "way": "trunk",
+      "value": 1,
+      "max_speed": 85
+    },
+    {
+      "name": "goods",
+      "way": "primary",
+      "value": 0.9,
+      "max_speed": 65
+    },
+    {
+      "name": "goods",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 55
+    },
+    {
+      "name": "goods",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 40
+    },
+    {
+      "name": "goods",
+      "way": "unclassified",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "goods",
+      "way": "residential",
+      "value": 0.5,
+      "max_speed": 25
+    },
+    {
+      "name": "goods",
+      "way": "service",
+      "value": 0.4,
+      "max_speed": 15
+    },
+    {
+      "name": "goods",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "goods",
+      "way": "living_street",
+      "value": 0.3,
+      "max_speed": 10
+    },
+    {
+      "name": "goods",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "goods",
+      "way": "motorway_link",
+      "value": 1,
+      "max_speed": 45
+    },
+    {
+      "name": "goods",
+      "way": "trunk_link",
+      "value": 1,
+      "max_speed": 40
+    },
+    {
+      "name": "goods",
+      "way": "primary_link",
+      "value": 0.9,
+      "max_speed": 30
+    },
+    {
+      "name": "goods",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 25
+    },
+    {
+      "name": "goods",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 20
+    },
+    {
+      "name": "hgv",
+      "way": "motorway",
+      "value": 1,
+      "max_speed": 90
+    },
+    {
+      "name": "hgv",
+      "way": "trunk",
+      "value": 1,
+      "max_speed": 85
+    },
+    {
+      "name": "hgv",
+      "way": "primary",
+      "value": 0.9,
+      "max_speed": 65
+    },
+    {
+      "name": "hgv",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 55
+    },
+    {
+      "name": "hgv",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 40
+    },
+    {
+      "name": "hgv",
+      "way": "unclassified",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "hgv",
+      "way": "residential",
+      "value": 0.5,
+      "max_speed": 25
+    },
+    {
+      "name": "hgv",
+      "way": "service",
+      "value": 0.4,
+      "max_speed": 15
+    },
+    {
+      "name": "hgv",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "hgv",
+      "way": "living_street",
+      "value": 0.3,
+      "max_speed": 10
+    },
+    {
+      "name": "hgv",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "hgv",
+      "way": "motorway_link",
+      "value": 1,
+      "max_speed": 45
+    },
+    {
+      "name": "hgv",
+      "way": "trunk_link",
+      "value": 1,
+      "max_speed": 40
+    },
+    {
+      "name": "hgv",
+      "way": "primary_link",
+      "value": 0.9,
+      "max_speed": 30
+    },
+    {
+      "name": "hgv",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 25
+    },
+    {
+      "name": "hgv",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 20
+    },
+    {
+      "name": "psv",
+      "way": "motorway",
+      "value": 1,
+      "max_speed": 90
+    },
+    {
+      "name": "psv",
+      "way": "trunk",
+      "value": 1,
+      "max_speed": 85
+    },
+    {
+      "name": "psv",
+      "way": "primary",
+      "value": 0.9,
+      "max_speed": 65
+    },
+    {
+      "name": "psv",
+      "way": "secondary",
+      "value": 0.8,
+      "max_speed": 55
+    },
+    {
+      "name": "psv",
+      "way": "tertiary",
+      "value": 0.7,
+      "max_speed": 40
+    },
+    {
+      "name": "psv",
+      "way": "unclassified",
+      "value": 0.6,
+      "max_speed": 25
+    },
+    {
+      "name": "psv",
+      "way": "residential",
+      "value": 0.5,
+      "max_speed": 25
+    },
+    {
+      "name": "psv",
+      "way": "service",
+      "value": 0.4,
+      "max_speed": 15
+    },
+    {
+      "name": "psv",
+      "way": "track",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "cycleway",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "path",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "steps",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "ferry",
+      "value": 0.2
+    },
+    {
+      "name": "psv",
+      "way": "living_street",
+      "value": 0.3,
+      "max_speed": 10
+    },
+    {
+      "name": "psv",
+      "way": "bridleway",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "footway",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "pedestrian",
+      "value": 0
+    },
+    {
+      "name": "psv",
+      "way": "motorway_link",
+      "value": 1,
+      "max_speed": 45
+    },
+    {
+      "name": "psv",
+      "way": "trunk_link",
+      "value": 1,
+      "max_speed": 40
+    },
+    {
+      "name": "psv",
+      "way": "primary_link",
+      "value": 0.9,
+      "max_speed": 30
+    },
+    {
+      "name": "psv",
+      "way": "secondary_link",
+      "value": 0.8,
+      "max_speed": 25
+    },
+    {
+      "name": "psv",
+      "way": "tertiary_link",
+      "value": 0.7,
+      "max_speed": 20
+    }
+  ],
+  "surface_speeds": [
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "cement",
+      "max_speed": 80
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "compacted",
+      "max_speed": 80
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "fine_gravel",
+      "max_speed": 80
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "paving_stones",
+      "max_speed": 60
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "metal",
+      "max_speed": 60
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "bricks",
+      "max_speed": 60
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "grass",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "wood",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "sett",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "grass_paver",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "gravel",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "unpaved",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "ground",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "dirt",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "pebblestone",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "tartan",
+      "max_speed": 40
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "cobblestone",
+      "max_speed": 30
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "clay",
+      "max_speed": 30
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "earth",
+      "max_speed": 20
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "stone",
+      "max_speed": 20
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "rocky",
+      "max_speed": 20
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "sand",
+      "max_speed": 20
+    },
+    {
+      "name": "motorcar",
+      "key": "surface",
+      "value": "mud",
+      "max_speed": 10
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "cobblestone:flattened",
+      "max_speed": 10
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "paving_stones",
+      "max_speed": 10
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "compacted",
+      "max_speed": 10
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "cobblestone",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "unpaved",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "fine_gravel",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "gravel",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "pebblestone",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "ground",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "dirt",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "earth",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "grass",
+      "max_speed": 6
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "mud",
+      "max_speed": 3
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "sand",
+      "max_speed": 3
+    },
+    {
+      "name": "bicycle",
+      "key": "surface",
+      "value": "sett",
+      "max_speed": 10
+    },
+    {
+      "name": "foot",
+      "key": "surface",
+      "value": "fine_gravel",
+      "max_speed": 4
+    },
+    {
+      "name": "foot",
+      "key": "surface",
+      "value": "gravel",
+      "max_speed": 4
+    },
+    {
+      "name": "foot",
+      "key": "surface",
+      "value": "pebblestone",
+      "max_speed": 4
+    },
+    {
+      "name": "foot",
+      "key": "surface",
+      "value": "mud",
+      "max_speed": 2
+    },
+    {
+      "name": "foot",
+      "key": "surface",
+      "value": "sand",
+      "max_speed": 2
+    }
+  ],
+  "penalties": [
+    {
+      "name": "foot",
+      "traffic_lights": 2,
+      "turn": 0
+    },
+    {
+      "name": "horse",
+      "traffic_lights": 8,
+      "turn": 0
+    },
+    {
+      "name": "wheelchair",
+      "traffic_lights": 2,
+      "turn": 7.5
+    },
+    {
+      "name": "bicycle",
+      "traffic_lights": 2,
+      "turn": 6
+    },
+    {
+      "name": "moped",
+      "traffic_lights": 8,
+      "turn": 7.5
+    },
+    {
+      "name": "motorcycle",
+      "traffic_lights": 8,
+      "turn": 7.5
+    },
+    {
+      "name": "motorcar",
+      "traffic_lights": 8,
+      "turn": 7.5
+    },
+    {
+      "name": "goods",
+      "traffic_lights": 8,
+      "turn": 7.5
+    },
+    {
+      "name": "hgv",
+      "traffic_lights": 8,
+      "turn": 7.5
+    },
+    {
+      "name": "psv",
+      "traffic_lights": 8,
+      "turn": 7.5
+    }
+  ]
+}
