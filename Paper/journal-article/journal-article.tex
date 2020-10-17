@@ -1,0 +1,347 @@
+\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+  \journal{An awesome journal} % Sets Journal name
+
+
+\usepackage{lineno} % add
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}
+\usepackage{booktabs} % book-quality tables
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\bibliographystyle{elsarticle-harv}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Short Paper},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setcounter{secnumdepth}{5}
+% Pandoc toggle for numbering sections (defaults to be off)
+
+
+% Pandoc header
+
+
+
+\begin{document}
+\begin{frontmatter}
+
+  \title{Short Paper}
+    \author[Some Institute of Technology]{Alice Anonymous\corref{1}}
+   \ead{alice@example.com} 
+    \author[Another University]{Bob Security}
+   \ead{bob@example.com} 
+    \author[Another University]{Cat Memes\corref{2}}
+   \ead{cat@example.com} 
+    \author[Some Institute of Technology]{Derek Zoolander\corref{2}}
+   \ead{derek@example.com} 
+      \address[Some Institute of Technology]{Department, Street, City, State, Zip}
+    \address[Another University]{Department, Street, City, State, Zip}
+      \cortext[1]{Corresponding Author}
+    \cortext[2]{Equal contribution}
+  
+  \begin{abstract}
+  This is the abstract.
+  
+  It consists of two paragraphs.
+  \end{abstract}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(ggrepel)}
+
+\CommentTok{# this is a lookup table matching MSOAs to major towns and cities}
+\NormalTok{city_names <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{'../data-raw/Middle_Layer_Super_Output_Area__2011__to_Major_Towns_and_Cities__December_2015__Lookup_in_England_and_Wales.csv'}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   MSOA11CD = col_character(),
+##   MSOA11NM = col_character(),
+##   TCITY15CD = col_character(),
+##   TCITY15NM = col_character(),
+##   FID = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# change column name}
+\NormalTok{city_names <-}\StringTok{ }\NormalTok{city_names }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{city =}\NormalTok{ TCITY15NM)}
+
+\CommentTok{#unique cities}
+\KeywordTok{unique}\NormalTok{(city_names}\OperatorTok{$}\NormalTok{city)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] "London"               NA                     "Bolton"              
+##   [4] "Stockport"            "Rochdale"             "Salford"             
+##   [7] "Manchester"           "Oldham"               "Bury"                
+##  [10] "Wigan"                "Rotherham"            "Liverpool"           
+##  [13] "Doncaster"            "Sheffield"            "St Helens"           
+##  [16] "Barnsley"             "Southport"            "Birkenhead"          
+##  [19] "Birmingham"           "Coventry"             "Dudley"              
+##  [22] "Newcastle upon Tyne"  "Sunderland"           "Sutton Coldfield"    
+##  [25] "South Shields"        "West Bromwich"        "Gateshead"           
+##  [28] "Leeds"                "Wolverhampton"        "Bradford"            
+##  [31] "Walsall"              "Huddersfield"         "Wakefield"           
+##  [34] "Solihull"             "Halifax"              "Leicester"           
+##  [37] "Nottingham"           "Hartlepool"           "Derby"               
+##  [40] "Blackpool"            "Grimsby"              "Warrington"          
+##  [43] "Scunthorpe"           "Kingston upon Hull"   "York"                
+##  [46] "Blackburn"            "Middlesbrough"        "Stockton-on-Tees"    
+##  [49] "Darlington"           "Telford"              "Stoke-on-Trent"      
+##  [52] "Swindon"              "Bristol"              "Peterborough"        
+##  [55] "Luton"                "Southend-on-Sea"      "Gillingham"          
+##  [58] "Plymouth"             "Weston-Super-Mare"    "Bath"                
+##  [61] "Bournemouth"          "Poole"                "Portsmouth"          
+##  [64] "Milton Keynes"        "Southampton"          "Bedford"             
+##  [67] "Reading"              "Chatham"              "Bracknell"           
+##  [70] "Slough"               "High Wycombe"         "Brighton and Hove"   
+##  [73] "Cambridge"            "Carlisle"             "Chester"             
+##  [76] "Chesterfield"         "Chelmsford"           "Basildon"            
+##  [79] "Eastbourne"           "Hastings"             "Exeter"              
+##  [82] "Colchester"           "Harlow"               "Cheltenham"          
+##  [85] "Gloucester"           "Hemel Hempstead"      "St Albans"           
+##  [88] "Stevenage"            "Basingstoke"          "Burnley"             
+##  [91] "Watford"              "Maidstone"            "Preston"             
+##  [94] "Norwich"              "Lincoln"              "Harrogate"           
+##  [97] "Northampton"          "Newcastle-under-Lyme" "Oxford"              
+## [100] "Mansfield"            "Shrewsbury"           "Burton upon Trent"   
+## [103] "Woking"               "Guildford"            "Ipswich"             
+## [106] "Crawley"              "Nuneaton"             "Worthing"            
+## [109] "Redditch"             "Worcester"            "Swansea"             
+## [112] "Cardiff"              "Newport"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# number of MSOAs in each city }
+\NormalTok{no_msoas <-}\StringTok{ }\NormalTok{city_names }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(city) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{tally}\NormalTok{()}
+
+\CommentTok{##### CHOOSE YOU CITY }
+\NormalTok{chosen_city <-}\StringTok{ "Manchester"}
+\CommentTok{#create a directory to store data related to this city (does nothing if directory already exists)}
+\KeywordTok{dir.create}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"../data/"}\NormalTok{, chosen_city), }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# create sub-directory to save plots as well}
+\KeywordTok{dir.create}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"../data/"}\NormalTok{, chosen_city,}\StringTok{"/Plots"}\NormalTok{), }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{##### CHOOSE YOU CITY }
+
+\CommentTok{# flow data from the 2011 census https://www.nomisweb.co.uk/census/2011/bulk/rOD1}
+\NormalTok{flows <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{'../data-raw/flow_data.csv'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   `Area of residence` = col_character(),
+##   `Area of workplace` = col_character(),
+##   `All categories: Method of travel to work` = col_double(),
+##   `Work mainly at or from home` = col_double(),
+##   `Underground, metro, light rail, tram` = col_double(),
+##   Train = col_double(),
+##   `Bus, minibus or coach` = col_double(),
+##   Taxi = col_double(),
+##   `Motorcycle, scooter or moped` = col_double(),
+##   `Driving a car or van` = col_double(),
+##   `Passenger in a car or van` = col_double(),
+##   Bicycle = col_double(),
+##   `On foot` = col_double(),
+##   `Other method of travel to work` = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{###############}
+\CommentTok{# MERGING NAMES WITH FLOW DATA (TO GET INTERNAL FLOWS IN ANY CITY)}
+\CommentTok{###############}
+
+\CommentTok{# add a column with the city name corresponding to each Residence MSOA}
+\NormalTok{flows <-}\StringTok{ }\NormalTok{flows }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(city_names[,}\KeywordTok{c}\NormalTok{(}\StringTok{"MSOA11CD"}\NormalTok{, }\StringTok{"city"}\NormalTok{)],}
+                             \DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"Area of residence"}\NormalTok{ =}\StringTok{ "MSOA11CD"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{city_origin =}\NormalTok{ city) }\CommentTok{# rename column so that we know it is referring to the 'Area of residence'}
+
+\CommentTok{# add a column with the city name corresponding to each Workplace MSOA}
+\NormalTok{flows <-}\StringTok{ }\NormalTok{flows }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(city_names[,}\KeywordTok{c}\NormalTok{(}\StringTok{"MSOA11CD"}\NormalTok{, }\StringTok{"city"}\NormalTok{)],}
+                             \DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"Area of workplace"}\NormalTok{ =}\StringTok{ "MSOA11CD"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{city_dest =}\NormalTok{ city) }\CommentTok{# rename column so that we know it is referring to the 'Area of workplace'}
+
+\CommentTok{# get mode share for all cities - just for report}
+\NormalTok{cycle_mode_share <-}\StringTok{ }\NormalTok{flows }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(city_origin }\OperatorTok{==}\StringTok{ }\NormalTok{city_dest) }\OperatorTok{%>%}\StringTok{   }\CommentTok{# only internal flows}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(city_origin, city_dest) }\OperatorTok{%>%}\StringTok{   }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{mode_share =}\NormalTok{ (}\KeywordTok{sum}\NormalTok{(Bicycle) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{All categories: Method of travel to work}\StringTok{`}\NormalTok{)) }\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+            \DataTypeTok{all =} \KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{All categories: Method of travel to work}\StringTok{`}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(mode_share)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` regrouping output by 'city_origin' (override with `.groups` argument)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# plot }
+\NormalTok{cycle_mode_share }\OperatorTok{%>%}\StringTok{ }\CommentTok{#filter(city_origin != 'London') %>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(all, mode_share)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{alpha =}\NormalTok{ mode_share), }\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\CommentTok{# some filtering labels for aesthetic purposes. Add some cities explicitly as they are in my case study}
+\StringTok{  }\KeywordTok{geom_label_repel}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{ifelse}\NormalTok{(mode_share}\OperatorTok{>}\DecValTok{12} \OperatorTok{|}\StringTok{ }\NormalTok{all}\OperatorTok{>}\StringTok{ }\NormalTok{(}\FloatTok{2.3}\OperatorTok{*}\KeywordTok{mean}\NormalTok{(all)) }\OperatorTok{|}\StringTok{ }\NormalTok{city_origin }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'Manchester'}\NormalTok{, }\StringTok{'Nottingham'}\NormalTok{, }\StringTok{'Birmingham'}\NormalTok{) , }\KeywordTok{as.character}\NormalTok{(city_origin),}\StringTok{''}\NormalTok{)), }
+                       \DataTypeTok{size =}\FloatTok{2.5}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"Total Number of Commuters"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Cycling Mode Share (%)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{trans=}\StringTok{'log10'}\NormalTok{, }\DataTypeTok{labels =}\NormalTok{ scales}\OperatorTok{::}\NormalTok{comma) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{journal-article_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\hypertarget{what-affects-the-decision-to-cycle}{%
+\section{What Affects the Decision To
+Cycle}\label{what-affects-the-decision-to-cycle}}
+
+\hypertarget{planning-cycling-networks}{%
+\section{Planning Cycling Networks}\label{planning-cycling-networks}}
+
+\hypertarget{potential-cycling-demand}{%
+\section{Potential Cycling Demand}\label{potential-cycling-demand}}
+
+\begin{align}\label{eq:pcteqn}
+     logit(C_{p}) = & -4.018 - 0.6369d +  1.988\sqrt{d} + 0.008775d^2\\ & - 0.2555s + 0.00206ds -0.1234\sqrt{d}s\nonumber 
+\end{align}
+
+\hypertarget{routing}{%
+\section{Routing}\label{routing}}
+
+\hypertarget{road-segment-prioritization}{%
+\section{Road Segment
+Prioritization}\label{road-segment-prioritization}}
+
+\hypertarget{analysis-of-methodology}{%
+\section{Analysis of Methodology}\label{analysis-of-methodology}}
+
+\hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+
+\end{document}
+
+
