@@ -78,8 +78,6 @@
   
   \begin{abstract}
   This is the abstract.
-  
-  It consists of two paragraphs.
   \end{abstract}
   
  \end{frontmatter}
@@ -164,6 +162,8 @@ connected by roads that meet the desired LOS, and a directness
 constraint is added so that paths between OD pairs do not exceed a
 certain multiple of the shortest path.
 
+\vspace{0.3cm}
+
 These problem formulations do not explicitly solve for continuity, which
 is dealt with using a either (a) a constraint specifying that each link
 with a bike lane should be connected to at least one destination (Mesbah
@@ -189,6 +189,56 @@ identify the minimum flow at which the whole city is connected by a
 giant component. The results show a cycling network that connects the
 entire city, and subtracting links intersecting with current cycling
 infrastructure identifies links proposed for intervention.
+
+\vspace{0.3cm}
+
+The problem formulations outlined above look at the network as a whole
+when attempting to improve it. An alternative approach is to identify
+the different sub-networks that exist within the larger network, and
+work on improving each separately. Trip patterns in a city are not
+uniformly distributed geographically, and \emph{community finding}
+methods have been used to partition study areas into localized areas
+that experience a disproportionate number of trips within them.
+Akbarzadeh et al. (2018) use a modularity maximization approach (Blondel
+et al., 2008) on taxi trip data to identify 7 different communities in
+the city of Isfahan, Iran. An optimization problem is then formulated to
+connect nodes within each community with cycling infrastructure. The
+emphasis is on connectivity within the communities, not between them.
+Bao et al. (2017) adopt a similar methodology, but use hierarchical
+clustering to specify the desired number of clusters. They use a greedy
+network expansion algorithm, where the link with the highest
+benefit/cost ratio in each cluster is selected, and the network is grown
+by adding neighboring links to the solution until a budget limit is met.
+The benefit is the flow on the link, and each link is assigned a cost
+based on current road conditions.
+
+\hypertarget{underlying-ethical-principles}{%
+\subsection{Underlying Ethical
+Principles}\label{underlying-ethical-principles}}
+
+The methodologies in Section \textbf{How do I cite a section??} are
+underpinned by different ethical principles, even though these
+principles are not explicitly acknowledged by the authors. This is
+important since different ethical principles constitute different
+problem formulations and targets. Broadly speaking, transport appraisal
+can be based on either utilitarian or egalitarian principles. The former
+seeks to maximize the overall benefit, while the latter is concerned
+with a fair distribution of benefits (Jafino et al., 2020).
+Nahmias-Biran et al. (2017) criticize the utilitarian approach that has
+been historically popular in the evaluation of transport investments,
+explaining how the maximization of overall benefit fails to account for
+the distribution of that benefit among communities or individuals. Lucas
+et al. (2016) explain how transport studies have traditionally looked at
+the bigger picture without studying the distribution of investments on
+the different parts of the study area, and go on to propose an
+egalitarian approach that ensures the dis-aggregation of transport
+policy benefits across the study area. Pereira et al. (2017) also
+emphasize the need for a more egalitarian approach to transport
+planning. They highlight accessibility as a cornerstone of distributive
+justice, and contend that policies should aim to distribute investments
+in a way that minimizes spatial variations in accessibility. This
+research attempts to provide a methodology that is grounded in
+egalitarian principles. \textbf{Write some more here}
 
 \hypertarget{data-and-geographical-scale-of-analysis}{%
 \section{Data and Geographical Scale of
@@ -280,6 +330,29 @@ traffic is most likely to be banned in the creation of LTNs.
 \section{Road Segment
 Prioritization}\label{road-segment-prioritization}}
 
+\hypertarget{overarching-policies}{%
+\section{Overarching Policies}\label{overarching-policies}}
+
+While segregated, connected, and direct cycling infrastructure is key to
+achieving high levels of cycling, research has shown that it cannot
+exist in a vacuum. Wardman et al. (2007) developed a mode choice model
+for the UK and their results showed that improved cycling infrastructure
+on its own only had modest impacts on mode shift, and even the unlikely
+scenario of all urban routes being serviced by segregated bike lanes was
+forecast to increase cycling mode share by only 3\%. However, cities
+that invest in more comprehensive cycling projects show a more
+significant increase in the number of cyclists as well as the cycling
+mode share (Pucher et al., 2010). These cities do not just focus on
+infrastructure, but on general policies as well as restricting car use.
+Evaluation of policies in Denmark and Germany and the Netherlands has
+shown that their high cycling mode share is down to a broader set of
+policies that also include traffic calming, cycling rights of way, bike
+parking, integration with the public transport network, and making
+driving cars both expensive and inconvenient (Pucher and Buehler, 2008).
+While these policies are outside the scope of this research, it is
+important to recognize their key role in bringing about an increase in
+levels of cycling.
+
 \hypertarget{conclusions}{%
 \section{Conclusions}\label{conclusions}}
 
@@ -292,12 +365,27 @@ Prioritization}\label{road-segment-prioritization}}
 \setlength{\parskip}{8pt}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-akbarzadeh2018designing}{}%
+Akbarzadeh, M., Mohri, S.S., Yazdian, E., 2018. Designing bike networks
+using the concept of network clusters. Applied network science 3, 12.
+
 \leavevmode\hypertarget{ref-aldred2019impacts}{}%
 Aldred, R., Croft, J., Goodman, A., 2019. Impacts of an active travel
 intervention with a cycling focus in a suburban context: One-year
 findings from an evaluation of london's in-progress mini-hollands
 programme. Transportation research part A: policy and practice 123,
 147--169.
+
+\leavevmode\hypertarget{ref-bao2017planning}{}%
+Bao, J., He, T., Ruan, S., Li, Y., Zheng, Y., 2017. Planning bike lanes
+based on sharing-bikes' trajectories, in: Proceedings of the 23rd Acm
+Sigkdd International Conference on Knowledge Discovery and Data Mining.
+pp. 1377--1386.
+
+\leavevmode\hypertarget{ref-blondel2008fast}{}%
+Blondel, V.D., Guillaume, J.-L., Lambiotte, R., Lefebvre, E., 2008. Fast
+unfolding of communities in large networks. Journal of statistical
+mechanics: theory and experiment 2008, P10008.
 
 \leavevmode\hypertarget{ref-broach2011bicycle}{}%
 Broach, J., Gliebe, J., Dill, J., 2011. Bicycle route choice model
@@ -338,11 +426,21 @@ Iacono, M., Krizek, K.J., El-Geneidy, A., 2010. Measuring non-motorized
 accessibility: Issues, alternatives, and execution. Journal of Transport
 Geography 18, 133--140.
 
+\leavevmode\hypertarget{ref-jafino2020transport}{}%
+Jafino, B.A., Kwakkel, J., Verbraeck, A., 2020. Transport network
+criticality metrics: A comparative analysis and a guideline for
+selection. Transport Reviews 40, 241--264.
+
 \leavevmode\hypertarget{ref-lovelace2017propensity}{}%
 Lovelace, R., Goodman, A., Aldred, R., Berkoff, N., Abbas, A., Woodcock,
 J., 2017. The propensity to cycle tool: An open source online system for
 sustainable transport planning. Journal of transport and land use 10,
 505--528.
+
+\leavevmode\hypertarget{ref-lucas2016method}{}%
+Lucas, K., Van Wee, B., Maat, K., 2016. A method to evaluate equitable
+accessibility: Combining ethical theories and accessibility-based
+approaches. Transportation 43, 473--490.
 
 \leavevmode\hypertarget{ref-marques2015infrastructure}{}%
 Marqués, R., Hernández-Herrador, V., Calvo-Salazar, M., García-Cebrián,
@@ -358,6 +456,11 @@ procedia 27, 969--976.
 Mesbah, M., Thompson, R., Moridpour, S., 2012. Bilevel optimization
 approach to design of network of bike lanes. Transportation research
 record 2284, 21--28.
+
+\leavevmode\hypertarget{ref-nahmias2017integrating}{}%
+Nahmias-Biran, B.-h., Martens, K., Shiftan, Y., 2017. Integrating equity
+in transportation project assessment: A philosophical exploration and
+its practical implications. Transport reviews 37, 192--210.
 
 \leavevmode\hypertarget{ref-natera2019data}{}%
 Natera, L., Battiston, F., Iñiguez, G., Szell, M., 2019. Data-driven
@@ -375,6 +478,19 @@ ONS, 2018. Population estimates for the uk, england and wales, scotland
 and northern ireland: Mid-2017. Hampshire: Office for National
 Statistics.
 
+\leavevmode\hypertarget{ref-pereira2017distributive}{}%
+Pereira, R.H., Schwanen, T., Banister, D., 2017. Distributive justice
+and equity in transportation. Transport reviews 37, 170--191.
+
+\leavevmode\hypertarget{ref-pucher2008making}{}%
+Pucher, J., Buehler, R., 2008. Making cycling irresistible: Lessons from
+the netherlands, denmark and germany. Transport reviews 28, 495--528.
+
+\leavevmode\hypertarget{ref-pucher2010infrastructure}{}%
+Pucher, J., Dill, J., Handy, S., 2010. Infrastructure, programs, and
+policies to increase bicycling: An international review. Preventive
+medicine 50, S106--S125.
+
 \leavevmode\hypertarget{ref-schoner2014missing}{}%
 Schoner, J.E., Levinson, D.M., 2014. The missing link: Bicycle
 infrastructure networks and ridership in 74 us cities. Transportation
@@ -384,6 +500,11 @@ infrastructure networks and ridership in 74 us cities. Transportation
 Stinson, M.A., Bhat, C.R., 2003. Commuter bicyclist route choice:
 Analysis using a stated preference survey. Transportation Research
 Record 1828, 107--115.
+
+\leavevmode\hypertarget{ref-wardman2007factors}{}%
+Wardman, M., Tight, M., Page, M., 2007. Factors influencing the
+propensity to cycle to work. Transportation Research Part A: Policy and
+Practice 41, 339--350.
 
 \leavevmode\hypertarget{ref-winters2011motivators}{}%
 Winters, M., Davidson, G., Kao, D., Teschke, K., 2011. Motivators and

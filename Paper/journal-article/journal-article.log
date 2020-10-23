@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.17)  23 OCT 2020 16:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.17)  23 OCT 2020 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -478,87 +478,87 @@ LaTeX Info: Redefining \nameref on input line 62.
 \openout4 = `journal-article.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
-5.
+3.
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
-5.
+3.
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-85.
+83.
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-85.
+83.
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 85.
+(Font)              <8> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 85.
+(Font)              <6> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 85.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
+(Font)              <5> on input line 83.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
 
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
 
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-5.
+3.
 (/Users/Hussein/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 85.
+(Font)              <10> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 85.
+(Font)              <7> on input line 83.
 [1
 
 
-{/Users/Hussein/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/Users/Hussein/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
+[2]
 
-LaTeX Warning: Reference `fig:pot_dem_histograms' on page 2 undefined on input 
-line 233.
+LaTeX Warning: Reference `fig:pot_dem_histograms' on page 3 undefined on input 
+line 283.
 
-<../../data/Manchester/Plots/desire_facet_cycling.png, id=75, 2409.0pt x 1806.7
+<../../data/Manchester/Plots/desire_facet_cycling.png, id=90, 2409.0pt x 1806.7
 5pt>
 File: ../../data/Manchester/Plots/desire_facet_cycling.png Graphic file (type p
 ng)
 <use ../../data/Manchester/Plots/desire_facet_cycling.png>
 Package pdftex.def Info: ../../data/Manchester/Plots/desire_facet_cycling.png  
-used on input line 237.
+used on input line 287.
 (pdftex.def)             Requested size: 300.29344pt x 225.2091pt.
-[2]
+[3 <../../data/Manchester/Plots/desire_facet_cycling.png>]
 
-LaTeX Warning: Reference `table:osmroadtypes' on page 3 undefined on input line
- 274.
+LaTeX Warning: Reference `table:osmroadtypes' on page 4 undefined on input line
+ 324.
 
-[3 <../../data/Manchester/Plots/desire_facet_cycling.png>] [4] (./journal-artic
-le.aux)
+[4] [5] [6] (./journal-article.aux)
 Package rerunfilecheck Info: File `journal-article.out' has not changed.
-(rerunfilecheck)             Checksum: 9840151C8BE4B2DAA775F2EE33A3D660;1566.
+(rerunfilecheck)             Checksum: 28FC697C0230C86D0875C28D21CA495D;1922.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10854 strings out of 481886
- 155238 string characters out of 5931134
- 440109 words of memory out of 5000000
- 26899 multiletter control sequences out of 15000+600000
+ 10874 strings out of 481886
+ 155632 string characters out of 5931134
+ 439211 words of memory out of 5000000
+ 26903 multiletter control sequences out of 15000+600000
  598676 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,9n,77p,303b,360s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,9n,77p,303b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/Hussein/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Use
 rs/Hussein/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/
 Hussein/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/Hus
@@ -579,10 +579,10 @@ m/lmri8.pfb></Users/Hussein/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
 sy10.pfb></Users/Hussein/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6
 .pfb></Users/Hussein/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
 ></Users/Hussein/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb>
-Output written on journal-article.pdf (4 pages, 880056 bytes).
+Output written on journal-article.pdf (6 pages, 888495 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 179 compressed objects within 2 object streams
- 59 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 239 PDF objects out of 1000 (max. 8388607)
+ 209 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
 
