@@ -127,7 +127,7 @@ city_geom <- city_geom %>% dplyr::filter(msoa11cd %in% city_msoas$MSOA11CD)
 
 # get straight line geometry of all OD pairs. Added as a geometry column
 uptake_decay <- stplanr::od2line(uptake_decay, city_centroids)
-uptake_decay <- lwgeom::st_make_valid(uptake_decay)
+uptake_decay <- sf::st_make_valid(uptake_decay)
 
 # keep only od pairs <10km
 uptake_plot <- uptake_decay %>% filter(dist <= 10)

@@ -41,7 +41,7 @@ city_od$potential_demand[is.na(city_od$potential_demand)] <- 0
 
 # get straight line geometry of all OD pairs in city_od
 desire_lines <- stplanr::od2line(city_od, city_centroids)
-desire_lines <- lwgeom::st_make_valid(desire_lines)
+desire_lines <- sf::st_make_valid(desire_lines)
 
 # filter out all OD pairs with flow less than this:
 flow_threshold_all <- 50
