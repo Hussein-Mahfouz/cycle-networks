@@ -1,86 +1,75 @@
-\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
-%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
-\usepackage[hyphens]{url}
-
-  \journal{An awesome journal} % Sets Journal name
-
-
-\usepackage{lineno} % add
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-\usepackage{graphicx}
-\usepackage{booktabs} % book-quality tables
-%%%%%%%%%%%%%%%% end my additions to header
-
-\usepackage[T1]{fontenc}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-% use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \usepackage{fontspec}
-  \ifxetex
-    \usepackage{xltxtra,xunicode}
-  \fi
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-  \newcommand{\euro}{€}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use microtype if available
-\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Short Paper},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=2cm]{geometry}
-\bibliographystyle{elsarticle-harv}
-\ifxetex
-  \usepackage[setpagesize=false, % page size defined by xetex
-              unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
-\else
-  \usepackage[unicode=true]{hyperref}
-\fi
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={},
-            pdftitle={Short Paper},
-            colorlinks=false,
-            urlcolor=blue,
-            linkcolor=magenta,
-            pdfborder={0 0 0}}
-\urlstyle{same}  % don't use monospace font for urls
-
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Pandoc toggle for numbering sections (defaults to be off)
+\usepackage{subcaption}
+\usepackage{longtable}
 
-
-% Pandoc header
-
-
+\title{Short Paper}
+\author{true \and true \and true \and true}
+\date{2020-10-30}
 
 \begin{document}
-\begin{frontmatter}
-
-  \title{Short Paper}
-    \author[Some Institute of Technology]{Alice Anonymous\corref{1}}
-   \ead{alice@example.com} 
-    \author[Another University]{Bob Security}
-   \ead{bob@example.com} 
-    \author[Another University]{Cat Memes\corref{2}}
-   \ead{cat@example.com} 
-    \author[Some Institute of Technology]{Derek Zoolander\corref{2}}
-   \ead{derek@example.com} 
-      \address[Some Institute of Technology]{Department, Street, City, State, Zip}
-    \address[Another University]{Department, Street, City, State, Zip}
-      \cortext[1]{Corresponding Author}
-    \cortext[2]{Equal contribution}
-  
-  \begin{abstract}
-  This is the abstract.
-  \end{abstract}
-  
- \end{frontmatter}
+\maketitle
+\begin{abstract}
+This is the abstract.
+\end{abstract}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -330,6 +319,25 @@ traffic is most likely to be banned in the creation of LTNs.
 \section{Road Segment
 Prioritization}\label{road-segment-prioritization}}
 
+\begin{figure} [h!]
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png}
+  \caption{Alg 1 (Utilitarian)}
+  \label{fig:growth_utilitarian_satisfied_all}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png}
+  \caption{Alg 2 (Egalitarian)}
+  \label{fig:growth_egalitarian_satisfied_all}
+\end{subfigure}
+\caption{Comparing Overall Person-Km Satisfied (Manchester)}
+\label{fig:growth_existing_infra_satisfied}
+\end{figure}
+
 \hypertarget{overarching-policies}{%
 \section{Overarching Policies}\label{overarching-policies}}
 
@@ -517,7 +525,4 @@ far out of the way will we travel? Built environment influences on route
 selection for bicycle and car travel. Transportation Research Record
 2190, 1--10.
 
-
 \end{document}
-
-

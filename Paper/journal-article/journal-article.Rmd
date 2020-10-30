@@ -38,7 +38,10 @@ bibliography: mybibfile.bib
 #linenumbers: true
 numbersections: true
 csl: elsevier-harvard.csl
-output: rticles::elsevier_article
+#output: rticles::elsevier_article
+output:
+  pdf_document:
+    extra_dependencies: ["subcaption", "longtable"]
 ---
 
 <!-- Keywords -->
@@ -126,6 +129,25 @@ The weighting profiles are therefore adjusted to favor less-stressful streets (b
 Road Segment Prioritization
 ===========================
 
+\begin{figure} [h!]
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png}
+  \caption{Alg 1 (Utilitarian)}
+  \label{fig:growth_utilitarian_satisfied_all}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png}
+  \caption{Alg 2 (Egalitarian)}
+  \label{fig:growth_egalitarian_satisfied_all}
+\end{subfigure}
+\caption{Comparing Overall Person-Km Satisfied (Manchester)}
+\label{fig:growth_existing_infra_satisfied}
+\end{figure}
+
 Overarching Policies
 ====================
 
@@ -134,6 +156,8 @@ However, cities that invest in more comprehensive cycling projects show a more s
 
 Conclusions
 ===========
+
+
 
 References {#references .unnumbered}
 ==========
