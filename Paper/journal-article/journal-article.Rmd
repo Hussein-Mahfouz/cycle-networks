@@ -40,8 +40,8 @@ numbersections: true
 csl: elsevier-harvard.csl
 #output: rticles::elsevier_article
 output:
-  pdf_document:
-    extra_dependencies: ["subcaption", "longtable"]
+  bookdown::pdf_document2
+    # extra_dependencies: ["subcaption", "longtable"]
 ---
 
 <!-- Keywords -->
@@ -99,15 +99,20 @@ The Propensity to Cycle Tool (PCT) [@lovelace2017propensity] is used to estimate
 
 \noindent where $\boldsymbol{d}$ and $\boldsymbol{s}$ are the distance and slope respectively for the OD pair. The authors use square and square-root distance terms ``to capture the non-linear impact of distance on the likelihood of cycling", and interaction terms to capture the combined effect of slope and distance [@lovelace2017propensity].
 
-The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-5km commuting distance and then going back down for longer distances (See Figure \ref{fig:pot_dem_histograms}). 
+The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-5km commuting distance and then going back down for longer distances (See Figure @\ref(fig:potdemhistograms)). 
+
+```{r potdemhistograms, fig.cap="Current and Potential Cycling Demand", out.width="80%"}
+knitr::include_graphics("../../data/Manchester/Plots/desire_facet_cycling.png")
+```
 
 
-\begin{figure}[h!]
-    \centering % puts the image in the horizontal centre of the page
-    \includegraphics[width=.6\textwidth]{../../data/Manchester/Plots/desire_facet_cycling.png} 
-    \caption{Current and Potential Cycling Demand} 
-    \label{fig:desire_facet_cycling} 
-\end{figure}
+
+<!-- \begin{figure}[h!] -->
+<!--     \centering % puts the image in the horizontal centre of the page -->
+<!--     \includegraphics[width=.6\textwidth]{../../data/Manchester/Plots/desire_facet_cycling.png}  -->
+<!--     \caption{Current and Potential Cycling Demand}  -->
+<!--     \label{fig:desire_facet_cycling}  -->
+<!-- \end{figure} -->
 
 Routing
 =======
@@ -132,24 +137,24 @@ The weighting profiles are therefore adjusted to favor less-stressful streets (b
 Road Segment Prioritization
 ===========================
 
-\begin{figure} [h!]
-\centering
-\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
-\begin{subfigure}{.45\textwidth}
-  \centering
-  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png}
-  \caption{Alg 1 (Utilitarian)}
-  \label{fig:growth_utilitarian_satisfied_all}
-\end{subfigure}
-\begin{subfigure}{.45\textwidth}
-  \centering
-  \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png}
-  \caption{Alg 2 (Egalitarian)}
-  \label{fig:growth_egalitarian_satisfied_all}
-\end{subfigure}
-\caption{Comparing Overall Person-Km Satisfied (Manchester)}
-\label{fig:growth_existing_infra_satisfied}
-\end{figure}
+<!-- \begin{figure} [h!] -->
+<!-- \centering -->
+<!-- \captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions -->
+<!-- \begin{subfigure}{.45\textwidth} -->
+<!--   \centering -->
+<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
+<!--   \caption{Alg 1 (Utilitarian)} -->
+<!--   \label{fig:growth_utilitarian_satisfied_all} -->
+<!-- \end{subfigure} -->
+<!-- \begin{subfigure}{.45\textwidth} -->
+<!--   \centering -->
+<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
+<!--   \caption{Alg 2 (Egalitarian)} -->
+<!--   \label{fig:growth_egalitarian_satisfied_all} -->
+<!-- \end{subfigure} -->
+<!-- \caption{Comparing Overall Person-Km Satisfied (Manchester)} -->
+<!-- \label{fig:growth_existing_infra_satisfied} -->
+<!-- \end{figure} -->
 
 Overarching Policies
 ====================
