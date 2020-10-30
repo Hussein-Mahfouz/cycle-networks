@@ -1,7 +1,0 @@
-[2,"Warning message:\nProject requested R version '3.6.1' but '4.0.2' is currently being used \n"]
-[1,"Installing 'ggrepel' ...\n"]
-[1,"Retrieving 'https://cran.rstudio.com/bin/macosx/contrib/4.0/ggrepel_0.8.2.tgz' ...\n"]
-[1,"\tOK [downloaded 883.1 Kb in 0.3 secs]\n"]
-[1,"Installing ggrepel [0.8.2] ...\n"]
-[1,"\tOK [installed binary]\n"]
-[2,"\n\n✔ Package 'ggrepel' successfully installed.\nWarning messages:\n1: In system2(R(), args, stdout = TRUE, stderr = TRUE) :\n  running command ''/Library/Frameworks/R.framework/Resources/bin/R' CMD config CC 2>&1' had status 1\n2: In if (eval(cond, envir = environment(dot))) return(eval(expr, envir = environment(dot))) :\n  the condition has length > 1 and only the first element will be used\n3: In if (eval(cond, envir = environment(dot))) return(eval(expr, envir = environment(dot))) :\n  the condition has length > 1 and only the first element will be used\n"]

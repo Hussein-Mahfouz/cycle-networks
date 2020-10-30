@@ -1,6 +1,0 @@
-"0","```r
-
-# add a column with the city name corresponding to each Workplace MSOA
-flows <- flows %>% 
-  left_join(city_names[,c(\"MSOA11CD\", \"city\")], by = c(\"Area of workplace\" = \"MSOA11CD\")) 
-```"
