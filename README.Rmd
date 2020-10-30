@@ -7,8 +7,9 @@ bibliography: mybibfile.bib
 numbersections: true
 #output: rticles::elsevier_article
 output:
-  # bookdown::github_document2
-  bookdown::pdf_document2
+  bookdown::github_document2
+  # bookdown::pdf_document2:
+  #   extra_dependencies: ["subcaption", "longtable"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -124,6 +125,15 @@ The weighting profiles are therefore adjusted to favor less-stressful streets (b
 
 # Road Segment Prioritization
 
+```{r growth, fig.cap="teswt", out.width="48%", fig.show='hold'}
+knitr::include_graphics(c(
+  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png",
+  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png"
+))
+```
+
+
+<!-- Todo: uncomment for final submission -->
 <!-- \begin{figure} [h!] -->
 
 <!-- \centering -->
@@ -134,7 +144,7 @@ The weighting profiles are therefore adjusted to favor less-stressful streets (b
 
 <!--   \centering -->
 
-<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
+<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
 
 <!--   \caption{Alg 1 (Utilitarian)} -->
 
@@ -146,7 +156,7 @@ The weighting profiles are therefore adjusted to favor less-stressful streets (b
 
 <!--   \centering -->
 
-<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
+<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
 
 <!--   \caption{Alg 2 (Egalitarian)} -->
 

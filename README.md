@@ -263,18 +263,35 @@ to be banned in the creation of LTNs.
 
 # 8 Road Segment Prioritization
 
+``` r
+knitr::include_graphics(c(
+  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png",
+  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png"
+))
+```
+
+<div class="figure">
+
+<img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png" alt="teswt" width="48%" /><img src="data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png" alt="teswt" width="48%" />
+<p class="caption">
+Figure 8.1: teswt
+</p>
+
+</div>
+
+<!-- Todo: uncomment for final submission -->
 <!-- \begin{figure} [h!] -->
 <!-- \centering -->
 <!-- \captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions -->
 <!-- \begin{subfigure}{.45\textwidth} -->
 <!--   \centering -->
-<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
+<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
 <!--   \caption{Alg 1 (Utilitarian)} -->
 <!--   \label{fig:growth_utilitarian_satisfied_all} -->
 <!-- \end{subfigure} -->
 <!-- \begin{subfigure}{.45\textwidth} -->
 <!--   \centering -->
-<!--   \includegraphics[width=1\linewidth]{../../data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
+<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
 <!--   \caption{Alg 2 (Egalitarian)} -->
 <!--   \label{fig:growth_egalitarian_satisfied_all} -->
 <!-- \end{subfigure} -->
