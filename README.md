@@ -162,30 +162,31 @@ assigned a cost based on current road conditions.
 
 ## 4.3 Underlying Ethical Principles
 
-The methodologies in Section **How do I cite a section??** are
-underpinned by different ethical principles, even though these
-principles are not explicitly acknowledged by the authors. This is
-important since different ethical principles constitute different
-problem formulations and targets. Broadly speaking, transport appraisal
-can be based on either utilitarian or egalitarian principles. The former
-seeks to maximize the overall benefit, while the latter is concerned
-with a fair distribution of benefits (Jafino, Kwakkel, and Verbraeck
-2020). Nahmias-Biran, Martens, and Shiftan (2017) criticize the
-utilitarian approach that has been historically popular in the
-evaluation of transport investments, explaining how the maximization of
-overall benefit fails to account for the distribution of that benefit
-among communities or individuals. Lucas, Van Wee, and Maat (2016)
-explain how transport studies have traditionally looked at the bigger
-picture without studying the distribution of investments on the
-different parts of the study area, and go on to propose an egalitarian
-approach that ensures the dis-aggregation of transport policy benefits
-across the study area. Pereira, Schwanen, and Banister (2017) also
-emphasize the need for a more egalitarian approach to transport
-planning. They highlight accessibility as a cornerstone of distributive
-justice, and contend that policies should aim to distribute investments
-in a way that minimizes spatial variations in accessibility. This
-research attempts to provide a methodology that is grounded in
-egalitarian principles. **Write some more here**
+The methodologies in Section
+<a href="#planning-cycling-networks">4.2</a> are underpinned by
+different ethical principles, even though these principles are not
+explicitly acknowledged by the authors. This is important since
+different ethical principles constitute different problem formulations
+and targets. Broadly speaking, transport appraisal can be based on
+either utilitarian or egalitarian principles. The former seeks to
+maximize the overall benefit, while the latter is concerned with a fair
+distribution of benefits (Jafino, Kwakkel, and Verbraeck 2020).
+Nahmias-Biran, Martens, and Shiftan (2017) criticize the utilitarian
+approach that has been historically popular in the evaluation of
+transport investments, explaining how the maximization of overall
+benefit fails to account for the distribution of that benefit among
+communities or individuals. Lucas, Van Wee, and Maat (2016) explain how
+transport studies have traditionally looked at the bigger picture
+without studying the distribution of investments on the different parts
+of the study area, and go on to propose an egalitarian approach that
+ensures the dis-aggregation of transport policy benefits across the
+study area. Pereira, Schwanen, and Banister (2017) also emphasize the
+need for a more egalitarian approach to transport planning. They
+highlight accessibility as a cornerstone of distributive justice, and
+contend that policies should aim to distribute investments in a way that
+minimizes spatial variations in accessibility. This research attempts to
+provide a methodology that is grounded in egalitarian principles.
+**Write some more here**
 
 # 5 Data and Geographical Scale of Analysis
 
