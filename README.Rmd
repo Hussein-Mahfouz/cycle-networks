@@ -19,38 +19,38 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 
 # Ideas and discussion
 
-Road Segment Prioritization for Bicycle Infrastructure
-================
+- Community Detection
+- Other Cities
 
-## Missing Data
+<!-- ## Missing Data -->
 
-There are a couple of files that cannot be synced to github due to their
-size. These files are neseccary for the scripts to run. Below are links
-to where you can download them, and instructions on where to place them
-in the repo file structure
+<!-- There are a couple of files that cannot be synced to github due to their -->
+<!-- size. These files are neseccary for the scripts to run. Below are links -->
+<!-- to where you can download them, and instructions on where to place them -->
+<!-- in the repo file structure -->
 
-Flow Data (2011 Census Origin-Destination Data):
+<!-- Flow Data (2011 Census Origin-Destination Data): -->
 
-  - Source: <https://www.nomisweb.co.uk/census/2011/bulk/rOD1> —\>
-    Choose File **“WU03EW”**
-  - Location in Repo: data-raw/flow\_data.csv
+<!--   - Source: <https://www.nomisweb.co.uk/census/2011/bulk/rOD1> —\> -->
+<!--     Choose File **“WU03EW”** -->
+<!--   - Location in Repo: data-raw/flow\_data.csv -->
 
-Middle Layer Super Output Areas (December 2011) Boundaries:
+<!-- Middle Layer Super Output Areas (December 2011) Boundaries: -->
 
-  - Source:
-    <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0>
-  - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\]
+<!--   - Source: -->
+<!--     <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
+<!--   - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\] -->
 
------
+<!-- ----- -->
 
-## Scripts
+<!-- ## Scripts -->
 
-The scripts should be run in the order they are numbered in (and listed
-in here). The only exception is \_x\_dodgr\_weighting\_profiles.R.
+<!-- The scripts should be run in the order they are numbered in (and listed -->
+<!-- in here). The only exception is \_x\_dodgr\_weighting\_profiles.R. -->
 
-Check the readme
-[here](https://github.com/Hussein-Mahfouz/Bicycle-Network-Optimization)
-for detailed info on each script
+<!-- Check the readme -->
+<!-- [here](https://github.com/Hussein-Mahfouz/Bicycle-Network-Optimization) -->
+<!-- for detailed info on each script -->
 
 <!-- Keywords -->
 
@@ -60,11 +60,12 @@ for detailed info on each script
 
 <!-- ======== -->
 
+### Hello 
+
 # Introduction
 
 Intro ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-and these will be the conclusions
 
 # Background
 
