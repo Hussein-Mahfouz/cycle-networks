@@ -173,7 +173,7 @@ We choose to avoid routing the potential cycling demand on Primary A Roads for t
 
 Routing potential cycling demand on a weighted network is more in line with government policy to create LTNs. Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted network significantly reduces flow on the trunk and primary roads, but does not eliminate it completely. This is intentional, as the impedance on these roads is only slightly higher than remaining road types (See Table **Reference the table**). Potential cycling demand is only routed on these roads if there are no routes through other roads that offer comparable directness. 
 
-Banning cycling flow completely on trunk and primary roads may result in excessively circuitous paths, as seen in Figure \ref{fig:boxplotcircuity}. When routing using the weighting profile in Table **Reference Table**, we see that shortest paths increase by less than 5\% on average from unweighted shortest paths, with the largest increases still below 30\%. When routing on primary and trunk roads is banned, the average increase relative to unweighted shortest paths rises to 10\%, with certain locations experiencing more significant negative effects on accessibility. 
+Banning cycling flow completely on trunk and primary roads may result in excessively circuitous paths, as seen in Figure \@ref(fig:boxplotcircuity). When routing using the weighting profile in Table **Reference Table**, we see that shortest paths increase by less than 5\% on average from unweighted shortest paths, with the largest increases still below 30\%. When routing on primary and trunk roads is banned, the average increase relative to unweighted shortest paths rises to 10\%, with certain locations experiencing more significant negative effects on accessibility. 
 
 ```{r boxplotcircuity, fig.cap="Effect of Banning Cyclists from Trunk and Primary Roads for all OD Pairs (Manchester)", out.width="35%", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
@@ -188,6 +188,27 @@ It should be reiterated that the weighting profile used for routing has been dev
 One use-case of such granular data would be to identify roads that serve schools. The Department of Transport notes that the number of school children being driven to school has trebled over the past 40 years [@departmentgearchange2020], and so having cycling infrastructure serving schools is key to achieving the government target of getting more children to cycle. This would not be difficult, as over 75\% of children in the UK live within a 15 minute cycle from their school [@departmentcycleinfradesign2020]. @goodman2019scenarios show that if dutch levels of cycling were achieved in the UK, the \% of children cycling to school could increase from 1.8\% to 41\%.
 
 In their typology of cyclists, @dill2013four found that a majority of people who say they would never cycle had never cycled to school, whereas confident cyclists were those most likely to have cycled to school. Getting people to cycle from a young age is therefore key to achieving societal change in commuting habits.   
+
+# Community Detection 
+
+One of the main aims of this research is to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas. Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
+
+```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="45%", echo=FALSE}
+knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
+```
+
+In our case, the network is the city; the nodes are the population-weighted MSOA centroids and the links connecting each MSOA pair are weighted by the potential cycling demand between them. The Louvian method  [@blondel2008fast] is used to separate MSOAs into communities. Potential cycling demand is used since we assume that this is what the cycling demand will be once the cycling infrastructure is added. To assign road links to communities, the following steps are carried out: 
+
+1. Create links between MSOA centroids and weigh these links by potential cycling demand between them.
+2. Use Louvian method to determine optimal number of communities and assign each MSOA centroid to a community.
+3. Assign each road link to the same community as the closest MSOA centroid to it.
+
+The results show that Manchester can be split into three large communities and one small one (Figure \@ref(fig:communitiesmanchester)).
+
+```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", echo=FALSE}
+knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
+```
+
 
 # Road Segment Prioritization
 

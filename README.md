@@ -1,6 +1,6 @@
 Road Segment Prioritization for Bicycle Infrastructure
 ================
-2020-10-30
+2020-10-31
 
 # 1 Ideas and discussion
 
@@ -395,13 +395,14 @@ only routed on these roads if there are no routes through other roads
 that offer comparable directness.
 
 Banning cycling flow completely on trunk and primary roads may result in
-excessively circuitous paths, as seen in Figure . When routing using the
-weighting profile in Table **Reference Table**, we see that shortest
-paths increase by less than 5% on average from unweighted shortest
-paths, with the largest increases still below 30%. When routing on
-primary and trunk roads is banned, the average increase relative to
-unweighted shortest paths rises to 10%, with certain locations
-experiencing more significant negative effects on accessibility.
+excessively circuitous paths, as seen in Figure
+<a href="#fig:boxplotcircuity">6.3</a>. When routing using the weighting
+profile in Table **Reference Table**, we see that shortest paths
+increase by less than 5% on average from unweighted shortest paths, with
+the largest increases still below 30%. When routing on primary and trunk
+roads is banned, the average increase relative to unweighted shortest
+paths rises to 10%, with certain locations experiencing more significant
+negative effects on accessibility.
 
 <div class="figure">
 
@@ -459,7 +460,62 @@ school, whereas confident cyclists were those most likely to have cycled
 to school. Getting people to cycle from a young age is therefore key to
 achieving societal change in commuting habits.
 
-# 7 Road Segment Prioritization
+# 7 Community Detection
+
+One of the main aims of this research is to incorporate egalitarian
+principles by fairly distributing investments in cycling infrastructure.
+One way of quantifying this is to split up the city into smaller
+geospatial areas and target equal investment in each of those areas.
+Community detection offers us a way to delineate such a split; cyclists
+are limited in their commuting distance (see Figure
+<a href="#fig:cyclinghistmanc">7.1</a>), and so trip attractors are more
+likely to have a local catchment area of cyclists.
+
+<div class="figure">
+
+<img src="data/Manchester/Plots/histogram_distance_cycling.png" alt="Cycling Commuting Distance - Manchester (2011 Census Data)" width="45%" />
+
+<p class="caption">
+
+Figure 7.1: Cycling Commuting Distance - Manchester (2011 Census Data)
+
+</p>
+
+</div>
+
+In our case, the network is the city; the nodes are the
+population-weighted MSOA centroids and the links connecting each MSOA
+pair are weighted by the potential cycling demand between them. The
+Louvian method (Blondel et al. 2008) is used to separate MSOAs into
+communities. Potential cycling demand is used since we assume that this
+is what the cycling demand will be once the cycling infrastructure is
+added. To assign road links to communities, the following steps are
+carried out:
+
+1.  Create links between MSOA centroids and weigh these links by
+    potential cycling demand between them.
+2.  Use Louvian method to determine optimal number of communities and
+    assign each MSOA centroid to a community.
+3.  Assign each road link to the same community as the closest MSOA
+    centroid to it.
+
+The results show that Manchester can be split into three large
+communities and one small one (Figure
+<a href="#fig:communitiesmanchester">7.2</a>).
+
+<div class="figure">
+
+<img src="data/Manchester/Plots/communities_alternative_Manchester.png" alt="Communities Based on Potential Cycling Demand (Manchester)" width="75%" />
+
+<p class="caption">
+
+Figure 7.2: Communities Based on Potential Cycling Demand (Manchester)
+
+</p>
+
+</div>
+
+# 8 Road Segment Prioritization
 
 ``` r
 knitr::include_graphics(c(
@@ -474,7 +530,7 @@ knitr::include_graphics(c(
 
 <p class="caption">
 
-Figure 7.1: teswt
+Figure 8.1: teswt
 
 </p>
 
@@ -518,7 +574,7 @@ Figure 7.1: teswt
 
 <!-- \end{figure} -->
 
-# 8 Overarching Policies
+# 9 Overarching Policies
 
 While segregated, connected, and direct cycling infrastructure is key to
 achieving high levels of cycling, research has shown that it cannot
@@ -540,7 +596,7 @@ inconvenient (Pucher and Buehler 2008). While these policies are outside
 the scope of this research, it is important to recognize their key role
 in bringing about an increase in levels of cycling.
 
-# 9 Conclusions
+# 10 Conclusions
 
 # References
 
