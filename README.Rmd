@@ -7,9 +7,9 @@ bibliography: mybibfile.bib
 numbersections: true
 #output: rticles::elsevier_article
 output:
-  bookdown::github_document2
-  # bookdown::pdf_document2:
-  #   extra_dependencies: ["subcaption", "longtable"]
+  # bookdown::github_document2
+  bookdown::pdf_document2:
+    extra_dependencies: ["subcaption", "longtable"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -69,7 +69,7 @@ Intro ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## What Affects the Decision To Cycle
 
-Segregated cycling infrastructure^[Segregated cycling infrastructure refers to road space that is allocated to cyclists only, with physical separation to protect cyclists from other modes of transport.] has been shown to increase cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure], with the separation from motorized vehicles being key [@winters2011motivators]. Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal]. However, such deviations are only considered if they do not considerably increase route circuitry; behaviour studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far]. Another defining feature for cycling infrastructure is how well connected it is. Cyclists prefer cohesive infrastructure, particularly when cycling on arterial roads with high levels of motorized traffic [@stinson2003commuter], and the lack of well-connected cycling infrastructure is one of the main obstacles to increasing cycling uptake [@caulfield2012determining]. While direct and cohesive cycling networks have been shown to positively impact cycling rates, density^[making an area's bicycle network denser means adding more cycling routes in the area and thereby giving cyclists more route options} of the cycling network is also vital [@schoner2014missing]].
+Segregated cycling infrastructure^[Segregated cycling infrastructure refers to road space that is allocated to cyclists only, with physical separation to protect cyclists from other modes of transport.] has been shown to increase cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure], with the separation from motorized vehicles being key [@winters2011motivators]. Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal]. However, such deviations are only considered if they do not considerably increase route circuitry; behaviour studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far]. Another defining feature for cycling infrastructure is how well connected it is. Cyclists prefer cohesive infrastructure, particularly when cycling on arterial roads with high levels of motorized traffic [@stinson2003commuter], and the lack of well-connected cycling infrastructure is one of the main obstacles to increasing cycling uptake [@caulfield2012determining]. While direct and cohesive cycling networks have been shown to positively impact cycling rates, density^[making an area's bicycle network denser means adding more cycling routes in the area and thereby giving cyclists more route options] of the cycling network is also vital [@schoner2014missing]].
 
 ## Planning Cycling Networks
 
@@ -113,7 +113,7 @@ knitr::include_graphics(c(
 ```
 
 
-```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="80%", echo=FALSE}
+```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="80%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
@@ -153,11 +153,11 @@ All weights are between 0 and 1, and the values in the \textit{Weighted} profile
 
 Comparing the cycling demand routed on the weighted and unweighted road network allows us to get a better understanding of the importance of different road types. In the case of Manchester, trunk roads bisect the city and are a major part of unweighted shortest paths (Figure \@ref(fig:flowsfacetunweighted)). On the other hand, cycleways are not part of unweighted shortest paths, and so very little of the cycling demand is routed through them. In the weighted network, cycleways are much better utilized, and the majority of the cycling demand passes through tertiary roads, as expected. 
 
-```{r flowsfacetunweighted, fig.cap="Flow Results Based on **Unweighted** Shortest Paths (Manchester)", out.width="90%", echo=FALSE}
+```{r flowsfacetunweighted, fig.cap="Flow Results Based on **Unweighted** Shortest Paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/flows_facet_unweighted_Manchester.png")
 ```
 
-```{r flowsfacetweighted, fig.cap="Flow Results Based on **Weighted** Shortest Paths (Manchester)", out.width="90%", echo=FALSE}
+```{r flowsfacetweighted, fig.cap="Flow Results Based on **Weighted** Shortest Paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/flows_facet_weighted_Manchester.png")
 ```
 
@@ -175,7 +175,7 @@ Routing potential cycling demand on a weighted network is more in line with gove
 
 Banning cycling flow completely on trunk and primary roads may result in excessively circuitous paths, as seen in Figure \@ref(fig:boxplotcircuity). When routing using the weighting profile in Table **Reference Table**, we see that shortest paths increase by less than 5\% on average from unweighted shortest paths, with the largest increases still below 30\%. When routing on primary and trunk roads is banned, the average increase relative to unweighted shortest paths rises to 10\%, with certain locations experiencing more significant negative effects on accessibility. 
 
-```{r boxplotcircuity, fig.cap="Effect of Banning Cyclists from Trunk and Primary Roads for all OD Pairs (Manchester)", out.width="35%", echo=FALSE}
+```{r boxplotcircuity, fig.cap="Effect of Banning Cyclists from Trunk and Primary Roads for all OD Pairs (Manchester)", out.width="35%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
 ```
 
@@ -193,7 +193,7 @@ In their typology of cyclists, @dill2013four found that a majority of people who
 
 One of the main aims of this research is to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas. Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
 
-```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="45%", echo=FALSE}
+```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="45%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
 ```
 
@@ -205,57 +205,83 @@ In our case, the network is the city; the nodes are the population-weighted MSOA
 
 The results show that Manchester can be split into three large communities and one small one (Figure \@ref(fig:communitiesmanchester)).
 
-```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", echo=FALSE}
+```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
 ```
 
 
 # Road Segment Prioritization
 
-```{r growth, fig.cap="teswt", out.width="48%", fig.show='hold'}
+After routing the potential cycling demand onto the road network using weighted shortest paths, we have estimates for the cumulative potential cycling demand passing through all road segments. This cumulative demand (referred to as *flow* is then used as a basis for determining where best to invest in segregated cycling infrastructure. In doing so, we must account for the motivations and deterrents for cycling identified in Section \@ref(what-affects-the-decision-to-cycle), namely direct and well connected routes.
+
+For this purpose, two algorithms are proposed. Both utilize existing infrastructure from the beginning and allow us to compare a solution that focuses on utilitarianism to one that focuses on egalitarianism. In both algorithms, links^[*link* refers to a road segment] are selected iteratively and the iteration at which each link is added to the solution is recorded. Investments in cycling infrastructure can be limited by budget constraints, so it can be useful to see where best to allocate a defined length of segregated infrastructure. 
+
+## Algorithm 1: Utilitarian Growth
+
+1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
+2. Identify all links that neighbor links in the current solution
+3. Select neighboring link with highest flow and add it to the solution
+4. Repeat steps 2 \& 3 until all flow is satisfied or investment threshold is met
+
+
+This algorithm ensures that the resulting network is connected. It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(what-affects-the-decision-to-cycle).
+
+Algorithm 2: Egalitarian Growth (Focus on Fair Distribution of Resources)
+
+The first algorithm focuses on connectivity and directness, but not on fairly distributing investment. The latter is not a requirement for increasing cycling uptake, but it is fundamental for spatial equity, as explained in Section \@ref(underlying-ethical-principles). This algorithm incorporates the ideal of fair distribution by using community detection to partition the road network. 
+
+The algorithm uses the following logic to ensure fair distribution between communities:
+
+
+1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
+2. Identify all links that neighbor links in the current solution
+3. Select *from each community* one neighboring link with highest flow and add it to the solution
+4. If there are no more neighboring links in a community, select the link with the highest flow in that community, regardless of connectivity, and add it to the solution
+5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met
+
+Even though we may end up with a more disconnected network, we will have separate connected networks in each community. Given that communities are defined by having more internal flow than external flow, this is a satisfactory solution.
+
+
+```{r growthtotal, fig.cap="Comparing Overall Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png",
   "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png"
 ))
 ```
 
+```{r growthcommunities, fig.cap="Comparing Community Level Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
+knitr::include_graphics(c(
+  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column.png",
+  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_community_flow_column.png"
+))
+```
 
-<!-- Todo: uncomment for final submission -->
-<!-- \begin{figure} [h!] -->
 
-<!-- \centering -->
+```{r growth3MapandBar, fig.cap="Results of Alg. 2 (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
+knitr::include_graphics(c(
+  "data/Manchester/Plots/Growth_Results/growth_community_4_priority_all_FLOW.png",
+  "data/Manchester/Plots/Growth_Results/growth_community_4_investment_highways_flow.png"
+))
+```
 
-<!-- \captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions -->
+## Connectivity
 
-<!-- \begin{subfigure}{.45\textwidth} -->
+Existing cycling infrastructure is made up of many disconnected components. Both Algorithm 1 and 2 start with all existing segregated cycling infrastructure and aim to create an efficient, connected network. Figure \@ref(fig:componentsandGCC) compares the performance of both Algorithms in terms of connectivity gains. We can see that, for all three cities analyzed, the number of components is gradually reduced as more infrastructure is added (this is true for both Algorithms). However these connectivity gains require considerable investment; both algorithms take almost 150km of investment to reduce the number of components by half. 
 
-<!--   \centering -->
+Consistent growth can also be seen for the size of the Largest Connected Component in the proposed bicycle network (Figure \@ref(fig:componentsandGCC)). Again, we can see from the results of the three different cities that there is little difference between both Algorithms. 
 
-<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
+```{r componentsandGCC, fig.cap="Network Characteristics", out.width="45%", fig.show='hold', echo=FALSE}
+knitr::include_graphics(c(
+  "data/Manchester/Plots/Growth_Results/growth_existing_infra_components_number_comparisonManchester.png",
+  "data/Manchester/Plots/Growth_Results/growth_existing_infra_components_gcc_comparisonManchester.png"
+))
+```
 
-<!--   \caption{Alg 1 (Utilitarian)} -->
 
-<!--   \label{fig:growth_utilitarian_satisfied_all} -->
 
-<!-- \end{subfigure} -->
 
-<!-- \begin{subfigure}{.45\textwidth} -->
 
-<!--   \centering -->
 
-<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
-
-<!--   \caption{Alg 2 (Egalitarian)} -->
-
-<!--   \label{fig:growth_egalitarian_satisfied_all} -->
-
-<!-- \end{subfigure} -->
-
-<!-- \caption{Comparing Overall Person-Km Satisfied (Manchester)} -->
-
-<!-- \label{fig:growth_existing_infra_satisfied} -->
-
-<!-- \end{figure} -->
 
 # Overarching Policies
 

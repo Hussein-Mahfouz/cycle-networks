@@ -19,7 +19,7 @@ graph_sf %>%
   group_by(Community) %>% 
   summarize(total_person_km = sum(person_km) / 1000) %>% 
   mutate(perc_person_km = (total_person_km / sum(total_person_km) * 100)) 
-########## GGPLOTS SHOWING FLOW/PERSON_KM SATISFIED AT THE NETWORK LEVEL AND AT THE COMMUNITY LEVEL #############
+
 
 # get percentage contibution of each edge to the network (distance, flow, person_km)
 graph_sf <- graph_sf %>%
@@ -42,109 +42,21 @@ no_cycle_infra <- round((sum(graph_sf$d) - sum(cycle_infra$d))  / 1000)
 no_cycle_infra <- no_cycle_infra - 5
 ################
 
-########################################### FUNCTION 1: GROWTH FROM ONE SEED/EDGE ###########################################
 
-# let's grow the network based on the flow column
-grow_flow_1_seed <- growth_one_seed(graph = graph_sf, km = no_cycle_infra, col_name = "flow")
-# save
-saveRDS(grow_flow_1_seed, file = paste0("../data/", chosen_city, "/growth_fun_1.Rds"))
-# read in 
-#grow_flow_1_seed <- readRDS(paste0("../data/", chosen_city,"/growth_fun_1.Rds"))
+# ----------------------------------- ALGORITHM 1: UTILITARIAN GROWTH ----------------------------------------- #
 
-
-# prepare a dataframe for plotting the results
-grow_flow_1_seed_c <- grow_flow_1_seed %>% 
-  arrange(sequen) %>%  # make sure it is arranged by sequen (Otherwise cumulative sum values will be wrong)
-  ungroup %>%   # not sure why it is a grouped df. This only has an effect on the select argument
-  #st_drop_geometry() %>% 
-  dplyr::select(Community, d, flow, cycle_infra, sequen, perc_dist, perc_flow,
-                perc_person_km, perc_dist_comm, perc_flow_comm, perc_person_km_comm, highway)
-
-# cumsum is cumulative sum. We see how much of person_km has been satisfied after each iteration 
-grow_flow_1_seed_c <- grow_flow_1_seed_c %>%
-  mutate(dist_c = cumsum(d/1000),
-         perc_dist_c = cumsum(perc_dist),
-         perc_person_km_c = cumsum(perc_person_km)) %>%
-  # groupby so that you can apply cumsum by community 
-  group_by(Community) %>% 
-  mutate(dist_c_comm = cumsum(d/1000),
-         perc_dist_comm_c = cumsum(perc_dist_comm),
-         perc_person_km_comm_c = cumsum(perc_person_km_comm)) %>%
-  ungroup()
-
-
-# add a categorical column to show which investment brack the segment is in (0:100, 100:200 etc)
-grow_flow_1_seed_c$distance_groups <- cut(grow_flow_1_seed_c$dist_c, breaks = seq(from = 0, to = max(grow_flow_1_seed_c$dist_c) + 100, by = 100))
-
-# network level plot
-ggplot(data=grow_flow_1_seed_c , aes(x=dist_c, y=perc_person_km_c)) +
-  geom_line() +
-  ggtitle("Connected Growth from One Origin") +
-  labs(x = "Length of Investment (km)", y = "% of person km satisfied",
-       subtitle=expression("Segments Prioritized Based On **Flow**")) +
-  theme_minimal() +
-  theme(plot.title = element_text(size = 14)) +
-  theme(plot.subtitle = element_markdown(size = 10))
-
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_one_seed_satisfied_km_all_flow_column.png"))
-
-# community level plots
-ggplot(data=grow_flow_1_seed_c, 
-       aes(x=dist_c, y=perc_person_km_comm_c, group=Community, color = Community)) +
-  geom_line() + 
-  ggtitle("Connected Growth from One Origin") +
-  labs(x = "Total Length of Investment (km)", y = "% of person km satisfied within community",
-       subtitle="Segments Prioritized Based On **Flow**") +
-  theme_minimal() +
-  theme(plot.title = element_text(size = 14)) +
-  theme(plot.subtitle = element_markdown(size = 10))
-
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_one_seed_satisfied_km_community_flow_column.png"))
-
-
-# we want edges added first to have a thicker lineweight. I add a column to inverse the sequence because tmap
-#will automatically give higher numbers a thicker weight when passing a variable to 'lwd'
-grow_flow_1_seed_c$sequen_inv <- max(grow_flow_1_seed_c$sequen) - grow_flow_1_seed_c$sequen
-
-#### Plot with colour proportional to km (from cumulative distance column) instead of sequence  ####
-tm_shape(graph_sf) +
-  tm_lines(col = 'gray95') +
-  tm_shape(grow_flow_1_seed_c) +
-  tm_lines(title.col = "Priority (km)",
-           col = 'dist_c',    # could do col='sequen' to 
-           lwd = 'sequen_inv',
-           scale = 1.8,     #multiply line widths by X
-           palette = "-Blues",
-           #style = "cont",   # to get a continuous gradient and not breaks
-           legend.lwd.show = FALSE) +
-  tm_layout(title = "Growing A Network From One Seed",        
-            title.size = 1.2,
-            title.color = "azure4",
-            #title.position = c("left", "top"),
-            inner.margins = c(0.1, 0.1, 0.1, 0.1),    # bottom, left, top, and right margin
-            fontfamily = 'Georgia',
-            #legend.position = c("right", "bottom"),
-            frame = FALSE) +
-  tm_scale_bar(color.dark = "gray60") -> p
-
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_one_seed_priority_all_FLOW.png"))
-
-
-########################################### FUNCTION 2: GROWTH FROM EXISTING INFRASTRUCTURE ###########################################
-
-
-# let's grow the network based on existing infrastructure
-grow_flow_existing_infra <- growth_existing_infra(graph = graph_sf, km = no_cycle_infra, col_name = "flow")
+# let's grow the network from the existing infrastructure
+grow_util <- growth_utilitarian(graph = graph_sf, km = no_cycle_infra, col_name = "flow")
 #save
-saveRDS(grow_flow_existing_infra, file = paste0("../data/", chosen_city, "/growth_fun_2.Rds"))
+saveRDS(grow_util, file = paste0("../data/", chosen_city, "/growth_util.Rds"))
 # read in 
-#grow_flow_existing_infra <- readRDS(paste0("../data/", chosen_city,"/growth_fun_2.Rds"))
+#grow_util <- readRDS(paste0("../data/", chosen_city,"/growth_util.Rds"))
 
 
 # get % of edges in gcc
-grow_flow_existing_infra$gcc_size_perc <- (grow_flow_existing_infra$gcc_size / nrow(graph_sf)) * 100
+grow_util$gcc_size_perc <- (grow_util$gcc_size / nrow(graph_sf)) * 100
 # prepare a dataframe for ggplot
-grow_flow_existing_infra_c <- grow_flow_existing_infra %>% 
+grow_util_c <- grow_util %>% 
   arrange(sequen) %>%  # make sure it is arranged by sequen (Otherwise cumulative sum values will be wrong)
   ungroup %>%   # not sure why it is a grouped df. This only has an effect on the select argument
   filter(cycle_infra == 0) %>% # all edges with cycle infrastructure were added at the beginning
@@ -159,12 +71,12 @@ grow_flow_existing_infra_c <- grow_flow_existing_infra %>%
 # percentages calculated
 
 # get the person_km satisfied by existing infrastructure
-initial_perc_satisfied_all <- grow_flow_existing_infra %>% 
+initial_perc_satisfied_all <- grow_util %>% 
   st_drop_geometry() %>% 
   filter(cycle_infra == 1) %>% 
   summarize(sum(perc_person_km)) %>% as.numeric()
 # same as above but for each community
-initial_perc_satisfied_comm <- grow_flow_existing_infra %>% 
+initial_perc_satisfied_comm <- grow_util %>% 
   st_drop_geometry() %>% 
   group_by(Community) %>%
   filter(cycle_infra == 1) %>% 
@@ -173,11 +85,11 @@ initial_perc_satisfied_comm <- grow_flow_existing_infra %>%
 
 
 # join the community values so that we can add them to cumsum so that % satisfied does not start at 0 
-grow_flow_existing_infra_c <- grow_flow_existing_infra_c %>%
+grow_util_c <- grow_util_c %>%
   dplyr::left_join(initial_perc_satisfied_comm, by = c("Community"))
 
 # cumsum is cumulative sum. We see how much of person_km has been satisfied after each iteration 
-grow_flow_existing_infra_c <- grow_flow_existing_infra_c %>%
+grow_util_c <- grow_util_c %>%
   mutate(dist_c = cumsum(d/1000),
          perc_dist_c = cumsum(perc_dist),
          perc_person_km_c = cumsum(perc_person_km) + initial_perc_satisfied_all) %>%
@@ -189,11 +101,11 @@ grow_flow_existing_infra_c <- grow_flow_existing_infra_c %>%
   ungroup()
 
 # add a categorical column to show which investment brack the segment is in (0:100, 100:200 etc)
-grow_flow_existing_infra_c$distance_groups <- cut(grow_flow_existing_infra_c$dist_c, breaks = seq(from = 0, to = max(grow_flow_existing_infra_c$dist_c) + 100, by = 100))
+grow_util_c$distance_groups <- cut(grow_util_c$dist_c, breaks = seq(from = 0, to = max(grow_util_c$dist_c) + 100, by = 100))
 
 
 # network level plot
-ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=perc_person_km_c)) +
+ggplot(data=grow_util_c , aes(x=dist_c, y=perc_person_km_c)) +
   geom_line() +
   ggtitle("Connected Growth from Existing Cycling Infrastructure") +
   labs(x = "Length of Investment (km)", y = "% of person km satisfied",
@@ -204,10 +116,10 @@ ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=perc_person_km_c)) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png"))
+ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_all_flow_column.png"))
 
 # community level plots
-ggplot(data=grow_flow_existing_infra_c, 
+ggplot(data=grow_util_c, 
        aes(x=dist_c, y=perc_person_km_comm_c, group=Community, color = Community)) +
   geom_line() + 
   ggtitle("Connected Growth from Existing Cycling Infrastructure") +
@@ -219,13 +131,13 @@ ggplot(data=grow_flow_existing_infra_c,
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column.png"))
+ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_community_flow_column.png"))
 
 
 
 # network level plot showing no of components (decreasing?) as network grows
 
-# ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=no_components)) +
+# ggplot(data=grow_util_c , aes(x=dist_c, y=no_components)) +
 #   geom_line() +
 #   ggtitle("Number of Components Making Up Network") +
 #   labs(x = "Length of Investment (km)", y = "No. of Components",
@@ -233,7 +145,7 @@ ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_inf
 #   theme_minimal() +
 #   theme(plot.subtitle = element_markdown())
 
-ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=no_components)) +
+ggplot(data=grow_util_c , aes(x=dist_c, y=no_components)) +
   geom_line() +
   ggtitle(chosen_city) +
   labs(x = "Length of Investment (km)", y = "No. of Components",
@@ -242,12 +154,12 @@ ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=no_components)) +
   theme_minimal() +
   theme(plot.subtitle = element_markdown(size =8))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_components_number_flow_", chosen_city, ".png"))
+ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_number_flow_", chosen_city, ".png"))
 
 
 # network level plot showing size of gcc 
 
-ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=gcc_size_perc)) +
+ggplot(data=grow_util_c , aes(x=dist_c, y=gcc_size_perc)) +
   geom_line() +
   ggtitle(chosen_city) +
   labs(x = "Length of Investment (km)", y = "% of Edges in LCC",
@@ -255,14 +167,14 @@ ggplot(data=grow_flow_existing_infra_c , aes(x=dist_c, y=gcc_size_perc)) +
   theme_minimal() +
   theme(plot.subtitle = element_markdown(size = 10))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_components_gcc_flow_", chosen_city, ".png"))
+ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_gcc_flow_", chosen_city, ".png"))
 
 
 # inverse sequence so that thickest edges are the ones selected first
-grow_flow_existing_infra_c$sequen_inv <- max(grow_flow_existing_infra_c$sequen) - grow_flow_existing_infra_c$sequen
+grow_util_c$sequen_inv <- max(grow_util_c$sequen) - grow_util_c$sequen
 
 # segments that had dedicated cycling infrastructure
-initial_infra <- grow_flow_existing_infra %>% filter(cycle_infra == 1)
+initial_infra <- grow_util %>% filter(cycle_infra == 1)
 
 #### Plot with colour proportional to km (from cumulative distance column) instead of sequence  ####
 tm_shape(graph_sf) +
@@ -270,7 +182,7 @@ tm_shape(graph_sf) +
   tm_shape(initial_infra) +
   tm_lines(col = 'firebrick2',
            lwd = 2) +
-  tm_shape(grow_flow_existing_infra_c) +
+  tm_shape(grow_util_c) +
   tm_lines(title.col = "Priority (km)",
            col = 'dist_c',    # could do col='sequen' to 
            lwd = 'sequen_inv',
@@ -290,11 +202,11 @@ tm_shape(graph_sf) +
   # add legend for the existing cycling infrastructure
   tm_add_legend(type = "line", labels = 'Existing Cycling Infrastructure', col = 'firebrick2', lwd = 2) -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_priority_all_FLOW.png"))
+tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_priority_all_FLOW.png"))
 
 
 # lets show where the 1st 100km selected are (to show distribution of resources across communities)
-grow_flow_existing_infra_c_100 <- grow_flow_existing_infra_c %>% dplyr::filter(dist_c <= 100)
+grow_util_c_100 <- grow_util_c %>% dplyr::filter(dist_c <= 100)
 
 tm_shape(graph_sf) +
   tm_lines(col = 'gray95') +
@@ -304,7 +216,7 @@ tm_shape(graph_sf) +
   tm_facets(by="Community",
             nrow = 1,
             free.coords=FALSE)  +  # so that the maps aren't different sizes 
-  tm_shape(grow_flow_existing_infra_c_100) +
+  tm_shape(grow_util_c_100) +
   tm_lines(title.col = "Priority (km)",
            col = 'dist_c', 
            lwd = 'sequen_inv',
@@ -326,14 +238,13 @@ tm_shape(graph_sf) +
   tm_add_legend(type = "line", labels = 'Existing Cycling Infrastructure', col = 'firebrick2', lwd = 1.5) -> p
 
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_existing_infra_facet_FLOW_100.png"), 
+tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_facet_FLOW_100.png"), 
           width=10, height=4)
 
 
 # clear environment
-rm(graph_sf, grow_flow_1_seed, grow_flow_1_seed_c, grow_flow_existing_infra, 
-   initial_perc_satisfied_all, initial_perc_satisfied_comm, initial_infra, 
-   grow_flow_existing_infra_c_100, p, cycle_infra)
+rm(graph_sf, grow_util, initial_perc_satisfied_all, initial_perc_satisfied_comm, initial_infra, 
+   grow_util_c_100, p, cycle_infra)
 
 
 

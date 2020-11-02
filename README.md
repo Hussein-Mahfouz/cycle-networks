@@ -97,7 +97,8 @@ roads with high levels of motorized traffic (Stinson and Bhat 2003), and
 the lack of well-connected cycling infrastructure is one of the main
 obstacles to increasing cycling uptake (Caulfield, Brick, and McCarthy
 2012). While direct and cohesive cycling networks have been shown to
-positively impact cycling rates, density\[2\].
+positively impact cycling rates, density\[2\] of the cycling network is
+also vital (Schoner and Levinson 2014)\].
 
 ## 3.2 Planning Cycling Networks
 
@@ -517,62 +518,134 @@ Figure 7.2: Communities Based on Potential Cycling Demand (Manchester)
 
 # 8 Road Segment Prioritization
 
-``` r
-knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png",
-  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png"
-))
-```
+After routing the potential cycling demand onto the road network using
+weighted shortest paths, we have estimates for the cumulative potential
+cycling demand passing through all road segments. This cumulative demand
+(referred to as *flow* is then used as a basis for determining where
+best to invest in segregated cycling infrastructure. In doing so, we
+must account for the motivations and deterrents for cycling identified
+in Section <a href="#what-affects-the-decision-to-cycle">3.1</a>, namely
+direct and well connected routes.
+
+For this purpose, two algorithms are proposed. Both utilize existing
+infrastructure from the beginning and allow us to compare a solution
+that focuses on utilitarianism to one that focuses on egalitarianism. In
+both algorithms, links\[6\] are selected iteratively and the iteration
+at which each link is added to the solution is recorded. Investments in
+cycling infrastructure can be limited by budget constraints, so it can
+be useful to see where best to allocate a defined length of segregated
+infrastructure.
+
+## 8.1 Algorithm 1: Utilitarian Growth
+
+1.  Identify all links that have segregated cycling infrastructure and
+    add them to the initial solution
+2.  Identify all links that neighbor links in the current solution
+3.  Select neighboring link with highest flow and add it to the solution
+4.  Repeat steps 2 & 3 until all flow is satisfied or investment
+    threshold is met
+
+This algorithm ensures that the resulting network is connected. It also
+satisfies the directness criteria, since links on the weighted shortest
+paths are those that have the highest flow passing through them (this is
+a result of the routing in Section
+<a href="#what-affects-the-decision-to-cycle">3.1</a>.
+
+Algorithm 2: Egalitarian Growth (Focus on Fair Distribution of
+Resources)
+
+The first algorithm focuses on connectivity and directness, but not on
+fairly distributing investment. The latter is not a requirement for
+increasing cycling uptake, but it is fundamental for spatial equity, as
+explained in Section <a href="#underlying-ethical-principles">3.3</a>.
+This algorithm incorporates the ideal of fair distribution by using
+community detection to partition the road network.
+
+The algorithm uses the following logic to ensure fair distribution
+between communities:
+
+1.  Identify all links that have segregated cycling infrastructure and
+    add them to the initial solution
+2.  Identify all links that neighbor links in the current solution
+3.  Select *from each community* one neighboring link with highest flow
+    and add it to the solution
+4.  If there are no more neighboring links in a community, select the
+    link with the highest flow in that community, regardless of
+    connectivity, and add it to the solution
+5.  Repeat steps 2, 3 & 4 until all flow is satisfied or investment
+    threshold is met
+
+Even though we may end up with a more disconnected network, we will have
+separate connected networks in each community. Given that communities
+are defined by having more internal flow than external flow, this is a
+satisfactory solution.
 
 <div class="figure">
 
-<img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png" alt="teswt" width="48%" /><img src="data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png" alt="teswt" width="48%" />
+<img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png" alt="Comparing Overall Person-Km Satisfied (Manchester)" width="45%" /><img src="data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png" alt="Comparing Overall Person-Km Satisfied (Manchester)" width="45%" />
 
 <p class="caption">
 
-Figure 8.1: teswt
+Figure 8.1: Comparing Overall Person-Km Satisfied (Manchester)
 
 </p>
 
 </div>
 
-<!-- Todo: uncomment for final submission -->
+<div class="figure">
 
-<!-- \begin{figure} [h!] -->
+<img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column.png" alt="Comparing Community Level Person-Km Satisfied (Manchester)" width="45%" /><img src="data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_community_flow_column.png" alt="Comparing Community Level Person-Km Satisfied (Manchester)" width="45%" />
 
-<!-- \centering -->
+<p class="caption">
 
-<!-- \captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions -->
+Figure 8.2: Comparing Community Level Person-Km Satisfied (Manchester)
 
-<!-- \begin{subfigure}{.45\textwidth} -->
+</p>
 
-<!--   \centering -->
+</div>
 
-<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png} -->
+<div class="figure">
 
-<!--   \caption{Alg 1 (Utilitarian)} -->
+<img src="data/Manchester/Plots/Growth_Results/growth_community_4_priority_all_FLOW.png" alt="Results of Alg. 2 (Manchester)" width="45%" /><img src="data/Manchester/Plots/Growth_Results/growth_community_4_investment_highways_flow.png" alt="Results of Alg. 2 (Manchester)" width="45%" />
 
-<!--   \label{fig:growth_utilitarian_satisfied_all} -->
+<p class="caption">
 
-<!-- \end{subfigure} -->
+Figure 8.3: Results of Alg. 2 (Manchester)
 
-<!-- \begin{subfigure}{.45\textwidth} -->
+</p>
 
-<!--   \centering -->
+</div>
 
-<!--   \includegraphics[width=1\linewidth]{data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png} -->
+## 8.2 Connectivity
 
-<!--   \caption{Alg 2 (Egalitarian)} -->
+Existing cycling infrastructure is made up of many disconnected
+components. Both Algorithm 1 and 2 start with all existing segregated
+cycling infrastructure and aim to create an efficient, connected
+network. Figure <a href="#fig:componentsandGCC">8.4</a> compares the
+performance of both Algorithms in terms of connectivity gains. We can
+see that, for all three cities analyzed, the number of components is
+gradually reduced as more infrastructure is added (this is true for both
+Algorithms). However these connectivity gains require considerable
+investment; both algorithms take almost 150km of investment to reduce
+the number of components by half.
 
-<!--   \label{fig:growth_egalitarian_satisfied_all} -->
+Consistent growth can also be seen for the size of the Largest Connected
+Component in the proposed bicycle network (Figure
+<a href="#fig:componentsandGCC">8.4</a>). Again, we can see from the
+results of the three different cities that there is little difference
+between both Algorithms.
 
-<!-- \end{subfigure} -->
+<div class="figure">
 
-<!-- \caption{Comparing Overall Person-Km Satisfied (Manchester)} -->
+<img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_components_number_comparisonManchester.png" alt="Network Characteristics" width="45%" /><img src="data/Manchester/Plots/Growth_Results/growth_existing_infra_components_gcc_comparisonManchester.png" alt="Network Characteristics" width="45%" />
 
-<!-- \label{fig:growth_existing_infra_satisfied} -->
+<p class="caption">
 
-<!-- \end{figure} -->
+Figure 8.4: Network Characteristics
+
+</p>
+
+</div>
 
 # 9 Overarching Policies
 
@@ -894,8 +967,7 @@ Environment Influences on Route Selection for Bicycle and Car Travel.”
     cyclists from other modes of transport.
 
 2.  making an area’s bicycle network denser means adding more cycling
-    routes in the area and thereby giving cyclists more route options}
-    of the cycling network is also vital (Schoner and Levinson 2014)
+    routes in the area and thereby giving cyclists more route options
 
 3.  *link* refers to a road segment throughout this research
 
@@ -914,3 +986,5 @@ Environment Influences on Route Selection for Bicycle and Car Travel.”
     package divides by numbers between 0 and 1, which achieves the same
     result. For the sake of reproducibility, we stick to the convention
     used in the package.
+
+6.  *link* refers to a road segment
