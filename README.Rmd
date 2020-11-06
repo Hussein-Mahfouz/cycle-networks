@@ -7,9 +7,9 @@ bibliography: mybibfile.bib
 numbersections: true
 #output: rticles::elsevier_article
 output:
-  # bookdown::github_document2
-  bookdown::pdf_document2:
-    extra_dependencies: ["subcaption", "longtable"]
+  bookdown::github_document2
+  # bookdown::pdf_document2:
+  #   extra_dependencies: ["subcaption", "longtable"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
