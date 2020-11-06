@@ -19,7 +19,11 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 
 # Ideas and discussion
 
-- Community Detection
+- Lit Review: I can also organize this thematically and trim down **Planning Cycling Networks** substantially. I would then add some literature in:
+  - Calculating Potential Demand
+  - Routing
+  - Road Segment Prioritization
+- Community Detection: Where in the document should this section be?
 - Other Cities
 
 <!-- ## Missing Data -->
@@ -203,7 +207,7 @@ In our case, the network is the city; the nodes are the population-weighted MSOA
 2. Use Louvian method to determine optimal number of communities and assign each MSOA centroid to a community.
 3. Assign each road link to the same community as the closest MSOA centroid to it.
 
-The results show that Manchester can be split into three large communities and one small one (Figure \@ref(fig:communitiesmanchester)).
+The results show that Manchester can be split into four large communities and one small one (Figure \@ref(fig:communitiesmanchester)).
 
 ```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
@@ -226,7 +230,7 @@ For this purpose, two algorithms are proposed. Both utilize existing infrastruct
 
 This algorithm ensures that the resulting network is connected. It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(what-affects-the-decision-to-cycle).
 
-Algorithm 2: Egalitarian Growth (Focus on Fair Distribution of Resources)
+## Algorithm 2: Egalitarian Growth (Focus on Fair Distribution of Resources)
 
 The first algorithm focuses on connectivity and directness, but not on fairly distributing investment. The latter is not a requirement for increasing cycling uptake, but it is fundamental for spatial equity, as explained in Section \@ref(underlying-ethical-principles). This algorithm incorporates the ideal of fair distribution by using community detection to partition the road network. 
 
@@ -241,39 +245,62 @@ The algorithm uses the following logic to ensure fair distribution between commu
 
 Even though we may end up with a more disconnected network, we will have separate connected networks in each community. Given that communities are defined by having more internal flow than external flow, this is a satisfactory solution.
 
+The results of the community detection are used to evaluate the algorithms. This is done by looking at the *person-km satisfied* as cycling infrastructure is added. Person-km is a measure of the total km cycled on a road segment, so it is the product of the number of potential commuters cycling on that road segment ($flow$) and the length of the segment in km ($l$). For each road segment, the person-km is equal to $flow * l$. In the case of Manchester, Table (**Reference the table**) shows that almost half of the person-km is in community 1 , while only 0.5\% of total person-km on the network is in community 5.
 
-```{r growthtotal, fig.cap="Comparing Overall Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
+
+```{r personkmtable, echo=FALSE, message = FALSE}
+
+library(tidyverse)
+library(sf)
+
+table <- readRDS("data/Manchester/graph_with_flows_weighted_communities.RDS")
+# we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
+table$person_km <- table$flow * table$d
+# get % of total person km on each link
+table$person_km_perc <- (table$person_km / sum(table$person_km)) * 100
+
+table <- table %>% sf::st_drop_geometry() %>% 
+  dplyr::group_by(Community) %>%
+  summarize(`Person-Km (Total)` = round(sum(person_km),0),
+            `Person-Km (%)` = round(sum(person_km_perc),1))
+
+knitr::kable(table,
+             caption = "Total Person-Km in Different Communities (Manchester)")
+       
+```
+
+Looking at the person-km satisfied (Figure \@ref(fig:growthtotal)), we see that the incremental addition of cycling infrastructure is better distributed between communities using Algorithm 2; equal distribution of investment results in the gain in % of person km satisfied in each community being inversely correlated with the size of the community. In addition, we find that the restrictions imposed by Algorithm 2 on the network growth do not seem to have a noticeable effect on the city-wide \% of person-km satisfied. Comparing both algorithms, we can see that Algorithm 1 provides only marginally quicker city-wide gains than Algorithm 2. 
+
+
+```{r growthtotal, fig.cap="Comparing Overall (Dashed) and Community Level Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column.png",
-  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column.png"
+  "data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png",
+  "data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_both_flow_column.png"
 ))
 ```
 
-```{r growthcommunities, fig.cap="Comparing Community Level Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
-knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column.png",
-  "data/Manchester/Plots/Growth_Results/growth_community_4_satisfied_km_community_flow_column.png"
-))
-```
+Figure \@ref(fig:growth3MapandBar) gives us a geographic representation of the results from Algorithm 2; it shows when each link was added to the solution (first 100km, second 100km, etc). We can see that, generally, road segments around cycling infrastructure are prioritized, except for those neighboring cycling infrastructure on the very periphery. The first 100km is also spatially distributed across the city, with no apparent bias towards a particular area.
+
+It is also important to understand how the different highway types contribute to the proposed network. Figure \@ref(fig:growth3MapandBar) shows that most of the flow will be on residential and tertiary roads, as expected from the weighting profile defined in Table **reference the table**. 
 
 
 ```{r growth3MapandBar, fig.cap="Results of Alg. 2 (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_community_4_priority_all_FLOW.png",
-  "data/Manchester/Plots/Growth_Results/growth_community_4_investment_highways_flow.png"
+  "data/Manchester/Plots/Growth_Results/growth_egalitarian_priority_all_FLOW.png",
+  "data/Manchester/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"
 ))
 ```
 
 ## Connectivity
 
-Existing cycling infrastructure is made up of many disconnected components. Both Algorithm 1 and 2 start with all existing segregated cycling infrastructure and aim to create an efficient, connected network. Figure \@ref(fig:componentsandGCC) compares the performance of both Algorithms in terms of connectivity gains. We can see that, for all three cities analyzed, the number of components is gradually reduced as more infrastructure is added (this is true for both Algorithms). However these connectivity gains require considerable investment; both algorithms take almost 150km of investment to reduce the number of components by half. 
+Existing cycling infrastructure is made up of many disconnected components. Both Algorithm 1 and 2 start with all existing segregated cycling infrastructure and aim to create an efficient, connected network. Figure \@ref(fig:componentsandGCC) shows that both algorithms gradually reduce the number of components as more infrastructure is added, but Algorithm 2 is able to provide better connectivity with less investment. 
 
-Consistent growth can also be seen for the size of the Largest Connected Component in the proposed bicycle network (Figure \@ref(fig:componentsandGCC)). Again, we can see from the results of the three different cities that there is little difference between both Algorithms. 
+Consistent growth can also be seen for the size of the Largest Connected Component in the proposed bicycle network (Figure \@ref(fig:componentsandGCC)). Here however, we find that there is little difference between both Algorithms. 
 
 ```{r componentsandGCC, fig.cap="Network Characteristics", out.width="45%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_existing_infra_components_number_comparisonManchester.png",
-  "data/Manchester/Plots/Growth_Results/growth_existing_infra_components_gcc_comparisonManchester.png"
+  "data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png",
+  "data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png"
 ))
 ```
 

@@ -1,6 +1,7 @@
 library(tidyverse)
 library(sf)
 library(dodgr)
+library(geodist)
 
 
 # read in MSOA centroids
@@ -39,7 +40,7 @@ to <- colnames(od_flow_matrix) %>% as.data.frame() %>% left_join(lon_lat, by = c
 # od_flow_matrix_2 <- od_flow_matrix %>% as.data.frame() %>% slice(1:10) %>% select(1:10) %>% as.matrix()
 
 # ROUTE
-# load in graph save in script 2
+# load in graph saved in script 2
 #graph <- readRDS(paste0("../data/",chosen_city,"/city_graph.Rds"))
 streetnet_sc <- readRDS(paste0("../data/",chosen_city,"/unweighted_streetnet.Rds"))
 ######
@@ -47,18 +48,13 @@ streetnet_sc <- readRDS(paste0("../data/",chosen_city,"/unweighted_streetnet.Rds
 # CREATE GRAPHS WITH DIFFERENT WEIGHTING PROFILES. THE WEIGHTING PROFILES ARE EDITED BY
 # DOWNLOADING THE JSON IN -x-dodgr_weight_profiles.R AND EDITING IN A TEXT EDITOR
 
+
 # this graph has weights so that low stress roads (secondary, tertiary) are preferred
 graph_weighted <- weight_streetnet(streetnet_sc, 
                                   wt_profile_file = "../data/weight_profile_weighted.json")
 # all road types are weighted equally here. We use these weights to get the absolute shortest paths
 graph_unweighted <- weight_streetnet(streetnet_sc, 
                                      wt_profile_file = "../data/weight_profile_unweighted.json")
-
-# Here trunk roads are changed from 0.3 to 0.7 (equal to primary). The idea is that segregated 
-# bicycle lanes can easily be built on trunk roads (park lane, euston road), so this helps determine 
-# which trunk routes would be useful for cyclists
-# graph_trunk <- weight_streetnet(streetnet_sc, 
-#                                 wt_profile_file = "../data/weight_profile_trunk.json")
 
 
 # # add flows to road segments # norm_sums isn't a parameter apparently. Tried updating dodgr...
@@ -110,13 +106,10 @@ aggregate_flows <- function(graph, from, to, flows){
 graph_sf_weighted <- aggregate_flows(graph=graph_weighted, from=from, to=to, flows=od_flow_matrix)
 # unweighted graph
 graph_sf_unweight <- aggregate_flows(graph=graph_unweighted, from=from, to=to, flows=od_flow_matrix)
-# graph with modified trunk weight
-#graph_sf_trunk <- aggregate_flows(graph=graph_trunk, from=from, to=to, flows=od_flow_matrix)
 
 # save as RDS to load in next script (geojson, shp etc cause problems)
 saveRDS(graph_sf_weighted, file = paste0("../data/", chosen_city, "/graph_with_flows_weighted.Rds"))
 saveRDS(graph_sf_unweight, file = paste0("../data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
-#saveRDS(graph_sf_trunk, file = paste0("../data/", chosen_city, "/graph_with_flows_trunk.Rds"))
 
 
 
