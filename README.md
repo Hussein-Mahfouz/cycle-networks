@@ -1,6 +1,6 @@
 Road Segment Prioritization for Bicycle Infrastructure
 ================
-2020-11-06
+2020-11-07
 
 # Ideas and discussion
 
@@ -221,23 +221,36 @@ commuter data should it become available.
 
 # Calculating Potential Cycling Demand
 
-The Propensity to Cycle Tool (PCT) (Lovelace et al. 2017) is used to
-estimate the proportion of cyclists (\(\boldsymbol{C_{p}}\)) for each
-MSOA pair should the government achieve its target of doubling cycling
-by 2025. The PCT uses the following logistic regression model to
-calculate \(\boldsymbol{C_{p}}\):
+Using existing cycling demand to inform decisions on where cycling
+infrastructure should be added reinforces existing cycling patterns and
+ignores potential cycling demand that could be satisfied by a connected
+network. To avoid this issue, Duthie and Unnikrishnan (2014) choose to
+ignore demand completely, and focus on creating a network that connects
+the entire study area. Olmos et al. (2020) obtain the distance
+distribution of cyclists using a smartphone-based bicycle GPS data. They
+then use a rejection-sampling algorithm on the OD data of the study area
+to match the potential demand distribution to the distribution obtained
+from GPS data.
 
-where \(\boldsymbol{d}\) and \(\boldsymbol{s}\) are the distance and
-slope respectively for the OD pair. The authors use square and
-square-root distance terms \`\`to capture the non-linear impact of
-distance on the likelihood of cycling", and interaction terms to capture
-the combined effect of slope and distance (Lovelace et al. 2017).
+For our purposes, we use a logistic regression model to calculate
+potential cycling demand. The model is adopted directly from the
+Propensity to Cycle Tool (PCT) (Lovelace et al. 2017). The PCT estimates
+the proportion of cyclists (\(\boldsymbol{C_{p}}\)) for each MSOA pair
+should the government achieve its target of doubling cycling by 2025.
+The logistic regression model used to calculate \(\boldsymbol{C_{p}}\)
+has the following parameters:
+
+where **d** and **s** are the distance and slope respectively for the OD
+pair. The authors use square and square-root distance terms “to capture
+the non-linear impact of distance on the likelihood of cycling”, and
+interaction terms to capture the combined effect of slope and distance
+(Lovelace et al. 2017).
 
 The potential demand calculations show that the current and potential
 number of cyclists both follow a bell-shaped distribution, with the
 number of trips peaking around the 3-5km commuting distance and then
 going back down for longer distances (see Figure
-<a href="#fig:potdemhistograms">1</a>.
+<a href="#fig:potdemhistograms">1</a>).
 
 <div class="figure">
 

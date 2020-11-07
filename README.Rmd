@@ -5,11 +5,13 @@ geometry: margin=2cm
 bibliography: mybibfile.bib
 #linenumbers: true
 numbersections: true
-#output: rticles::elsevier_article
+abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. Therefore, the aim of this study is to develop a methodology that determines where cycling infrastructure should be added by accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand in a city will come from, how such demand should be routed on the street network, and how to  consider fair distribution of cycling infrastructure that is in line with egalitarian principles. The city of Manchester is used as a case study, but the methodology is generic enough to be applicable to any city. For routing, it is found that deviating from shortest paths to avoid high-stress road segments can result in acceptable travel time increases for cyclists. Community detection is used to partition the city and evaluate results from utilitarian to egalitarian algorithms on distributing cycling infrastructure. The results show that the egalitarian algorithm provides comparable city-wide results to the utilitarian one. \\par\\textbf{Keywords:} cycling network, routing, transport equity"
+# keywords: "cycling, potential demand, routing"
 output:
-  bookdown::github_document2
-  # bookdown::pdf_document2:
-  #   extra_dependencies: ["subcaption", "longtable"]
+  # bookdown::github_document2
+  bookdown::pdf_document2:
+      toc: false
+      extra_dependencies: ["subcaption", "longtable"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -97,16 +99,19 @@ The analysis is heavily dependant on Origin-Destination census data (commuter da
 
 # Calculating Potential Cycling Demand
 
-The Propensity to Cycle Tool (PCT) [@lovelace2017propensity] is used to estimate the proportion of cyclists ($\boldsymbol{C_{p}}$) for each MSOA pair should the government achieve its target of doubling cycling by 2025. The PCT uses the following logistic regression model to calculate $\boldsymbol{C_{p}}$:
+Using existing cycling demand to inform decisions on where cycling infrastructure should be added reinforces existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network. To avoid this issue, @duthie2014optimization choose to ignore demand completely, and focus on creating a network that connects the entire study area. @olmos2020data obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data. They then use a rejection-sampling algorithm on the OD data of the study area to match the potential demand distribution to the distribution obtained from GPS data. 
+
+For our purposes, we use a logistic regression model to calculate potential cycling demand. The model is adopted directly from the Propensity to Cycle Tool (PCT) [@lovelace2017propensity]. The PCT estimates  the proportion of cyclists ($\boldsymbol{C_{p}}$) for each MSOA pair should the government achieve its target of doubling cycling by 2025. The logistic regression model used to calculate $\boldsymbol{C_{p}}$ has the following parameters:
 
 ```{=tex}
 \begin{align}\label{eq:pcteqn}
      logit(C_{p}) = & -4.018 - 0.6369d +  1.988\sqrt{d} + 0.008775d^2\\ & - 0.2555s + 0.00206ds -0.1234\sqrt{d}s\nonumber 
 \end{align}
 ```
-\noindent where $\boldsymbol{d}$ and $\boldsymbol{s}$ are the distance and slope respectively for the OD pair. The authors use square and square-root distance terms \`\`to capture the non-linear impact of distance on the likelihood of cycling", and interaction terms to capture the combined effect of slope and distance [@lovelace2017propensity].
 
-The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-5km commuting distance and then going back down for longer distances (see Figure \@ref(fig:potdemhistograms).
+\noindent where **d** and **s** are the distance and slope respectively for the OD pair. The authors use square and square-root distance terms "to capture the non-linear impact of distance on the likelihood of cycling", and interaction terms to capture the combined effect of slope and distance [@lovelace2017propensity].
+
+The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-5km commuting distance and then going back down for longer distances (see Figure \@ref(fig:potdemhistograms)).
 
 ```{r potdemhistograms, fig.cap="Distribution of Potential Cycling Demand", out.width="32%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
