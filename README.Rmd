@@ -26,7 +26,8 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
   - Routing
   - Road Segment Prioritization
 - Community Detection: Where in the document should this section be?
-- Other Cities
+- Should we use other cities for the sake of comparison
+- How to add tables
 
 <!-- ## Missing Data -->
 
