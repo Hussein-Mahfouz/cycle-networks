@@ -21,11 +21,12 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 
 # Ideas and discussion
 
-- Intro: trim down substantially then add some literature in: Calculating Potential Demand / Routing / Road Segment Prioritization
-- Community Detection: Where in the document should this section be?
-- Should we use other cities for the sake of comparison
-- How to add tables properly
+- Intro: possible trim down substantially then add some literature in (a) Calculating Potential Demand / (b) Routing / (c) Road Segment Prioritization
+- Community Detection: Where in the document should this section be? It is now before Road Segment Prioritization, but I can merge them
+- Should we use other cities for the sake of comparison (compare communities, road types etc)
+- How to add tables properly (they are now added using latex code which only shows up when outputting to pdf)
 - Footnotes are sometimes split between pages. How do I keep them on the same page?
+- What is the best way to write pseudocode (Steps for Algorithm 1 and 2)
 
 <!-- ## Missing Data -->
 
@@ -276,7 +277,7 @@ After routing the potential cycling demand onto the road network using weighted 
 
 For this purpose, two algorithms are proposed. Both utilize existing infrastructure from the beginning and allow us to compare a solution that focuses on utilitarianism to one that focuses on egalitarianism. In both algorithms, links are selected iteratively and the iteration at which each link is added to the solution is recorded. Investments in cycling infrastructure can be limited by budget constraints, so it can be useful to see where best to allocate a defined length of segregated infrastructure. 
 
-## Algorithm 1: Utilitarian Growth
+## Algorithm 1: Utilitarian Expansion
 
 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
@@ -286,7 +287,7 @@ For this purpose, two algorithms are proposed. Both utilize existing infrastruct
 
 This algorithm ensures that the resulting network is connected. It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(introduction).
 
-## Algorithm 2: Egalitarian Growth (Focus on Fair Distribution of Resources)
+## Algorithm 2: Egalitarian Expansion (Focus on Fair Distribution of Resources)
 
 The first algorithm focuses on connectivity and directness, but not on fairly distributing investment. The latter is not a requirement for increasing cycling uptake, but it is fundamental for spatial equity, as explained in Section \@ref(introduction). This algorithm incorporates the ideal of fair distribution by using community detection to partition the road network. 
 
@@ -325,7 +326,7 @@ knitr::kable(table,
        
 ```
 
-Looking at the person-km satisfied (Figure \@ref(fig:growthtotal)), we see that the incremental addition of cycling infrastructure is better distributed between communities using Algorithm 2; equal distribution of investment results in the gain in % of person km satisfied in each community being inversely correlated with the size of the community. In addition, we find that the restrictions imposed by Algorithm 2 on the network growth do not seem to have a noticeable effect on the city-wide \% of person-km satisfied. Comparing both algorithms, we can see that Algorithm 1 provides only marginally quicker city-wide gains than Algorithm 2. 
+Looking at the person-km satisfied (Figure \@ref(fig:growthtotal)), we see that the incremental addition of cycling infrastructure is better distributed between communities using Algorithm 2; equal distribution of investment results in the gain in % of person km satisfied in each community being inversely correlated with the size of the community. In addition, we find that the restrictions imposed by Algorithm 2 on the network expansion do not seem to have a noticeable effect on the city-wide \% of person-km satisfied. Comparing both algorithms, we can see that Algorithm 1 provides only marginally quicker city-wide gains than Algorithm 2. 
 
 
 ```{r growthtotal, fig.cap="Comparing Overall (Dashed) and Community Level Person-Km Satisfied (Manchester)", out.width="45%", fig.show='hold', echo=FALSE}
@@ -368,7 +369,7 @@ While segregated, connected, and direct cycling infrastructure is key to achievi
 
 # Conclusions
 
-The research set out to provide a methodology for designing a cycling network that respects both the needs of the users and the ambitions of the government. The methodology can be used as a starting point for introducing a direct, connected, and low-stress network for any city by leveraging available open data. The only data necessary for reproducing it is the road network (from OSM), its topography (from satellite imagery), and commuter data (from the census). It should be noted that the recommendations are only as good as the granularity of the available data.  
+The research provides a methodology for designing a cycling network that respects both the needs of the users and the ambitions of the government. The methodology can be used as a starting point for introducing a direct, connected, and low-stress network for any city by leveraging available open data. The only data necessary for reproducing it is the road network (from OSM), its topography (from satellite imagery), and commuter data (from the national census). It should be noted that the recommendations are only as good as the granularity of the available data.  
 A core part of the methodology is determining where there is high potential for cycling, and using this as a basis for recommendations on road space reallocation in order to unlock potential cycling demand. A routing engine was used to study the effects of limiting access on different road types, and it was found that reducing cyclist flow on roads with high through-traffic resulted in acceptable increases in commuting distances. As a result, a hierarchy of road preference was used to route potential cycling demand. Algorithms were developed to determine where investments in cycling infrastructure should be prioritized. These algorithms, based on connectivity and egalitarian principles of resource distribution, ensured that whatever the level of investment, the resulting cycling network would improve connectivity of existing cycling infrastructure.
 
 The research hopes to aid in the current shift towards active transport that is being promoted by the UK government. The success of such a shift is contingent on the appeal of the cycling network for prospective cyclists, a fact that was used as the basis for the methodology outlined here. 
