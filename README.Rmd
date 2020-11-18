@@ -129,7 +129,7 @@ It should be noted that the calculations assume a future that is constrained by 
 
 # Routing
 
-The next step is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. **TALK ABOUT WEIGHTED ROUTING IN OTHER STUDIES **
+The next step is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. 
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
 
 \begin{longtable}{lll}
@@ -170,7 +170,7 @@ To conduct routing, the following is considered:
 2.  **Low-Traffic Neighborhoods**: The UK Department for Transport is allocating funding to local authorities to invest in Active Transport, partially through the creation of LTNs [@departmentgearchange2020]. This includes closing off residential streets to motorized traffic.
 3.  **Existing Cycling Infrastructure**: Utilizing existing cycling infrastructure makes economic sense, as small investments may lead to large connectivity gains as the disconnected cycling infrastructure gets joined together.
 
-The weighting profiles are therefore adjusted to favor less stressful streets (based on information from Table  \@ref(table:osmroadtypes)), and roads with existing cycling infrastructure. This is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs. 
+The above points are accounted for by using a weighted road network for routing. This has previously been done by multiplying all road segments without cycling infrastructure by an impedance factor [@mauttone2017bicycle], or by assigning a weight to the road segment proportional to the investment cost of bringing it to an acceptable level of stress for cycling  [@duthie2014optimization]. Our approach is similar to the latter, as we create a weighting profile that is adjusted to favor less stressful streets (based on information from Table  \@ref(table:osmroadtypes)), and roads with existing cycling infrastructure. We believe this to be more practical  than the approach adopted by @mauttone2017bicycle, as it goes beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference based on perceived stress levels. The approach is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs. 
 
 <!-- **ADD TABLE - THIS IS BASIC** -->
 <!-- ```{r, echo=FALSE, message = FALSE} -->
@@ -232,7 +232,7 @@ We choose to avoid routing the potential cycling demand on Primary A Roads for t
 1. **Logistical Difficulty**: Changes on these roads need to be agreed upon by all affected authorities [@department2012guidance], which may prove to be difficult. 
 2. **Low Traffic Neighborhoods (LTNs)**: The UK government is aiming to restrict access to motorized vehicles on residential roads to create LTNs [@departmentgearchange2020]. This is part of a policy to prevent automobile rat-running and make streets more accessible to cyclists and pedestrians. Under such a policy, Primary A roads would become even more essential for motorized traffic and it would be more difficult to reallocate road space on these roads to cyclists. 
 
-Routing potential cycling demand on a weighted network is more in line with government policy to create LTNs. Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted network significantly reduces flow on the trunk and primary roads, but does not eliminate it completely. This is intentional, as the impedance on these roads is only slightly higher than remaining road types (See Table \@ref(table:weightprofiles)). Potential cycling demand is only routed on these roads if there are no routes through other roads that offer comparable directness. 
+Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted network significantly reduces flow on the trunk and primary roads, but does not eliminate it completely. This is intentional, as the impedance on these roads is only slightly higher than remaining road types (See Table \@ref(table:weightprofiles)). Potential cycling demand is only routed on these roads if there are no routes through other roads that offer comparable directness. 
 
 Banning cycling flow completely on trunk and primary roads may result in excessively circuitous paths, as seen in Figure \@ref(fig:boxplotcircuity). When routing using the weighting profile in Table \@ref(table:weightprofiles), we see that shortest paths increase by less than 5\% on average from unweighted shortest paths, with the largest increases still below 30\%. When routing on primary and trunk roads is banned (weighted_2 profile in Table \@ref(table:weightprofiles)), the average increase relative to unweighted shortest paths rises to 10\%, with certain locations experiencing more significant negative effects on accessibility. 
 
@@ -240,7 +240,7 @@ Banning cycling flow completely on trunk and primary roads may result in excessi
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
 ```
 
-Given that cyclists will only deviate from shortest paths by a certain amount to access better cycling infrastructure (as explained in Section \@ref(introduction), allowing flow on some stretches of trunk and primary roads is necessary to insure cycling uptake and equitable access to cycling infrastructure. In its new vision for walking and cycling, the Department for Transport acknowledges that minimal segregated stretches of bicycle lanes on main roads will be necessary to avoid circuitous cycling networks [@departmentgearchange2020].
+Given that cyclists will only deviate from shortest paths by a certain amount to access better cycling infrastructure (as explained in Section \@ref(introduction)), allowing flow on some stretches of trunk and primary roads is necessary to insure cycling uptake and equitable access to cycling infrastructure. In its new vision for walking and cycling, the Department for Transport acknowledges that minimal segregated stretches of bicycle lanes on main roads will be necessary to avoid circuitous cycling networks [@departmentgearchange2020].
 
 Weighting the road network also allows us to better utilize existing cycling infrastructure, as can be seen by the higher flow on cycleways in Figure \@ref(fig:flowsfacetweighted). Again, the small differences in impedance between cycleways and other road types mean that cycleways that require significant deviation are not routed on. 
 
