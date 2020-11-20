@@ -4,7 +4,7 @@ library(sfnetworks)
 library(dplyr)
 library(rbenchmark)
 
-test <- readRDS(paste0("../data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
+test <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
 
 
 growth_one_seed_modified <- function(graph, km, col_name) {
@@ -134,7 +134,7 @@ growth_community_modified <- function(graph, km, col_name) {
   # add sequen column
   graph$sequen <- NA
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   # we get max flow per group, and then get max distance on result in case of ties (so that we end up with 1 row per group)
   x <- graph %>% group_by(Community) %>% 
     slice_max(order_by = !! sym(col_name)) %>% 
@@ -203,7 +203,7 @@ growth_community_2_modified <- function(graph, km, col_name) {
   # add sequence column
   graph$sequen <- NA
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   # we get max flow per group, and then get max distance on result in case of ties (so that we end up with 1 row per group)
   x <- graph %>% group_by(Community) %>% 
     slice_max(order_by = !! sym(col_name)) %>% 
@@ -297,7 +297,7 @@ growth_community_3_modified <- function(graph, km, col_name) {
   # add sequence column
   graph$sequen <- NA
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   # we get max flow per group, and then get max distance on result in case of ties (so that we end up with 1 row per group)
   x <- graph %>% group_by(Community) %>% 
     slice_max(order_by = !! sym(col_name)) %>% 
@@ -390,7 +390,7 @@ growth_community_4_modified <- function(graph, km, col_name) {
                             no_components = NA,
                             gcc_size = NA)
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   # we get max flow per group, and then get max distance on result in case of ties (so that we end up with 1 row per group)
   x <- graph %>% group_by(Community) %>% 
     slice_max(order_by = !! sym(col_name)) %>% 

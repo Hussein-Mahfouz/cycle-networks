@@ -11,7 +11,7 @@ library(tmap)
 ########
 
 # centroids for bounding box of chosen city
-msoa_centroids <- st_read(paste0("../data/", chosen_city,"/msoa_lon_lat.shp"))
+msoa_centroids <- st_read(paste0("data/", chosen_city,"/msoa_lon_lat.shp"))
 
 # bounding box
 pts <- st_coordinates (msoa_centroids)
@@ -68,7 +68,7 @@ maxspeed <- streetnet2 %>%
 ########
 
 # Read in the graph with the road network and flows
-graph_sf <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_weighted.RDS"))
+graph_sf <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
 
 # this is all road segments with bicycle == 'designated'
 cycle_designated <- streetnet2 %>% 
@@ -195,7 +195,7 @@ tm_shape(graph_sf) +
 p <- tmap_arrange(p1, p2, p4, nrow = 1)
 
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/OSM_identifying_cycle_infrastructure.png"),
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/OSM_identifying_cycle_infrastructure.png"),
           width=10, height=5)
 
 
@@ -235,7 +235,7 @@ graph_sf <- dplyr::left_join(graph_sf, graph_sf_cycle, by = "edge_id")
 graph_sf$cycle_infra[is.na(graph_sf$cycle_infra)] <- 0
 
 # save it as an RDS
-saveRDS(graph_sf, file = paste0("../data/", chosen_city, "/graph_with_flows_weighted.Rds"))
+saveRDS(graph_sf, file = paste0("data/", chosen_city, "/graph_with_flows_weighted.Rds"))
 
 ###### FUNCTION TO ADD BINARY COLUMN INDICATING THE PRESENCE OF CYCLING INFRASTRUCTURE #####
 
@@ -273,14 +273,14 @@ infra_exists <- function(graph, network){
 }
 
 # Read in the other graphs, add column for cycling infrastrucure, then overwrite
-graph_sf_unweight <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
+graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
 graph_sf_unweight <- infra_exists(graph=graph_sf_unweight, network=streetnet2)
-saveRDS(graph_sf_unweight, file = paste0("../data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
+saveRDS(graph_sf_unweight, file = paste0("data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
 
 
-# graph_sf_trunk <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_trunk.RDS"))
+# graph_sf_trunk <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_trunk.RDS"))
 # graph_sf_trunk <- infra_exists(graph_sf_trunk, streetnet2)
-# saveRDS(graph_sf_trunk, file = paste0("../data/", chosen_city, "/graph_with_flows_trunk.Rds"))
+# saveRDS(graph_sf_trunk, file = paste0("data/", chosen_city, "/graph_with_flows_trunk.Rds"))
 
 
 #clean environment

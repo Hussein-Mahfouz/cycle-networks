@@ -14,5 +14,5 @@ penalties <- dodgr::weighting_profiles$penalties
 weights_bicycle <- dodgr::weighting_profiles$weighting_profiles %>% 
   filter(name == 'bicycle')
 
-write_dodgr_wt_profile(file = "../data/weight_profile_default")
+write_dodgr_wt_profile(file = "data/weight_profile_default")
 

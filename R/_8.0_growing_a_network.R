@@ -3,7 +3,7 @@ library(sf)
 library(sfnetworks)
 library(tidyverse)
 
-# graph_sf <- readRDS(paste0("../data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
+# graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
 
 
 ##### FUNCTION TO CHECK IF THE INVESTMENT LENGTH CHOSEN IS REASONABLE. IT SHOULD BE LESS THAN THE TOTAL KM
@@ -132,7 +132,7 @@ growth_egalitarian <- function(graph, km, col_name) {
                             no_components = NA,
                             gcc_size = NA)
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   # we get max flow per group, and then get max distance on result in case of ties (so that we end up with 1 row per group)
   x <- graph %>% group_by(Community) %>% 
     slice_max(order_by = !! sym(col_name)) %>% 

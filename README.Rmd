@@ -44,7 +44,7 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 <!-- Middle Layer Super Output Areas (December 2011) Boundaries: -->
 
 <!--   - Source: -->
-<!--     <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
+<!--     <http://geoportal.statistics.gov.datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
 <!--   - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\] -->
 
 <!-- ----- -->
@@ -127,7 +127,7 @@ knitr::include_graphics(c(
 
 
 ```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="75%", fig.show='hold', echo=FALSE}
-knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
+knitr::include_graphics("data/Manchester/Plodesire_facet_cycling.png")
 ```
 
 It should be noted that the calculations assume a future that is constrained by physical geography; i.e. we consider cycling in the traditional sense. Recently there have been various micro-mobility solutions, including e-bikes, that allow commuters to traverse longer distances and hillier roads with less effort than traditional bicycles. While these modes would probably be associated with less geographical impedance, it is beyond the scope of this work to integrate that into the analysis. Doing so is partially restricted by the lack of data on the proliferation of these modes, which raises the point that perhaps the census data category of `Bicycle' is too vague, and should be further dis-aggregated to distinguish between traditional bicycles and other forms of micro-mobility.

@@ -5,7 +5,7 @@ library(ggplot2)
 library(ggrepel)
 
 # this is a lookup table matching MSOAs to major towns and cities
-city_names <- read_csv('../data-raw/Middle_Layer_Super_Output_Area__2011__to_Major_Towns_and_Cities__December_2015__Lookup_in_England_and_Wales.csv') 
+city_names <- read_csv('data-raw/Middle_Layer_Super_Output_Area__2011__to_Major_Towns_and_Cities__December_2015__Lookup_in_England_and_Wales.csv') 
 # change column name
 city_names <- city_names %>% rename(city = TCITY15NM)
 
@@ -18,14 +18,22 @@ no_msoas <- city_names %>% dplyr::group_by(city) %>% dplyr::tally()
 ##### CHOOSE YOU CITY 
 chosen_city <- "Manchester"
 #create a directory to store data related to this city (does nothing if directory already exists)
-dir.create(paste0("../data/", chosen_city), showWarnings = FALSE)
+dir.create(paste0("data/", chosen_city), showWarnings = FALSE)
 # create sub-directory to save plots as well
-dir.create(paste0("../data/", chosen_city,"/Plots"), showWarnings = FALSE)
+dir.create(paste0("data/", chosen_city,"/Plots"), showWarnings = FALSE)
 
 ##### CHOOSE YOU CITY 
 
 # flow data from the 2011 census https://www.nomisweb.co.uk/census/2011/bulk/rOD1
-flows <- read_csv('../data-raw/flow_data.csv')
+u = "https://www.nomisweb.co.uk/output/census/2011/wu03ew_msoa.zip"
+f = 'data-raw/flow_data.csv'
+f_zip = file.path(tempdir(), basename(u))
+if(!file.exists(f)) {
+  download.file(url = u, destfile = f_zip)
+  unzip(zipfile = f_zip, exdir = "data-raw")
+  file.rename("data-raw/wu03ew_msoa.csv", f)
+}
+flows <- read_csv(f)
 
 ###############
 # MERGING NAMES WITH FLOW DATA (TO GET INTERNAL FLOWS IN ANY CITY)
@@ -60,7 +68,7 @@ cycle_mode_share %>% #filter(city_origin != 'London') %>%
   scale_x_continuous(trans='log10', labels = scales::comma) +
   theme_minimal()
 
-ggsave("../data/uk_cities_mode_share.png")
+ggsave("data/uk_cities_mode_share.png")
 
 # Subset flows to keep only those that are within a specific city
 # function to return rows where origin and destination match the specified city name 
@@ -76,7 +84,7 @@ flows_city <- flows_internal(chosen_city) %>%
   dplyr::filter(`All categories: Method of travel to work` > 10) 
 
 # save as csv to use in next step
-write_csv(flows_city, path = paste0("../data/", chosen_city, "/flows_city.csv"))
+write_csv(flows_city, path = paste0("data/", chosen_city, "/flows_city.csv"))
 
 # remove variables from global environment
 rm(flows, flows_city, flows_internal, cycle_mode_share, no_msoas)

@@ -40,7 +40,7 @@ Road Segment Prioritization for Bicycle Infrastructure
 
 <!--   - Source: -->
 
-<!--     <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
+<!--     <http://geoportal.statistics.gov.datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
 
 <!--   - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\] -->
 
@@ -282,7 +282,7 @@ Figure 1: Distribution of Potential Cycling Demand
 
 <div class="figure">
 
-<img src="data/Manchester/Plots/desire_facet_cycling.png" alt="Current and Potential Cycling Demand" width="75%" />
+<img src="data/Manchester/Plodesire_facet_cycling.png" alt="Current and Potential Cycling Demand" width="75%" />
 
 <p class="caption">
 
@@ -1115,7 +1115,7 @@ Session, 2015: Paris). Retrived December*, 4:2017. HeinOnline.
 Wardman, Mark, Miles Tight, and Matthew Page. 2007. “Factors Influencing
 the Propensity to Cycle to Work.” *Transportation Research Part A:
 Policy and Practice* 41 (4): 339–50.
-<https://doi.org/10.1016/j.tra.2006.09.011>.
+<httpsdoi.org/10.1016/j.tra.2006.09.011>.
 
 </div>
 

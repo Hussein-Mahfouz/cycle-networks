@@ -6,9 +6,9 @@ library(igraph)
 library(tmap)
 
 #create a directory to store data related to this city (does nothing if directory already exists)
-dir.create(paste0("../data/", chosen_city, "/Plots/Growth_Results"), showWarnings = FALSE)
+dir.create(paste0("data/", chosen_city, "/Plots/Growth_Results"), showWarnings = FALSE)
 
-graph_sf <- readRDS(paste0("../data/", chosen_city, "/graph_with_flows_weighted_communities.RDS"))
+graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.RDS"))
 
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
 graph_sf$person_km <- graph_sf$flow * graph_sf$d
@@ -48,9 +48,9 @@ no_cycle_infra <- no_cycle_infra - 5
 # let's grow the network from the existing infrastructure
 grow_util <- growth_utilitarian(graph = graph_sf, km = no_cycle_infra, col_name = "flow")
 #save
-saveRDS(grow_util, file = paste0("../data/", chosen_city, "/growth_util.Rds"))
+saveRDS(grow_util, file = paste0("data/", chosen_city, "/growth_util.Rds"))
 # read in 
-#grow_util <- readRDS(paste0("../data/", chosen_city,"/growth_util.Rds"))
+#grow_util <- readRDS(paste0("data/", chosen_city,"/growth_util.Rds"))
 
 
 # get % of edges in gcc
@@ -116,7 +116,7 @@ ggplot(data=grow_util_c , aes(x=dist_c, y=perc_person_km_c)) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_all_flow_column.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_all_flow_column.png"))
 
 # community level plots
 ggplot(data=grow_util_c, 
@@ -131,7 +131,7 @@ ggplot(data=grow_util_c,
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_community_flow_column.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_community_flow_column.png"))
 
 
 # both community and network level together
@@ -148,7 +148,7 @@ ggplot(data=grow_util_c, mapping=aes(x=dist_c, y = perc_person_km_comm_c)) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png"))
 
 
 # network level plot showing no of components (decreasing?) as network grows
@@ -168,7 +168,7 @@ ggplot(data=grow_util_c , aes(x=dist_c, y=no_components)) +
   theme_minimal() +
   theme(plot.subtitle = element_markdown(size =8))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_number_flow_", chosen_city, ".png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_number_flow_", chosen_city, ".png"))
 
 
 # network level plot showing size of gcc 
@@ -180,7 +180,7 @@ ggplot(data=grow_util_c , aes(x=dist_c, y=gcc_size_perc)) +
   theme_minimal() +
   theme(plot.subtitle = element_markdown(size = 10))
 
-ggsave(paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_gcc_flow_", chosen_city, ".png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_components_gcc_flow_", chosen_city, ".png"))
 
 
 # inverse sequence so that thickest edges are the ones selected first
@@ -215,7 +215,7 @@ tm_shape(graph_sf) +
   # add legend for the existing cycling infrastructure
   tm_add_legend(type = "line", labels = 'Existing Cycling Infrastructure', col = 'firebrick2', lwd = 2) -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_priority_all_FLOW.png"))
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_priority_all_FLOW.png"))
 
 
 # lets show where the 1st 100km selected are (to show distribution of resources across communities)
@@ -251,7 +251,7 @@ tm_shape(graph_sf) +
   tm_add_legend(type = "line", labels = 'Existing Cycling Infrastructure', col = 'firebrick2', lwd = 1.5) -> p
 
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_facet_FLOW_100.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/Growth_Results/growth_utilitarian_facet_FLOW_100.png"), 
           width=10, height=4)
 
 

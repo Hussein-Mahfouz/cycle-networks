@@ -3,9 +3,9 @@ library(sf)
 library(tmap)
 
 
-graph_sf_weighted <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_weighted.RDS"))
-graph_sf_unweight <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
-#graph_sf_trunk <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_trunk.RDS"))
+graph_sf_weighted <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
+graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
+#graph_sf_trunk <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_trunk.RDS"))
 
 
 plot(graph_sf_weighted['flow'])
@@ -67,7 +67,7 @@ ggplot(data=person_km , aes(x=highway, y=dist_perc, group=factor(weighting), fil
     coord_flip() -> p
 p
 
-ggsave(path = paste0("../data/", chosen_city,"/Plots"), 
+ggsave(path = paste0("data/", chosen_city,"/Plots"), 
        file=paste0("perc_person-km-per-highway-type_", chosen_city, ".png"), p, width = 10, height = 6)
 
 
@@ -85,7 +85,7 @@ ggplot(data=person_km , aes(x=highway, y=dist, group=factor(weighting), fill=fac
 
 p
 
-ggsave(path = paste0("../data/", chosen_city,"/Plots"), 
+ggsave(path = paste0("data/", chosen_city,"/Plots"), 
        file=paste0("person-km-per-highway-type_", chosen_city, ".png"), p, width = 10, height = 6)
 
 
@@ -124,7 +124,7 @@ tm_shape(x) +
             #legend.position = c("right", "bottom"),
             frame = FALSE) -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/osm_road_types_all.png"))
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/osm_road_types_all.png"))
 
 
 #### Roads with Routed Flow Only 
@@ -150,7 +150,7 @@ tm_shape(x) +
             #legend.position = c("right", "bottom"),
             frame = FALSE) -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/osm_road_types_routed.png"))
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/osm_road_types_routed.png"))
 
 
 
@@ -171,7 +171,7 @@ tm_shape(x) +
             #inner.margins = c(0.01, 0.01, 0.01, 0.01),
             frame = FALSE)  -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/osm_road_types_facet.png"),
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/osm_road_types_facet.png"),
           width=10, height=6)
 
 
@@ -201,7 +201,7 @@ tm_shape(facet_1) +
               #inner.margins = c(0.01, 0.01, 0.01, 0.01),
               frame = FALSE)  -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/flows_facet_weighted_", chosen_city, ".png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/flows_facet_weighted_", chosen_city, ".png"), 
           width=10, height=6)
 
 
@@ -229,7 +229,7 @@ tm_layout(fontfamily = 'Georgia',
           legend.outside.size = .1,
           frame = FALSE)  -> p
 
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/flows_facet_unweighted_", chosen_city, ".png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/flows_facet_unweighted_", chosen_city, ".png"), 
           width=10, height=6)
 
 # 3. Trunk weight
@@ -255,7 +255,7 @@ tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/flows_facet_
 #           legend.outside.size = .1,
 #           frame = FALSE)  -> p
 # 
-# tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/flows_facet_trunk.png"), 
+# tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/flows_facet_trunk.png"), 
 #           width=10, height=6)
 
 
@@ -348,7 +348,7 @@ tm_shape(plot1) +
 facet_road_type <- tmap_arrange(p1, p2, legend, nrow=1)
 
 
-tmap_save(tm = facet_road_type, filename = paste0("../data/", chosen_city,"/Plots/", road_type, chosen_city, "_facet.png"),
+tmap_save(tm = facet_road_type, filename = paste0("data/", chosen_city,"/Plots/", road_type, chosen_city, "_facet.png"),
           height=4, width= 9)
 
 

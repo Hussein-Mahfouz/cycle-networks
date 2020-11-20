@@ -10,11 +10,11 @@ library(lwgeom)
 
 # FLOW DATA
 # get the flow for the chosen city: data retrieved in Script 1 _1_get_flow_data
-city_od <- readr::read_csv(paste0("../data/", chosen_city, "/flows_city.csv"))
+city_od <- readr::read_csv(paste0("data/", chosen_city, "/flows_city.csv"))
 
 # MSOA CODES
 # get the MSOA codes of MSOAs in the chosen city. Data retrieved from _2_distance_and_elevation
-city_msoas <- readr::read_csv(paste0("../data/",chosen_city,"/msoa_codes_city.csv"))
+city_msoas <- readr::read_csv(paste0("data/",chosen_city,"/msoa_codes_city.csv"))
 
 # MSOA CENTROIDS
 # get population weighted centroids from pct and change crs (default is northing)
@@ -24,13 +24,13 @@ city_centroids <- city_centroids %>% dplyr::filter(msoa11cd %in% city_msoas$MSOA
 
 # MSOA BOUNDARIES
 #get msoa boundaries for plotting 
-city_geom <- sf::st_read("../data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
+city_geom <- sf::st_read("data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
   st_transform(4326)
 # filter only MSOAs in the city_msoas df
 city_geom <- city_geom %>% dplyr::filter(msoa11cd %in% city_msoas$MSOA11CD)
 
 #POTENTIAL FLOW (Script 3)
-city_potential_cycling <- read_csv(paste0("../data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
+city_potential_cycling <- read_csv(paste0("data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
 # add potential flow column to city_od df
 city_od <- city_od %>% left_join(city_potential_cycling, 
                                  by = c("Area of residence" = "Area of residence", 
@@ -125,7 +125,7 @@ tm_shape(desire_cycling_long) +
   tm_scale_bar(color.dark = "gray60") -> p
 
 #save
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/desire_facet_cycling.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plodesire_facet_cycling.png"), 
           width=8, height=6)
 
 # clear environment

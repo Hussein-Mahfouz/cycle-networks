@@ -17,16 +17,16 @@ msoas_in_city <- function(df, city_name) {
 # get MSOAs in chosen_city. chosen_city is chosen in script 1
 msoas_city <- msoas_in_city(city_names, chosen_city)
 #save it for plotting later
-write_csv(msoas_city, path = paste0("../data/",chosen_city,"/msoa_codes_city.csv"))
+write_csv(msoas_city, path = paste0("data/",chosen_city,"/msoa_codes_city.csv"))
 
 
 # get geometry of msoas_city. We nned this geometry for plotting later
-city_geom <- sf::st_read("../data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
+city_geom <- sf::st_read("data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
   st_transform(4326)
 # filter only MSOAs in the msoas_city df
 city_geom <- city_geom %>% dplyr::filter(msoa11cd %in% msoas_city$MSOA11CD)
 # save to load in when plotting
-st_write(city_geom, paste0("../data/",chosen_city,"/msoas_geometry.shp"), append=FALSE)
+st_write(city_geom, paste0("data/",chosen_city,"/msoas_geometry.shp"), append=FALSE)
 
 
 # get population weighted centroids from pct and change crs (default is northing)
@@ -92,11 +92,11 @@ msoa_centroids_snapped %>%
   cbind(st_coordinates(.)) %>%  #split geometry into X and Y columns
   rename(lon = X, lat = Y) %>%  # rename x and y
   dplyr::select(-c(msoa11nm)) %>% 
-  #st_write("../data/alt_city/msoa_lon_lat.shp", append=FALSE) # save as shp file. append=FALSE to overwrite existing layer
-  st_write(paste0("../data/",chosen_city,"/msoa_lon_lat.shp"), append=FALSE)
+  #st_write("data/alt_city/msoa_lon_lat.shp", append=FALSE) # save as shp file. append=FALSE to overwrite existing layer
+  st_write(paste0("data/",chosen_city,"/msoa_lon_lat.shp"), append=FALSE)
 
 # read it in for dodgr_dist calculations (below)
-msoa_lon_lat <- st_read(paste0("../data/",chosen_city,"/msoa_lon_lat.shp")) %>%
+msoa_lon_lat <- st_read(paste0("data/",chosen_city,"/msoa_lon_lat.shp")) %>%
   dplyr::select(c(lon, lat))  %>%
   st_drop_geometry()
 
@@ -111,20 +111,20 @@ streetnet_sc <- dodgr_streetnet_sc(pts = pts, expand = 0.05)
 
 # add elevation data to sc object
 # #London is split between two tiles. we load both and then merge them
-# uk_1 <- raster::raster('../data-raw/UK_Elevation/srtm_36_02.tif')
-# uk_2 <- raster::raster('../data-raw/UK_Elevation/srtm_37_02.tif')
+# uk_1 <- raster::raster('data-raw/UK_Elevation/srtm_36_02.tif')
+# uk_2 <- raster::raster('data-raw/UK_Elevation/srtm_37_02.tif')
 # #merge
 # uk_elev <- raster::merge(uk_1, uk_2)
 # # write to disk for osm_elevation function (need to pass file path...)
-# writeRaster(uk_elev, '../data/uk_elev.tif')
+# writeRaster(uk_elev, 'data/uk_elev.tif')
 # # we only need the merged one
 # rm(uk_1, uk_2, uk_elev)
 
 # add the elevation data to the vertices
-streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = c('../data/uk_elev.tif'))
+streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = c('data/uk_elev.tif'))
 
 # SAVE STREETNET FOR SCRIPT 4. There we will be trying out different weighting profiles
-saveRDS(streetnet_sc, file = paste0("../data/",chosen_city,"/unweighted_streetnet.Rds"))
+saveRDS(streetnet_sc, file = paste0("data/",chosen_city,"/unweighted_streetnet.Rds"))
 # make graph for routing
 graph <- weight_streetnet(streetnet_sc, wt_profile = "bicycle")
 
@@ -143,11 +143,11 @@ dist_mat <- dist_mat %>%
   pivot_longer(-from, names_to = "to", values_to = "dist")
 
 # save to use in calculation of potential demand (next script)
-flows_city <- readr::read_csv(paste0("../data/",chosen_city,"/flows_city.csv"))
+flows_city <- readr::read_csv(paste0("data/",chosen_city,"/flows_city.csv"))
 
 # flows_london %>% subset(select = -c(city_origin, city_dest)) %>%
 #   left_join(dist_mat, by = c("Area of residence" = "from" , "Area of workplace" = "to")) %>%
-#   write_csv(path = "../data/flows_dist_for_potential_flow.csv")
+#   write_csv(path = "data/flows_dist_for_potential_flow.csv")
 
 flows_slope <- flows_city %>% subset(select = -c(city_origin, city_dest)) %>%
   left_join(dist_mat, by = c("Area of residence" = "from" , "Area of workplace" = "to"))
@@ -169,7 +169,7 @@ flows_slope <- flows_slope %>% left_join(msoa_centroids_snapped[,c('msoa11cd' ,'
 net <- dodgr::dodgr_streetnet(pts = pts, expand = 0.1)
 
 # load in elevation data
-uk_elev <- raster::raster('../data/uk_elev.tif')
+uk_elev <- raster::raster('data/uk_elev.tif')
 
 # 1. get geometries
 route <- function(df, net){
@@ -197,7 +197,7 @@ flows_slope <- flows_slope %>% route(net = net) %>% slope(elev = uk_elev)
 
 flows_slope %>% 
   dplyr::select(-c(cent_orig, cent_dest, route)) %>%
-  write_csv(path = paste0("../data/",chosen_city,"/flows_dist_elev_for_potential_flow.csv"))
+  write_csv(path = paste0("data/",chosen_city,"/flows_dist_elev_for_potential_flow.csv"))
 
 ##### ADD SLOPE - END
 
@@ -212,7 +212,7 @@ flows_slope %>%
                         ###### (1) ######
 
 # # make graph for routing
-graph_1 <- weight_streetnet(streetnet_sc, wt_profile_file = "../data/weight_profile_unweighted.json")
+graph_1 <- weight_streetnet(streetnet_sc, wt_profile_file = "data/weight_profile_unweighted.json")
 # 
 # # contract graph for faster routing
 graph_contracted <- dodgr_contract_graph(graph_1)
@@ -229,7 +229,7 @@ dist_mat_1 <- dist_mat_1 %>%
 
                                ###### (2) ######
 
-graph_2 <- weight_streetnet(streetnet_sc, wt_profile_file = "../data/weight_profile_weighted.json")
+graph_2 <- weight_streetnet(streetnet_sc, wt_profile_file = "data/weight_profile_weighted.json")
 
 graph_contracted <- dodgr_contract_graph(graph_2)
 
@@ -244,7 +244,7 @@ dist_mat_2 <- cbind(msoa_centroids$msoa11cd, dist_mat_2) %>%
 
                               ###### (3) ######
 
-graph_3 <- weight_streetnet(streetnet_sc, wt_profile_file = "../data/weight_profile_no_primary_trunk.json")
+graph_3 <- weight_streetnet(streetnet_sc, wt_profile_file = "data/weight_profile_no_primary_trunk.json")
 
 graph_contracted <- dodgr_contract_graph(graph_3)
 
@@ -292,7 +292,7 @@ ggplot(aes(value, circuity)) +
   #ggtitle("Comparing Weighted to Unweighted Shortest Paths") +
   theme_minimal()
 
-ggsave(paste0("../data/", chosen_city,"/Plots/boxplot_weighted_unweighted_distances.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/boxplot_weighted_unweighted_distances.png"))
 
 # point graph distance vs circuity
 dist_mat_all %>% filter(circuity_1_2 >= 1) %>%
@@ -308,7 +308,7 @@ dist_mat_all %>% filter(circuity_1_2 >= 1) %>%
 # GETTING SF STRAIGHT LINE DISTANCES TO COMPARE WITH RESULTS
 ##########
 
-# flows_london <- read_csv("../data/flows_london.csv") %>% 
+# flows_london <- read_csv("data/flows_london.csv") %>% 
 #       subset(select = -c(city_origin, city_dest))
 # 
 # # add geometry of origin
@@ -334,7 +334,7 @@ dist_mat_all %>% filter(circuity_1_2 >= 1) %>%
 #   rename(dist_dodgr = dist)
 # 
 # # save for reference
-# write_csv(distances, path = paste0("../data/",chosen_city, dist_straight_vs_dodgr.csv"))
+# write_csv(distances, path = paste0("data/",chosen_city, dist_straight_vs_dodgr.csv"))
 
 # remove variables from global environment
 rm(city_geom, city_names, dist_mat, dist_mat_1, dist_mat_2, dist_mat_3, dist_mat_all, dist_mat_all_box, 

@@ -3,7 +3,7 @@ library(sf)
 library(sfnetworks)
 library(tidyverse)
 
-# graph_sf <- readRDS(paste0("../data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
+# graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_default_communities.RDS"))
 
 
 ##### FUNCTION TO CHECK IF THE INVESTMENT LENGTH CHOSEN IS REASONABLE. IT SHOULD BE LESS THAN THE TOTAL KM
@@ -173,7 +173,7 @@ growth_community_OLD <- function(graph, km, col_name) {
   # copy of graph to edit
   x <- graph
   # Group by community and get the edge with the highest flow in each group
-  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/48062213/dplyr-using-column-names-as-function-arguments
+  # to pass column name in function (specific to dplyr): https://stackoverflow.com/questions/480622dplyr-using-column-names-as-function-arguments
   x <-  x %>% group_by(Community) %>% top_n(1, !! sym(col_name)) %>% ungroup()
   # above might return more than one edge per group (edges tied for highest flow), so here we group the 
   # result by Community and select the longer edge

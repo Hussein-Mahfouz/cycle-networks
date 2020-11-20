@@ -14,4 +14,4 @@ hampi_sc_weighted <- weight_streetnet(hampi_sc, wt_profile = "bicycle")
 
 
 remotes::install_github("hypertidy/geodist") 
-remotes::install_github("atfutures/dodgr")
+remotes::install_github("atfuturdodgr")
