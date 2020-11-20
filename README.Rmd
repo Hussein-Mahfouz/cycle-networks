@@ -314,7 +314,7 @@ The results of the community detection are used to evaluate the algorithms. This
 library(tidyverse)
 library(sf)
 
-table <- readRDS("data/Manchester/graph_with_flows_weighted_communities.RDS")
+table <- readRDS("data/Manchester/graph_with_flows_weighted_communities.Rds")
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
 table$person_km <- table$flow * table$d
 # get % of total person km on each link
