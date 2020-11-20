@@ -2,7 +2,9 @@
 title: Road Segment Prioritization for Bicycle Infrastructure
 date: "`r Sys.Date()`"
 geometry: margin=2cm
-bibliography: mybibfile.bib
+bibliography:
+  - mybibfile.bib
+  - rlbibfile.bib
 #linenumbers: true
 numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods where to prioritise cycling infrastructure, accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accomodated by the street network, and how to ensure a fair distribution of investment. The city of Manchester, which has substantial cycling ambitions, is used to demonstrate the methods which, we demonstrate, can be applied to any city. Flexible routing profiles that are adjustable to local needs can avoid high-stress road segments, enabling the identification of networks that balance directness against the need for safe and stress-free routes. Community detection is used to partition the city and evaluate results from 'utilitarian' and 'egalitarian' policy perspectives. We conclude that the 'egalitarian' model prioritisation approach demonstrated in this paper has great potential to support cost-effective strategic cycle network planning internationally. \\par\\textbf{Keywords:} cycling networks, routing, transport equity"
@@ -13,6 +15,12 @@ output:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
+
+```{r, echo=FALSE, eval=FALSE}
+# aim: add citations efficiently to the paper (can tidy up after)
+citr::tidy_bib_file(rmd_file = "README.Rmd", messy_bibliography = "~/uaf/allrefs.bib", file = "rlbibfile.bib")
+```
+
 
 ```{r, echo=FALSE, eval=FALSE}
 file.rename("README.pdf", "cycle-network-paper.pdf")
@@ -69,7 +77,9 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 # Introduction
 
 
-The 2015 Paris agreement [@agreement2015paris] was an acknowledgment that fundamental changes to our lives and economies are necessary to reduce the impacts of climate change. The transport sector is one of many sectors facing transformation, with innovation and policy measures leading to the introduction of ‘greener’ private vehicles. But as demand for transport rises, resulting in increased congestion, public and active modes of transport are also gaining more recognition. The benefits of the latter extend beyond congestion and the environment, as it promises to help alleviate what is referred to as the pandemic of global inactivity; physical inactivity is on the rise and has become the 4th highest cause of death globally [@kohl2012pandemic]. Various studies have documented the association between active transport and lower risk of disease, including cancer and cardiovascular disease [@celis2017association; @jarrett2012effect; @patterson2020associations].
+The 2015 Paris agreement [@agreement2015paris] acknowledged that fundamental changes to societies and economies are necessary to mitigate climate change. Like other sectors, transport is under substantial pressure to decarbonise resulting in a number of technical innovations including electric vehicles. But new vehicle technologies can only go so far and do not tackle parallel problems such as congestion, road traffic casualties and physical inactivity [@brand_climate_2020].
+
+In this context, interest and investment in active modes is growing. The benefits of the latter extend beyond congestion and the environment, as it promises to help alleviate what is referred to as the pandemic of global inactivity; physical inactivity is on the rise and has become the 4th highest cause of death globally [@kohl2012pandemic]. Various studies have documented the association between active transport and lower risk of disease, including cancer and cardiovascular disease [@celis2017association; @jarrett2012effect; @patterson2020associations].
 In the wake of the Covid-19 pandemic, and the resulting reduced capacity of public transport, the UK government has pledged to invest billions of pounds to improve walking and cycling infrastructure across the country. While this unprecedented sum is an opportunity to reshape cities in a way that improves the well-being of citizens, it does come with a warning:
 
 > "Inadequate cycling infrastructure discourages cycling and wastes public money. Much cycling infrastructure in this country is inadequate. It reflects a belief, con- scious or otherwise, that hardly anyone cycles, that cycling is unimportant and that cycles must take no meaningful space from more important road users, such as motor vehicles and pedestrians - [@departmentgearchange2020]"

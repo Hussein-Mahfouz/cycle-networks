@@ -45,13 +45,15 @@ Road Segment Prioritization for Bicycle Infrastructure
 
 # 2 Introduction
 
-The 2015 Paris agreement (UN 2015) was an acknowledgment that
-fundamental changes to our lives and economies are necessary to reduce
-the impacts of climate change. The transport sector is one of many
-sectors facing transformation, with innovation and policy measures
-leading to the introduction of ‘greener’ private vehicles. But as demand
-for transport rises, resulting in increased congestion, public and
-active modes of transport are also gaining more recognition. The
+The 2015 Paris agreement (UN 2015) acknowledged that fundamental changes
+to societies and economies are necessary to mitigate climate change.
+Like other sectors, transport is under substantial pressure to
+decarbonise resulting in a number of technical innovations including
+electric vehicles. But new vehicle technologies can only go so far and
+do not tackle parallel problems such as congestion, road traffic
+casualties and physical inactivity (Brand et al. 2020).
+
+In this context, interest and investment in active modes is growing. The
 benefits of the latter extend beyond congestion and the environment, as
 it promises to help alleviate what is referred to as the pandemic of
 global inactivity; physical inactivity is on the rise and has become the
@@ -768,6 +770,15 @@ Blondel, Vincent D, Jean-Loup Guillaume, Renaud Lambiotte, and Etienne
 Lefebvre. 2008. “Fast Unfolding of Communities in Large Networks.”
 *Journal of Statistical Mechanics: Theory and Experiment* 2008 (10):
 P10008.
+
+</div>
+
+<div id="ref-brand_climate_2020" class="csl-entry">
+
+Brand, Christian, Evi Dons, Esther Anaya-Boig, Ione Avila-Palencia, Anna
+Clark, Audrey de Nazelle, Mireia Gascon, Mailin Gaupp-Berghausen, Regine
+Gerike, and Thomas Gotschi. 2020. “The Climate Change Mitigation Effects
+of Active Travel.” *Preprint: Researchsquare.com*.
 
 </div>
 
