@@ -8,7 +8,7 @@ numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. Therefore, the aim of this study is to develop a methodology that determines where cycling infrastructure should be added by accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand in a city will come from, how such demand should be routed on the street network, and how to  consider fair distribution of cycling infrastructure that is in line with egalitarian principles. The city of Manchester is used as a case study, but the methodology is generic enough to be applicable to any city. For routing, it is found that deviating from shortest paths to avoid high-stress road segments can result in acceptable travel time increases for cyclists. Community detection is used to partition the city and evaluate results from utilitarian to egalitarian algorithms on distributing cycling infrastructure. The results show that the egalitarian algorithm provides comparable city-wide results to the utilitarian one, demostrating it's potential suitability in the planning of cycling networks. \\par\\textbf{Keywords:} cycling networks, routing, transport equity"
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
-  # bookdown::github_document2
+  bookdown::github_document2:
   bookdown::pdf_document2:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
