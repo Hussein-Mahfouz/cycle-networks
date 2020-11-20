@@ -113,7 +113,7 @@ The potential demand calculations show that the current and potential number of 
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # this doesn't work because R project for code is in a different path to R project for paper (relative paths inside code won't work)
-# source("R/_1.0_get_flow_data.R")
+source("R/_1.0_get_flow_data.R")
 ```
 
 
@@ -127,7 +127,7 @@ knitr::include_graphics(c(
 
 
 ```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="75%", fig.show='hold', echo=FALSE}
-knitr::include_graphics("data/Manchester/Plodesire_facet_cycling.png")
+knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
 It should be noted that the calculations assume a future that is constrained by physical geography; i.e. we consider cycling in the traditional sense. Recently there have been various micro-mobility solutions, including e-bikes, that allow commuters to traverse longer distances and hillier roads with less effort than traditional bicycles. While these modes would probably be associated with less geographical impedance, it is beyond the scope of this work to integrate that into the analysis. Doing so is partially restricted by the lack of data on the proliferation of these modes, which raises the point that perhaps the census data category of `Bicycle' is too vague, and should be further dis-aggregated to distinguish between traditional bicycles and other forms of micro-mobility.
