@@ -80,3 +80,4 @@ write_csv(flows_city, path = paste0("../data/", chosen_city, "/flows_city.csv"))
 
 # remove variables from global environment
 rm(flows, flows_city, flows_internal, cycle_mode_share, no_msoas)
+

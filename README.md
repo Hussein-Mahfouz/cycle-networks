@@ -1,12 +1,12 @@
 Road Segment Prioritization for Bicycle Infrastructure
 ================
-2020-11-16
+2020-11-20
 
 # Ideas and discussion
 
   - Intro: possible trim down substantially then add some literature in
-    (a) Calculating Potential Demand / (b) Routing / (c) Road Segment
-    Prioritization
+    (a) Calculating Potential Demand \[DONE\]/ (b) Routing \[DONE\]/ (c)
+    Road Segment Prioritization
   - Community Detection: Where in the document should this section be?
     It is now before Road Segment Prioritization, but I can merge them
   - Should we use other cities for the sake of comparison (compare
@@ -219,7 +219,7 @@ spatial variations in accessibility. This research attempts to compare
 the two principles, and in doing so determine whether a methodology
 formulated based on an egalitarian approach can be feasible in designing
 a cycling network that aligns with motivators and deterrents to cycling.
-**Write some more here**
+**Write some more here?**
 
 # Data and Geographical Scale of Analysis
 
@@ -241,8 +241,8 @@ Using existing cycling demand to inform decisions on where cycling
 infrastructure should be added reinforces existing cycling patterns and
 ignores potential cycling demand that could be satisfied by a connected
 network. To avoid this issue, Duthie and Unnikrishnan (2014) choose to
-ignore demand completely, and focus on creating a network that connects
-the entire study area. Olmos et al. (2020) obtain the distance
+ignore existing demand completely, and focus on creating a network that
+connects the entire study area. Olmos et al. (2020) obtain the distance
 distribution of cyclists using a smartphone-based bicycle GPS data, and
 then use a rejection-sampling algorithm on the OD data of the study area
 to match the potential demand distribution to the distribution obtained
@@ -264,7 +264,7 @@ interaction terms to capture the combined effect of slope and distance
 
 The potential demand calculations show that the current and potential
 number of cyclists both follow a bell-shaped distribution, with the
-number of trips peaking around the 3-5km commuting distance and then
+number of trips peaking around the 3-4km commuting distance and then
 going back down for longer distances (see Figure
 <a href="#fig:potdemhistograms">1</a>).
 
@@ -309,7 +309,6 @@ other forms of micro-mobility.
 
 The next step is to route the potential cycling demand
 (\(\boldsymbol{C_{p}}\)) between all OD pairs onto the road network.
-**TALK ABOUT WEIGHTED ROUTING IN OTHER STUDIES **
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
 
 To conduct routing, the following is considered:
@@ -330,12 +329,22 @@ To conduct routing, the following is considered:
     to large connectivity gains as the disconnected cycling
     infrastructure gets joined together.
 
-The weighting profiles are therefore adjusted to favor less stressful
-streets (based on information from Table
+The above points are accounted for by using a weighted road network for
+routing. This has previously been done by multiplying all road segments
+without cycling infrastructure by an impedance factor (Mauttone et al.
+2017), or by assigning a weight to the road segment proportional to the
+investment cost of bringing it to an acceptable level of stress for
+cycling (Duthie and Unnikrishnan 2014). Our approach is similar to the
+latter, as we create a weighting profile that is adjusted to favor less
+stressful streets (based on information from Table
 <a href="#table:osmroadtypes"><strong>??</strong></a>), and roads with
-existing cycling infrastructure. This is also in line with the creation
-of LTNs, as residential streets are those where motorized traffic is
-most likely to be banned in the creation of LTNs.
+existing cycling infrastructure. We believe this to be more practical
+than the approach adopted by Mauttone et al. (2017), as it goes beyond
+simply favoring roads with existing cycling infrastructure to creating a
+hierarchy of road preference based on perceived stress levels. The
+approach is also in line with the creation of LTNs, as residential
+streets are those where motorized traffic is most likely to be banned in
+the creation of LTNs.
 
 <!-- **ADD TABLE - THIS IS BASIC** -->
 
@@ -432,9 +441,7 @@ Roads for the following 2 reasons:
     more essential for motorized traffic and it would be more difficult
     to reallocate road space on these roads to cyclists.
 
-Routing potential cycling demand on a weighted network is more in line
-with government policy to create LTNs. Figure
-<a href="#fig:flowsfacetweighted">4</a> shows that routing on the
+Figure <a href="#fig:flowsfacetweighted">4</a> shows that routing on the
 weighted network significantly reduces flow on the trunk and primary
 roads, but does not eliminate it completely. This is intentional, as the
 impedance on these roads is only slightly higher than remaining road
@@ -445,12 +452,12 @@ through other roads that offer comparable directness.
 
 Banning cycling flow completely on trunk and primary roads may result in
 excessively circuitous paths, as seen in Figure
-<a href="#fig:boxplotcircuity">5</a>. When routing using the weighting
-profile in Table
+<a href="#fig:boxplotcircuity">5</a>. When routing using the *weighted*
+weighting profile in Table
 <a href="#table:weightprofiles"><strong>??</strong></a>, we see that
 shortest paths increase by less than 5% on average from unweighted
 shortest paths, with the largest increases still below 30%. When routing
-on primary and trunk roads is banned (weighted\_2 profile in Table
+on primary and trunk roads is banned (*weighted\_2* profile in Table
 <a href="#table:weightprofiles"><strong>??</strong></a>), the average
 increase relative to unweighted shortest paths rises to 10%, with
 certain locations experiencing more significant negative effects on
@@ -471,7 +478,7 @@ all OD Pairs (Manchester)
 
 Given that cyclists will only deviate from shortest paths by a certain
 amount to access better cycling infrastructure (as explained in Section
-<a href="#introduction">2</a>, allowing flow on some stretches of trunk
+<a href="#introduction">2</a>), allowing flow on some stretches of trunk
 and primary roads is necessary to insure cycling uptake and equitable
 access to cycling infrastructure. In its new vision for walking and
 cycling, the Department for Transport acknowledges that minimal
@@ -504,12 +511,11 @@ achieving the government target of getting more children to cycle. This
 would not be difficult, as over 75% of children in the UK live within a
 15 minute cycle from their school (DfT 2020a). Goodman et al. (2019)
 show that if dutch levels of cycling were achieved in the UK, the % of
-children cycling to school could increase from 1.8% to 41%.
-
-In their typology of cyclists, Dill and McNeil (2013) found that a
-majority of people who say they would never cycle had never cycled to
-school, whereas confident cyclists were those most likely to have cycled
-to school. Getting people to cycle from a young age is therefore key to
+children cycling to school could increase from 1.8% to 41%. In their
+typology of cyclists, Dill and McNeil (2013) found that a majority of
+people who say they would never cycle had never cycled to school,
+whereas confident cyclists were those most likely to have cycled to
+school. Getting people to cycle from a young age is therefore key to
 achieving societal change in commuting habits.
 
 # Community Detection
@@ -572,7 +578,7 @@ Figure 7: Communities Based on Potential Cycling Demand (Manchester)
 After routing the potential cycling demand onto the road network using
 weighted shortest paths, we have estimates for the cumulative potential
 cycling demand passing through all road segments. This cumulative demand
-(referred to as *flow* is then used as a basis for determining where
+(referred to as *flow*) is then used as a basis for determining where
 best to invest in segregated cycling infrastructure. In doing so, we
 must account for the motivations and deterrents for cycling identified
 in Section <a href="#introduction">2</a>, namely direct and well
