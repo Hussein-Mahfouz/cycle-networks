@@ -5,9 +5,9 @@ library(geodist)
 
 
 # read in MSOA centroids
-lon_lat <- st_read(paste0("../data/",chosen_city,'/msoa_lon_lat.shp')) 
+lon_lat <- st_read(paste0("data/",chosen_city,'/msoa_lon_lat.shp')) 
 # flow data: there are 3 files (check script 3 and choose 1)
-od_flow <- read_csv(paste0("../data/",chosen_city,'/flows_for_aggregated_routing_opt_3.csv')) 
+od_flow <- read_csv(paste0("data/",chosen_city,'/flows_for_aggregated_routing_opt_3.csv')) 
 
 # remove flows where ORIGIN = DESTINATION
 od_flow <- od_flow %>% filter(`Area of residence` != `Area of workplace`)
@@ -41,8 +41,8 @@ to <- colnames(od_flow_matrix) %>% as.data.frame() %>% left_join(lon_lat, by = c
 
 # ROUTE
 # load in graph saved in script 2
-#graph <- readRDS(paste0("../data/",chosen_city,"/city_graph.Rds"))
-streetnet_sc <- readRDS(paste0("../data/",chosen_city,"/unweighted_streetnet.Rds"))
+#graph <- readRDS(paste0("data/",chosen_city,"/city_graph.Rds"))
+streetnet_sc <- readRDS(paste0("data/",chosen_city,"/unweighted_streetnet.Rds"))
 ######
 
 # CREATE GRAPHS WITH DIFFERENT WEIGHTING PROFILES. THE WEIGHTING PROFILES ARE EDITED BY
@@ -51,10 +51,10 @@ streetnet_sc <- readRDS(paste0("../data/",chosen_city,"/unweighted_streetnet.Rds
 
 # this graph has weights so that low stress roads (secondary, tertiary) are preferred
 graph_weighted <- weight_streetnet(streetnet_sc, 
-                                  wt_profile_file = "../data/weight_profile_weighted.json")
+                                  wt_profile_file = "data/weight_profile_weighted.json")
 # all road types are weighted equally here. We use these weights to get the absolute shortest paths
 graph_unweighted <- weight_streetnet(streetnet_sc, 
-                                     wt_profile_file = "../data/weight_profile_unweighted.json")
+                                     wt_profile_file = "data/weight_profile_unweighted.json")
 
 
 # # add flows to road segments # norm_sums isn't a parameter apparently. Tried updating dodgr...
@@ -108,8 +108,8 @@ graph_sf_weighted <- aggregate_flows(graph=graph_weighted, from=from, to=to, flo
 graph_sf_unweight <- aggregate_flows(graph=graph_unweighted, from=from, to=to, flows=od_flow_matrix)
 
 # save as RDS to load in next script (geojson, shp etc cause problems)
-saveRDS(graph_sf_weighted, file = paste0("../data/", chosen_city, "/graph_with_flows_weighted.Rds"))
-saveRDS(graph_sf_unweight, file = paste0("../data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
+saveRDS(graph_sf_weighted, file = paste0("data/", chosen_city, "/graph_with_flows_weighted.Rds"))
+saveRDS(graph_sf_unweight, file = paste0("data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
 
 
 

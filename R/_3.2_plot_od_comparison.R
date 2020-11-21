@@ -8,7 +8,7 @@ library(latex2exp)
 
 
 
-uptake_decay <- readr::read_csv(paste0("../data/",chosen_city,"/flows_for_desire_lines.csv"))
+uptake_decay <- readr::read_csv(paste0("data/",chosen_city,"/flows_for_desire_lines.csv"))
 
 
 # turn distance to km
@@ -109,7 +109,7 @@ ggplot(uptake_gg, aes(x = factor(distance_groups, level = order), y = ratio)) +
 
 # MSOA CODES
 # get the MSOA codes of MSOAs in the chosen city. Data retrieved from _2_distance_and_elevation
-city_msoas <- readr::read_csv(paste0("../data/",chosen_city,"/msoa_codes_city.csv"))
+city_msoas <- readr::read_csv(paste0("data/",chosen_city,"/msoa_codes_city.csv"))
 
 # MSOA CENTROIDS
 # get population weighted centroids from pct and change crs (default is northing)
@@ -119,7 +119,7 @@ city_centroids <- city_centroids %>% dplyr::filter(msoa11cd %in% city_msoas$MSOA
 
 # MSOA BOUNDARIES
 #get msoa boundaries for plotting 
-city_geom <- sf::st_read("../data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
+city_geom <- sf::st_read("data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
   st_transform(4326)
 # filter only MSOAs in the city_msoas df
 city_geom <- city_geom %>% dplyr::filter(msoa11cd %in% city_msoas$MSOA11CD)
@@ -195,7 +195,7 @@ tm_shape(city_geom) +
             frame = FALSE) -> p
 
 #save
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/facet_desire_lines_all.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/facet_desire_lines_all.png"), 
           width=9, height=4)
 
 
@@ -225,7 +225,7 @@ tm_shape(city_geom) +
             frame = FALSE) -> p
 
 #save
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/facet_desire_lines_below_avg.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/facet_desire_lines_below_avg.png"), 
           width=9, height=4)
 
 
@@ -255,7 +255,7 @@ tm_shape(city_geom) +
             frame = FALSE) -> p
 
 #save
-tmap_save(tm = p, filename = paste0("../data/", chosen_city,"/Plots/facet_desire_lines_above_avg.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/facet_desire_lines_above_avg.png"), 
           width=9, height=4)
 
 
@@ -278,7 +278,7 @@ ggplot(p, aes(x= dist, y=value, color = name)) +
   #ylim(0, NA)
   
 #save
-ggsave(paste0("../data/", chosen_city,"/Plots/cycling_increase_line.png"), width = 6, height = 6)
+ggsave(paste0("data/", chosen_city,"/Plots/cycling_increase_line.png"), width = 6, height = 6)
 
 
 

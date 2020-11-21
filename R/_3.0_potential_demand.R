@@ -3,7 +3,7 @@ library(stplanr)
 library(pct)
 
 # read in the data
-flow <- readr::read_csv(paste0("../data/",chosen_city,"/flows_dist_elev_for_potential_flow.csv"))
+flow <- readr::read_csv(paste0("data/",chosen_city,"/flows_dist_elev_for_potential_flow.csv"))
 # replace NA values with the mean slope
 flow$slope[is.na(flow$slope)] <- mean(na.omit(flow$slope))
 
@@ -114,7 +114,7 @@ uptake_decay %>% filter(!(is.na(distance_groups))) %>%
 
 
 
-ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_increase_vs_performance_smooth_" , chosen_city, ".png"))
+ggsave(paste0("data/", chosen_city,"/Plots/mode_share_increase_vs_performance_smooth_" , chosen_city, ".png"))
 
 
 
@@ -132,18 +132,18 @@ uptake_decay %>% filter(!(is.na(distance_groups))) %>%
        x="Existing Cycling Mode Share As Fraction of Cycling Potential", y = "Cycling Mode Share Increase (%)",
        color = "Distance Between \nOD Pair (km)")
 
-ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_increase_vs_performance_point_",chosen_city, ".png"))
+ggsave(paste0("data/", chosen_city,"/Plots/mode_share_increase_vs_performance_point_",chosen_city, ".png"))
 
 
 
 #save csv for routing
 uptake_decay %>% 
   subset(select = c(`Area of residence`, `Area of workplace`, `potential_demand`)) %>%
-  write_csv(path = paste0("../data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
+  write_csv(path = paste0("data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
 
 #save csv for plotting desire_lines (script: _3.2_plot_od_comparisons)
 uptake_decay %>%
-  write_csv(path = paste0("../data/",chosen_city, "/flows_for_desire_lines.csv"))
+  write_csv(path = paste0("data/",chosen_city, "/flows_for_desire_lines.csv"))
 
 
 
@@ -189,7 +189,7 @@ uptake_decay %>%
 #   geom_vline(xintercept = 1, linetype="dotted", size=0.5) +
 #   labs(x="Existing Cycling Mode Share As a Fraction of Cycling Potential", y = "No. of OD Pairs") 
 # 
-# ggsave(paste0("../data/", chosen_city,"/Plots/histogram_od_pair_performance.png"))
+# ggsave(paste0("data/", chosen_city,"/Plots/histogram_od_pair_performance.png"))
 # 
 # 
 # ##### DISTRIBUTE ADDITIONAL FLOWS #####
@@ -333,7 +333,7 @@ uptake_decay %>%
 # #        color = "Distance Between \nOD Pair (km)") 
 # 
 # 
-# ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_increase_vs_performance_smooth_" , chosen_city, ".png"))
+# ggsave(paste0("data/", chosen_city,"/Plots/mode_share_increase_vs_performance_smooth_" , chosen_city, ".png"))
 # 
 # 
 # 
@@ -351,7 +351,7 @@ uptake_decay %>%
 #        x="Existing Cycling Mode Share As Fraction of Cycling Potential", y = "Cycling Mode Share Increase (%)", 
 #        color = "Distance Between \nOD Pair (km)") 
 # 
-# ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_increase_vs_performance_point_",chosen_city, ".png"))
+# ggsave(paste0("data/", chosen_city,"/Plots/mode_share_increase_vs_performance_point_",chosen_city, ".png"))
 # 
 # 
 #
@@ -359,11 +359,11 @@ uptake_decay %>%
 # #save csv for routing
 # uptake_decay %>% 
 #   subset(select = c(`Area of residence`, `Area of workplace`, `potential_demand`)) %>%
-#   write_csv(path = paste0("../data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
+#   write_csv(path = paste0("data/",chosen_city, "/flows_for_aggregated_routing_opt_3.csv"))
 # 
 # #save csv for plotting desire_lines (script: _3.2_plot_od_comparisons)
 # uptake_decay %>%
-#   write_csv(path = paste0("../data/",chosen_city, "/flows_for_desire_lines.csv"))
+#   write_csv(path = paste0("data/",chosen_city, "/flows_for_desire_lines.csv"))
 
 
 

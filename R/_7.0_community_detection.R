@@ -12,8 +12,8 @@ library(tmap)
 # You don''t need the nodes for community detection. They are used to store the community detection results 
 
 #tidygraph
-nodes <- st_read(paste0("../data/", chosen_city,"/msoa_lon_lat.shp"))
-edges <- read_csv(paste0("../data/", chosen_city,"/flows_for_desire_lines.csv"))
+nodes <- st_read(paste0("data/", chosen_city,"/msoa_lon_lat.shp"))
+edges <- read_csv(paste0("data/", chosen_city,"/flows_for_desire_lines.csv"))
 # change names of columns to from and to -> UNNECESSARY IF THEY ARE FIRST TWO COLUMNS
 # edges <- edges %>% rename(from = `Area of residence`, to = `Area of workplace`) 
 
@@ -34,14 +34,14 @@ nodes %>% st_drop_geometry() %>%
   summarize(count = n()) %>% arrange(desc(count))
 
 # read in msoa border geometry 
-msoa_borders <- st_read(paste0("../data/", chosen_city,"/msoas_geometry.shp"))
+msoa_borders <- st_read(paste0("data/", chosen_city,"/msoas_geometry.shp"))
 
 plot(st_geometry(msoa_borders))
 plot(nodes['group'], add = TRUE)
 
 
 # read in road edges with aggregated flow data 
-road_segments <- readRDS(paste0("../data/", chosen_city,"/graph_with_flows_weighted.RDS"))
+road_segments <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
 #road_segments <- road_segments %>% dplyr::select(flow)
 
 # plot
@@ -169,7 +169,7 @@ tm_shape(road_segments) +
 tm_facet <- tmap_arrange(tm1, tm2, tm_leg, nrow=1)
 
 #save
-tmap_save(tm = tm_facet, filename = paste0("../data/", chosen_city,"/Plots/communities_", chosen_city, ".png"), 
+tmap_save(tm = tm_facet, filename = paste0("data/", chosen_city,"/Plots/communities_", chosen_city, ".png"), 
           width=8.5, height=4)
 
 
@@ -192,7 +192,7 @@ tm_shape(msoa_borders) +
 
 tm_facet2 <- tmap_arrange(tm3, tm2, tm_leg, nrow=1)
 
-tmap_save(tm = tm_facet2, filename = paste0("../data/", chosen_city,"/Plots/communities_alternative_", chosen_city, ".png"), 
+tmap_save(tm = tm_facet2, filename = paste0("data/", chosen_city,"/Plots/communities_alternative_", chosen_city, ".png"), 
           width=8.5, height=4)
 
 
@@ -204,12 +204,12 @@ tm_shape(msoa_borders) +
             frame = FALSE) +
   tm_scale_bar(color.dark = "gray60") -> tm_single
 
-tmap_save(tm = tm_single, filename = paste0("../data/", chosen_city,"/Plots/communities_msoas", chosen_city, ".png"))
+tmap_save(tm = tm_single, filename = paste0("data/", chosen_city,"/Plots/communities_msoas", chosen_city, ".png"))
 
 
 
 # save road_segments as an RDS to work with in the next script
-saveRDS(road_segments, file = paste0("../data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
+saveRDS(road_segments, file = paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
 
 # CLEAR ENVIRONMENT!!!
 rm(community_assignment, edge_msoas, edges, graph, graph_louvain, msoa_borders, nodes, road_segments,

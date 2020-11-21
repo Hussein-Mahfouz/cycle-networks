@@ -2,7 +2,7 @@ library(tidyverse)
 library(waffle)
 
 # read in the data
-flow <- readr::read_csv(paste0("../data/",chosen_city,"/flows_for_desire_lines.csv"))
+flow <- readr::read_csv(paste0("data/",chosen_city,"/flows_for_desire_lines.csv"))
 
 #######################
 # PLOTTING MODE SHARE
@@ -32,7 +32,7 @@ ggplot(flow_pie, aes(x="", y=value, fill=mode)) +
   coord_polar("y", start=0) +
   theme_void() # remove background, grid, numeric labels
 
-ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_pie.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/mode_share_pie.png"))
 
 
 # waffle chat
@@ -43,7 +43,7 @@ flow_waffle$value <- (flow_waffle$value / sum(flow_waffle$value)) * 100
 waffle(parts = flow_waffle$value , rows = 6, title = paste0("Mode Share - ", chosen_city), 
        legend_pos = "bottom")  
 
-ggsave(paste0("../data/", chosen_city,"/Plots/mode_share_waffle.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/mode_share_waffle.png"))
 
 # ggplot(flow_waffle, aes(fill = mode, values = value)) +
 #   geom_waffle(color = "white", n_rows = 6) +
@@ -102,7 +102,7 @@ ggplot(flow_long_bike, aes(x = dist)) +
   theme_minimal() +
   labs(title = "Trips Made By Bicycle", x="Commuting Distance (km)", y = "No. of Commuters")
 
-ggsave(paste0("../data/", chosen_city,"/Plots/histogram_distance_cycling.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_cycling.png"))
 
 ###
 flow_long_motor <- flow_plot %>% tidyr::uncount(motor) %>%
@@ -177,7 +177,7 @@ ggplot(histogram, aes(x=dist)) +
   labs(title = "Current Cycling Trips Compared to All Trips", 
        x="Commuting Distance (km)", y = "No. of Commuters", color = "Legend")
 
-ggsave(paste0("../data/", chosen_city,"/Plots/histogram_distance_all_vs_cycling.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_all_vs_cycling.png"))
 
 ### potential cycling trips vs all commuter trips
 cols <- c("All" = "grey60", "Bicycle (Potential)" = "darkgreen")
@@ -188,7 +188,7 @@ ggplot(histogram, aes(x=dist)) +
   labs(title = "Potential Cycling Trips Compared to All Trips", 
        x="Commuting Distance (km)", y = "No. of Commuters", color = "Legend") 
 
-ggsave(paste0("../data/", chosen_city,"/Plots/histogram_distance_all_vs_cycling_potential.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_all_vs_cycling_potential.png"))
 
 ### current cycling trips vs potential cycling trips
 cols <- c("Potential" = "darkgreen", "Current" = "darkred")
@@ -199,7 +199,7 @@ ggplot(histogram, aes(x=dist)) +
   labs(title = "Current vs Potential Cycling Trips", 
        x="Commuting Distance (km)", y = "No. of Commuters", color = "Legend") 
 
-ggsave(paste0("../data/", chosen_city,"/Plots/histogram_distance_cycling_potential_vs_current.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_cycling_potential_vs_current.png"))
 
 
 
