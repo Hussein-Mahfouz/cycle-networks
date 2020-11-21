@@ -11,9 +11,9 @@ abstract: "Understanding the motivators and deterrents to cycling is essential f
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
   bookdown::github_document2:
-  bookdown::pdf_document2:
-      toc: false
-      extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
+  # bookdown::pdf_document2:
+  #     toc: false
+  #     extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -52,7 +52,7 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 <!-- Middle Layer Super Output Areas (December 2011) Boundaries: -->
 
 <!--   - Source: -->
-<!--     <http://geoportal.statistics.gov.datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
+<!--     <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0> -->
 <!--   - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\] -->
 
 <!-- ----- -->
@@ -107,6 +107,17 @@ The analysis is heavily dependent on commuter data^[*commuter data* refers to pu
 
 # Calculating Potential Cycling Demand
 
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# scripts for potential demand
+
+# source("R/_1.0_get_flow_data.R")
+# source("R/_2.0_distance_and_elevation.R")
+# source("R/_3.0_potential_demand.R")
+# source("R/_3.1_plot_mode_shares.R")
+# source("R/_3.2_plot_od_comparison.R")
+# source("R/_3.3_plot_desire_lines_current_vs_potential.R")
+```
+
 Using existing cycling demand to inform decisions on where cycling infrastructure should be added reinforces existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network. To avoid this issue, @duthie2014optimization choose to ignore existing demand completely, and focus on creating a network that connects the entire study area. @olmos2020data obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data, and then use a rejection-sampling algorithm on the OD data of the study area to match the potential demand distribution to the distribution obtained from GPS data. 
 
 For our purposes, we use a logistic regression model to calculate potential cycling demand. The model is adopted directly from the Propensity to Cycle Tool (PCT) [@lovelace2017propensity]. The PCT estimates  the proportion of cyclists ($\boldsymbol{C_{p}}$) for each MSOA pair should the government achieve its target of doubling cycling by 2025. The logistic regression model used to calculate $\boldsymbol{C_{p}}$ has the following parameters:
@@ -120,11 +131,6 @@ For our purposes, we use a logistic regression model to calculate potential cycl
 \noindent where **d** and **s** are the distance and slope respectively for the OD pair. The authors use square and square-root distance terms "to capture the non-linear impact of distance on the likelihood of cycling", and interaction terms to capture the combined effect of slope and distance [@lovelace2017propensity].
 
 The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-4km commuting distance and then going back down for longer distances (see Figure \@ref(fig:potdemhistograms)).
-
-```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# this doesn't work because R project for code is in a different path to R project for paper (relative paths inside code won't work)
-source("R/_1.0_get_flow_data.R")
-```
 
 
 ```{r potdemhistograms, fig.cap="Distribution of Potential Cycling Demand", out.width="32%", fig.show='hold', echo=FALSE}
@@ -144,6 +150,14 @@ It should be noted that the calculations assume a future that is constrained by 
 
 
 # Routing
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# scripts for routing
+
+# source("R/_4.0_aggregating_flows.R")
+# source("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
+# source("R/_6.0_comparing_weighting_profiles.R")
+```
 
 The next step is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. 
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
@@ -265,6 +279,15 @@ It should be reiterated that the weighting profile used for routing has been dev
 One use-case of such granular data would be to identify roads that serve schools. The Department of Transport notes that the number of school children being driven to school has trebled over the past 40 years [@departmentgearchange2020], and so having cycling infrastructure serving schools is key to achieving the government target of getting more children to cycle. This would not be difficult, as over 75\% of children in the UK live within a 15 minute cycle from their school [@departmentcycleinfradesign2020]. @goodman2019scenarios show that if dutch levels of cycling were achieved in the UK, the \% of children cycling to school could increase from 1.8\% to 41\%. In their typology of cyclists, @dill2013four found that a majority of people who say they would never cycle had never cycled to school, whereas confident cyclists were those most likely to have cycled to school. Getting people to cycle from a young age is therefore key to achieving societal change in commuting habits.   
 
 # Community Detection 
+
+```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# scripts for cycle network algorithms
+
+# source("R/_7.0_community_detection.R")
+# source("R/_8.0_growing_a_network.R")
+# source("R/_8.1_growth_utilitarian.R")
+# source("R/_8.2_growth_egalitarian.R")
+```
 
 One of the main aims of this research is to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas. Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
 
