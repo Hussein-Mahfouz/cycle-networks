@@ -7,13 +7,13 @@ bibliography:
   - rlbibfile.bib
 #linenumbers: true
 numbersections: true
-abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods where to prioritise cycling infrastructure, accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accomodated by the street network, and how to ensure a fair distribution of investment. The city of Manchester, which has substantial cycling ambitions, is used to demonstrate the methods which, we demonstrate, can be applied to any city. Flexible routing profiles that are adjustable to local needs can avoid high-stress road segments, enabling the identification of networks that balance directness against the need for safe and stress-free routes. Community detection is used to partition the city and evaluate results from 'utilitarian' and 'egalitarian' policy perspectives. We conclude that the 'egalitarian' model prioritisation approach demonstrated in this paper has great potential to support cost-effective strategic cycle network planning internationally. \\par\\textbf{Keywords:} cycling networks, routing, transport equity"
+abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods to prioritise cycling infrastructure, accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accomodated by the street network, and how to ensure a fair distribution of investment. The city of Manchester, which has substantial cycling ambitions, is used to demonstrate the methods which, we demonstrate, can be applied to any city. Flexible routing profiles that are adjustable to local needs can avoid high-stress road segments, enabling the identification of networks that balance directness against the need for safe and stress-free routes. Community detection is used to partition the city and evaluate results from 'utilitarian' and 'egalitarian' policy perspectives. We conclude that the 'egalitarian' model prioritisation approach demonstrated in this paper has great potential to support cost-effective strategic cycle network planning internationally. \\par\\textbf{Keywords:} cycling networks, routing, transport equity"
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
-  bookdown::github_document2:
-  # bookdown::pdf_document2:
-  #     toc: false
-  #     extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
+  # bookdown::github_document2:
+  bookdown::pdf_document2:
+      toc: false
+      extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
 
 ```{r, echo=FALSE, eval=FALSE}

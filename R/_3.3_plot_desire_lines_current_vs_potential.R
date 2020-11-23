@@ -125,7 +125,7 @@ tm_shape(desire_cycling_long) +
   tm_scale_bar(color.dark = "gray60") -> p
 
 #save
-tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plodesire_facet_cycling.png"), 
+tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/desire_facet_cycling.png"), 
           width=8, height=6)
 
 # clear environment
