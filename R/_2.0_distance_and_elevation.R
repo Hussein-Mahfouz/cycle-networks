@@ -20,7 +20,9 @@ msoas_city <- msoas_in_city(city_names, chosen_city)
 write_csv(msoas_city, path = paste0("data/",chosen_city,"/msoa_codes_city.csv"))
 
 
-# get geometry of msoas_city. We nned this geometry for plotting later
+# get geometry of msoas_city. We need this geometry for plotting later
+# download as geojson from this api link: https://opendata.arcgis.com/datasets/826dc85fb600440889480f4d9dbb1a24_0.geojson
+# 650mb!! I just download as shp (only 250mb but no api), save in directory, and load in 
 city_geom <- sf::st_read("data-raw/MSOA_2011_Boundaries/Middle_Layer_Super_Output_Areas__December_2011__Boundaries.shp") %>%
   st_transform(4326)
 # filter only MSOAs in the msoas_city df
