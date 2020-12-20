@@ -10,8 +10,8 @@ numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that is successful in getting more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods to prioritise cycling infrastructure, accounting for cyclist preference and UK government policies to create Low Traffic Neighborhoods. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accomodated by the street network, and how to ensure a fair distribution of investment. The city of Manchester, which has substantial cycling ambitions, is used to demonstrate the methods which, we demonstrate, can be applied to any city. Flexible routing profiles that are adjustable to local needs can avoid high-stress road segments, enabling the identification of networks that balance directness against the need for safe and stress-free routes. Community detection is used to partition the city and evaluate results from 'utilitarian' and 'egalitarian' policy perspectives. We conclude that the 'egalitarian' model prioritisation approach demonstrated in this paper has great potential to support cost-effective strategic cycle network planning internationally. \\par\\textbf{Keywords:} cycling networks, routing, transport equity"
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
-  bookdown::github_document2:
-  # bookdown::pdf_document2:
+  # bookdown::github_document2:
+  bookdown::pdf_document2:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
@@ -90,7 +90,7 @@ The funding on its own is therefore no guarantee of a change in commuting across
 A considerable amount of research has been done towards that end. Segregated cycling infrastructure^[Segregated cycling infrastructure refers to road space that is allocated to cyclists only, with physical separation to protect cyclists from other modes of transport.] has been shown to increase cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure], with the separation from motorized vehicles being key [@winters2011motivators]. Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal]. However, such deviations are only considered if they do not considerably increase route circuitry; behaviour studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far]. Another defining feature for cycling infrastructure is how well connected it is. Cyclists prefer cohesive infrastructure, particularly when cycling on arterial roads with high levels of motorized traffic [@stinson2003commuter], and the lack of well-connected cycling infrastructure is one of the main obstacles to increasing cycling uptake [@caulfield2012determining]. While direct and cohesive cycling networks have been shown to positively impact cycling rates, density^[making an area's bicycle network denser means adding more cycling routes in the area and thereby giving cyclists more route options] of the cycling network is also vital [@schoner2014missing]. 
 
 
-As noted by @buehler2016bikeway, there has been shift in focus from localized (street or intersection) level planning towards planning based on studying the cycling network as a whole since the turn of the 21^st^ century. They emphasize the promise of this shift in capturing the network-wide effect of street-level interventions. *Optimization* techniques have been used to propose improvements to cycling networks. @mesbah2012bilevel propose a bi-level formulation to optimize allocation of cycling lanes to the network without exceeding a set budget. The upper level is the proposed interventions and the lower level is the route choices made by users in reaction to changes in the network. The problem accounts for the effect of cycling lanes on car traffic, and attempts to maximize utilization of said lanes with minimal impact on car travel times. To improve cohesion of the suggested network, a constraint is added so that each link^[*link* refers to a road segment throughout this research] with a bike lane should be connected to at least one destination. Car usage is not considered by @mauttone2017bicycle, who develop an optimization framework that aims to minimize the total user cost of cycling on the network. The aggregate flow on links is obtained by using shortest paths to route existing cycling demand onto the road network, and the solution is a proposed set of links where cycling infrastructure should be added in order to minimize the overall travel cost of cyclists across the network. The cost of traversing a link is given as a function of its length and whether or not it has cycling infrastructure, and a discontinuity penalty is also added to prioritize connected road segments. The problem has also been solved by attempting to find the minimum cost of improving roadway links to meet a desired level of service (LOS) [@duthie2014optimization]. In this formulation, all OD pairs need to be connected by roads that meet the desired LOS, and a directness constraint is added so that paths between OD pairs do not exceed a certain multiple of the shortest path.
+As noted by @buehler2016bikeway, there has been a shift in focus from localized (street or intersection) level planning towards planning based on studying the cycling network as a whole since the turn of the 21^st^ century. They emphasize the promise of this shift in capturing the network-wide effect of street-level interventions. *Optimization* techniques have been used to propose improvements to cycling networks. @mesbah2012bilevel propose a bi-level formulation to optimize allocation of cycling lanes to the network without exceeding a set budget. The upper level is the proposed interventions and the lower level is the route choices made by users in reaction to changes in the network. The problem accounts for the effect of cycling lanes on car traffic, and attempts to maximize utilization of said lanes with minimal impact on car travel times. To improve cohesion of the suggested network, a constraint is added so that each link^[*link* refers to a road segment throughout this research] with a bike lane should be connected to at least one destination. Car usage is not considered by @mauttone2017bicycle, who develop an optimization framework that aims to minimize the total user cost of cycling on the network. The aggregate flow on links is obtained by using shortest paths to route existing cycling demand onto the road network, and the solution is a proposed set of links where cycling infrastructure should be added in order to minimize the overall travel cost of cyclists across the network. The cost of traversing a link is given as a function of its length and whether or not it has cycling infrastructure, and a discontinuity penalty is also added to prioritize connected road segments. The problem has also been solved by attempting to find the minimum cost of improving roadway links to meet a desired level of service (LOS) [@duthie2014optimization]. In this formulation, all OD pairs need to be connected by roads that meet the desired LOS, and a directness constraint is added so that paths between OD pairs do not exceed a certain multiple of the shortest path.
 
 
 These problem formulations do not explicitly solve for continuity, which is dealt with using a either (a) a constraint specifying that each link with a bike lane should be connected to at least one destination [@mesbah2012bilevel], (b) a constraint on deviation from shortest paths [@duthie2014optimization], or (c) a discontinuity penalty [@mauttone2017bicycle]. To solve for continuity, the graph-theoretic concept of *connected components*, has been used. @natera2019data study the existing cycling network in terms of its disconnected components and introduce two different algorithms to connect these components by their most critical links and, in doing so, measure the size of the growth of the largest connected component as a function of the kilometers of network added. They observe that small investments at strategic points have a large impact on connectivity in most cases. The concept of connected components is also at the core of the methodology proposed by @olmos2020data. After routing the cycling demand onto the network links, they use percolation theory to filter out the links based on the aggregate flow^[*flow* is used throughout this research to refer to the cycling demand when it is routed onto the road network. The flow on any road segment is the cumulative demand on it, resulting from cyclists commuting between various OD pairs] passing through them, varying the flow threshold for filtering to identify the minimum flow at which the whole city is connected by a giant component. The results show a cycling network that connects the entire city, and subtracting links intersecting with current cycling infrastructure identifies links proposed for intervention.
@@ -316,10 +316,18 @@ For this purpose, two algorithms are proposed. Both utilize existing infrastruct
 
 ## Algorithm 1: Utilitarian Expansion
 
-1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
+<!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
 3. Select neighboring link with highest flow and add it to the solution
-4. Repeat steps 2 \& 3 until all flow is satisfied or investment threshold is met
+4. Repeat steps 2 \& 3 until all flow is satisfied or investment threshold is met -->
+
+```{r, eval = FALSE}
+1. Identify all links that have segregated cycling infrastructure and add them to the 
+   initial solution
+2. Identify all links that neighbor links in the current solution
+3. Select neighboring link with highest flow and add it to the solution
+4. Repeat steps 2 and 3 until all flow is satisfied or investment threshold is met
+```
 
 
 This algorithm ensures that the resulting network is connected. It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(introduction).
@@ -330,16 +338,28 @@ The first algorithm focuses on connectivity and directness, but not on fairly di
 
 The algorithm uses the following logic to ensure fair distribution between communities:
 
-
-1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
+<!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
 3. Select *from each community* one neighboring link with highest flow and add it to the solution
 4. If there are no more neighboring links in a community, select the link with the highest flow in that community, regardless of connectivity, and add it to the solution
-5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met
+5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met -->
+
+
+```{r, eval = FALSE}
+1. Identify all links that have segregated cycling infrastructure and add them to the initial 
+   solution
+2. Identify all links that neighbor links in the current solution
+3. Select from each community one neighboring link with highest flow and add it to the 
+   solution
+4. If there are no more neighboring links in a community, select the link with the highest 
+   flow in that community, regardless of connectivity, and add it to the solution
+5. Repeat steps 2, 3 and 4 until all flow is satisfied or investment threshold is met
+
+```
 
 Even though we may end up with a more disconnected network, we will have separate connected networks in each community. Given that communities are defined by having more internal flow than external flow, this is a satisfactory solution.
 
-The results of the community detection are used to evaluate the algorithms. This is done by looking at the *person-km satisfied* as cycling infrastructure is added. Person-km is a measure of the total km cycled on a road segment, so it is the product of the number of potential commuters cycling on that road segment ($flow$) and the length of the segment in km ($l$). For each road segment, the person-km is equal to $flow * l$. In the case of Manchester, Table (**Reference the table**) shows that almost half of the person-km is in community 1 , while only 0.5\% of total person-km on the network is in community 5.
+The results of the community detection are used to evaluate the algorithms. This is done by looking at the *person-km satisfied* as cycling infrastructure is added. Person-km is a measure of the total km cycled on a road segment, so it is the product of the number of potential commuters cycling on that road segment ($flow$) and the length of the segment in km ($l$). For each road segment, the person-km is equal to $flow * l$. In the case of Manchester, Table \@ref(tab:personkmtable) shows that almost half of the person-km is in community 1 , while only 0.5\% of total person-km on the network is in community 5.
 
 
 ```{r personkmtable, echo=FALSE, message = FALSE}
@@ -415,6 +435,7 @@ A core part of the methodology is determining where there is high potential for 
 The methods can support the ongoing shift in transport planning towards active transport that is being promoted by the UK government and other authorities at city, regional and national levels worldwide. The success of such a shift depends on the appeal of the cycling network for prospective cyclists, a fact that was used as the basis for the methodology outlined here. 
 
 <!-- I think it would be good to say how others could reproduce the methods in other cities (RL) -->
+<!--  HUSSEIN TO DO!-->
 
 <!-- There should also be links to the literature. -->
 
