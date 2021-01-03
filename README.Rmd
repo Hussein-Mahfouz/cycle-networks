@@ -11,7 +11,8 @@ abstract: "Understanding the motivators and deterrents to cycling is essential f
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
   # bookdown::github_document2:
-  bookdown::pdf_document2:
+  # bookdown::pdf_document2:
+  bookdown::word_document2:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
