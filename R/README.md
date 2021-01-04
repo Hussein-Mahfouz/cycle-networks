@@ -1,6 +1,5 @@
-Road Segment Prioritization for Bicycle Infrastructure
+Reproducibility Instructions
 ================
-Hussein Mahfouz
 18/8/2020
 
 This repository contains the code used for the paper. Below is an

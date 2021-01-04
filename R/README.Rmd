@@ -1,6 +1,6 @@
 ---
-title: "Road Segment Prioritization for Bicycle Infrastructure"
-author: "Hussein Mahfouz"
+title: "Reproducibility Instructions"
+#author: "Hussein Mahfouz"
 date: "18/8/2020"
 output: github_document
 fontsize: 10pt
