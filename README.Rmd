@@ -282,7 +282,7 @@ One use-case of such granular data would be to identify roads that serve schools
 # source("R/_8.2_growth_egalitarian.R")
 ```
 
-One of the main aims of this research is to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas. Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
+A major challenge facing ‘top-down’ planning approaches is how to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas, , which could also help ensure that on-the-ground surveys are made by local stakeholders, an important component of the planning process  [@parkin2018designing]. Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
 
 ```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="30%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
