@@ -94,7 +94,7 @@ The problem formulations outlined above look at the network as a whole when atte
 
 All of these network-level methodologies are underpinned by different ethical principles, even though these principles are not explicitly acknowledged by the authors. This is important since different ethical principles constitute different problem formulations and targets. Broadly speaking, transport appraisal can be based on either utilitarian or egalitarian principles. The former seeks to maximize the overall benefit, while the latter is concerned with a fair distribution of benefits [@jafino2020transport]. @nahmias2017integrating criticize the utilitarian approach that has been historically popular in the evaluation of transport investments, explaining how the maximization of overall benefit fails to account for the distribution of that benefit among communities or individuals. @lucas2016method explain how transport studies have traditionally looked at the bigger picture without studying the distribution of investments on the different parts of the study area, and go on to propose an egalitarian approach that ensures the dis-aggregation of transport policy benefits across the study area. @pereira2017distributive also emphasize the need for a more egalitarian approach to transport planning. They highlight accessibility as a cornerstone of distributive justice, and contend that policies should aim to distribute investments in a way that minimizes spatial variations in accessibility. This research attempts to compare the two principles, and in doing so determine whether a methodology formulated based on an egalitarian approach can be feasible in designing a cycling network that aligns with motivators and deterrents to cycling. **Write some more here?**
 
-# Data and Geographical Scale of Analysis
+<!-- # Data and Geographical Scale of Analysis -->
 
 The approach is based on origin-destination (OD), which can be obtained from many sources.
 In this paper we use open access data from the UK census [@ONS2011flowdata], which contains aggregate statistics on number of commuters between Middle layer Super Output Area (MSOA) zones, which have an average population of just over 8000 [@ofn2018population].
@@ -112,9 +112,9 @@ In this paper we use open access data from the UK census [@ONS2011flowdata], whi
 # source("R/_3.3_plot_desire_lines_current_vs_potential.R")
 ```
 
-Using existing cycling demand to inform decisions on where cycling infrastructure should be added reinforces existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network. To avoid this issue, @duthie2014optimization choose to ignore existing demand completely, and focus on creating a network that connects the entire study area. @olmos2020data obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data, and then use a rejection-sampling algorithm on the OD data of the study area to match the potential demand distribution to the distribution obtained from GPS data. 
+Relying only on existing cycling activity to prioritize cycling infrastructure can reinforce existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network. To avoid this issue, @duthie2014optimization choose to ignore existing demand completely, and focus on creating a network that connects the entire study area. @olmos2020data obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data, and then use a rejection-sampling algorithm on the OD data of the study area to match the potential demand distribution to the distribution obtained from GPS data. 
 
-For our purposes, we use a logistic regression model to calculate potential cycling demand. The model is adopted directly from the Propensity to Cycle Tool (PCT) [@lovelace2017propensity]. The PCT estimates  the proportion of cyclists ($\boldsymbol{C_{p}}$) for each MSOA pair should the government achieve its target of doubling cycling by 2025. The logistic regression model used to calculate $\boldsymbol{C_{p}}$ has the following parameters:
+For our purposes, we use a logistic regression model to calculate potential cycling demand. The model was adopted from the Propensity to Cycle Tool (PCT), which estimates the proportion of trips ($\boldsymbol{C_{p}}$) for each origin-destination pair that would cycle under different scenarios of change (we used the Government Target scenario, representing a nationwide target of doubling cycling by 2025) as a function of distance and hilliness [@lovelace2017propensity]. The logistic regression model used to calculate $\boldsymbol{C_{p}}$ has the following parameters:
 
 ```{=tex}
 \begin{align}\label{eq:pcteqn}
@@ -152,7 +152,7 @@ It should be noted that the calculations assume a future that is constrained by 
 # source("R/_6.0_comparing_weighting_profiles.R")
 ```
 
-The next step is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. 
+The next step in our approach is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. We choose not to use the PCT approach for routing as it is reliant on external and therefore inflexible routing services.
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
 
 \begin{longtable}{lll}
@@ -193,7 +193,7 @@ To conduct routing, the following is considered:
 2.  **Low-Traffic Neighborhoods**: The UK Department for Transport is allocating funding to local authorities to invest in Active Transport, partially through the creation of LTNs [@departmentgearchange2020]. This includes closing off residential streets to motorized traffic.
 3.  **Existing Cycling Infrastructure**: Utilizing existing cycling infrastructure makes economic sense, as small investments may lead to large connectivity gains as the disconnected cycling infrastructure gets joined together.
 
-The above points are accounted for by using a weighted road network for routing. This has previously been done by multiplying all road segments without cycling infrastructure by an impedance factor [@mauttone2017bicycle], or by assigning a weight to the road segment proportional to the investment cost of bringing it to an acceptable level of stress for cycling  [@duthie2014optimization]. Our approach is similar to the latter, as we create a weighting profile that is adjusted to favor less stressful streets (based on information from Table  \@ref(table:osmroadtypes)), and roads with existing cycling infrastructure. We believe this to be more practical  than the approach adopted by @mauttone2017bicycle, as it goes beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference based on perceived stress levels. The approach is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs. 
+The above points are accounted for by using a weighted road network for routing. This has previously been done by multiplying all road segments without cycling infrastructure by an impedance factor [@mauttone2017bicycle], or by assigning different weights to the road segments proportional to the investment cost of bringing them to an acceptable level of stress for cycling  [@duthie2014optimization]. Our approach is similar to the latter, as we create a weighting profile that is adjusted to favor less stressful streets (based on information from Table  \@ref(table:osmroadtypes)), and roads with existing cycling infrastructure. We believe this to be more practical  than the approach adopted by @mauttone2017bicycle, as it goes beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference based on perceived stress levels. The approach is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs. 
 
 <!-- **ADD TABLE - THIS IS BASIC** -->
 <!-- ```{r, echo=FALSE, message = FALSE} -->
@@ -228,7 +228,7 @@ Motorway                                & 1          & \textcolor{red}{0}       
 
 \noindent where $\boldsymbol{d_{unw}}$ is the unweighted distance and $\boldsymbol{W}$ is the weight from Table \ref{table:weightprofiles}. 
 
-All weights are between 0 and 1, and the values in the \textit{Weighted} profile are chosen so as to be inversely proportional to the stress level experienced by cyclists on them. The \textit{Unweighted} weighting profile is used to compare increases in route length resulting from two different approaches: 
+All weights are between 0 and 1, and the values in the \textit{Weighted} profile are chosen to be inversely proportional to the stress level experienced by cyclists on them. The \textit{Unweighted} weighting profile is used to compare increases in route length resulting from two different approaches: 
 
 
 1. **Weighted**: Relatively high impedance on Primary and Trunk roads (to minimize cycling on them).
