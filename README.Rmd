@@ -28,6 +28,8 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 ```
 
 
+
+
 # Ideas and discussion
 
 <!-- - Intro: possible trim down substantially then add some literature in (a) Calculating Potential Demand [DONE]/ (b) Routing [DONE]/ (c) Road Segment Prioritization -->
