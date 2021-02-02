@@ -7,7 +7,7 @@ bibliography:
   - rlbibfile.bib
 #linenumbers: true
 numbersections: true
-abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods to support the prioritisation of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. The city of Manchester is used as a case study, although the methods can be applied to any city, as demonstrated in a reproducible code and open access data accompanying the paper. We find that flexible routing profiles that are adjustable to local needs can avoid road segments that are stressful to cycle on, enabling the identification of networks that balance directness against the need for safe and stress-free routes. We assess two different policy interventions , 'utilitarian' and 'egalitarian' by analyzing the connectivity of the city through community detection. From a policy perspective, our findings indicate that the 'egalitarian' prioritisation model approach is the more adequate to support cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
+abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. The aim of this paper is to develop methods to support the prioritisation of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. Distance decay, routing, and network analysis techniques are used to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. The city of Manchester is used as a case study, although the methods can be applied to any city, as demonstrated in a reproducible code and open access data accompanying the paper. We find that flexible routing profiles that are adjustable to local needs can avoid road segments that are stressful to cycle on, enabling the identification of networks that balance directness against the need for safe and stress-free routes. We assess two different policy interventions , 'utilitarian' and 'egalitarian', by analyzing the connectivity of the city through community detection. From a policy perspective, our findings indicate that the 'egalitarian' prioritisation model approach is the more adequate to support cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
 # keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
 output:
   # bookdown::github_document2:
@@ -15,6 +15,9 @@ output:
   # # bookdown::word_document2:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -22,24 +25,25 @@ output:
 citr::tidy_bib_file(rmd_file = "README.Rmd", messy_bibliography = "~/uaf/allrefs.bib", file = "rlbibfile.bib")
 ```
 
-
 ```{r, echo=FALSE, eval=FALSE}
 file.rename("README.pdf", "cycle-network-paper.pdf")
 ```
 
-
-
-
 <!-- # Ideas and discussion -->
 
 <!-- - Intro: possible trim down substantially then add some literature in (a) Calculating Potential Demand [DONE]/ (b) Routing [DONE]/ (c) Road Segment Prioritization -->
-<!-- - Community Detection: Where in the document should this section be? It is now before Road Segment Prioritization, but I can merge them -->
-<!-- Can go into road segment section. -->
-<!-- - Should we use other cities for the sake of comparison (compare communities, road types etc) -->
-<!-- - How to add tables properly (they are now added using latex code which only shows up when outputting to pdf) -->
-<!-- - Footnotes are sometimes split between pages. How do I keep them on the same page? -->
-<!-- - What is the best way to write pseudocode (Steps for Algorithm 1 and 2) -->
 
+<!-- - Community Detection: Where in the document should this section be? It is now before Road Segment Prioritization, but I can merge them -->
+
+<!-- Can go into road segment section. -->
+
+<!-- - Should we use other cities for the sake of comparison (compare communities, road types etc) -->
+
+<!-- - How to add tables properly (they are now added using latex code which only shows up when outputting to pdf) -->
+
+<!-- - Footnotes are sometimes split between pages. How do I keep them on the same page? -->
+
+<!-- - What is the best way to write pseudocode (Steps for Algorithm 1 and 2) -->
 
 <!-- Keywords -->
 
@@ -51,36 +55,193 @@ file.rename("README.pdf", "cycle-network-paper.pdf")
 
 # Introduction
 
-The 2015 Paris agreement [@agreement2015paris] acknowledged that fundamental changes to societies and economies are necessary to mitigate climate change. Like other sectors, transport is under substantial pressure to decarbonise resulting in a number of technical innovations including electric vehicles. But new vehicle technologies can only go so far and do not tackle parallel problems such as congestion, road traffic casualties and physical inactivity [@brand_climate_2020].
+The 2015 Paris agreement [@agreement2015paris] acknowledged that
+fundamental changes to societies and economies are necessary to mitigate
+climate change. Like other sectors, transport is under substantial
+pressure to decarbonise resulting in a number of technical innovations
+including electric vehicles. But new vehicle technologies can only go so
+far and do not tackle parallel problems such as congestion, road traffic
+casualties and physical inactivity [@brand_climate_2020].
 
-In this context, interest and investment in active modes are growing. The benefits extend beyond congestion and the environment, as active travel can also help alleviate what is referred to as the pandemic of global inactivity; physical inactivity is on the rise and has become the 4th highest cause of death globally [@kohl2012pandemic]. Various studies have documented the association between active transport and lower risk of disease, including cancer and cardiovascular disease [@celis2017association; @jarrett2012effect; @patterson2020associations].
-In the wake of the Covid-19 pandemic, and the resulting reduced capacity of public transport, the UK government has pledged to invest billions of pounds to improve walking and cycling infrastructure across the country. While this unprecedented sum is an opportunity to reshape cities in a way that improves the well-being of citizens, it does come with a warning:
+In this context, interest and investment in active modes are growing.
+The benefits extend beyond congestion and the environment, as active
+travel can also help alleviate what is referred to as the pandemic of
+global inactivity; physical inactivity is on the rise and has become the
+4th highest cause of death globally [@kohl2012pandemic]. Various
+studies have documented the association between active transport and
+lower risk of disease, including cancer and cardiovascular disease
+[@celis2017association; @jarrett2012effect;
+@patterson2020associations]. In the wake of the Covid-19 pandemic, and
+the resulting reduced capacity of public transport, the UK government
+has pledged to invest billions of pounds to improve walking and cycling
+infrastructure across the country. While this unprecedented sum is an
+opportunity to reshape cities in a way that improves the well-being of
+citizens, it does come with a warning:
 
-> "Inadequate cycling infrastructure discourages cycling and wastes public money. Much cycling infrastructure in this country is inadequate. It reflects a belief, conscious or otherwise, that hardly anyone cycles, that cycling is unimportant and that cycles must take no meaningful space from more important road users, such as motor vehicles and pedestrians - [@departmentgearchange2020]"
+> "Inadequate cycling infrastructure discourages cycling and wastes
+> public money. Much cycling infrastructure in this country is
+> inadequate. It reflects a belief, conscious or otherwise, that hardly
+> anyone cycles, that cycling is unimportant and that cycles must take
+> no meaningful space from more important road users, such as motor
+> vehicles and pedestrians - [@departmentgearchange2020]"
 
-The funding on its own is therefore no guarantee of a change in commuting across the country; it must be used to design adequate cycling infrastructure that is based on motivators and deterrents to cycling. 
+The funding on its own is therefore no guarantee of a change in
+commuting across the country; it must be used to design adequate cycling
+infrastructure that is based on motivators and deterrents to cycling.
 
 ## Motivators and Deterrents to Cycling
 
-A considerable amount of research has been done towards that end. Segregated cycling infrastructure^[*Segregated cycling infrastructure* refers to road space that is allocated to cyclists only, with physical separation to protect cyclists from other modes of transport.] has been shown to increase cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure], with the separation from motorized vehicles being key [@winters2011motivators]. Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal]. However, such deviations are only considered if they do not considerably increase route circuitry; behaviour studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far]. Another defining feature for cycling infrastructure is how well connected it is. Cyclists prefer cohesive infrastructure, particularly when cycling on arterial roads with high levels of motorized traffic [@stinson2003commuter]. The lack of well-connected cycling infrastructure is one of the main obstacles to increasing cycling uptake [@caulfield2012determining]. While direct and cohesive cycling networks have been shown to positively impact cycling rates, density^[making an area's bicycle network denser means adding more cycling routes in the area and thereby giving cyclists more route options] of the cycling network is also vital [@schoner2014missing]. 
+A considerable amount of research has been done to understand what gets people to cycle.
+Segregated cycling infrastructure^[*Segregated cycling infrastructure*
+refers to road space that is allocated to cyclists only, with physical
+separation to protect cyclists from other modes of transport.] has been
+shown to increase cycling uptake [@aldred2019impacts; @goodman2014new;
+@marques2015infrastructure], with the separation from motorized
+vehicles being key [@winters2011motivators]. Revealed preference of
+cyclists shows that they are willing to deviate from the most efficient
+routes in order to commute on safer roads [@crane2017longitudinal].
+However, such deviations are only considered if they do not considerably
+increase route circuitry; behaviour studies have found that the
+probability of choosing a route decreases in proportion to its length
+relative to the shortest route [@broach2011bicycle; @winters2010far].
+Another defining feature for cycling infrastructure is how well
+connected it is. Cyclists prefer cohesive infrastructure, particularly
+when cycling on arterial roads with high levels of motorized traffic
+[@stinson2003commuter]. The lack of well-connected cycling
+infrastructure is one of the main obstacles to increasing cycling uptake
+[@caulfield2012determining]. While direct and cohesive cycling networks
+have been shown to positively impact cycling rates, density^[making an
+area's bicycle network denser means adding more cycling routes in the
+area and thereby giving cyclists more route options] of the cycling
+network is also vital [@schoner2014missing].
 
 ## Network-Level Approaches
 
-The studies outlined above lay out the fundamentals for designing cycling networks that generate significant cycling uptake, but they do not propose network-level interventions. In this section we outline techniques used in past studies, namely optimization and network analysis techniques, such as connected components and community detection, and examine how they are leveraged to suggest cycling network designs. We compare the effectiveness of these network-level studies in incorporating the fundamentals outlined above. The methodology of this research is inspired by these techniques, but it attempts to add to them by ensuring that all of the outlined fundamentals are accounted for. It also goes further by attempting to factor in ethical considerations relating to distribution of investment.
+The studies outlined above lay out the fundamentals for designing
+cycling networks that generate significant cycling uptake, but they do
+not propose network-level interventions. In this section we outline
+techniques used in past studies, namely optimization and network
+analysis techniques, such as connected components and community
+detection, and examine how they are leveraged to suggest cycling network
+designs. We compare the effectiveness of these network-level studies in
+incorporating the fundamentals outlined above. The methodology of this
+research is inspired by these techniques, but it attempts to add to them
+by ensuring that all of the outlined fundamentals are accounted for. It
+also goes further by attempting to factor in ethical considerations
+relating to distribution of investment.
 
-*Optimization* techniques have been used to propose improvements to cycling networks. @mesbah2012bilevel propose a bi-level formulation to optimize allocation of cycling lanes to the network without exceeding a set budget. They account for the effect of cycling lanes on car traffic, and attempt to maximize utilization of said lanes with minimal impact on car travel times. Car usage is not considered by @mauttone2017bicycle, who develop an optimization framework that aims to minimize the total user cost of cycling on the network. The aggregate flow on links^[*link* refers to a road segment throughout this research] is obtained by using shortest paths to route existing cycling demand onto the road network, and the solution is a proposed set of links where cycling infrastructure should be added in order to minimize the overall travel cost of cyclists across the network. The cost of traversing a link is given as a function of its length and whether or not it has cycling infrastructure. The problem has also been solved by attempting to find the minimum cost of improving roadway links to meet a desired level of service (LOS) [@duthie2014optimization]. In this formulation, all origin-destination (OD) pairs need to be connected by roads that meet the desired LOS. A limitation of these problem formulations do not explicitly solve for continuity, which is dealt with using either a constraint specifying that each link with a bike lane should be connected to at least one destination [@mesbah2012bilevel], a constraint on maximum deviation from shortest paths [@duthie2014optimization], or a discontinuity penalty to prioritize connected road segments [@mauttone2017bicycle]. 
+*Optimization* techniques have been used to propose improvements to
+cycling networks. @mesbah2012bilevel propose a bi-level formulation to
+optimize allocation of cycling lanes to the network without exceeding a
+set budget. They account for the effect of cycling lanes on car traffic,
+and attempt to maximize utilization of said lanes with minimal impact on
+car travel times. Safeguarding against increased car traffic may be counter-productive if the goal is to create a mode-shift, as research has shown that reducing road space for cars leads to less cars on the road, a phenomenon referred to as "traffic evaporation" [@nello2020environmental].
+Car usage is not considered by @mauttone2017bicycle,
+who develop an optimization framework that aims to minimize the total
+user cost of cycling on the network. The aggregate flow^[*flow* is
+used throughout this research to refer to the cycling demand when it is
+routed onto the road network. The flow on any road segment is the
+cumulative demand on it, resulting from cyclists commuting between
+various OD pairs] on links^[*link*
+refers to a road segment throughout this research] is obtained by using
+shortest paths to route existing cycling demand onto the road network,
+and the solution is a proposed set of links where cycling infrastructure
+should be added in order to minimize the overall travel cost of cyclists
+across the network. The cost of traversing a link is given as a function
+of its length and whether or not it has cycling infrastructure. The
+problem has also been solved by attempting to find the minimum cost of
+improving roadway links to meet a desired level of service (LOS)
+[@duthie2014optimization]. In this formulation, all origin-destination
+(OD) pairs need to be connected by roads that meet the desired LOS. A
+limitation of these problem formulations do not explicitly solve for
+continuity, which is dealt with using either a constraint specifying
+that each link with a bike lane should be connected to at least one
+destination [@mesbah2012bilevel], a constraint on maximum deviation
+from shortest paths [@duthie2014optimization], or a discontinuity
+penalty to prioritize connected road segments [@mauttone2017bicycle].
 
-In this paper, continuity is analysed by looking at the connectivity of the network through the graph-theoretic concept of *connected components*. Other academics have taken this approach; @natera2019data study the existing cycling network in terms of its disconnected components and introduce two different algorithms to connect these components by their most critical links and, in doing so, measure the size of the growth of the largest connected component as a function of the kilometers of network added. The concept of connected components is also at the core of the methodology proposed by @olmos2020data. After routing the cycling demand onto the network links, they use percolation theory to filter out the links based on the aggregate flow^[*flow* is used throughout this research to refer to the cycling demand when it is routed onto the road network. The flow on any road segment is the cumulative demand on it, resulting from cyclists commuting between various OD pairs] passing through them, varying the flow threshold for filtering to identify the minimum flow at which the whole city is connected by a giant component. While these approaches deal with continuity better, they look at the network as a whole when attempting to improve it, and in doing so fail to account for equitable distribution of infrastructure. 
+In this paper, continuity is analysed by looking at the connectivity of
+the network through the graph-theoretic concept of *connected
+components*. Other academics have taken this approach; @natera2019data
+study the existing cycling network in terms of its disconnected
+components and introduce two different algorithms to connect these
+components by their most critical links and, in doing so, measure the
+size of the growth of the largest connected component as a function of
+the kilometers of network added. The concept of connected components is
+also at the core of the methodology proposed by @olmos2020data. After
+routing the cycling demand onto the network links, they use percolation
+theory to filter out the links based on the aggregate flow passing through them, varying the flow threshold for
+filtering to identify the minimum flow at which the whole city is
+connected by a giant component. While these approaches deal with
+continuity better, they look at the network as a whole when attempting
+to improve it, and in doing so fail to account for equitable
+distribution of infrastructure.
 
-## Ethical Underpinnings and Proposed Approach 
+## Ethical Underpinnings and Proposed Approach
 
-All of these network-level methodologies are underpinned by ethical principles, even though these principles are not explicitly acknowledged by the authors. This is important since different ethical principles constitute different problem formulations and targets. Broadly speaking, transport appraisal can be based on either utilitarian or egalitarian principles. The former seeks to maximize the overall benefit, while the latter is concerned with a fair distribution of benefits [@jafino2020transport]. @nahmias2017integrating criticize the utilitarian approach that has been historically popular in the evaluation of transport investments, explaining how the maximization of overall benefit fails to account for the distribution of that benefit among communities or individuals. @lucas2016method explain how transport studies have traditionally looked at the bigger picture without studying the distribution of investments on the different parts of the study area, and go on to propose an egalitarian approach that ensures the disaggregation of transport policy benefits across the study area. @pereira2017distributive also emphasize the need for a more egalitarian approach to transport planning. They highlight accessibility as a cornerstone of distributive justice, and contend that policies should aim to distribute investments in a way that minimizes spatial variations in accessibility.
+All of these network-level methodologies are underpinned by ethical
+principles, even though these principles are not explicitly acknowledged
+by the authors. This is important since different ethical principles
+constitute different problem formulations and targets. Broadly speaking,
+transport appraisal can be based on either utilitarian or egalitarian
+principles. The former seeks to maximize the overall benefit, while the
+latter is concerned with a fair distribution of benefits
+[@jafino2020transport]. @nahmias2017integrating criticize the
+utilitarian approach that has been historically popular in the
+evaluation of transport investments, explaining how the maximization of
+overall benefit fails to account for the distribution of that benefit
+among communities or individuals. @lucas2016method explain how
+transport studies have traditionally looked at the bigger picture
+without studying the distribution of investments on the different parts
+of the study area, and go on to propose an egalitarian approach that
+ensures the disaggregation of transport policy benefits across the study
+area. @pereira2017distributive also emphasize the need for a more
+egalitarian approach to transport planning. They highlight accessibility
+as a cornerstone of distributive justice, and contend that policies
+should aim to distribute investments in a way that minimizes spatial
+variations in accessibility.
 
-This research attempts to propose an egalitarian framework for cycling network design. This is done by identifying the different sub-networks that exist within the larger network, and ensuring they all get a fair share of investment. Trip patterns in a city are not uniformly distributed geographically, and *community finding* methods have been used to partition study areas into localized areas that experience a disproportionate number of trips within them. @akbarzadeh2018designing use a modularity maximization approach [@blondel2008fast] on taxi trip data to identify 7 different communities in the city of Isfahan, Iran. An optimization problem is then formulated to connect nodes within each community with cycling infrastructure, with the emphasis being on connectivity within the communities, not between them. @bao2017planning adopt a similar methodology, first identifying communities and then using a greedy network expansion algorithm to simultaneously add links to each community. The link with the highest benefit-cost ratio in each community is selected, and the network is grown by adding neighboring links to the solution until a budget limit is met. The benefit is the flow on the link, and each link is assigned a cost based on current road conditions.
+This research attempts to propose an egalitarian framework for cycling
+network design. This is done by identifying the different sub-networks
+that exist within the larger network, and ensuring that each gets a fair
+share of investment. Trip patterns in a city are not uniformly
+distributed geographically, and *community finding* methods have been
+used to partition study areas into localized areas that experience a
+disproportionate number of trips within them. @akbarzadeh2018designing
+use a modularity maximization approach [@blondel2008fast] on taxi trip
+data to identify 7 different communities in the city of Isfahan, Iran.
+An optimization problem is then formulated to connect nodes within each
+community with cycling infrastructure, with the emphasis being on
+connectivity within the communities, not between them. @bao2017planning
+adopt a similar methodology, first identifying communities and then
+using a greedy network expansion algorithm to simultaneously add links
+to each community. The link with the highest benefit-cost ratio in each
+community is selected, and the network is grown by adding neighboring
+links to the solution until a budget limit is met. The benefit is the
+flow on the link, and each link is assigned a cost based on current road
+conditions.
 
 <!-- EDIT! Add more to limitations -->
-Our work builds on these *community finding* approaches by proposing a similar greedy network expansion algorithm for cycle network expansion within communities. We incorporate community finding methods for study area partitioning with weighted routing to avoid links that are stressful to cycle on. In doing so, we propose a methodology that accounts for motivators and deterrents to cycling. We propose three sub-methodologies that expand on some of the limitations of previous studies. These limitations include (a) bias inherent when basing network design solely on existing cycling demand, (b) proposing routes that may not correspond to studies on cyclist preference and government policies, and (3) insufficient consideration of the ethical principles underlying the analysis. Section \@ref(calculating-potential-cycling-demand) focuses on calculating potential cycling demand. Section \@ref(routing) focuses on routing the demand onto the road network while accounting for cyclist preferences and government priorities. Section \@ref(community-detection) outlines a methodology for partitioning the study area based on a community finding algorithm and routed cycling demand. Section \@ref(road-segment-prioritization) introduces the network expansion algorithms, and compares an approach grounded in ‘egalitarianism' to one grounded in ‘utilitarianism'.
 
+Our work builds on these *community finding* approaches by proposing a
+similar greedy network expansion algorithm for cycle network expansion
+within communities. We incorporate community finding methods for study
+area partitioning with weighted routing to avoid links that are
+stressful to cycle on. In doing so, we propose a methodology that
+accounts for motivators and deterrents to cycling. We propose three
+sub-methodologies that expand on some of the limitations of previous
+studies. These limitations include (a) bias inherent when basing network
+design solely on existing cycling demand, (b) proposing routes that may
+not correspond to studies on cyclist preference and government policies,
+and (3) insufficient consideration of the ethical principles underlying
+the analysis. Section \@ref(calculating-potential-cycling-demand)
+focuses on calculating potential cycling demand. Section \@ref(routing)
+focuses on routing the demand onto the road network while accounting for
+cyclist preferences and government priorities. Section
+\@ref(road-segment-prioritisation) outlines a methodology for partitioning the
+study area based on a community finding algorithm and routed cycling
+demand. It then introduces the network expansion algorithms, and compares an approach grounded in
+'egalitarianism' to one grounded in 'utilitarianism'.
 
 # Calculating Potential Cycling Demand
 
@@ -95,16 +256,41 @@ Our work builds on these *community finding* approaches by proposing a similar g
 # source("R/_3.3_plot_desire_lines_current_vs_potential.R")
 ```
 
-Relying only on existing cycling activity to prioritise cycling infrastructure can reinforce existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network. To avoid this issue, @duthie2014optimization choose to ignore existing demand completely, and focus on creating a network that connects the entire study area. @olmos2020data obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data, and then use a rejection-sampling algorithm on the OD data of the study area to match the potential demand distribution to the distribution obtained from GPS data. 
+Relying only on existing cycling activity to prioritise cycling
+infrastructure can reinforce existing cycling patterns and ignores
+potential cycling demand that could be satisfied by a connected network.
+To avoid this issue, @duthie2014optimization choose to ignore existing
+demand completely, and focus on creating a network that connects the
+entire study area. @olmos2020data obtain the distance distribution of
+cyclists using a smartphone-based bicycle GPS data, and then use a
+rejection-sampling algorithm on the OD data of the study area to match
+the potential demand distribution to the distribution obtained from GPS
+data.
 
-*Origin-Destination (OD)* data can be obtained from a range of sources, including GPS data, household travels surveys and Census data on work locations.
-In areas where observed OD data is unavailable, modelling techniques such as spatial interaction models can be used to estimate travel volumes between zones [@black1995spatial; @martinez2013new; @wilson1971family].
-In this paper we use open access data from the UK census [@ONS2011flowdata], which contains aggregate statistics on number of commuters between administrative zones --- Middle layer Super Output Areas (MSOA) --- by mode of travel. MSOAs have an average population of just over 8000 [@ofn2018population].^[
-See https://wicid.ukdataservice.ac.uk/ for open access to the OD data.
-]
-Figures \@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling) illustrates the proportion of trips cycled by distance and the geographic extent of the input OD dataset used in this paper.
+*Origin-Destination (OD)* data can be obtained from a range of sources,
+including GPS data, household travels surveys and Census data on work
+locations. In areas where observed OD data is unavailable, modelling
+techniques such as spatial interaction models can be used to estimate
+travel volumes between zones [@black1995spatial; @martinez2013new;
+@wilson1971family]. In this paper we use open access data from the UK
+census [@ONS2011flowdata], which contains aggregate statistics on
+number of commuters between administrative zones --- Middle layer Super
+Output Areas (MSOA) --- by mode of travel. MSOAs have an average
+population of just over 8000 [@ofn2018population].^[ See
+<https://wicid.ukdataservice.ac.uk/> for open access to the OD data.]
+Figures \@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling)
+illustrates the proportion of trips cycled by distance and the
+geographic extent of the input OD dataset used in this paper.
 
-For our purposes, we use a logistic regression model to calculate potential cycling demand. The model was adapted from the Propensity to Cycle Tool (PCT), which estimates the proportion of trips ($\boldsymbol{C_{p}}$) for each OD pair that would cycle under different scenarios of change (we used the Government Target scenario, representing a nationwide target of doubling cycling by 2025) as a function of distance and hilliness [@lovelace2017propensity]. The logistic regression model used to calculate $\boldsymbol{C_{p}}$ has the following parameters:
+For our purposes, we use a logistic regression model to calculate
+potential cycling demand. The model was adapted from the Propensity to
+Cycle Tool (PCT), which estimates the proportion of trips
+($\boldsymbol{C_{p}}$) for each OD pair that would cycle under
+different scenarios of change (we used the Government Target scenario,
+representing a nationwide target of doubling cycling by 2025) as a
+function of distance and hilliness [@lovelace2017propensity]. The
+logistic regression model used to calculate $\boldsymbol{C_{p}}$ has
+the following parameters:
 
 ```{=tex}
 \begin{align}\label{eq:pcteqn}
@@ -112,10 +298,18 @@ For our purposes, we use a logistic regression model to calculate potential cycl
 \end{align}
 ```
 
-\noindent where **d** and **s** are the distance and slope respectively for the OD pair. The authors use square and square-root distance terms "to capture the non-linear impact of distance on the likelihood of cycling", and interaction terms to capture the combined effect of slope and distance [@lovelace2017propensity].
-Alternative cycling uptake models could be used in different contexts or scenarios of change.
+\noindent where **d** and **s** are the distance and slope respectively
+for the OD pair. The authors use square and square-root distance terms
+"to capture the non-linear impact of distance on the likelihood of
+cycling", and interaction terms to capture the combined effect of slope
+and distance [@lovelace2017propensity]. Alternative cycling uptake
+models could be used in different contexts or scenarios of change.
 
-The potential demand calculations show that the current and potential number of cyclists both follow a bell-shaped distribution, with the number of trips peaking around the 3-4km commuting distance and then going back down for longer distances (see Figures \@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling)).
+The potential demand calculations show that the current and potential
+number of cyclists both follow a bell-shaped distribution, with the
+number of trips peaking around the 3-4km commuting distance and then
+going back down for longer distances (see Figures
+\@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling)).
 
 <!-- note: could be a joint table/map showing sample - if reviewers request -->
 
@@ -127,12 +321,22 @@ knitr::include_graphics(c(
 ))
 ```
 
-
-```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="100%", fig.show='hold', echo=FALSE}
+```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="65%", fig.pos="H", fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
-It should be noted that the calculations assume cycling in the traditional sense, i.e. the topography affects the decision to cycle. Recently there have been various micro-mobility solutions, including e-bikes, that allow commuters to traverse longer distances and hillier roads with less effort than traditional bicycles. While these modes would probably be associated with less geographical impedance, it is beyond the scope of this work to integrate those modes into the analysis. This is partially restricted by the lack of data on the proliferation of these modes, raising the point that perhaps the census data category of `Bicycle' is too vague, and should be further disaggregated to distinguish between traditional bicycles and other forms of micro-mobility.
+It should be noted that the calculations assume cycling in the
+traditional sense, i.e. the topography affects the decision to cycle.
+Recently there have been various micro-mobility solutions, including
+e-bikes, that allow commuters to traverse longer distances and hillier
+roads with less effort than traditional bicycles. While these modes
+would probably be associated with less geographical impedance, it is
+beyond the scope of this work to integrate those modes into the
+analysis. This is partially restricted by the lack of data on the
+proliferation of these modes, raising the point that perhaps the census
+data category of `Bicycle' is too vague, and should be further
+disaggregated to distinguish between traditional bicycles and other
+forms of micro-mobility.
 
 # Routing
 
@@ -144,7 +348,10 @@ It should be noted that the calculations assume cycling in the traditional sense
 # source("R/_6.0_comparing_weighting_profiles.R")
 ```
 
-The next step in our approach is to route the potential cycling demand ($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. We choose not to use the PCT approach for routing as it is reliant on external and therefore inflexible routing services.
+The next step in our approach is to route the potential cycling demand
+($\boldsymbol{C_{p}}$) between all OD pairs onto the road network. We
+choose not to use the PCT approach for routing as it is reliant on
+external and therefore inflexible routing services.
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
 
 \begin{longtable}{lll}
@@ -176,31 +383,60 @@ Path                    & \begin{tabular}[c]{@{}l@{}}Unpaved - open to \\non-mot
 \hline
 \end{longtable}
 
-
-
-
 To conduct routing, the following is considered:
 
-1.  **Cyclist Preference**: Work done by @dill2013four on examining cyclist typologies determined that around 60% of Portland residents fit under the *interested but concerned* category. These were people that enjoyed cycling but avoided it due safety concerns. The key to encouraging this group was to create a low-stress cycling network, not only though segregated infrastructure but also by planning routes that passed through residential streets.
-2.  **Low-Traffic Neighborhoods**: The UK Department for Transport is allocating funding to local authorities to invest in Active Transport, partially through the creation of LTNs [@departmentgearchange2020]. This includes closing off residential streets to motorized traffic.
-3.  **Existing Cycling Infrastructure**: Utilizing existing cycling infrastructure makes economic sense, as small investments may lead to large connectivity gains as the disconnected cycling infrastructure gets joined together.
+1.  **Cyclist Preference**: Work done by @dill2013four on examining
+    cyclist typologies determined that around 60% of Portland residents
+    fit under the *interested but concerned* category. These were people
+    that enjoyed cycling but avoided it due safety concerns. The key to
+    encouraging this group was to create a low-stress cycling network,
+    not only though segregated infrastructure but also by planning
+    routes that passed through residential streets.
+2.  **Low-Traffic Neighborhoods**: The UK Department for Transport is
+    allocating funding to local authorities to invest in Active
+    Transport, partially through the creation of LTNs
+    [@departmentgearchange2020]. This includes closing off residential
+    streets to motorized traffic.
+3.  **Existing Cycling Infrastructure**: Utilizing existing cycling
+    infrastructure makes economic sense, as small investments may lead
+    to large connectivity gains as the disconnected cycling
+    infrastructure gets joined together.
 
-The above points are accounted for by using a weighted road network for routing. This has previously been done by multiplying all road segments without cycling infrastructure by a fixed impedance factor [@mauttone2017bicycle], or by assigning different weights to the road segments proportional to the investment cost of bringing them to an acceptable level of stress for cycling  [@duthie2014optimization].
-Perceived stress has been found to be a function of vehicular traffic volume and speed [@sorton1994bicycle], both of which vary predictably with road type. 
-@gehrke2020cycling build on this information to use routing impedance factors for road segments that are based on road type and the existence of cycling infrastructure.
+The above points are accounted for by using a weighted road network for
+routing. This has previously been done by multiplying all road segments
+without cycling infrastructure by a fixed impedance factor
+[@mauttone2017bicycle], or by assigning different weights to the road
+segments proportional to the investment cost of bringing them to an
+acceptable level of stress for cycling [@duthie2014optimization].
+Perceived stress for cyclists has been found to be a function of vehicular traffic
+volume and speed [@sorton1994bicycle], both of which vary predictably
+with road type. @gehrke2020cycling build on this information to use
+routing impedance factors for road segments that are based on road type
+and the existence of cycling infrastructure.
 
-For the purposes of this paper, we created a similar weighting profile that is adjusted to favor less stressful roads (based on the definition by @sorton1994bicycle and information from Table  \@ref(table:osmroadtypes)), and roads with existing cycling infrastructure. 
-We believe this to be more practical than the simplistic approach adopted by @mauttone2017bicycle, as it goes beyond simply favoring roads with existing cycling infrastructure enabling a hierarchy of road preference based on perceived stress levels. 
+For the purposes of this paper, we created a similar weighting profile
+that is adjusted to favor less stressful roads (based on the definition
+by @sorton1994bicycle and information from Table
+\@ref(table:osmroadtypes)), and roads with existing cycling
+infrastructure. We believe this to be more practical than the simplistic
+approach adopted by @mauttone2017bicycle, as it goes beyond simply
+favoring roads with existing cycling infrastructure enabling a hierarchy
+of road preference based on perceived stress levels.
 
 <!-- The approach is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs.  -->
 
 <!-- **ADD TABLE - THIS IS BASIC** -->
+
 <!-- ```{r, echo=FALSE, message = FALSE} -->
+
 <!-- weight_profiles <- readxl::read_excel("Paper/paper_tables.xlsx", sheet = "Weighting Profile") -->
 
 <!-- knitr::kable(weight_profiles, -->
+
 <!--              caption = "Weighting Profiles") -->
+
 <!-- ``` -->
+
 \begin{longtable}{lrrr}
 \caption{Weighting Profiles}
 \label{table:weightprofiles}\\
@@ -219,22 +455,45 @@ Trunk                                   & 1          & 0.6                      
 Motorway                                & 1          & \textcolor{red}{0}                    & \textcolor{red}{0}                       
 \end{longtable}
 
-\noindent A weighted distance $\boldsymbol{d_{w}}$ for each road segment is calculated as follows ^[The **dodgr** r package [@padgham2019dodgr] is used to route cycling demand onto the road network. The package uses the OpenStreetMaps (OSM) road network and allows the user to assign weights to roads based on their type. The routing is done based on weighted shortest paths, with the distance along each road segment being divided by a factor to obtain the weighted distance for routing. It is more intuitive to multiply when weighting a network, but the dodgr package divides by numbers between 0 and 1, which achieves the same result. For the sake of reproducibility, we stick to the convention used in the package.]: 
+
+\noindent A weighted distance $\boldsymbol{d_{w}}$ for each road
+segment is calculated as follows ^[The **dodgr** r package
+[@padgham2019dodgr] is used to route cycling demand onto the road
+network. The package uses the OpenStreetMaps (OSM) road network and
+allows the user to assign weights to roads based on their type. The
+routing is done based on weighted shortest paths, with the distance
+along each road segment being divided by a factor to obtain the weighted
+distance for routing. It is more intuitive to multiply when weighting a
+network, but the dodgr package divides by numbers between 0 and 1, which
+achieves the same result. For the sake of reproducibility, we stick to
+the convention used in the package.]:
 
 \begin{equation}\label{eq:weight_distance}
     d_{w} = d_{unw}  \:/\:  W
 \end{equation}
 
-\noindent where $\boldsymbol{d_{unw}}$ is the unweighted distance and $\boldsymbol{W}$ is the weight from Table \ref{table:weightprofiles}. 
+\noindent where $\boldsymbol{d_{unw}}$ is the unweighted distance and
+$\boldsymbol{W}$ is the weight from Table \ref{table:weightprofiles}.
 
-All weights are between 0 and 1, and the values in the \textit{Weighted} profile are chosen to be inversely proportional to the stress level experienced by cyclists on them. The \textit{Unweighted} weighting profile is used to compare increases in route length resulting from two different approaches: 
+All weights are between 0 and 1, and the values in the
+\textit{Weighted} profile are chosen to be inversely proportional to
+the stress level experienced by cyclists on them. The
+\textit{Unweighted} weighting profile is used to compare increases in
+route length resulting from two different approaches:
 
+1.  **Weighted**: Relatively high impedance on Primary and Trunk roads
+    (to minimize cycling on them).
+2.  **Weighted_2**: Avoiding Primary and Trunk Roads completely.
 
-1. **Weighted**: Relatively high impedance on Primary and Trunk roads (to minimize cycling on them).
-2. **Weighted\_2**: Avoiding Primary and Trunk Roads completely.
-
-
-Comparing the cycling demand routed on the weighted and unweighted road network allows us to get a better understanding of the importance of different road types. In the case of Manchester, trunk roads bisect the city and are a major part of unweighted shortest paths (Figure \@ref(fig:flowsfacetunweighted)). On the other hand, cycleways are not part of unweighted shortest paths, and so very little of the cycling demand is routed through them. In the weighted network, cycleways are much better utilized, and the majority of the cycling demand passes through tertiary roads, as expected. 
+Comparing the cycling demand routed on the weighted and unweighted road
+network allows us to get a better understanding of the importance of
+different road types. In the case of Manchester, trunk roads bisect the
+city and are a major part of unweighted shortest paths (Figure
+\@ref(fig:flowsfacetunweighted)). On the other hand, cycleways are not
+part of unweighted shortest paths, and so very little of the cycling
+demand is routed through them. In the weighted network, cycleways are
+much better utilized, and the majority of the cycling demand passes
+through tertiary roads, as expected.
 
 ```{r flowsfacetunweighted, fig.cap="Flow Results Based on Unweighted Shortest Paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/flows_facet_unweighted_Manchester.png")
@@ -246,33 +505,102 @@ knitr::include_graphics("data/Manchester/Plots/flows_facet_weighted_Manchester.p
 
 <!-- The difference between aggregate flow on weighted and unweighted networks is dependant on the road network of the city. Comparing Manchester to Nottingham, we see that trunk roads are much more important in the former, as over 25\% of flow on the unweighted road network passes through them. For Nottingham, less than 10\% of the flow on the unweighted network passes through trunk roads, but almost 25\% of the flow passes through tertiary roads (Figure \ref{fig:perc_person-km}).  -->
 
-The results of routing potential cycling demand on the weighted and unweighted networks are understandably quite different. From Figure \@ref(fig:flowsfacetunweighted) we can see that trunk and primary roads are the most efficient means of traversing the road network of Manchester. Both of these road types are classified as Primary A roads according to the UK Department for Transport's road classification (Table \@ref(table:osmroadtypes)), and are therefore part of the Primary Route Network (PRN) [@department2012guidance]. The PRN has the widest, most direct roads on the network, and carries most of the through traffic. This includes freight, with all roads in the PRN being required by law to provide unrestricted access to trucks up to 40 tonnes [@department2012guidance]. 
+The results of routing potential cycling demand on the weighted and
+unweighted networks are understandably quite different. From Figure
+\@ref(fig:flowsfacetunweighted) we can see that trunk and primary roads
+are the most efficient means of traversing the road network of
+Manchester. Both of these road types are classified as Primary A roads
+according to the UK Department for Transport's road classification
+(Table \@ref(table:osmroadtypes)), and are therefore part of the Primary
+Route Network (PRN) [@department2012guidance]. The PRN has the widest,
+most direct roads on the network, and carries most of the through
+traffic. This includes freight, with all roads in the PRN being required
+by law to provide unrestricted access to trucks up to 40 tonnes
+[@department2012guidance].
 
-We choose to avoid routing the potential cycling demand on Primary A Roads for the following 2 reasons:
+We choose to avoid routing the potential cycling demand on Primary A
+Roads for the following 2 reasons:
 
+1.  **Logistical Difficulty**: Changes on these roads need to be agreed
+    upon by all affected authorities [@department2012guidance], which
+    may prove to be difficult.
+2.  **Low Traffic Neighborhoods (LTNs)**: The UK government is aiming to
+    restrict access to motorized vehicles on residential roads to create
+    LTNs [@departmentgearchange2020]. This is part of a policy to
+    prevent automobile rat-running and make streets more accessible to
+    cyclists and pedestrians. Under such a policy, Primary A roads would
+    become even more essential for motorized traffic and it would be
+    more difficult to reallocate road space on these roads to cyclists.
 
-1. **Logistical Difficulty**: Changes on these roads need to be agreed upon by all affected authorities [@department2012guidance], which may prove to be difficult. 
-2. **Low Traffic Neighborhoods (LTNs)**: The UK government is aiming to restrict access to motorized vehicles on residential roads to create LTNs [@departmentgearchange2020]. This is part of a policy to prevent automobile rat-running and make streets more accessible to cyclists and pedestrians. Under such a policy, Primary A roads would become even more essential for motorized traffic and it would be more difficult to reallocate road space on these roads to cyclists. 
+Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted
+network significantly reduces flow on the trunk and primary roads, but
+does not eliminate it completely. This is intentional, as the impedance
+on these roads is only slightly higher than remaining road types (See
+Table \@ref(table:weightprofiles)). Potential cycling demand is only
+routed on these roads if there are no routes through other roads that
+offer comparable directness.
 
-Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted network significantly reduces flow on the trunk and primary roads, but does not eliminate it completely. This is intentional, as the impedance on these roads is only slightly higher than remaining road types (See Table \@ref(table:weightprofiles)). Potential cycling demand is only routed on these roads if there are no routes through other roads that offer comparable directness. 
-
-Banning cycling flow completely on trunk and primary roads may result in excessively circuitous paths, as seen in Figure \@ref(fig:boxplotcircuity). When routing using the *weighted* weighting profile in Table \@ref(table:weightprofiles), we see that shortest paths increase by less than 5\% on average from unweighted shortest paths, with the largest increases still below 30\%. When routing on primary and trunk roads is banned (*weighted_2* profile in Table \@ref(table:weightprofiles)), the average increase relative to unweighted shortest paths rises to 10\%, with certain locations experiencing more significant negative effects on accessibility. 
-Given that cyclists will only deviate from shortest paths by a certain amount to access better cycling infrastructure (as explained in Section \@ref(introduction)), allowing flow on some stretches of trunk and primary roads is necessary to insure cycling uptake and equitable access to cycling infrastructure. In its new vision for walking and cycling, the Department for Transport acknowledges that minimal segregated stretches of bicycle lanes on main roads will be necessary to avoid circuitous cycling networks [@departmentgearchange2020].
+Banning cycling flow completely on trunk and primary roads may result in
+excessively circuitous paths, as seen in Figure
+\@ref(fig:boxplotcircuity). When routing using the *weighted* weighting
+profile in Table \@ref(table:weightprofiles), we see that shortest paths
+increase by less than 5% on average from unweighted shortest paths, with
+the largest increases still below 30%. When routing on primary and trunk
+roads is banned (*weighted_2* profile in Table
+\@ref(table:weightprofiles)), the average increase relative to
+unweighted shortest paths rises to 10%, with certain locations
+experiencing more significant negative effects on accessibility. Given
+that cyclists will only deviate from shortest paths by a certain amount
+to access better cycling infrastructure (as explained in Section
+\@ref(introduction)), allowing flow on some stretches of trunk and
+primary roads is necessary to insure cycling uptake and equitable access
+to cycling infrastructure. In its new vision for walking and cycling,
+the Department for Transport acknowledges that minimal segregated
+stretches of bicycle lanes on main roads will be necessary to avoid
+circuitous cycling networks [@departmentgearchange2020].
 
 ```{r boxplotcircuity, fig.cap="Effect of Banning Cyclists from Trunk and Primary Roads for all OD Pairs (Manchester)", out.width="35%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
 ```
 
-Weighting the road network also allows us to better utilize existing cycling infrastructure, as can be seen by the higher flow on cycleways in Figure \@ref(fig:flowsfacetweighted). Again, the small differences in impedance between cycleways and other road types mean that cycleways that require significant deviation are not routed on. 
+Weighting the road network also allows us to better utilize existing
+cycling infrastructure, as can be seen by the higher flow on cycleways
+in Figure \@ref(fig:flowsfacetweighted). Again, the small differences in
+impedance between cycleways and other road types mean that cycleways
+that require significant deviation are not routed on.
 
-It should be reiterated that the weighting profile used for routing has been developed for the purposes of this study. It creates a hierarchy of road preference that is grounded in cyclist preferences and government plans to create LTNs.
-A wide range of weighting profiles could be used, to represent different types of cyclists and road environments, as described in @gehrke2020cycling and @furth2016network.
-Sensitivity analysis could be done to determine an optimal weighting profile, but given the variation in city road networks<!-- (Figure \ref{fig:perc_person-km}) -->, this would probably require calibration to the specific city. More accurate routing could be carried out given the availability of road-level data. In such cases we would add additional impedance to specific roads, giving more useful routing results than the current methodology which considers all roads of the same type to be equivalent.
+It should be reiterated that the weighting profile used for routing has
+been developed for the purposes of this study. It creates a hierarchy of
+road preference that is grounded in cyclist preferences and government
+plans to create LTNs. A wide range of weighting profiles could be used
+to represent different types of cyclists and road environments, as
+described in @gehrke2020cycling and @furth2016network. Sensitivity
+analysis could be done to determine an optimal weighting profile, but
+given the variation in city road
+networks<!-- (Figure \ref{fig:perc_person-km}) -->, this would probably
+require calibration to the specific city. More accurate routing could be
+carried out given the availability of road-level data. In such cases we
+would add additional impedance to specific roads, giving more useful
+routing results than the current methodology which considers all roads
+of the same type to be equivalent.
 
-One use-case of such granular data would be to identify roads that serve schools. The Department of Transport notes that the number of school children being driven to school has trebled over the past 40 years [@departmentgearchange2020], and so having cycling infrastructure serving schools is key to achieving the government target of getting more children to cycle. This would not be difficult, as over 75\% of children in the UK live within a 15 minute cycle from their school [@departmentcycleinfradesign2020]. @goodman2019scenarios show that if dutch levels of cycling were achieved in the UK, the \% of children cycling to school could increase from 1.8\% to 41\%. In their typology of cyclists, @dill2013four found that a majority of people who say they would never cycle had never cycled to school, whereas confident cyclists were those most likely to have cycled to school. Getting people to cycle from a young age is therefore key to achieving societal change in commuting habits.   
+One use-case of such granular data would be to identify roads that serve
+schools. The Department of Transport notes that the number of school
+children being driven to school has trebled over the past 40 years
+[@departmentgearchange2020], and so having cycling infrastructure
+serving schools is key to achieving the government target of getting
+more children to cycle. This would not be difficult, as over 75% of
+children in the UK live within a 15 minute cycle from their school
+[@departmentcycleinfradesign2020]. @goodman2019scenarios show that if
+dutch levels of cycling were achieved in the UK, the % of children
+cycling to school could increase from 1.8% to 41%. In their typology of
+cyclists, @dill2013four found that a majority of people who say they
+would never cycle had never cycled to school, whereas confident cyclists
+were those most likely to have cycled to school. Getting people to cycle
+from a young age is therefore key to achieving societal change in
+commuting habits.
 
-
-# Road Segment Prioritization
+# Road Segment Prioritisation
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # scripts for cycle network algorithms
@@ -283,25 +611,59 @@ One use-case of such granular data would be to identify roads that serve schools
 # source("R/_8.2_growth_egalitarian.R")
 ```
 
-After routing the potential cycling demand onto the road network using weighted shortest paths, we have estimates for the cumulative potential cycling demand passing through all road segments. This cumulative demand (referred to as *flow*) is then used as a basis for identifying segments that are in most need of investment in segregated cycling infrastructure. In doing so, we must account for the motivations and deterrents for cycling identified in Section \@ref(introduction), namely direct and well-connected routes.
+After routing the potential cycling demand onto the road network using
+weighted shortest paths, we have estimates for the cumulative potential
+cycling demand passing through all road segments. This cumulative demand
+(referred to as *flow*) is then used as a basis for identifying segments
+that are in most need of investment in segregated cycling
+infrastructure. In doing so, we must account for the motivations and
+deterrents for cycling identified in Section \@ref(introduction), namely
+direct and well-connected routes.
 
-A range of algorithms could be used for prioritisation. Because policy priorities vary, we present two algorithms. Both utilize existing infrastructure from the beginning and allow us to compare a solution that focuses on utilitarianism to one that focuses on egalitarianism. In both algorithms, links are selected iteratively and the iteration at which each link is added to the solution is recorded. Investments in cycling infrastructure can be limited by budget constraints, so it can be useful to see where best to allocate a defined length of segregated infrastructure. In order to incorporate egalitarian principles in our approach, we use community detection to partition the study area and evaluate the distribution of investment over the different subdivisions.
+A range of algorithms could be used for prioritisation. Because policy
+priorities vary, we present two algorithms. Both utilize existing
+infrastructure from the beginning and allow us to compare a solution
+that focuses on utilitarianism to one that focuses on egalitarianism. In
+both algorithms, links are selected iteratively and the iteration at
+which each link is added to the solution is recorded. Investments in
+cycling infrastructure can be limited by budget constraints, so it can
+be useful to see where best to allocate a defined length of segregated
+infrastructure. In order to incorporate egalitarian principles in our
+approach, we use community detection to partition the study area and
+evaluate the distribution of investment over the different subdivisions.
 
-## Community Detection 
+## Community Detection
 
-A major challenge facing ‘top-down’ planning approaches is how to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. 
-One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas. This approach could also help ensure that on-the-ground surveys are made by local stakeholders, an important component of the planning process  [@parkin2018designing]. 
-Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more likely to have a local catchment area of cyclists.
+As explained in Section
+\@ref(ethical-underpinnings-and-proposed-approach), a major challenge
+facing 'top-down' planning approaches is how to incorporate egalitarian
+principles by fairly distributing investments in cycling infrastructure.
+One way of quantifying this is to split up the city into smaller
+geospatial areas and target equal investment in each of those areas.
+This approach could also help ensure that on-the-ground surveys are made
+by local stakeholders, an important component of the planning process
+[@parkin2018designing]. Community detection offers us a way to
+delineate such a split; cyclists are limited in their commuting distance
+(see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more
+likely to have a local catchment area of cyclists.
 
 ```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="30%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
 ```
 
-In our case, the network is the city; the nodes are the population-weighted MSOA centroids and the links connecting each MSOA pair are weighted by the potential cycling demand between them. The Louvain method  [@blondel2008fast] is used to separate MSOAs into communities. Potential cycling demand is used since we assume that this is what the cycling demand will be once the cycling infrastructure is added. To assign road links to communities, the following steps are carried out: 
+In our case, the network is the city; the nodes are the
+population-weighted MSOA centroids and the links connecting each MSOA
+pair are weighted by the potential cycling demand between them. The
+Louvain method [@blondel2008fast] is used to separate MSOAs into
+communities. Potential cycling demand is used since we assume that this
+is what the cycling demand will be once the cycling infrastructure is
+added. To assign road links to communities, the following steps are
+carried out:
 
 <!-- 1. Create links between MSOA centroids and weigh these links by potential cycling demand between them.
 2. Use Louvian method to determine optimal number of communities and assign each MSOA centroid to a community.
 3. Assign each road link to the same community as the closest MSOA centroid to it. -->
+
 ```{r, eval = FALSE}
 1. Create links between MSOA centroids and weigh these links by potential cycling demand 
    between them.
@@ -310,9 +672,10 @@ In our case, the network is the city; the nodes are the population-weighted MSOA
 3. Assign each road link to the same community as the closest MSOA centroid to it.
 ```
 
-The results show that Manchester can be split into four large communities and one small one (Figure \@ref(fig:communitiesmanchester)).
+The results show that Manchester can be split into four large
+communities and one small one (Figure \@ref(fig:communitiesmanchester)).
 
-```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", fig.show='hold', echo=FALSE}
+```{r communitiesmanchester, fig.cap="Communities Based on Potential Cycling Demand (Manchester)", out.width="75%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
 ```
 
@@ -331,21 +694,28 @@ knitr::include_graphics("data/Manchester/Plots/communities_alternative_Mancheste
 4. Repeat steps 2 and 3 until all flow is satisfied or investment threshold is met
 ```
 
+This algorithm ensures that the resulting network is connected. It also
+satisfies the directness criteria, since links on the weighted shortest
+paths are those that have the highest flow passing through them (this is
+a result of the routing in Section \@ref(introduction).
 
-This algorithm ensures that the resulting network is connected. It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(introduction).
+## Algorithm 2: Egalitarian Expansion 
 
-## Algorithm 2: Egalitarian Expansion (Focus on Fair Distribution of Resources)
+The first algorithm focuses on connectivity and directness, but not on
+fairly distributing investment. The latter is not a requirement for
+increasing cycling uptake, but it is fundamental for spatial equity, as
+explained in Section \@ref(ethical-underpinnings-and-proposed-approach). This algorithm incorporates
+the ideal of fair distribution by using community detection to partition
+the road network.
 
-The first algorithm focuses on connectivity and directness, but not on fairly distributing investment. The latter is not a requirement for increasing cycling uptake, but it is fundamental for spatial equity, as explained in Section \@ref(introduction). This algorithm incorporates the ideal of fair distribution by using community detection to partition the road network. 
-
-The algorithm uses the following logic to ensure fair distribution between communities:
+The algorithm uses the following logic to ensure fair distribution
+between communities:
 
 <!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
 3. Select *from each community* one neighboring link with highest flow and add it to the solution
 4. If there are no more neighboring links in a community, select the link with the highest flow in that community, regardless of connectivity, and add it to the solution
 5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met -->
-
 
 ```{r, eval = FALSE}
 1. Identify all links that have segregated cycling infrastructure and add them to the initial 
@@ -359,10 +729,21 @@ The algorithm uses the following logic to ensure fair distribution between commu
 
 ```
 
-Even though we may end up with a more disconnected network, we will have separate connected networks in each community. Given that communities are defined by having more internal flow than external flow, this is a satisfactory solution.
+Even though we may end up with a more disconnected network, we will have
+separate connected networks in each community. Given that communities
+are defined by having more internal flow than external flow, this is a
+satisfactory solution.
 
-The results of the community detection are used to evaluate the algorithms. This is done by looking at the *person-km satisfied* as cycling infrastructure is added. Person-km is a measure of the total km cycled on a road segment, so it is the product of the number of potential commuters cycling on that road segment ($flow$) and the length of the segment in km ($l$). For each road segment, the person-km is equal to $flow * l$. In the case of Manchester, Table \@ref(tab:personkmtable) shows that almost half of the person-km is in community 1 , while only 0.5\% of total person-km on the network is in community 5.
-
+The results of the community detection are used to evaluate the
+algorithms. This is done by looking at the *person-km satisfied* as
+cycling infrastructure is added. Person-km is a measure of the total km
+cycled on a road segment, so it is the product of the number of
+potential commuters cycling on that road segment ($flow$) and the length
+of the segment in km ($l$). For each road segment, the person-km is
+equal to $flow * l$. In the case of Manchester, Table
+\@ref(tab:personkmtable) shows that almost half of the person-km is in
+community 1 , while only 0.5% of total person-km on the network is in
+community 5.
 
 ```{r personkmtable, echo=FALSE, message = FALSE}
 
@@ -385,22 +766,39 @@ knitr::kable(table,
        
 ```
 
-Looking at the person-km satisfied (Figure \@ref(fig:growthtotal)), we see that the incremental addition of cycling infrastructure is better distributed between communities using Algorithm 2; equal distribution of investment results in the gain in % of person km satisfied in each community being inversely correlated with the size of the community. In addition, we find that the restrictions imposed by Algorithm 2 on the network expansion do not seem to have a noticeable effect on the city-wide \% of person-km satisfied. Comparing both algorithms, we can see that Algorithm 1 provides only marginally quicker city-wide gains than Algorithm 2. 
+Looking at the person-km satisfied (Figure \@ref(fig:growthtotal)), we
+see that the incremental addition of cycling infrastructure is better
+distributed between communities using Algorithm 2; equal distribution of
+investment results in the gain in % of person km satisfied in each
+community being inversely correlated with the size of the community. In
+addition, we find that the restrictions imposed by Algorithm 2 on the
+network expansion do not seem to have a noticeable effect on the
+city-wide % of person-km satisfied. Comparing both algorithms, we can
+see that Algorithm 1 provides only marginally quicker city-wide gains
+than Algorithm 2.
 
-
-```{r growthtotal, fig.cap="Comparing Overall (Dashed) and Community Level Person-Km Satisfied (Manchester)", out.width="35%", fig.show='hold', echo=FALSE}
+```{r growthtotal, fig.cap="Comparing Overall (Dashed) and Community Level Person-Km Satisfied (Manchester)", out.width="35%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_both_flow_column.png"
 ))
 ```
 
-Figure \@ref(fig:growth3MapandBar) gives us a geographic representation of the results from Algorithm 2; it shows when each link was added to the solution (first 100km, second 100km, etc). We can see that, generally, road segments around cycling infrastructure are prioritized, except for those neighboring cycling infrastructure on the very periphery. The first 100km is also spatially distributed across the city, with no apparent bias towards a particular area.
+Figure \@ref(fig:growth3MapandBar) gives us a geographic representation
+of the results from Algorithm 2; it shows when each link was added to
+the solution (first 100km, second 100km, etc). We can see that,
+generally, road segments around cycling infrastructure are prioritized,
+except for those neighboring cycling infrastructure on the very
+periphery. The first 100km is also spatially distributed across the
+city, with no apparent bias towards a particular area.
 
-It is also important to understand how the different highway types contribute to the proposed network. Figure \@ref(fig:growth3MapandBar) shows that most of the flow will be on residential and tertiary roads, as expected from the weighting profile defined in Table \@ref(table:weightprofiles). 
+It is also important to understand how the different highway types
+contribute to the proposed network. Figure \@ref(fig:growth3MapandBar)
+shows that most of the flow will be on residential and tertiary roads,
+as expected from the weighting profile defined in Table
+\@ref(table:weightprofiles).
 
-
-```{r growth3MapandBar, fig.cap="Results of Alg. 2 (Manchester)", out.width="35%", fig.show='hold', echo=FALSE}
+```{r growth3MapandBar, fig.cap="Road Segment Priority (left), disaggregated by road type (right) - Egalitarian Growth", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_priority_all_FLOW.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"
@@ -409,50 +807,124 @@ knitr::include_graphics(c(
 
 ## Connectivity
 
-Existing cycling infrastructure is made up of many disconnected components. Both Algorithm 1 and 2 start with all existing segregated cycling infrastructure and aim to create an efficient, connected network. Figure \@ref(fig:componentsandGCC) shows that both algorithms gradually reduce the number of components as more infrastructure is added, but Algorithm 2 is able to provide better connectivity with less investment. 
+Existing cycling infrastructure is made up of many disconnected
+components. Both Algorithm 1 and 2 start with all existing segregated
+cycling infrastructure and aim to create an efficient, connected
+network. Figure \@ref(fig:componentsandGCC) shows that both algorithms
+gradually reduce the number of components as more infrastructure is
+added, but Algorithm 2 is able to provide better connectivity with less
+investment.
 
-Consistent growth can also be seen for the size of the Largest Connected Component in the proposed bicycle network (Figure \@ref(fig:componentsandGCC)). Here however, we find that there is little difference between both Algorithms. 
+Consistent growth can also be seen for the size of the Largest Connected
+Component in the proposed bicycle network (Figure
+\@ref(fig:componentsandGCC)). Here however, we find that there is little
+difference between both Algorithms.
 
-```{r componentsandGCC, fig.cap="Network Characteristics", out.width="35%", fig.show='hold', echo=FALSE}
+```{r componentsandGCC, fig.cap="Network Characteristics", out.width="30%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png",
   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png"
 ))
 ```
 
+# Discussion and conclusions
 
-# Disussion and conclusions
-
-This paper provides a methodology for prioritizing road segments for investments in cycling infrastructure, with the output being a proposed cycling network for the city under study. 
-The approach aims to respect both the needs of the users and the ambitions of stakeholders working at local or regional levels.
-The results, primarily detailed route network maps based on current travel behaviour derived from OD data, can provide an evidence-based starting point for introducing a direct, connected, and low-stress network for any city by leveraging available open data. Given that the “most essential activity entailed in the design of cycle-friendly infrastructure is developing a cycle network” [@parkin2018designing], we believe that the methods have great potential to inform investment in cities such as Manchester where there is political will to invest in cycling long-term. A benefit of the approach is that it has relatively modest data requirements: only the road network (from OSM), its topography (from satellite imagery), and origin-destination data (from the national census in this case) are needed, opening up the possibility of deploying the approach in other cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. For instructions on reproducing the results shown in this paper, see the **README** file in the R folder of the .zip file that accompanies this paper (to be released as open source software when the paper is published).].
+This paper provides a methodology for prioritizing road segments for
+investments in cycling infrastructure, with the output being a proposed
+cycling network for the city under study. The approach aims to respect
+both the needs of the users and the ambitions of stakeholders working at
+local or regional levels. The results, primarily detailed route network
+maps based on current travel behaviour derived from OD data, can provide
+an evidence-based starting point for introducing a direct, connected,
+and low-stress network for any city by leveraging available open data.
+Given that the "most essential activity entailed in the design of
+cycle-friendly infrastructure is developing a cycle network"
+[@parkin2018designing], we believe that the methods have great
+potential to inform investment in cities such as Manchester where there
+is political will to invest in cycling long-term. A benefit of the
+approach is that it has relatively modest data requirements: only the
+road network (from OSM), its topography (from satellite imagery), and
+OD data (from the national census in this case) are
+needed, opening up the possibility of deploying the approach in other
+cities^[The results are easily reproducible for all UK cities, and can
+also be reproduced for cities elsewhere given the availability of
+commuter data. For instructions on reproducing the results shown in this
+paper, see the **README** file in the R folder of the .zip file that
+accompanies this paper (to be released as open source software when the
+paper is published).].
 
 <!-- For after publishing 
 
 ^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]. -->
-A core part of the methodology is determining where there is a high potential for cycling, and using this as a basis for recommendations on road space reallocation in order to unlock potential cycling demand. The framework provides a routing engine to study the effects of limiting access on different road types, finding that reducing cyclist flow on roads with high through-traffic results in acceptable increases in commuting distances. As a result, a hierarchy of road preference needs to be defined to route potential cycling demand. The framework provides different algorithms to determine where investments in cycling infrastructure should be prioritized. These algorithms, based on connectivity and egalitarian principles of resource distribution, ensured that whatever the level of investment, the resulting cycling network would improve connectivity of existing cycling infrastructure.
 
-The approach is not without limitations.
-The level of detail is only as good as the granularity of the available data (in this case relatively coarse zones).
-@iacono2010measuring note that such large travel zones are not ideal for understanding route choice behaviour of cyclists and pedestrians. They also give rise to an \`ecological fallacy' whereby average characteristics are assumed to apply to all residents of the aggregated geographical area, suggesting a need for applying the methods to more granular origin-destination data (and for governments and other data-collecting organisations to make origin-destination data more readily available).
+A core part of the methodology is determining where there is a high
+potential for cycling, and using this as a basis for recommendations on
+road space reallocation in order to unlock potential cycling demand. The
+framework provides a routing engine to study the effects of limiting
+access on different road types, finding that reducing cyclist flow on
+roads with high through-traffic results in acceptable increases in
+commuting distances. As a result, a hierarchy of road preference needs
+to be defined to route potential cycling demand. The framework provides
+different algorithms to determine where investments in cycling
+infrastructure should be prioritized. These algorithms, based on
+connectivity and egalitarian principles of resource distribution,
+ensured that whatever the level of investment, the resulting cycling
+network would improve connectivity of existing cycling infrastructure.
 
-The approach is also focused solely on the allocation of cycling infrastructure, and does not consider the larger political and regulatory environment that needs to exist to promote cycling; while segregated, connected, and direct cycling infrastructure is key to achieving high levels of cycling, research has shown that it cannot exist in a vacuum. 
-@wardman2007factors developed a mode choice model for the UK and their results showed that improved cycling infrastructure on its own only had modest impacts on mode shift, and even the unlikely scenario of all urban routes being serviced by segregated bike lanes was forecast to increase cycling mode share by only 3%. 
-International research shows that cities that invest in more comprehensive cycling projects have a more significant increase in the number of cyclists as well as the cycling mode share [@parkin2018designing; @pucher2010infrastructure]. These cities do not just focus on infrastructure, but on general policies as well as restricting car use. Evaluation of policies in Denmark and Germany and the Netherlands has shown that their high cycling mode share is down to a broader set of policies that also include traffic calming, filtered permeability interventions, cycling rights of way, bike parking, integration with the public transport network, and making driving cars both expensive and inconvenient [@pucher2008making]. 
-While these policies are outside the scope of this research, it is important to recognize their key role in bringing about an increase in levels of cycling.
+The approach is not without limitations. The level of detail is only as
+good as the granularity of the available data (in this case relatively
+coarse zones). @iacono2010measuring note that such large travel zones
+are not ideal for understanding route choice behaviour of cyclists and
+pedestrians. They also give rise to an \`ecological fallacy' whereby
+average characteristics are assumed to apply to all residents of the
+aggregated geographical area, suggesting a need for applying the methods
+to more granular OD data (and for governments and other
+data-collecting organisations to make OD data more
+readily available).
 
-The methods can support the ongoing shift towards active transport, which is one of the priority areas of investments worldwide in transport planning. This necessary shift predates the pandemic and is driven by ambitions to improve the health and well-being of the citizens worldwide. The success of such a shift depends on the appeal of the cycling network for prospective cyclists, together with policies and interventions deterring the usage of the private car. 
+The approach is also focused solely on the allocation of cycling
+infrastructure, and does not consider the larger political and
+regulatory environment that needs to exist to promote cycling; while
+segregated, connected, and direct cycling infrastructure is key to
+achieving high levels of cycling, research has shown that it cannot
+exist in a vacuum. @wardman2007factors developed a mode choice model
+for the UK and their results showed that improved cycling infrastructure
+on its own only had modest impacts on mode shift, and even the unlikely
+scenario of all urban routes being serviced by segregated bike lanes was
+forecast to increase cycling mode share by only 3%. International
+research shows that cities that invest in more comprehensive cycling
+projects have a more significant increase in the number of cyclists as
+well as the cycling mode share [@parkin2018designing;
+@pucher2010infrastructure]. These cities do not just focus on
+infrastructure, but on general policies as well as restricting car use.
+Evaluation of policies in Denmark and Germany and the Netherlands has
+shown that their high cycling mode share is down to a broader set of
+soft and hard policies. Hard policies include traffic calming, filtered permeability
+interventions, cycling rights of way, bike parking, integration with the
+public transport network, and making driving cars both expensive and
+inconvenient, while soft policies include marketing and awareness compaigns [@gossling2013urban; @pucher2008making]. While these policies are outside the scope of this research, it is important to recognize their key role in
+bringing about an increase in levels of cycling.
+
+The methods can support the ongoing shift towards active transport,
+which is one of the priority areas of investments worldwide in transport
+planning. This necessary shift predates the pandemic and is driven by
+ambitions to improve the health and well-being of the citizens
+worldwide. The success of such a shift depends on the appeal of the
+cycling network for prospective cyclists, together with policies and
+interventions deterring the usage of the private car.
 
 <!-- I think it would be good to say how others could reproduce the methods in other cities (RL) -->
+
 <!-- (HM) Answer: Done. I added a footnote to the first paragraph in the conclusion linking to the github repo -->
 
 <!-- There should also be links to the literature. -->
-<!-- (HM) Answer: There are links to the literature at the end of each thematic section (Calculating Potential Cycling Demand / Routing / Road Segment Prioritization). There is a discussion paragraph in each of them. What additional links are necessary here? -->
 
+<!-- (HM) Answer: There are links to the literature at the end of each thematic section (Calculating Potential Cycling Demand / Routing / Road Segment Prioritization). There is a discussion paragraph in each of them. What additional links are necessary here? -->
 
 # References {#references .unnumbered}
 
 <!-- to fix indentation: https://github.com/crsh/papaja/issues/37#issuecomment-104185288 -->
+
 
 ```{=tex}
 \setlength{\parindent}{-0.5in}
