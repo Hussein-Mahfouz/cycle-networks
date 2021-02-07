@@ -256,18 +256,16 @@ demand. It then introduces the network expansion algorithms, and compares an app
 # source("R/_3.3_plot_desire_lines_current_vs_potential.R")
 ```
 
-Relying only on existing cycling activity to prioritise cycling
-infrastructure can reinforce existing cycling patterns and ignores
-potential cycling demand that could be satisfied by a connected network.
-To avoid this issue, @duthie2014optimization choose to ignore existing
-demand completely, and focus on creating a network that connects the
-entire study area. @olmos2020data obtain the distance distribution of
-cyclists using a smartphone-based bicycle GPS data, and then use a
-rejection-sampling algorithm on the OD data of the study area to match
-the potential demand distribution to the distribution obtained from GPS
-data.
+Many of the cycling network studies mentioned above use demand data for cycling as a starting point. 
+Some use existing cycling demand, some calculate potential cycling demand, and others ignore demand completely. 
+@duthie2014optimization note that relying only on existing cycling activity to prioritise cycling
+infrastructure can reinforce existing cycling patterns and ignores potential cycling demand that could be satisfied by a connected network.
+To avoid this issue they choose to ignore existing demand completely, and focus on creating a network that connects the
+entire study area. 
+@olmos2020data opt to calculate potential demand instead; they obtain the distance distribution of cyclists using a smartphone-based bicycle GPS data, and then use a rejection-sampling algorithm on the OD data of the study area to match
+the potential demand distribution to the distribution obtained from GPS data.
 
-*Origin-Destination (OD)* data can be obtained from a range of sources,
+*OD* data can be obtained from a range of sources,
 including GPS data, household travels surveys and Census data on work
 locations. In areas where observed OD data is unavailable, modelling
 techniques such as spatial interaction models can be used to estimate
