@@ -153,7 +153,7 @@ problem has also been solved by attempting to find the minimum cost of
 improving roadway links to meet a desired level of service (LOS)
 [@duthie2014optimization]. In this formulation, all origin-destination
 (OD) pairs need to be connected by roads that meet the desired LOS. A
-limitation of these problem formulations do not explicitly solve for
+limitation of these problem formulations is that they do not explicitly solve for
 continuity, which is dealt with using either a constraint specifying
 that each link with a bike lane should be connected to at least one
 destination [@mesbah2012bilevel], a constraint on maximum deviation
@@ -186,16 +186,19 @@ constitute different problem formulations and targets. Broadly speaking,
 transport appraisal can be based on either utilitarian or egalitarian
 principles. The former seeks to maximize the overall benefit, while the
 latter is concerned with a fair distribution of benefits
-[@jafino2020transport]. @nahmias2017integrating criticize the
-utilitarian approach that has been historically popular in the
-evaluation of transport investments, explaining how the maximization of
-overall benefit fails to account for the distribution of that benefit
-among communities or individuals. @lucas2016method explain how
-transport studies have traditionally looked at the bigger picture
-without studying the distribution of investments on the different parts
-of the study area, and go on to propose an egalitarian approach that
-ensures the disaggregation of transport policy benefits across the study
-area. @pereira2017distributive also emphasize the need for a more
+[@jafino2020transport]. 
+<!-- @nahmias2017integrating criticize the -->
+<!-- utilitarian approach that has been historically popular in the -->
+<!-- evaluation of transport investments, explaining how the maximization of -->
+<!-- overall benefit fails to account for the distribution of that benefit -->
+<!-- among communities or individuals. @lucas2016method explain how -->
+<!-- transport studies have traditionally looked at the bigger picture -->
+<!-- without studying the distribution of investments on the different parts -->
+<!-- of the study area, and go on to propose an egalitarian approach that -->
+<!-- ensures the disaggregation of transport policy benefits across the study -->
+<!-- area.  -->
+The utilitarian approach, historically popular in transport planning, has been criticised for focusing on the bigger picture and failing to account for the distribution of investments on the different communities of the study area [@lucas2016method; @nahmias2017integrating].
+@pereira2017distributive emphasize the need for a more
 egalitarian approach to transport planning. They highlight accessibility
 as a cornerstone of distributive justice, and contend that policies
 should aim to distribute investments in a way that minimizes spatial
@@ -311,7 +314,7 @@ going back down for longer distances (see Figures
 
 <!-- note: could be a joint table/map showing sample - if reviewers request -->
 
-```{r potdemhistograms, fig.cap="Distribution of Potential Cycling Demand", out.width="32%", fig.show='hold', echo=FALSE}
+```{r potdemhistograms, fig.cap="Distribution of Potential Cycling Demand", out.width="30%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/histogram_distance_all_vs_cycling.png",
   "data/Manchester/Plots/histogram_distance_all_vs_cycling_potential.png",
@@ -319,7 +322,7 @@ knitr::include_graphics(c(
 ))
 ```
 
-```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="65%", fig.pos="H", fig.align="center", echo=FALSE}
+```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="60%", fig.pos="H", fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
@@ -533,7 +536,7 @@ Roads for the following 2 reasons:
 Figure \@ref(fig:flowsfacetweighted) shows that routing on the weighted
 network significantly reduces flow on the trunk and primary roads, but
 does not eliminate it completely. This is intentional, as the impedance
-on these roads is only slightly higher than remaining road types (See
+on these roads is only slightly higher than the remaining road types (See
 Table \@ref(table:weightprofiles)). Potential cycling demand is only
 routed on these roads if there are no routes through other roads that
 offer comparable directness.
@@ -679,6 +682,8 @@ knitr::include_graphics("data/Manchester/Plots/communities_alternative_Mancheste
 
 ## Algorithm 1: Utilitarian Expansion
 
+The algorithm logic is as follows:
+
 <!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
 3. Select neighboring link with highest flow and add it to the solution
@@ -703,11 +708,8 @@ The first algorithm focuses on connectivity and directness, but not on
 fairly distributing investment. The latter is not a requirement for
 increasing cycling uptake, but it is fundamental for spatial equity, as
 explained in Section \@ref(ethical-underpinnings-and-proposed-approach). This algorithm incorporates
-the ideal of fair distribution by using community detection to partition
-the road network.
-
-The algorithm uses the following logic to ensure fair distribution
-between communities:
+the ideal of fair distribution by ensuring that investment is distributed between the defined communities. 
+This is done using the following logic:
 
 <!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
 2. Identify all links that neighbor links in the current solution
@@ -747,6 +749,7 @@ community 5.
 
 library(tidyverse)
 library(sf)
+library(kableExtra)
 
 table <- readRDS("data/Manchester/graph_with_flows_weighted_communities.Rds")
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
@@ -760,7 +763,8 @@ table <- table %>% sf::st_drop_geometry() %>%
             `Person-Km (%)` = round(sum(person_km_perc),1))
 
 knitr::kable(table,
-             caption = "Total Person-Km in Different Communities (Manchester)")
+             caption = "Total Person-Km in Different Communities (Manchester)") %>%
+  kable_styling(latex_options = "hold_position")
        
 ```
 
@@ -825,6 +829,10 @@ knitr::include_graphics(c(
 ))
 ```
 
+Overall, the improved distribution of investment shown by Algorithm 2 does not seem to come at the cost 
+of poorer connectivity or less city-wide gains when compared to Algorithm 1. 
+The results therefore advocate for the incorporation of egalitarian principles in bicycle network planning. 
+
 # Discussion and conclusions
 
 This paper provides a methodology for prioritizing road segments for
@@ -863,11 +871,12 @@ access on different road types, finding that reducing cyclist flow on
 roads with high through-traffic results in acceptable increases in
 commuting distances. As a result, a hierarchy of road preference needs
 to be defined to route potential cycling demand. The framework provides
-different algorithms to determine where investments in cycling
-infrastructure should be prioritized. These algorithms, based on
+an algorithm to determine where investments in cycling
+infrastructure should be prioritized. This algorithm, based on
 connectivity and egalitarian principles of resource distribution,
 ensured that whatever the level of investment, the resulting cycling
 network would improve connectivity of existing cycling infrastructure.
+The algorithm was also shown to provide similar city-wide results as well better distribution of investment when compared to one based on utilitarian principles.
 
 The approach is not without limitations. The level of detail is only as
 good as the granularity of the available data (in this case relatively
@@ -879,6 +888,8 @@ aggregated geographical area, suggesting a need for applying the methods
 to more granular OD data (and for governments and other
 data-collecting organisations to make OD data more
 readily available).
+The potential demand calculation is also based on cycling in the traditional sense, and does not consider the 
+effect of micro-mobility on reducing topology-related impedance to cycling. Given that we are proposing a methodological framework which can accommodate any cycling uptake functions, this is an acceptable limitation.
 
 The approach is also focused solely on the allocation of cycling
 infrastructure, and does not consider the larger political and
