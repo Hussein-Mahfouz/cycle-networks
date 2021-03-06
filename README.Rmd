@@ -907,16 +907,36 @@ shown that their high cycling mode share is down to a broader set of
 soft and hard policies. Hard policies include traffic calming, filtered permeability
 interventions, cycling rights of way, bike parking, integration with the
 public transport network, and making driving cars both expensive and
-inconvenient, while soft policies include marketing and awareness compaigns [@gossling2013urban; @pucher2008making]. While these policies are outside the scope of this research, it is important to recognize their key role in
+inconvenient, while soft policies include marketing and awareness campaigns [@gossling2013urban; @pucher2008making]. While these policies are outside the scope of this research, it is important to recognize their key role in
 bringing about an increase in levels of cycling.
 
-The methods can support the ongoing shift towards active transport,
-which is one of the priority areas of investments worldwide in transport
-planning. This necessary shift predates the pandemic and is driven by
-ambitions to improve the health and well-being of the citizens
-worldwide. The success of such a shift depends on the appeal of the
-cycling network for prospective cyclists, together with policies and
-interventions deterring the usage of the private car.
+Consideration of these limitations suggest future directions of research.
+New datasets and continuously evolving computational (hardware and software)
+capabilities should enable the data related issues to be overcome as open
+datasets, and our ability to process them, improve.
+Plugging-in alternative uptake models could help address the relatively narrow
+definition of 'potential' used in this paper, to consider broader social factors.
+A promising area of future research in this direction could be 
+to integrate a wider range of modes, including e-bikes and e-scooters, into the
+analysis. Currently scope for progress in this direction is
+partially restricted by the lack of data on the
+proliferation of these modes, raising the point that surveys could
+replace the broad category of `Bicycle' a range of small modes such as
+'pedal cycles' (including tricycles and recumbent cycles), e-bikes
+and other forms of micro-mobility.
+
+Despite the rapid growth of these alternative modes, there is little doubt that
+the humble bicycle is a key ingredient in the ongoing shift towards active transport.
+Recognition of the importance of this shift for improved the health and well-being
+the citizens, and the wider challenge to decarbonise the global economy,
+has grown with pressures on health and public transport systems during the pandemic.
+The success of policies to accelerate cycling uptake depends on a range of
+factors including, vitally, the design of the
+cycling network for potential cyclists.
+The approach presented in this paper provides a strong evidence base,
+that considers both cycling potential and social equity,
+for designing joined-up and cost-effective strategic cycle networks.
+<!-- In tandem with policies to reduce excessive reliance on private cars, evidence-based investment in strategic cycle networks is key to. -->
 
 <!-- I think it would be good to say how others could reproduce the methods in other cities (RL) -->
 
