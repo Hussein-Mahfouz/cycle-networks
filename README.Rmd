@@ -91,7 +91,7 @@ infrastructure that is based on motivators and deterrents to cycling.
 
 ## Motivators and Deterrents to Cycling
 
-A considerable amount of research has been done to understand what gets people to cycle.
+Much research has been done to understand what gets people to cycle.
 Segregated cycling infrastructure^[*Segregated cycling infrastructure*
 refers to road space that is allocated to cyclists only, with physical
 separation to protect cyclists from other modes of transport.] has been
@@ -232,7 +232,7 @@ within communities. We incorporate community finding methods for study
 area partitioning with weighted routing to avoid links that are
 stressful to cycle on. In doing so, we propose a methodology that
 accounts for motivators and deterrents to cycling. We propose three
-sub-methodologies that expand on some of the limitations of previous
+sub-methodologies that address on some of the limitations of previous
 studies. These limitations include (a) bias inherent when basing network
 design solely on existing cycling demand, (b) proposing routes that may
 not correspond to studies on cyclist preference and government policies,
