@@ -280,7 +280,7 @@ Output Areas (MSOA) --- by mode of travel. MSOAs have an average
 population of just over 8000 [@ofn2018population].^[ See
 <https://wicid.ukdataservice.ac.uk/> for open access to the OD data.]
 Figures \@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling)
-illustrates the proportion of trips cycled by distance and the
+illustrate the proportion of trips cycled by distance and the
 geographic extent of the input OD dataset used in this paper.
 
 For our purposes, we use a logistic regression model to calculate
@@ -295,16 +295,18 @@ the following parameters:
 
 ```{=tex}
 \begin{align}\label{eq:pcteqn}
-     logit(C_{p}) = & -4.018 - 0.6369d +  1.988\sqrt{d} + 0.008775d^2\\ & - 0.2555s + 0.00206ds -0.1234\sqrt{d}s\nonumber 
+     logit(C_{p}) = & \alpha + \beta_1 d + \beta_2 \sqrt{d} + \beta_3 d^2 + \beta_4 s + \beta_5 ds + \beta_6 \sqrt{d}s\nonumber 
 \end{align}
 ```
 
-\noindent where **d** and **s** are the distance and slope respectively
-for the OD pair. The authors use square and square-root distance terms
-"to capture the non-linear impact of distance on the likelihood of
+\noindent where **d** and **s** are the distance and slope associated with each
+OD pair and $\alpha$ and $\beta$ values are parameters calculated by a regression
+model on training data. The square and square-root distance terms
+"capture the non-linear impact of distance on the likelihood of
 cycling", and interaction terms to capture the combined effect of slope
 and distance [@lovelace2017propensity]. Alternative cycling uptake
-models could be used in different contexts or scenarios of change.
+models could be 'plugged in' to our approach for different
+different contexts or scenarios of change.
 
 The potential demand calculations show that the current and potential
 number of cyclists both follow a bell-shaped distribution, with the
