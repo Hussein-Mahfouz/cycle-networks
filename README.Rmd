@@ -78,12 +78,12 @@ infrastructure across the country. While this unprecedented sum is an
 opportunity to reshape cities in a way that improves the well-being of
 citizens, it does come with a warning:
 
-> "Inadequate cycling infrastructure discourages cycling and wastes
-> public money. Much cycling infrastructure in this country is
-> inadequate. It reflects a belief, conscious or otherwise, that hardly
-> anyone cycles, that cycling is unimportant and that cycles must take
-> no meaningful space from more important road users, such as motor
-> vehicles and pedestrians - [@departmentgearchange2020]"
+> Inadequate cycling infrastructure discourages cycling and wastes
+ public money. Much cycling infrastructure in this country is
+ inadequate. It reflects a belief, conscious or otherwise, that hardly
+ anyone cycles, that cycling is unimportant and that cycles must take
+ no meaningful space from more important road users, such as motor
+ vehicles and pedestrians [@departmentgearchange2020]
 
 The funding on its own is therefore no guarantee of a change in
 commuting across the country; it must be used to design adequate cycling
