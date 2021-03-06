@@ -328,18 +328,11 @@ knitr::include_graphics(c(
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
-It should be noted that the calculations assume cycling in the
-traditional sense, i.e. the topography affects the decision to cycle.
-Recently there have been various micro-mobility solutions, including
-e-bikes, that allow commuters to traverse longer distances and hillier
-roads with less effort than traditional bicycles. While these modes
-would probably be associated with less geographical impedance, it is
-beyond the scope of this work to integrate those modes into the
-analysis. This is partially restricted by the lack of data on the
-proliferation of these modes, raising the point that perhaps the census
-data category of `Bicycle' is too vague, and should be further
-disaggregated to distinguish between traditional bicycles and other
-forms of micro-mobility.
+The uptake model used in this paper assumes uptake of traditional bicycles,
+which are affected by topography and distance due to physical effort.
+As discussed in Section \@ref(discussion-and-conclusions), using adapted uptake
+models could enable the approach to help plan for solutions such as e-bikes
+that enable trips covering longer distances and hillier roads.
 
 # Routing
 
@@ -837,14 +830,14 @@ The results therefore advocate for the incorporation of egalitarian principles i
 
 # Discussion and conclusions
 
-This paper provides a methodology for prioritizing road segments for
-investments in cycling infrastructure, with the output being a proposed
-cycling network for the city under study. The approach aims to respect
+This paper demonstrates an approach for prioritizing
+investments in city-wide cycleway networks. The approach aims to respect
 both the needs of the users and the ambitions of stakeholders working at
-local or regional levels. The results, primarily detailed route network
+local or regional levels. The results, including detailed route network
 maps based on current travel behaviour derived from OD data, can provide
-an evidence-based starting point for introducing a direct, connected,
-and low-stress network for any city by leveraging available open data.
+an evidence-base for designing direct, connected,
+and low-stress networks.
+
 Given that the "most essential activity entailed in the design of
 cycle-friendly infrastructure is developing a cycle network"
 [@parkin2018designing], we believe that the methods have great
@@ -865,20 +858,21 @@ paper is published).].
 
 ^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]. -->
 
-A core part of the methodology is determining where there is a high
-potential for cycling, and using this as a basis for recommendations on
-road space reallocation in order to unlock potential cycling demand. The
-framework provides a routing engine to study the effects of limiting
-access on different road types, finding that reducing cyclist flow on
-roads with high through-traffic results in acceptable increases in
-commuting distances. As a result, a hierarchy of road preference needs
-to be defined to route potential cycling demand. The framework provides
-an algorithm to determine where investments in cycling
-infrastructure should be prioritized. This algorithm, based on
-connectivity and egalitarian principles of resource distribution,
-ensured that whatever the level of investment, the resulting cycling
-network would improve connectivity of existing cycling infrastructure.
-The algorithm was also shown to provide similar city-wide results as well better distribution of investment when compared to one based on utilitarian principles.
+The approach can identify not only where there is high
+potential for cycling but also trade-offs between
+quietness (the absence of motor traffic) and directness.
+The results can therefore be used as a basis for recommendations on
+road space reallocation *and* new infrastructure to unlock potential cycling demand.
+The approach encourages consideration of a wider range of preferences
+and needs that previous methods that focus only on absolute potential.
+Moreover, the inclusion of egalitarian principles in scenarios of change
+encourages investment in cycling infrastructure to
+increase the connectivity of existing cycling infrastructure
+*and* investment that addresses geographical and social inequalities.
+This ability to address inequalities in network prioritisation is particularly
+important given research research showing substantial *inequalities*
+around transport provision in general and cycling uptake and investment
+in particular [@lucas2016method; @vidaltortosa_infrastructure_2020].
 
 The approach is not without limitations. The level of detail is only as
 good as the granularity of the available data (in this case relatively
