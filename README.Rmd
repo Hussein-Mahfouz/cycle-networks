@@ -860,7 +860,7 @@ paper is published).].
 
 The approach can identify not only where there is high
 potential for cycling but also trade-offs between
-quietness (the absence of motor traffic) and directness.
+stress levels (related to motor traffic) and directness.
 The results can therefore be used as a basis for recommendations on
 road space reallocation *and* new infrastructure to unlock potential cycling demand.
 The approach encourages consideration of a wider range of preferences
