@@ -41,7 +41,7 @@ plot(nodes['group'], add = TRUE)
 
 
 # read in road edges with aggregated flow data 
-road_segments <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
+road_segments <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.Rds"))
 #road_segments <- road_segments %>% dplyr::select(flow)
 
 # plot

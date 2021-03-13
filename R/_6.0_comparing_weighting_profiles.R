@@ -3,9 +3,9 @@ library(sf)
 library(tmap)
 
 
-graph_sf_weighted <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
-graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
-#graph_sf_trunk <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_trunk.RDS"))
+graph_sf_weighted <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.Rds"))
+graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.Rds"))
+#graph_sf_trunk <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_trunk.Rds"))
 
 
 plot(graph_sf_weighted['flow'])

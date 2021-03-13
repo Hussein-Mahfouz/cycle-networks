@@ -28,8 +28,21 @@ source("R/_4.0_aggregating_flows.R")
 
 file.exists("data/Leeds/msoa_lon_lat.shp")
 file.exists("data/Leeds/graph_with_flows_unweighted.Rds")
-file.edit("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
+# file.edit("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
+# Warning: takes several minutes to run
 source("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
+
+# file.edit("R/_6.0_comparing_weighting_profiles.R")
+source("R/_6.0_comparing_weighting_profiles.R")
+
+file.edit("R/_7.0_community_detection.R")
+source("R/_7.0_community_detection.R")
+
+source("R/_8.0_growing_a_network.R")
+source("R/_8.1_growth_utilitarian.R")
+source("R/_8.2_growth_egalitarian.R")
+
+source("R/_")
 
 
 source("R/_3.1_plot_mode_shares.R")
