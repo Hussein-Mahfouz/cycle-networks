@@ -35,7 +35,7 @@ source("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
 # file.edit("R/_6.0_comparing_weighting_profiles.R")
 source("R/_6.0_comparing_weighting_profiles.R")
 
-file.edit("R/_7.0_community_detection.R")
+# file.edit("R/_7.0_community_detection.R")
 source("R/_7.0_community_detection.R")
 
 source("R/_8.0_growing_a_network.R")

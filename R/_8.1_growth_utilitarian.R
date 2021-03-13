@@ -8,7 +8,7 @@ library(tmap)
 #create a directory to store data related to this city (does nothing if directory already exists)
 dir.create(paste0("data/", chosen_city, "/Plots/Growth_Results"), showWarnings = FALSE)
 
-graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.RDS"))
+graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
 
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
 graph_sf$person_km <- graph_sf$flow * graph_sf$d

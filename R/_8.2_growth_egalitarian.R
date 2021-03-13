@@ -3,7 +3,7 @@ library(tidyverse)
 library(ggtext)
 library(tmap)
 
-graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.RDS"))
+graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
 
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
 graph_sf$person_km <- graph_sf$flow * graph_sf$d
