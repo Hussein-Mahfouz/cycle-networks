@@ -40,11 +40,6 @@ source("R/_7.0_community_detection.R")
 
 source("R/_8.0_growing_a_network.R")
 source("R/_8.1_growth_utilitarian.R")
+
 source("R/_8.2_growth_egalitarian.R")
-
-source("R/_")
-
-
-source("R/_3.1_plot_mode_shares.R")
-
 

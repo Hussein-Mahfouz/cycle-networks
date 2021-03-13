@@ -9,22 +9,24 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Reproducing the results for other cities
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+To reproduce the results presented for Manchester for other cities there are a few computing pre-requisites:
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+- A reasonably powerful computer, e.g. with 8 GB RAM
+- The statistical programming language R installed (we recommend running it in the RStudio editor)
+- The source code of the paper repository, which can be download from `url TBC`
 
-```{r cars}
-summary(cars)
+```{r, eval=FALSE, echo=FALSE}
+required_packages = renv::dependencies()
+renv::snapshot()
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Birmingham
+
+# Leeds
+
+# Nottingham
