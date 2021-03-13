@@ -2,7 +2,9 @@
 title: "Appendix"
 author: "Hussein Mahfouz, Robin Lovelace, Elsa Arcaute"
 date: "13/03/2021"
-output: pdf_document
+output:
+  pdf_document:
+    extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 ---
 
 ```{r setup, include=FALSE}
@@ -18,15 +20,242 @@ To reproduce the results presented for Manchester for other cities there are a f
 - The source code of the paper repository, which can be download from `url TBC`
 
 ```{r, eval=FALSE, echo=FALSE}
+# run these lines to update the snapshot
 required_packages = renv::dependencies()
 renv::snapshot()
 ```
 
+To ensure you have the necessary packages installed, open the `cycle-networks.Rproj` file in RStudio and run the following commands to ensure you have the necessary packages installed:
 
+```{r, eval=FALSE}
+install.packages("renv")
+renv::restore()
+```
+
+The `build.R` script contains all of the necessary steps to reproduce the results for any city in the UK.
+Open this file with the following command and run the code line-by-line.
+
+```{r, eval=FALSE}
+file.edit("R/build.R")
+```
+
+<!-- Todo: make the .zip download work for anyone, e.g. by uploading the data to the osf.io website alongside the preprint. -->
+
+You can select a city to build by executing the following command:
+
+```{r}
+chosen_city <- "Leeds"
+```
+
+Replacing `Leeds` with any other city will make the script work for that city.
+Note: this only works for Local Authority names in England and Wales listed below.
+
+In this script, you choose which city you wish to run the analysis from
+this list of available towns and cities:
+
+    ##   [1] "Barnsley"             "Basildon"             "Basingstoke"         
+    ##   [4] "Bath"                 "Bedford"              "Birkenhead"          
+    ##   [7] "Birmingham"           "Blackburn"            "Blackpool"           
+    ##  [10] "Bolton"               "Bournemouth"          "Bracknell"           
+    ##  [13] "Bradford"             "Brighton and Hove"    "Bristol"             
+    ##  [16] "Burnley"              "Burton upon Trent"    "Bury"                
+    ##  [19] "Cambridge"            "Cardiff"              "Carlisle"            
+    ##  [22] "Chatham"              "Chelmsford"           "Cheltenham"          
+    ##  [25] "Chester"              "Chesterfield"         "Colchester"          
+    ##  [28] "Coventry"             "Crawley"              "Darlington"          
+    ##  [31] "Derby"                "Doncaster"            "Dudley"              
+    ##  [34] "Eastbourne"           "Exeter"               "Gateshead"           
+    ##  [37] "Gillingham"           "Gloucester"           "Grimsby"             
+    ##  [40] "Guildford"            "Halifax"              "Harlow"              
+    ##  [43] "Harrogate"            "Hartlepool"           "Hastings"            
+    ##  [46] "Hemel Hempstead"      "High Wycombe"         "Huddersfield"        
+    ##  [49] "Ipswich"              "Kingston upon Hull"   "Leeds"               
+    ##  [52] "Leicester"            "Lincoln"              "Liverpool"           
+    ##  [55] "London"               "Luton"                "Maidstone"           
+    ##  [58] "Manchester"           "Mansfield"            "Middlesbrough"       
+    ##  [61] "Milton Keynes"        "Newcastle upon Tyne"  "Newcastle-under-Lyme"
+    ##  [64] "Newport"              "Northampton"          "Norwich"             
+    ##  [67] "Nottingham"           "Nuneaton"             "Oldham"              
+    ##  [70] "Oxford"               "Peterborough"         "Plymouth"            
+    ##  [73] "Poole"                "Portsmouth"           "Preston"             
+    ##  [76] "Reading"              "Redditch"             "Rochdale"            
+    ##  [79] "Rotherham"            "Salford"              "Scunthorpe"          
+    ##  [82] "Sheffield"            "Shrewsbury"           "Slough"              
+    ##  [85] "Solihull"             "South Shields"        "Southampton"         
+    ##  [88] "Southend-on-Sea"      "Southport"            "St Albans"           
+    ##  [91] "St Helens"            "Stevenage"            "Stockport"           
+    ##  [94] "Stockton-on-Tees"     "Stoke-on-Trent"       "Sunderland"          
+    ##  [97] "Sutton Coldfield"     "Swansea"              "Swindon"             
+    ## [100] "Telford"              "Wakefield"            "Walsall"             
+    ## [103] "Warrington"           "Watford"              "West Bromwich"       
+    ## [106] "Weston-Super-Mare"    "Wigan"                "Woking"              
+    ## [109] "Wolverhampton"        "Worcester"            "Worthing"            
+    ## [112] "York"
 
 
 # Birmingham
 
+\subsubsection{Potential Demand}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.4\textwidth]{data/Birmingham/Plots/mode_share_increase_vs_performance_smooth_Birmingham} 
+    \caption*{Distribution of Cycling Demand Relative to OD Pair Performance} 
+\end{figure} 
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.85\textwidth]{data/Birmingham/Plots/desire_facet_cycling_Birmingham} 
+    \caption*{Current and Potential Cycling Flow (Birmingham)} 
+\end{figure}
+
+\newpage
+
+\subsubsection{Routing Cycling Flows}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.9\textwidth]{data/Birmingham/Plots/flows_facet_unweighted_Birmingham} 
+    \caption*{Flow Results Based on \textbf{Unweighted} Shortest Paths (Birmingham)} 
+\end{figure}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.9\textwidth]{data/Birmingham/Plots/flows_facet_weighted_Birmingham} 
+    \caption*{Flow Results Based on \textbf{Weighted} Shortest Paths (Birmingham)} 
+\end{figure}
+
+\subsubsection{Algorithm 2 (Utilitarian)}
+
+
+\begin{figure} [H] 
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Birmingham/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column_Birmingham}
+  \caption{\% of Person-Km Satisfied}
+\end{subfigure}
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Birmingham/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column_Birmingham}
+  \caption{\% of Person-Km Satisfied in Each Community}
+\end{subfigure}
+\caption*{Effectiveness of Alg. 2 on Overall and Community-Wide Person-Km Satisfied (Birmingham)}
+\end{figure}
+
+\subsubsection{Algorithm 3 (Egalitarian)}
+
+
+\begin{figure} [H] 
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Birmingham/Plots/Growth_Results/growth_community_4_satisfied_km_all_flow_column_Birmingham}
+  \caption{\% of Person-Km Satisfied}
+\end{subfigure}
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Birmingham/Plots/Growth_Results/growth_community_4_satisfied_km_community_flow_column_Birmingham}
+  \caption{\% of Person-Km Satisfied in Each Community}
+\end{subfigure}
+\caption*{Effectiveness of Alg. 3 on Overall and Community-Wide Person-Km Satisfied (Birmingham)}
+\end{figure}
+
+
+\begin{figure} [H] 
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\includegraphics[width=1\linewidth]{data/Birmingham/Plots/Growth_Results/growth_community_4_priority_all_FLOW_Birmingham}
+\caption*{Results of Alg. 3 (Birmingham)}
+\end{figure}
+
 # Leeds
+
+\subsubsection{Potential Demand}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.4\textwidth]{data/Leeds/Plots/mode_share_increase_vs_performance_smooth_Leeds} 
+    \caption*{Distribution of Cycling Demand Relative to OD Pair Performance} 
+\end{figure} 
+
+<!-- \begin{figure} [H]  -->
+<!--     \centering % puts the image in the horizontal centre of the page -->
+<!--     \captionsetup{font=footnotesize,labelfont=footnotesize} -->
+<!--     \includegraphics[width=.85\textwidth]{data/Leeds/Plots/desire_facet_cycling_Leeds}  -->
+<!--     \caption*{Current and Potential Cycling Flow (Leeds)}  -->
+<!-- \end{figure} -->
+
+\newpage
+
+\subsubsection{Routing Cycling Flows}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.9\textwidth]{data/Leeds/Plots/flows_facet_unweighted_Leeds} 
+    \caption*{Flow Results Based on \textbf{Unweighted} Shortest Paths (Leeds)} 
+\end{figure}
+
+\begin{figure} [H] 
+    \centering % puts the image in the horizontal centre of the page
+    \captionsetup{font=footnotesize,labelfont=footnotesize}
+    \includegraphics[width=.9\textwidth]{data/Leeds/Plots/flows_facet_weighted_Leeds} 
+    \caption*{Flow Results Based on \textbf{Weighted} Shortest Paths (Leeds)} 
+\end{figure}
+
+\subsubsection{Algorithm 2 (Utilitarian)}
+
+
+<!-- \begin{figure} [H]  -->
+<!-- \centering -->
+<!-- \captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions -->
+<!-- \begin{subfigure}{.4\textwidth} -->
+<!--   \centering -->
+<!--   \includegraphics[width=1\linewidth]{data/Leeds/Plots/Growth_Results/growth_existing_infra_satisfied_km_all_flow_column_Leeds} -->
+<!--   \caption{\% of Person-Km Satisfied} -->
+<!-- \end{subfigure} -->
+<!-- \begin{subfigure}{.4\textwidth} -->
+<!--   \centering -->
+<!--   \includegraphics[width=1\linewidth]{data/Leeds/Plots/Growth_Results/growth_existing_infra_satisfied_km_community_flow_column_Leeds} -->
+<!--   \caption{\% of Person-Km Satisfied in Each Community} -->
+<!-- \end{subfigure} -->
+<!-- \caption*{Effectiveness of Alg. 2 on Overall and Community-Wide Person-Km Satisfied (Leeds)} -->
+<!-- \end{figure} -->
+
+\subsubsection{Algorithm 3 (Egalitarian)}
+
+
+\begin{figure} [H]
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Leeds/Plots/Growth_Results/growth_utilitarian_satisfied_km_all_flow_column}
+  \caption{\% of Person-Km Satisfied}
+\end{subfigure}
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{data/Leeds/Plots/Growth_Results/growth_utilitarian_satisfied_km_community_flow_column}
+  \caption{\% of Person-Km Satisfied in Each Community}
+\end{subfigure}
+\caption*{Effectiveness of Alg. 3 on Overall and Community-Wide Person-Km Satisfied (Leeds)}
+\end{figure}
+
+
+\begin{figure} [H] 
+\centering
+\captionsetup{font=footnotesize,labelfont=footnotesize} % size of captions
+\includegraphics[width=1\linewidth]{data/Leeds/Plots/Growth_Results/growth_egalitarian_satisfied_km_community_flow_column}
+\caption*{Results of Alg. 3 (Leeds)}
+\end{figure}
+
 
 # Nottingham
