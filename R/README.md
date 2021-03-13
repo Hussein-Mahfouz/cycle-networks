@@ -9,7 +9,7 @@ explanation of the scripts used, and how the analysis can be reproduced.
 
 The paper can be found in the repo,\[**ADD LINK TO PDF**\]
 
------
+------------------------------------------------------------------------
 
 ## Missing Data
 
@@ -18,11 +18,11 @@ file is neseccary for the scripts to run:
 
 Middle Layer Super Output Areas (December 2011) Boundaries:
 
-  - Source:
+-   Source:
     <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0>
-  - Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\]
+-   Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\]
 
------
+------------------------------------------------------------------------
 
 ## Scripts
 
@@ -94,14 +94,14 @@ task.
 
 This script is used to get the distance and slope between each OD pair
 
-  - Distance: The routed distance using the
+-   Distance: The routed distance using the
     [dodgr](https://atfutures.github.io/dodgr/) package.
-  - Slope: The average slope along the route seperating the OD pair,
+-   Slope: The average slope along the route seperating the OD pair,
     using the [slopes](https://itsleeds.github.io/slopes/) package
 
 #### \_\_*3.0\_potential\_demand.R*
 
-**EDIT THIS\!\!**
+**EDIT THIS!!**
 
 This script is used to estimate where additional cycling demand will
 come from. It uses an uptake function from the Propensity to Cycle Tool
@@ -112,29 +112,17 @@ come from. It uses an uptake function from the Propensity to Cycle Tool
 These three scripts plot the results of \_\_*3.0\_potential\_demand.R* .
 
 <!-- * Compare the distance distribution of existing cycling mode share and potential cycling mode share: -->
-
 <!-- <p float="left"> -->
-
 <!--   <img src="../data/Manchester/Plots/histogram_distance_all_vs_cycling.png" width="250" /> -->
-
 <!--   <img src="../data/Manchester/Plots/histogram_distance_all_vs_cycling_potential.png" width="250" />  -->
-
 <!--   <img src="../data/Manchester/Plots/histogram_distance_cycling_potential_vs_current.png" width="250" /> -->
-
 <!-- </p> -->
-
 <!-- * Vizualize Existing and Potential Cycling Flow as Desire Lines -->
-
 <!-- ![desire lines](../data/Manchester/Plots/desire_facet_cycling.png) -->
-
 <!-- * Examine where potential cycling demand is assigned.  -->
-
 <!-- In the figure below, the x axis is a ratio of the cycling mode share of the OD pair to its expected cycling mode share. Looking at the resulting cycling mode share, we see that OD pairs between 2-8km have the highest mode share (consistent with bell-shaped distribution of cycling vs distance), and that mode share increase is highest for OD pairs that have lower than expected cycling mode shares. -->
-
 <!-- <p float="center"> -->
-
 <!--   <img src="../data/Manchester/Plots/mode_share_increase_vs_performance_smooth_Manchester.png" width="400" /> -->
-
 <!-- </p> -->
 
 #### \_\_*x\_dodgr\_weighting\_profiles.R*
@@ -171,9 +159,9 @@ This script is used to identify all road segments that have segregated
 cycling lanes. This includes all roads that match any of the 3 following
 tags:
 
-  - highway = cycleway  
-  - cycleway = track
-  - bicycle = designated
+-   highway = cycleway  
+-   cycleway = track
+-   bicycle = designated
 
 #### \_\_*6.0\_comparing\_weighting\_profiles.R*
 
@@ -183,7 +171,6 @@ comparing the unweighted shortest paths to the weighted shortest paths
 <!-- The aggregated flow shows us which road types are used, and it is clear that cycleways are not utilized unless the road network is weighted to create a hierarchy of road type preference.  -->
 
 <!-- ![Unweighted Routing](../data/Manchester/Plots/flows_facet_unweighted.png) -->
-
 <!-- ![Weighted Routing](../data/Manchester/Plots/flows_facet_weighted.png) -->
 
 #### \_\_*7.0\_community\_detection.R*
@@ -198,7 +185,6 @@ and then each road segment on the network is assigned to the same
 community as the MSOA centroid closest to it.
 
 <!-- The results for Manchester are shown below  -->
-
 <!-- ![Community Detection](../data/Manchester/Plots/communities_alternative_Manchester.png) -->
 
 #### \_\_*8.0\_growing\_a\_network.R*
@@ -226,21 +212,13 @@ Logic:
     threshold is met
 
 <!-- Results:  -->
-
 <!-- <p float="left"> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_all_flow_column.png" width="350" /> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_community_flow_column.png" width="350" />  -->
-
 <!-- </p> -->
-
 <!-- The results show the priority of each road segment (Roads are grouped into 100km groups for vizualization purposes) -->
-
 <!-- <p float="center"> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_utilitarian_priority_all_FLOW.png" width="450" /> -->
-
 <!-- </p> -->
 
 #### \_\_*8.2\_plot\_network\_growth\_community.R*
@@ -265,35 +243,19 @@ Logic:
     threshold is met
 
 <!-- Results:  -->
-
 <!-- <p float="left"> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_all_flow_column.png" width="350" /> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_community_flow_column.png" width="350" />  -->
-
 <!-- </p> -->
-
 <!-- Priority of each road segment, and utilization of different OSM road types: -->
-
 <!-- <p float="left"> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_egalitarian_priority_all_FLOW.png" width="300" /> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png" width="300" />  -->
-
 <!-- </p> -->
-
 <!-- ##### Comparing Connectivity of Algorithm 2 and 3 -->
-
 <!-- We check the number of connected components and the size of the Largest Connected Component as road segments are added to the solution (the components are the road segments). The initial number of components depends on the existing bicycle network of the city. For Manchester, we can see that the existing bicycle network has over 120 disconnected components (Remember we are only looking at segregated bicycle infrastructure, not painted bicycle lanes). -->
-
 <!-- <p float="left"> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png" width="350" /> -->
-
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png" width="350" />  -->
-
 <!-- </p> -->
-
 <!-- The algorithms seem to provide comparable connectivity gains.  -->

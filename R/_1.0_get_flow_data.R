@@ -16,7 +16,7 @@ unique(city_names$city)
 no_msoas <- city_names %>% dplyr::group_by(city) %>% dplyr::tally()
 
 ##### CHOOSE YOU CITY 
-chosen_city <- "Manchester"
+if(!exists("chosen_city")) chosen_city <- "Manchester"
 #create a directory to store data related to this city (does nothing if directory already exists)
 dir.create(paste0("data/", chosen_city), showWarnings = FALSE)
 # create sub-directory to save plots as well

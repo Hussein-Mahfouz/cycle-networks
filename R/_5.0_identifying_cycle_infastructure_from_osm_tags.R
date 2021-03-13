@@ -68,7 +68,7 @@ maxspeed <- streetnet2 %>%
 ########
 
 # Read in the graph with the road network and flows
-graph_sf <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.RDS"))
+graph_sf <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_weighted.Rds"))
 
 # this is all road segments with bicycle == 'designated'
 cycle_designated <- streetnet2 %>% 
@@ -273,7 +273,7 @@ infra_exists <- function(graph, network){
 }
 
 # Read in the other graphs, add column for cycling infrastrucure, then overwrite
-graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.RDS"))
+graph_sf_unweight <- readRDS(paste0("data/", chosen_city,"/graph_with_flows_unweighted.Rds"))
 graph_sf_unweight <- infra_exists(graph=graph_sf_unweight, network=streetnet2)
 saveRDS(graph_sf_unweight, file = paste0("data/", chosen_city, "/graph_with_flows_unweighted.Rds"))
 
