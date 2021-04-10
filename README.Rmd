@@ -1,5 +1,5 @@
 ---
-title: Road Segment Prioritization for Bicycle Infrastructure
+title: A Road Segment Prioritization Approach for Cycling Infrastructure
 date: "`r Sys.Date()`"
 geometry: margin=2cm
 bibliography:
@@ -8,16 +8,19 @@ bibliography:
 #linenumbers: true
 numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritisation of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritisation in previous research, this is the first time that they have been combined, creating an integrated road segment prioritisation approach. The approach, which can be applied to other cities, as shown in the Appendix, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
-# keywords: "cycling, low-traffic neighborhoods, potential demand, routing"
+# keywords: "cycling networks, low-traffic neighborhoods, potential demand, routing"
 output:
   # bookdown::github_document2:
   bookdown::pdf_document2:
   # # bookdown::word_document2:
+      highlight: null   # to remove code highlighting in r chunks
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
 editor_options: 
   markdown: 
     wrap: 72
+# elsevier style for referencing (from https://github.com/citation-style-language/styles)
+csl: elsevier-harvard.csl
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -161,10 +164,8 @@ In this paper, continuity is analysed by looking at the connectivity of
 the network through the graph-theoretic concept of *connected
 components*. @natera2019data for example,
 study the existing cycling network in terms of its disconnected
-components. They propose two different algorithms to connect disconnected
-components by their most critical links and, in doing so, measure the
-size of the growth of the largest connected component as a function of
-the kilometers of network added. The concept of connected components is
+components. They propose two different algorithms to connect disconnected components; one connects the two largest components, and the other connects the largest component to its nearest neighbor. By measuring the growth of the largest connected component as a function of the kilometers of network added, they determine that these approaches are more effective at improving cycling network connectivity than random allocation of cycling infrastructure.
+The concept of connected components is
 also at the core of the methodology proposed by @olmos2020data. After
 routing the cycling demand onto the network links, they use percolation
 theory to filter out the links based on the aggregate flow passing through them, varying the flow threshold for
@@ -292,7 +293,7 @@ the following parameters:
 
 ```{=tex}
 \begin{align}\label{eq:pcteqn}
-     \logit(C_{p}) = & \alpha + \beta_1 d + \beta_2 \sqrt{d} + \beta_3 d^2 + \beta_4 s + \beta_5 ds + \beta_6 \sqrt{d}s 
+     logit(C_{p}) = & \alpha + \beta_1 d + \beta_2 \sqrt{d} + \beta_3 d^2 + \beta_4 s + \beta_5 ds + \beta_6 \sqrt{d}s 
 \end{align}
 ```
 
@@ -312,15 +313,19 @@ going back down for longer distances (see Figures
 
 <!-- note: could be a joint table/map showing sample - if reviewers request -->
 
-```{r potdemhistograms, fig.cap="Distribution of Potential Cycling Demand", out.width="30%", fig.show='hold', echo=FALSE}
-knitr::include_graphics(c(
-  "data/Manchester/Plots/histogram_distance_all_vs_cycling.png",
-  "data/Manchester/Plots/histogram_distance_all_vs_cycling_potential.png",
-  "data/Manchester/Plots/histogram_distance_cycling_potential_vs_current.png"
-))
+<!-- ```{r potdemhistograms, fig.cap="Distribution of potential cycling demand", out.width="30%", fig.show='hold', echo=FALSE} -->
+<!-- knitr::include_graphics(c( -->
+<!--   "data/Manchester/Plots/histogram_distance_all_vs_cycling.png", -->
+<!--   "data/Manchester/Plots/histogram_distance_all_vs_cycling_potential.png", -->
+<!--   "data/Manchester/Plots/histogram_distance_cycling_potential_vs_current.png" -->
+<!-- )) -->
+<!-- ``` -->
+
+```{r potdemhistograms, fig.cap="Distribution of potential cycling demand", out.width="100%", fig.show='hold', fig.align="center", echo=FALSE}
+knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling_potential_current_all.png")
 ```
 
-```{r desirefacetcycling, fig.cap="Current and Potential Cycling Demand", out.width="60%", fig.pos="H", fig.align="center", echo=FALSE}
+```{r desirefacetcycling, fig.cap="Current and potential cycling demand", out.width="60%", fig.pos="H", fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
@@ -347,7 +352,7 @@ external and therefore inflexible routing services.
 <!-- This expands on the work of @mauttone2017bicycle, by going beyond simply favoring roads with existing cycling infrastructure to creating a hierarchy of road preference. -->
 
 \begin{longtable}{lll}
-\caption{OSM Road Types}
+\caption{OSM road types}
 \label{table:osmroadtypes}\\
 \textbf{OSM Road Type } & \textbf{Description}                                                                                                                                            & \textbf{UK Equivalent}                                                                                                   \endfirsthead 
 \hline
@@ -430,7 +435,7 @@ favoring roads with existing cycling infrastructure.
 <!-- ``` -->
 
 \begin{longtable}{lrrr}
-\caption{Weighting Profiles}
+\caption{Weighting profiles}
 \label{table:weightprofiles}\\
 \multirow{2}{*}{\textbf{OSM Road Type}} & \multicolumn{3}{c}{\textbf{Weighting Profile}}                                                 \\*
                                         & \multicolumn{1}{l}{\textit{Unweighted}} & \multicolumn{1}{l}{\textit{Weighted}} & \multicolumn{1}{l}{\textit{Weighted\_2}}  \endfirsthead
@@ -457,7 +462,8 @@ routing is done based on weighted shortest paths, with the distance
 along each road segment being divided by a factor to obtain the weighted
 distance for routing. It is more intuitive to multiply when weighting a
 network, but the dodgr package divides by numbers between 0 and 1, which
-achieves the same result. For the sake of reproducibility, we stick to
+achieves the same result (road types with a weight of 0 are not routed on). 
+For the sake of reproducibility, we stick to
 the convention used in the package.]:
 
 \begin{equation}\label{eq:weight_distance}
@@ -487,11 +493,11 @@ demand is routed through them. In the weighted network, cycleways are
 much better utilized, and the majority of the cycling demand passes
 through tertiary roads, as expected.
 
-```{r flowsfacetunweighted, fig.cap="Flow Results Based on Unweighted Shortest Paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
+```{r flowsfacetunweighted, fig.cap="Flow results based on unweighted shortest paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/flows_facet_unweighted_Manchester.png")
 ```
 
-```{r flowsfacetweighted, fig.cap="Flow Results Based on Weighted Shortest Paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
+```{r flowsfacetweighted, fig.cap="Flow results based on weighted shortest paths (Manchester)", out.width="90%", fig.show='hold', echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/flows_facet_weighted_Manchester.png")
 ```
 
@@ -551,7 +557,7 @@ the Department for Transport acknowledges that minimal segregated
 stretches of bicycle lanes on main roads will be necessary to avoid
 circuitous cycling networks [@departmentgearchange2020].
 
-```{r boxplotcircuity, fig.cap="Effect of banning cyclists from trunk and primary roads for all OD pairs (Manchester)", out.width="35%", fig.show='hold', echo=FALSE}
+```{r boxplotcircuity, fig.cap="Effect of banning cyclists from trunk and primary roads for all OD pairs (Manchester)", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
 ```
 
@@ -639,7 +645,7 @@ delineate such a split; cyclists are limited in their commuting distance
 (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more
 likely to have a local catchment area of cyclists.
 
-```{r cyclinghistmanc, fig.cap="Cycling Commuting Distance - Manchester (2011 Census Data)", out.width="30%", fig.show='hold', echo=FALSE}
+```{r cyclinghistmanc, fig.cap="Cycling commuting distance - Manchester (2011 census data)", out.width="30%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
 ```
 
@@ -670,6 +676,8 @@ communities and one small one (Figure \@ref(fig:communitiesmanchester)).
 ```{r communitiesmanchester, fig.cap="Communities based on potential cycling demand between MSOAs (Manchester)", out.width="75%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
 ```
+\  
+<!-- this prevents text from floating above figure -->
 
 ## Algorithm 1: Utilitarian Expansion
 
@@ -680,7 +688,7 @@ The algorithm logic is as follows:
 3. Select neighboring link with highest flow and add it to the solution
 4. Repeat steps 2 \& 3 until all flow is satisfied or investment threshold is met -->
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, results='asis'}
 1. Identify all links that have segregated cycling infrastructure and add them to the 
    initial solution
 2. Identify all links that neighbor links in the current solution
@@ -702,19 +710,19 @@ explained in Section \@ref(ethical-underpinnings-and-proposed-approach). This al
 the ideal of fair distribution by ensuring that investment is distributed between the defined communities. 
 This is done using the following logic:
 
-<!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution
-2. Identify all links that neighbor links in the current solution
-3. Select *from each community* one neighboring link with highest flow and add it to the solution
-4. If there are no more neighboring links in a community, select the link with the highest flow in that community, regardless of connectivity, and add it to the solution
-5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met -->
+<!-- 1. Identify all links that have segregated cycling infrastructure and add them to the initial solution -->
+<!-- 2. Identify all links that neighbor links in the current solution -->
+<!-- 3. Select *from each community* one neighboring link with highest flow and add it to the solution -->
+<!-- 4. If there are no more neighboring links in a community, select the link with the highest flow in that community, regardless of connectivity, and add it to the solution -->
+<!-- 5. Repeat steps 2, 3 \& 4 until all flow is satisfied or investment threshold is met  -->
 
 ```{r, eval = FALSE}
-1. Identify all links that have segregated cycling infrastructure and add them to the initial 
+1. Identify all links that have segregated cycling infrastructure and add them to the initial
    solution
 2. Identify all links that neighbor links in the current solution
-3. Select from each community one neighboring link with highest flow and add it to the 
+3. Select from each community one neighboring link with highest flow and add it to the
    solution
-4. If there are no more neighboring links in a community, select the link with the highest 
+4. If there are no more neighboring links in a community, select the link with the highest
    flow in that community, regardless of connectivity, and add it to the solution
 5. Repeat steps 2, 3 and 4 until all flow is satisfied or investment threshold is met
 
@@ -754,7 +762,7 @@ table <- table %>% sf::st_drop_geometry() %>%
             `Person-Km (%)` = round(sum(person_km_perc),1))
 
 knitr::kable(table,
-             caption = "Total Person-Km in Different Communities (Manchester)") %>%
+             caption = "Total person-km in different communities (Manchester)") %>%
   kable_styling(latex_options = "hold_position")
        
 ```
@@ -770,7 +778,7 @@ city-wide % of person-km satisfied. Comparing both algorithms, we can
 see that Algorithm 1 provides only marginally quicker city-wide gains
 than Algorithm 2.
 
-```{r growthtotal, fig.cap="Comparing Overall (Dashed) and Community Level Person-Km Satisfied (Manchester)", out.width="35%", fig.show='hold', fig.align = "center", echo=FALSE}
+```{r growthtotal, fig.cap="Comparing overall (dashed) and community level person-km satisfied (Manchester)", out.width="35%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_both_flow_column.png"
@@ -791,7 +799,7 @@ shows that most of the flow will be on residential and tertiary roads,
 as expected from the weighting profile defined in Table
 \@ref(table:weightprofiles).
 
-```{r growth3MapandBar, fig.cap="Road Segment Priority (left), disaggregated by road type (right) - Egalitarian Growth", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
+```{r growth3MapandBar, fig.cap="Road segment priority (left), disaggregated by road type (right) - egalitarian growth", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_priority_all_FLOW.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"
@@ -813,7 +821,7 @@ Component in the proposed bicycle network (Figure
 \@ref(fig:componentsandGCC)). Here however, we find that there is little
 difference between both Algorithms.
 
-```{r componentsandGCC, fig.cap="Network Characteristics", out.width="30%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
+```{r componentsandGCC, fig.cap="Network characteristics", out.width="30%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png",
   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png"
@@ -845,7 +853,8 @@ OD data (from the national census in this case) are
 needed, opening up the possibility of deploying the approach in other
 cities^[The results are easily reproducible for all UK cities, and can
 also be reproduced for cities elsewhere given the availability of
-commuter data. For instructions on reproducing the results shown in this
+commuter data. The appendix shows the results for 3 other UK cities: Birmingham, Leeds and Nottingham. 
+For instructions on reproducing the results shown in this
 paper, see the **README** file in the R folder of the .zip file that
 accompanies this paper (to be released as open source software when the
 paper is published).].

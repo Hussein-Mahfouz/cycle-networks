@@ -1,8 +1,9 @@
-library(dplyr)
+library(tidyverse)
 library(pct)
 library(stplanr)
 library(tmap)
 library(lwgeom)
+library(sf)
 
 # This script depends on data from Script 1, 2 and 3
 
@@ -122,7 +123,12 @@ tm_shape(desire_cycling_long) +
             legend.outside = TRUE,
             legend.outside.position = 'bottom',
             frame = FALSE) +
-  tm_scale_bar(color.dark = "gray60") -> p
+  tm_scale_bar(color.dark = "gray60") + 
+  tm_compass(type = "arrow",
+             size = 1,
+             show.labels = 0,
+             position = c("right","top"),
+             color.dark = "gray60") -> p
 
 #save
 tmap_save(tm = p, filename = paste0("data/", chosen_city,"/Plots/desire_facet_cycling.png"), 

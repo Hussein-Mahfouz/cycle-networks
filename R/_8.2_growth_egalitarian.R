@@ -218,7 +218,12 @@ tm_shape(grow_egal_c) +
             fontfamily = 'Georgia',
             #legend.position = c("right", "bottom"),
             frame = FALSE) +
-  tm_scale_bar(color.dark = "gray60") +
+  tm_scale_bar(color.dark = "gray60") + 
+  tm_compass(type = "arrow",
+             size = 1,
+             show.labels = 0,
+             position = c("left","bottom"),
+             color.dark = "gray60") +
   # add legend for the existing cycling infrastructure
   tm_add_legend(type = "line", labels = 'Existing Cycling Infrastructure', col = 'firebrick2', lwd = 2) -> p
 

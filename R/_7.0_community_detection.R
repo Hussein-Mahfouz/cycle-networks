@@ -155,7 +155,12 @@ tm_shape(road_segments) +
   tm_layout(fontfamily = 'Georgia',
             legend.show =FALSE,
             frame = FALSE) +
-  tm_scale_bar(color.dark = "gray60") -> tm2
+  tm_scale_bar(color.dark = "gray60") + 
+  tm_compass(type = "arrow",
+             size = 1,
+             show.labels = 0,
+             position = c("right","top"),
+             color.dark = "gray60") -> tm2
 
 # 3.3  get legend only for facet map
 tm_shape(road_segments) +
