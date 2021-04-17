@@ -1,6 +1,6 @@
 ---
 title: "Appendix"
-author: "Hussein Mahfouz, Robin Lovelace, Elsa Arcaute"
+#author: "Hussein Mahfouz, Robin Lovelace, Elsa Arcaute"
 date: "13/03/2021"
 geometry: margin=1.5cm
 output:

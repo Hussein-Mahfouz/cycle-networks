@@ -1,5 +1,6 @@
 library(tidyverse)
 library(waffle)
+library(patchwork)
 
 # read in the data
 flow <- readr::read_csv(paste0("data/",chosen_city,"/flows_for_desire_lines.csv"))
@@ -203,12 +204,81 @@ ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_cycling_potential_
 
 
 
+
+# --- Create a Facet Plot Using Patchwork 
+
+
+### current cycling trips vs all commuter trips
+cols <- c("All" = "grey60", "Bicycle (Current)" = "darkred")
+ggplot(histogram, aes(x=dist)) + 
+  geom_histogram(data=flow_long_all, color = 'grey50', aes(fill = "All")) +
+  geom_histogram(data= flow_long_bike, color = 'grey50', aes(fill = "Bicycle (Current)")) +
+  scale_fill_manual(name = "Mode", values = cols) +
+  labs(title = "Current Cycling Trips", 
+       # keep only the y axis (this is the left-most plot)
+       x="", y = "No. of Commuters", color = "Legend") + 
+  theme(axis.title=element_text(size=15)) -> a
+
+
+### potential cycling trips vs all commuter trips
+cols <- c("All" = "grey60", "Bicycle (Potential)" = "darkgreen")
+ggplot(histogram, aes(x=dist)) + 
+  geom_histogram(data=flow_long_all, color = 'grey50', aes(fill = "All")) +
+  geom_histogram(data= flow_long_potential, color = 'grey50', aes(fill = "Bicycle (Potential)")) +
+  scale_fill_manual(name = "Mode", values = cols) +
+  labs(title = "Potential Cycling Trips", 
+       # keep only the x axis (this is the center plot)
+       x="Commuting Distance (km)", y = "", color = "Legend")  + 
+  theme(axis.title=element_text(size=15)) -> b
+
+
+### current cycling trips vs potential cycling trips
+cols <- c("Bicycle (Potential)" = "darkgreen", "Bicycle (Current)" = "darkred")
+ggplot(histogram, aes(x=dist)) + 
+  geom_histogram(data=flow_long_potential, color = 'grey50', aes(fill = "Bicycle (Potential)")) +
+  geom_histogram(data= flow_long_bike, color = 'grey50', aes(fill = "Bicycle (Current)")) +
+  scale_fill_manual(name = "", values = cols) +
+  labs(title = "Current vs Potential Cycling Trips", 
+       # remove both axis labels
+       x="", y = "", color = "Legend") -> c
+
+### Create a new plot just to extract its legend for the facet plot (It has :All, Current, Potential)
+cols <- c("All" = "grey60", "Bicycle (Potential)" = "darkgreen", "Bicycle (Current)" = "darkred")
+ggplot(histogram, aes(x=dist)) + 
+  geom_histogram(data=flow_long_all, color = 'grey50', aes(fill = "All")) +
+  geom_histogram(data=flow_long_potential, color = 'grey50', aes(fill = "Bicycle (Potential)")) +
+  geom_histogram(data= flow_long_bike, color = 'grey50', aes(fill = "Bicycle (Current)")) +
+  scale_fill_manual(name = "Mode", values = cols) +
+  labs(title = "Current vs Potential Cycling Trips", 
+       x="Commuting Distance (km)", y = "No. of Commuters", color = "Legend") + 
+  theme(legend.title=element_text(size=15), 
+        legend.text=element_text(size=12))-> d
+
+
+# extract legend # https://stackoverflow.com/questions/12539348/ggplot-separate-legend-and-plot
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  legend
+}
+# use function to extract legend 
+legend <- g_legend(d)
+
+# arrange the plots (remove all legends and add the extracted legend)
+
+arranged_plot <- (a + theme(legend.position = "none") | b + theme(legend.position = "none") | 
+                  c + theme(legend.position = "none") | legend) + 
+  # relative size of plots
+  plot_layout(widths = c(1, 1, 1, 0.5))
+
+# save
+ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_cycling_potential_current_all.png"), width = 16, height = 6)
+
+
+
+
 rm(flow, flow_pie, flow_waffle, flow_plot, flow_long_all, flow_long_active, flow_long_bike, flow_long_motor, flow_long_private, 
-   flow_long_sustainable, flow_long_potential, histogram, cols)
-
-
-
-
-
+   flow_long_sustainable, flow_long_potential, histogram, cols, a, b, c, d, legend, g_legend, arranged_plot)
 
 

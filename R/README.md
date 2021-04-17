@@ -1,20 +1,21 @@
 Reproducibility Instructions
 ================
-18/8/2020
 
 This repository contains the code used for the paper. Below is an
-explanation of the scripts used, and how the analysis can be reproduced.
+explanation of the scripts used, and how the analysis can be reproduced
+for other cities.
 
 ## Paper
 
-The paper can be found in the repo,\[**ADD LINK TO PDF**\]
+The paper can be found in the repo,
+[here](https://github.com/Hussein-Mahfouz/cycle-networks/blob/main/README.pdf)
 
 ------------------------------------------------------------------------
 
 ## Missing Data
 
 There is one file that cannot be synced to github due to its size. This
-file is neseccary for the scripts to run:
+file is necessary for the scripts to run:
 
 Middle Layer Super Output Areas (December 2011) Boundaries:
 
@@ -24,10 +25,51 @@ Middle Layer Super Output Areas (December 2011) Boundaries:
 
 ------------------------------------------------------------------------
 
+## Reproducing the Results for Other Cities
+
+To reproduce the results presented for other cities in the UK there are
+a few computing pre-requisites:
+
+-   A reasonably powerful computer, e.g. with 8 GB RAM
+-   The statistical programming language R installed (we recommend
+    running it in the RStudio editor)
+
+To ensure you have the necessary packages installed, open the
+`cycle-networks.Rproj` file in RStudio and run the following commands:
+
+``` r
+install.packages("renv")
+renv::restore()
+```
+
+The `build.R` script contains all of the necessary steps to reproduce
+the results for any city in the UK. Open this file with the following
+command and run the code line-by-line.
+
+``` r
+file.edit("R/build.R")
+```
+
+<!-- Todo: make the .zip download work for anyone, e.g. by uploading the data to the osf.io website alongside the preprint. -->
+
+You can select a city to build by executing the following command:
+
+``` r
+chosen_city <- "Leeds"
+```
+
+Replacing `Leeds` with any other city will make the script work for that
+city. Note: this only works for Local Authority names in England and
+Wales listed below.
+
 ## Scripts
 
-The scripts should be run in the order they are numbered in (and listed
-in here). The only exception is \_x\_dodgr\_weighting\_profiles.R.
+Below is a description of all the scripts used to run the analysis. They
+are all sourced in the `build.R` script, but a description of all the
+scripts/components should allow any part of the analysis to be improved
+
+The scripts are run in the order they are numbered in (and listed in
+here). The only exception is \_x\_dodgr\_weighting\_profiles.R.
 
 #### \_\_*1.0\_get\_flow\_data.R*
 
@@ -149,9 +191,9 @@ These weighting profiles are used in script
 
 #### \_\_*4.0\_aggregating\_flows.R*
 
-This script uses the The [dodgr](https://atfutures.github.io/dodgr/)
-package is used to route potential cycling demand onto the road network.
-This is done for the different weighting profiles used in the analysis
+This script uses the [dodgr](https://atfutures.github.io/dodgr/) package
+to route potential cycling demand onto the road network. This is done
+for the different weighting profiles used in the analysis
 
 #### \_\_*5.0\_identifying\_cycle\_infastructure\_from\_osm\_tags.R*
 
