@@ -142,7 +142,7 @@ ggplot(data=grow_util_c, mapping=aes(x=dist_c, y = perc_person_km_comm_c)) +
   ggtitle("Algorithm 1 (Utilitarian)") +
   labs(x = "Total Length of Investment (km)", y = "% of person km satisfied within community",
        subtitle="Segments Prioritized Based On **Flow**") +
-  theme_minimal() +
+  theme_minimal(base_size = 13) +
   theme(plot.title = element_text(size = 14)) +
   theme(plot.subtitle = element_markdown(size = 10)) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 

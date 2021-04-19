@@ -100,7 +100,7 @@ flow_long_bike$dist <- flow_long_bike$dist / 1000
 
 ggplot(flow_long_bike, aes(x = dist)) + 
   geom_histogram(color = "black", alpha = 0.4, binwidth = 1) +
-  theme_minimal() +
+  theme_minimal(base_size = 13) +
   labs(title = "Trips Made By Bicycle", x="Commuting Distance (km)", y = "No. of Commuters")
 
 ggsave(paste0("data/", chosen_city,"/Plots/histogram_distance_cycling.png"))

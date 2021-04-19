@@ -1,7 +1,9 @@
 library(sf)
 library(tidyverse)
 library(ggtext)
+library(patchwork)
 library(tmap)
+
 
 graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
 
@@ -132,7 +134,7 @@ ggplot(data=grow_egal_c, mapping=aes(x=dist_c, y = perc_person_km_comm_c)) +
   ggtitle("Algorithm 2 (Egalitarian)") +
   labs(x = "Total Length of Investment (km)", y = "% of person km satisfied within community",
        subtitle="Segments Prioritized Based On **Flow**") +
-  theme_minimal() +
+  theme_minimal(base_size = 13) +
   theme(plot.title = element_text(size = 14)) +
   theme(plot.subtitle = element_markdown(size = 10)) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) + 
@@ -179,14 +181,15 @@ grow_egal_c %>% st_drop_geometry() %>%
 ggplot(data=p , aes(x=highway, y=dist, fill = distance_groups)) +
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_fill_brewer(palette = "Blues", direction=-1) +
-  ggtitle("Investment on Different Highway Types") +
-  labs(x = "Highway Type", y = "Length (km)", fill = "Investment Priority \n(km groups)") +
+  ggtitle("Investment on Different Road Types") +
+  labs(x = "Road Type", y = "Length (km)", fill = "Investment Priority \n(km groups)") +
   theme_minimal() +
   # edit angle of text, hjust argument so that text stays below plot AND center plot title
   theme(axis.text.x = element_text(angle=50, hjust=1), plot.title = element_text(hjust = 0.5)) +
   coord_flip()
 
-ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"))
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"),
+       width = 15, height = 18, units = "cm")
 
 ###### MAP #####
 
@@ -322,10 +325,10 @@ ggplot(data=components_util_egal,
        title = "Connectivity",
        #subtitle = chosen_city,
        color = "") +
-  theme_minimal() +
+  theme_minimal(base_size = 13) +
   scale_fill_discrete(labels = c("Algorithm 1 (Utilitarian)", "Algorithm 2 (Egalitarian)")) +
   theme(plot.subtitle = element_markdown(size =12),
-        legend.key.height=unit(1, "cm")) # spacing out legend keys
+        legend.key.height=unit(1, "cm")) -> comp_plot # spacing out legend keys
 
 ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_util_egal_components_number_comparison", chosen_city, ".png"))
 
@@ -337,13 +340,18 @@ ggplot(data=components_util_egal ,
   labs(x = "Length of Investment (km)", y = "% of Edges in LCC",
        title= "Size of Largest Connected Component (LCC)",
        color = "") +
-  theme_minimal() +
+  theme_minimal(base_size = 13) +
   scale_fill_discrete(labels = c("Algorithm 1 (Utilitarian)", "Algorithm 2 (Egalitarian)")) +
   theme(plot.subtitle = element_markdown(size = 12),
-        legend.key.height=unit(1, "cm")) # spacing out legend keys)
+        legend.key.height=unit(1, "cm")) -> gcc_plot # spacing out legend keys)
 
 ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_util_egal_components_gcc_comparison", chosen_city, ".png"))
 
+# use patchwork to keep one common legend
+comp_plot + gcc_plot + plot_layout(guides = 'collect')
+
+ggsave(paste0("data/", chosen_city,"/Plots/Growth_Results/growth_util_egal_components_gcc_components_together_", chosen_city, ".png"),
+       width = 30, height = 18, units = "cm")
 
 # clear environment 
 rm(grow_egal, grow_egal_c, grow_egal_c_100, initial_perc_satisfied_all, initial_perc_satisfied_comm, 

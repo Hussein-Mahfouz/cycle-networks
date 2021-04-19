@@ -1,6 +1,6 @@
 ---
 title: A Road Segment Prioritization Approach for Cycling Infrastructure
-date: "`r Sys.Date()`"
+#date: "`r Sys.Date()`"
 geometry: margin=2cm
 bibliography:
   - mybibfile.bib
@@ -325,7 +325,7 @@ going back down for longer distances (see Figures
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling_potential_current_all.png")
 ```
 
-```{r desirefacetcycling, fig.cap="Current and potential cycling demand", out.width="60%", fig.pos="H", fig.align="center", echo=FALSE}
+```{r desirefacetcycling, fig.cap="Current and potential cycling demand", out.width="65%", fig.pos="H", fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/desire_facet_cycling.png")
 ```
 
@@ -557,7 +557,7 @@ the Department for Transport acknowledges that minimal segregated
 stretches of bicycle lanes on main roads will be necessary to avoid
 circuitous cycling networks [@departmentgearchange2020].
 
-```{r boxplotcircuity, fig.cap="Effect of banning cyclists from trunk and primary roads for all OD pairs (Manchester)", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
+```{r boxplotcircuity, fig.cap="Effect of banning cyclists from trunk and primary roads for all OD pairs (Manchester)", out.width="50%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/boxplot_weighted_unweighted_distances.png")
 ```
 
@@ -645,7 +645,7 @@ delineate such a split; cyclists are limited in their commuting distance
 (see Figure \@ref(fig:cyclinghistmanc)), and so trip attractors are more
 likely to have a local catchment area of cyclists.
 
-```{r cyclinghistmanc, fig.cap="Cycling commuting distance - Manchester (2011 census data)", out.width="30%", fig.show='hold', fig.align = "center", echo=FALSE}
+```{r cyclinghistmanc, fig.cap="Cycling commuting distance - Manchester (2011 census data)", out.width="40%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling.png")
 ```
 
@@ -673,7 +673,7 @@ carried out:
 The results show that Manchester can be split into four large
 communities and one small one (Figure \@ref(fig:communitiesmanchester)).
 
-```{r communitiesmanchester, fig.cap="Communities based on potential cycling demand between MSOAs (Manchester)", out.width="75%", fig.show='hold', fig.align = "center", echo=FALSE}
+```{r communitiesmanchester, fig.cap="Communities based on potential cycling demand between MSOAs (Manchester)", out.width="80%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/communities_alternative_Manchester.png")
 ```
 \  
@@ -778,7 +778,7 @@ city-wide % of person-km satisfied. Comparing both algorithms, we can
 see that Algorithm 1 provides only marginally quicker city-wide gains
 than Algorithm 2.
 
-```{r growthtotal, fig.cap="Comparing overall (dashed) and community level person-km satisfied (Manchester)", out.width="35%", fig.show='hold', fig.align = "center", echo=FALSE}
+```{r growthtotal, fig.cap="Comparing overall (dashed) and community level person-km satisfied (Manchester)", out.width="48%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_utilitarian_satisfied_km_both_flow_column.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_satisfied_km_both_flow_column.png"
@@ -799,11 +799,12 @@ shows that most of the flow will be on residential and tertiary roads,
 as expected from the weighting profile defined in Table
 \@ref(table:weightprofiles).
 
-```{r growth3MapandBar, fig.cap="Road segment priority (left), disaggregated by road type (right) - egalitarian growth", out.width="35%", fig.show='hold', fig.align="center", echo=FALSE}
+```{r growth3MapandBar, fig.cap="Road segment priority (left), disaggregated by road type (right) - egalitarian growth", out.width="45%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics(c(
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_priority_all_FLOW.png",
   "data/Manchester/Plots/Growth_Results/growth_egalitarian_investment_highways_flow.png"
 ))
+
 ```
 
 ## Connectivity
@@ -821,11 +822,13 @@ Component in the proposed bicycle network (Figure
 \@ref(fig:componentsandGCC)). Here however, we find that there is little
 difference between both Algorithms.
 
-```{r componentsandGCC, fig.cap="Network characteristics", out.width="30%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
-knitr::include_graphics(c(
-  "data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png",
-  "data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png"
-))
+```{r componentsandGCC, fig.cap="Network characteristics", out.width="85%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
+# knitr::include_graphics(c(
+#   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_number_comparisonManchester.png",
+#   "data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_comparisonManchester.png"
+# ))
+knitr::include_graphics("data/Manchester/Plots/Growth_Results/growth_util_egal_components_gcc_components_together_Manchester.png")
+
 ```
 
 Overall, the improved distribution of investment shown by Algorithm 2 does not seem to come at the cost 

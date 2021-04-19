@@ -287,12 +287,12 @@ dist_mat_all_box %>%
   filter(value <= 3) %>%   # because there are a few very large values that ruin the scale of the plot
 ggplot(aes(value, circuity)) + 
   geom_boxplot(outlier.alpha = 0.5) +
-  scale_x_continuous(name = 'Distance Relative to Unweighted Shortest Path (Ratio)', 
+  scale_x_continuous(name = 'Distance Relative to Unweighted \nShortest Path (Ratio)', 
                      breaks = seq(1, 3, by = 0.2)) +  # seq(1, max(dist_mat_all_box$value, , by = 0.2)
   scale_y_discrete(name = '', labels=c("Weighted", "Weighted \n(No Trunk \n or Primary)")) +
   #xlim(NA, 3) +
   #ggtitle("Comparing Weighted to Unweighted Shortest Paths") +
-  theme_minimal()
+  theme_minimal(base_size = 13)
 
 ggsave(paste0("data/", chosen_city,"/Plots/boxplot_weighted_unweighted_distances.png"))
 
