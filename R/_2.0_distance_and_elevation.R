@@ -111,7 +111,10 @@ pts <- st_coordinates (msoa_centroids_snapped)
 #silicate format: penalizes intersections and hilliness
 streetnet_sc <- dodgr_streetnet_sc(pts = pts, expand = 0.05)
 
-# add elevation data to sc object
+# add elevation data to sc object 
+
+# Option 1: Download from https://earthexplorer.usgs.gov/
+
 # #London is split between two tiles. we load both and then merge them
 # uk_1 <- raster::raster('data-raw/UK_Elevation/srtm_36_02.tif')
 # uk_2 <- raster::raster('data-raw/UK_Elevation/srtm_37_02.tif')
@@ -122,8 +125,18 @@ streetnet_sc <- dodgr_streetnet_sc(pts = pts, expand = 0.05)
 # # we only need the merged one
 # rm(uk_1, uk_2, uk_elev)
 
+# Option 2: Download for specific city using elevatr package:
+
+# specify the crs
+prj_elev <- "+init=EPSG:4326"
+# download elevation for study area using elevatr
+city_elev <- elevatr::get_elev_raster(city_geom, z= 9, prj = prj_elev, expand = 0.05)
+# save
+raster::writeRaster(city_elev, paste0("data/", chosen_city, '/city_elev.tif'))
+
 # add the elevation data to the vertices
-streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = c('data/uk_elev.tif'))
+#streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = c('data/uk_elev.tif'))
+streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = paste0("data/", chosen_city, '/city_elev.tif'))
 
 # SAVE STREETNET FOR SCRIPT 4. There we will be trying out different weighting profiles
 saveRDS(streetnet_sc, file = paste0("data/",chosen_city,"/unweighted_streetnet.Rds"))
@@ -342,5 +355,5 @@ dist_mat_all %>% filter(circuity_1_2 >= 1) %>%
 rm(city_geom, city_names, dist_mat, dist_mat_1, dist_mat_2, dist_mat_3, dist_mat_all, dist_mat_all_box, 
    flows_city, flows_slope, graph, graph_contracted, graph_1, graph_2, graph_3,
    msoa_centroids, msoa_centroids_snapped, msoa_lon_lat, msoas_city,
-   net, pts, streetnet_sc, uk_elev)
+   net, pts, streetnet_sc, uk_elev, prj_elev, city_elev)
 
