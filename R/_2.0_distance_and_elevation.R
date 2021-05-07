@@ -184,7 +184,7 @@ flows_slope <- flows_slope %>% left_join(msoa_centroids_snapped[,c('msoa11cd' ,'
 net <- dodgr::dodgr_streetnet(pts = pts, expand = 0.1)
 
 # load in elevation data
-uk_elev <- raster::raster('data/uk_elev.tif')
+#elev <- raster::raster('data/uk_elev.tif')
 
 # 1. get geometries
 route <- function(df, net){
@@ -208,7 +208,8 @@ slope <- function(df, elev){
 }
 
 # get routes column then slope column (function 1 then function 2)
-flows_slope <- flows_slope %>% route(net = net) %>% slope(elev = uk_elev)
+#flows_slope <- flows_slope %>% route(net = net) %>% slope(elev = uk_elev)
+flows_slope <- flows_slope %>% route(net = net) %>% slope(elev = city_elev)
 
 flows_slope %>% 
   dplyr::select(-c(cent_orig, cent_dest, route)) %>%

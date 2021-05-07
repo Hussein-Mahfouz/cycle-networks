@@ -7,20 +7,21 @@ bibliography:
   - rlbibfile.bib
 #linenumbers: true
 numbersections: true
-abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritisation of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritisation in previous research, this is the first time that they have been combined, creating an integrated road segment prioritisation approach. The approach, which can be applied to other cities, as shown in the Appendix, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
+abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, as shown in the Appendix, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
 # keywords: "cycling networks, low-traffic neighborhoods, potential demand, routing"
 output:
-  # bookdown::github_document2:
-  bookdown::pdf_document2:
-  # # bookdown::word_document2:
+ # bookdown::github_document2:
+   bookdown::pdf_document2:
+ # bookdown::word_document2:
       highlight: null   # to remove code highlighting in r chunks
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 # elsevier style for referencing (from https://github.com/citation-style-language/styles)
 csl: elsevier-harvard.csl
+always_allow_html: yes
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -32,25 +33,6 @@ citr::tidy_bib_file(rmd_file = "README.Rmd", messy_bibliography = "~/uaf/allrefs
 file.rename("README.pdf", "cycle-network-paper.pdf")
 ```
 
-<!-- # Ideas and discussion -->
-
-<!-- - Intro: possible trim down substantially then add some literature in (a) Calculating Potential Demand [DONE]/ (b) Routing [DONE]/ (c) Road Segment Prioritization -->
-
-<!-- - Community Detection: Where in the document should this section be? It is now before Road Segment Prioritization, but I can merge them -->
-
-<!-- Can go into road segment section. -->
-
-<!-- - Should we use other cities for the sake of comparison (compare communities, road types etc) -->
-
-<!-- - How to add tables properly (they are now added using latex code which only shows up when outputting to pdf) -->
-
-<!-- - Footnotes are sometimes split between pages. How do I keep them on the same page? -->
-
-<!-- - What is the best way to write pseudocode (Steps for Algorithm 1 and 2) -->
-
-<!-- Keywords -->
-
-<!-- ======== -->
 
 <!-- Highlights -->
 
@@ -239,7 +221,7 @@ the analysis. The current work addresses these limitations through the following
 focuses on calculating potential cycling demand. Section \@ref(routing)
 focuses on routing the demand onto the road network while accounting for
 cyclist preferences and government priorities. Section
-\@ref(road-segment-prioritisation) outlines a method for partitioning the
+\@ref(road-segment-prioritization) outlines a method for partitioning the
 study area based on a community finding algorithm and routed cycling
 demand. It then introduces the network expansion algorithms, and compares an approach grounded in
 'egalitarianism' to one grounded in 'utilitarianism'.
@@ -259,7 +241,7 @@ demand. It then introduces the network expansion algorithms, and compares an app
 
 Many of the cycling network studies mentioned above use demand data for cycling as a starting point. 
 Some use existing cycling demand, some calculate potential cycling demand, and others ignore demand completely. 
-@duthie2014optimization note that relying only on existing cycling activity to prioritise cycling
+@duthie2014optimization note that relying only on existing cycling activity to prioritize cycling
 infrastructure can reinforce existing cycling patterns and ignore potential cycling demand that could be satisfied by a connected network.
 To avoid this issue they choose to ignore existing demand completely, and focus on creating a network that connects the
 entire study area. 
@@ -598,7 +580,7 @@ were those most likely to have cycled to school. Getting people to cycle
 from a young age is therefore key to achieving societal change in
 commuting habits.
 
-# Road Segment Prioritisation
+# Road Segment Prioritization
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # scripts for cycle network algorithms
@@ -618,7 +600,7 @@ infrastructure. In doing so, we must account for the motivations and
 deterrents for cycling identified in Section \@ref(introduction), namely
 direct and well-connected routes.
 
-A range of algorithms could be used for prioritisation. Because policy
+A range of algorithms could be used for prioritization. Because policy
 priorities vary, we present two algorithms. Both utilize existing
 infrastructure from the beginning and allow us to compare a solution
 that focuses on utilitarianism to one that focuses on egalitarianism. In
@@ -854,13 +836,15 @@ approach is that it has relatively modest data requirements: only the
 road network (from OSM), its topography (from satellite imagery), and
 OD data (from the national census in this case) are
 needed, opening up the possibility of deploying the approach in other
-cities^[The results are easily reproducible for all UK cities, and can
-also be reproduced for cities elsewhere given the availability of
-commuter data. The appendix shows the results for 3 other UK cities: Birmingham, Leeds and Nottingham. 
-For instructions on reproducing the results shown in this
-paper, see the **README** file in the R folder of the .zip file that
-accompanies this paper (to be released as open source software when the
-paper is published).].
+cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]
+
+<!-- [The results are easily reproducible for all UK cities, and can -->
+<!-- also be reproduced for cities elsewhere given the availability of -->
+<!-- commuter data. The appendix shows the results for 3 other UK cities: Birmingham, Leeds and Nottingham.  -->
+<!-- For instructions on reproducing the results shown in this -->
+<!-- paper, see the **README** file in the R folder of the .zip file that -->
+<!-- accompanies this paper (to be released as open source software when the -->
+<!-- paper is published).]. -->
 
 <!-- For after publishing 
 
@@ -877,7 +861,7 @@ Moreover, the inclusion of egalitarian principles in scenarios of change
 encourages investment in cycling infrastructure to
 increase the connectivity of existing cycling infrastructure
 *and* investment that addresses geographical and social inequalities.
-This ability to address inequalities in network prioritisation is particularly
+This ability to address inequalities in network prioritization is particularly
 important given research showing substantial *inequalities*
 around transport provision in general and cycling uptake and investment
 in particular [@lucas2016method; @vidaltortosa_infrastructure_2020].

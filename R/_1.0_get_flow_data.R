@@ -5,7 +5,7 @@ library(ggplot2)
 library(ggrepel)
 
 # this is a lookup table matching MSOAs to major towns and cities
-city_names <- read_csv('data-raw/Middle_Layer_Super_Output_Area__2011__to_Major_Towns_and_Cities__December_2015__Lookup_in_England_and_Wales.csv') 
+city_names <- read_csv('data-raw/MSOA_2011_to_Major_Towns_and_Cities.csv') 
 # change column name
 city_names <- city_names %>% rename(city = TCITY15NM)
 
