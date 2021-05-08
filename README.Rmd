@@ -1,6 +1,18 @@
 ---
 title: A Road Segment Prioritization Approach for Cycling Infrastructure
-#date: "`r Sys.Date()`"
+author:
+  - Hussein Mahfouz:
+      email: h.mahfouz.19@ucl.ac.uk
+      institute: casa
+      correspondence: true
+  - name: Elsa Arcaute
+    institute: casa
+  - name: Robin Lovelace
+    institute: its
+institute:
+  - casa: Centre for Advanced Spatial Analysis (CASA), University College London, London, UK
+  - its: Institute of Transport Studies, University of Leeds, Leeds, UK
+
 geometry: margin=2cm
 bibliography:
   - mybibfile.bib
@@ -16,11 +28,16 @@ output:
       highlight: null   # to remove code highlighting in r chunks
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
+      # https://stackoverflow.com/questions/52918716/authors-and-affiliations-in-the-yaml-of-rmarkdown
+      pandoc_args:
+      - '--lua-filter=extras/scholarly-metadata.lua'
+      - '--lua-filter=extras/author-info-blocks.lua'
+      keep_tex:  true
 editor_options:
   markdown:
     wrap: 72
 # elsevier style for referencing (from https://github.com/citation-style-language/styles)
-csl: elsevier-harvard.csl
+csl: extras/elsevier-harvard.csl
 always_allow_html: yes
 ---
 
@@ -681,7 +698,7 @@ The algorithm logic is as follows:
 This algorithm ensures that the resulting network is connected. It also
 satisfies the directness criteria, since links on the weighted shortest
 paths are those that have the highest flow passing through them (this is
-a result of the routing in Section \@ref(introduction).
+a result of the routing in Section \@ref(routing).
 
 ## Algorithm 2: Egalitarian Expansion 
 
@@ -913,14 +930,14 @@ to integrate a wider range of modes, including e-bikes and e-scooters, into the
 analysis. Currently scope for progress in this direction is
 partially restricted by the lack of data on the
 proliferation of these modes, raising the point that surveys could
-replace the broad category of `Bicycle' a range of small modes such as
+replace the broad category of `Bicycle' with a range of small modes such as
 'pedal cycles' (including tricycles and recumbent cycles), e-bikes
 and other forms of micro-mobility.
 
 Despite the rapid growth of these alternative modes, there is little doubt that
 the humble bicycle is a key ingredient in the ongoing shift towards active transport.
-Recognition of the importance of this shift for improved the health and well-being
-the citizens, and the wider challenge to decarbonise the global economy,
+Recognition of the importance of this shift for improved health and well-being
+of citizens, and the wider challenge to decarbonise the global economy,
 has grown with pressures on health and public transport systems during the pandemic.
 The success of policies to accelerate cycling uptake depends on a range of
 factors including, vitally, the design of the
