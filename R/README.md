@@ -20,7 +20,7 @@ file is necessary for the scripts to run:
 Middle Layer Super Output Areas (December 2011) Boundaries:
 
 -   Source:
-    <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0>
+    <http://geoportal.statistics.gov.uk/datasets/826dc85fb600440889480f4d9dbb1a24_0>  (Download the .shp file)
 -   Location in Repo: data-raw/MSOA\_2011\_Boundaries/\[Add files here\]
 
 ------------------------------------------------------------------------
