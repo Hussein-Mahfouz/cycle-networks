@@ -113,17 +113,21 @@ streetnet_sc <- dodgr_streetnet_sc(pts = pts, expand = 0.05)
 
 # add elevation data to sc object 
 
-# Option 1: Download from https://earthexplorer.usgs.gov/
+# Option 1: Download elevation data manually 
 
-# #London is split between two tiles. we load both and then merge them
-# uk_1 <- raster::raster('data-raw/UK_Elevation/srtm_36_02.tif')
-# uk_2 <- raster::raster('data-raw/UK_Elevation/srtm_37_02.tif')
-# #merge
-# uk_elev <- raster::merge(uk_1, uk_2)
-# # write to disk for osm_elevation function (need to pass file path...)
-# writeRaster(uk_elev, 'data/uk_elev.tif')
-# # we only need the merged one
-# rm(uk_1, uk_2, uk_elev)
+# 1. go to https://remotepixel.ca/projects/srtm1arc-gl.html and select the tile / tiles that cover your city.
+# 2. click on create and input your email. They will send you a .tif file
+# 3. Save the .tif file as city_elev.tif in this path 'data/chosen city/[add file here]'
+# 4. Read in the data 
+
+# city_elev <- raster::raster(paste0("data/", chosen_city, '/city_elev.tif'))
+# # specify the crs
+# prj_elev <- "+init=EPSG:4326"
+# # reproject
+# city_elev <- city_elev %>%
+#   raster::projectRaster(., crs=prj_elev)
+
+# -------------
 
 # Option 2: Download for specific city using elevatr package:
 
@@ -132,7 +136,9 @@ prj_elev <- "+init=EPSG:4326"
 # download elevation for study area using elevatr
 city_elev <- elevatr::get_elev_raster(city_geom, z= 9, prj = prj_elev, expand = 0.05)
 # save
-raster::writeRaster(city_elev, paste0("data/", chosen_city, '/city_elev.tif'))
+raster::writeRaster(city_elev, paste0("data/", chosen_city, '/city_elev.tif'), overwrite = TRUE)
+
+# -------------
 
 # add the elevation data to the vertices
 #streetnet_sc <- osmdata::osm_elevation(streetnet_sc, elev_file = c('data/uk_elev.tif'))
