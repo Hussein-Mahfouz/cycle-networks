@@ -1,6 +1,6 @@
 # Aim: reproduce results for other UK cities
 
-chosen_city <- "Birmingham"
+chosen_city <- "Bradford"
 
 source("R/_1.0_get_flow_data.R")
 

@@ -17,7 +17,7 @@ msoas_in_city <- function(df, city_name) {
 # get MSOAs in chosen_city. chosen_city is chosen in script 1
 msoas_city <- msoas_in_city(city_names, chosen_city)
 #save it for plotting later
-write_csv(msoas_city, path = paste0("data/",chosen_city,"/msoa_codes_city.csv"))
+write_csv(msoas_city, file = paste0("data/",chosen_city,"/msoa_codes_city.csv"))
 
 
 # get geometry of msoas_city. We need this geometry for plotting later
@@ -132,9 +132,11 @@ streetnet_sc <- dodgr_streetnet_sc(pts = pts, expand = 0.05)
 # Option 2: Download for specific city using elevatr package:
 
 # specify the crs
-prj_elev <- "+init=EPSG:4326"
+#prj_elev <- "+init=EPSG:4326"
 # download elevation for study area using elevatr
-city_elev <- elevatr::get_elev_raster(city_geom, z= 9, prj = prj_elev, expand = 0.05)
+#city_elev <- elevatr::get_elev_raster(city_geom, z= 9, prj = prj_elev, expand = 0.05)
+city_elev <- elevatr::get_elev_raster(city_geom, z= 9, expand = 0.05)
+
 # save
 raster::writeRaster(city_elev, paste0("data/", chosen_city, '/city_elev.tif'), overwrite = TRUE)
 
