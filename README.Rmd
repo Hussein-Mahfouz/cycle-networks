@@ -11,7 +11,7 @@ author:
     institute: its
 institute:
   - casa: Centre for Advanced Spatial Analysis (CASA), University College London, London, UK
-  - its: Institute of Transport Studies, University of Leeds, Leeds, UK
+  - its: Institute for Transport Studies, University of Leeds, Leeds, UK
 
 geometry: margin=2cm
 bibliography:
@@ -89,7 +89,15 @@ citizens, it does come with a warning:
 
 The funding on its own is therefore no guarantee of a change in
 commuting across the country; it must be used to design adequate cycling
-infrastructure that is based on motivators and deterrents to cycling.
+infrastructure that is based on motivators and deterrents to cycling. In this paper we 
+propose an approach for planning a connected cycling network that is meant to 
+be applicable to any city, and we use the city of Manchester as a case study. Greater 
+Manchester aims to become the first region to reach a carbon neutral transport network; 
+Its local authorities have developed plans for a 1800 mile walking and cycling network 
+(Bee Network) that will be delivered over 10 years [@manchestercyclingbee2020]. While schemes 
+have already been put in place for around a quarter of this network, the majority is yet to be built.
+
+# Literature Review
 
 ## Motivators and Deterrents to Cycling
 
@@ -117,7 +125,7 @@ area's bicycle network denser means adding more cycling routes in the
 area and thereby giving cyclists more route options.] of the cycling
 network is also vital [@schoner2014missing].
 
-## Network-Level Approaches
+## Network-Level Approaches to Bicycle Infrastructure Planning
 
 The studies outlined above lay out the fundamentals for designing
 cycling networks that generate significant cycling uptake, but they do
@@ -161,7 +169,7 @@ penalty to prioritize connected road segments [@mauttone2017bicycle].
 
 In this paper, continuity is analysed by looking at the connectivity of
 the network through the graph-theoretic concept of *connected
-components*. @natera2019data for example,
+components*. @orozco2020data for example,
 study the existing cycling network in terms of its disconnected
 components. They propose two different algorithms to connect disconnected components; one connects the two largest components, and the other connects the largest component to its nearest neighbor. By measuring the growth of the largest connected component as a function of the kilometers of network added, they determine that these approaches are more effective at improving cycling network connectivity than random allocation of cycling infrastructure.
 The concept of connected components is
@@ -320,7 +328,7 @@ going back down for longer distances (see Figures
 <!-- )) -->
 <!-- ``` -->
 
-```{r potdemhistograms, fig.cap="Distribution of potential cycling demand", out.width="100%", fig.show='hold', fig.align="center", echo=FALSE}
+```{r potdemhistograms, fig.cap="Distribution of potential cycling demand", out.width="90%", fig.show='hold', fig.align="center", echo=FALSE}
 knitr::include_graphics("data/Manchester/Plots/histogram_distance_cycling_potential_current_all.png")
 ```
 
