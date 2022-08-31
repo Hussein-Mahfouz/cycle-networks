@@ -231,13 +231,13 @@ conditions.
 
 <!-- EDIT! Add more to limitations -->
 
-Our work builds on these *community finding* approaches by proposing a
+Our work builds on these community finding approaches by proposing a
 similar greedy network expansion algorithm for cycle network expansion
-within communities. We incorporate community finding methods for study
+*within communities*. We incorporate community finding methods for study
 area partitioning with weighted routing to avoid links that are
-stressful to cycle on. In doing so, we propose an approach that
-accounts for motivators and deterrents to cycling. We propose three
-sub-methods that address some of the limitations of previous
+stressful to cycle on. In doing so, we propose an approach that ensures a better distribution 
+investments across the study area while also accounting for motivators and deterrents to cycling. 
+We propose three sub-methods that address some of the limitations of previous
 studies. These limitations include (a) an inherent bias of basing network
 design solely on existing cycling demand, (b) the proposal of routes that may
 not correspond to studies on cyclist preference and government policies,
@@ -751,7 +751,7 @@ equal to $flow * l$. In the case of Manchester, Table
 community 1, while only 0.5% of total person-km on the network is in
 community 5.
 
-```{r personkmtable, echo=FALSE, message = FALSE}
+```{r personkmtable, echo=FALSE, message = FALSE, warning=FALSE}
 
 library(tidyverse)
 library(sf)
@@ -827,7 +827,7 @@ investment.
 Consistent growth can also be seen for the size of the Largest Connected
 Component in the proposed bicycle network (Figure
 \@ref(fig:componentsandGCC)). Here however, we find that there is little
-difference between both Algorithms.
+difference between both algorithms.
 
 ```{r componentsandGCC, fig.cap="Network characteristics", out.width="85%", fig.show='hold', fig.pos="H", fig.align = "center", echo=FALSE}
 # knitr::include_graphics(c(
@@ -861,7 +861,7 @@ approach is that it has relatively modest data requirements: only the
 road network (from OSM), its topography (from satellite imagery), and
 OD data (from the national census in this case) are
 needed, opening up the possibility of deploying the approach in other
-cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]
+cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)].
 
 <!-- [The results are easily reproducible for all UK cities, and can -->
 <!-- also be reproduced for cities elsewhere given the availability of -->
