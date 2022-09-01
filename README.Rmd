@@ -849,7 +849,9 @@ both the needs of the users and the ambitions of stakeholders working at
 local or regional levels. The results, including detailed route network
 maps based on current travel behaviour derived from OD data, can provide
 an evidence-base for designing direct, connected,
-and low-stress networks.
+and low-stress networks. A core contribution of this approach is that it insures 
+that investments in cycling infrastructure are distributed fairly between different 
+communities in a city. 
 
 Given that the "most essential activity entailed in the design of
 cycle-friendly infrastructure is developing a cycle network"
@@ -882,9 +884,12 @@ road space reallocation *and* new infrastructure to unlock potential cycling dem
 The approach encourages consideration of a wider range of preferences
 and needs than previous approaches that focus only on absolute potential.
 Moreover, the inclusion of egalitarian principles in scenarios of change
-encourages investment in cycling infrastructure to
-increase the connectivity of existing cycling infrastructure
-*and* investment that addresses geographical and social inequalities.
+encourages investment in cycling infrastructure that addresses geographical and 
+social inequalities. This is done by explicitly ensuring that infrastructure improvements 
+are pursued in different parts of the city simultaneously. This approach compares well with one 
+that focuses exclusively on maximizing the number of potential cycling trips that 
+benefit from investment, showing that a fair distribution can be achieved without 
+compromising on overall benefit. 
 This ability to address inequalities in network prioritization is particularly
 important given research showing substantial *inequalities*
 around transport provision in general and cycling uptake and investment

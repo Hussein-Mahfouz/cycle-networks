@@ -8,8 +8,6 @@ output:
     #keep_tex: true
 ---
 
-# Overall Comments
-
 # Reviewer 1
 
 *This paper presents an approach to help planners prioritize investments in cycling infrastructure.*
@@ -40,7 +38,9 @@ a major challenge facing 'top-down' planning approaches is how to incorporate eg
 
 "the inclusion of egalitarian principles in scenarios of change encourages investment in cycling infrastructure to increase the connectivity of existing cycling infrastructure and investment that addresses geographical and social inequalities. This ability to address inequalities in network prioritization is particularly important given research showing substantial inequalities around transport provision in general and cycling uptake and investment in particular (Lucas et al., 2016; Vidal Tortosa et al., 2021
 
--   The big picture take aways from the work were also not clear...
+-   *The big picture take aways from the work were also not clear...*
+
+We have added a couple of lines to the conclusion to emphasise the contribution
 
 # Reviewer 2
 
@@ -48,7 +48,7 @@ This paper presents an interesting approach to network design for cycling infras
 
 -   *However, the paper still has some flaws which should be solved. I suggest the authors to revise the structure of the paper: in particular, readers may not be familiar with the Manchester case. Instead it is taken for granted by the authors, who introduce the applied methodology in section 2 without ever having presented the case study and its peculiarities; even some results (e.g. those relating to the calculation of the demand potential) are presented in section 2, before having concluded the description of the methodology. Authors should choose from one of the following structures: 1) presentation of the different steps of the methodology (theoretically) and subsequent application to the case study. 2) Presentation of the case study and step-by-step application of the methodology, however including a clear schematization of it and any procedures to ensure its scalability.*
 
-We have chosen option 2 as we think it is better to show the methodology and results for each sub-secion together. Some context was added on Manchester and its recent cycling and walking targets (specifically the Change a Region to Change a Nation report [[link](<https://beeactive.tfgm.com/publications-and-downloads/>)].
+We have chosen option 2 as we think it is better to show the methodology and results for each sub-secion together. Some context was added on Manchester and its recent cycling and walking targets (specifically the Change a Region to Change a Nation report [[link](https://beeactive.tfgm.com/publications-and-downloads/)].
 
 We think that the methodology is generic enough to be scalable. The readme in the github page (linked in the paper) has step by step instructions for reproducibility, and the appendix includes examples fr two other UK cities.
 
