@@ -269,7 +269,9 @@ infra_exists <- function(graph, network){
   
   # all NA values in cycle_infra are those that had nothing to join to. It means they have no 
   # cycling infrastructure. We will give them a value of 0 for cycle_infra
-  graph$cycle_infra[is.na(graph$cycle_infra)] <- 0
+  if(any(is.na(graph$cycle_infra))) {
+    graph$cycle_infra[is.na(graph$cycle_infra)] <- 0
+  }  
   
   return(graph)
 }
