@@ -27,7 +27,7 @@ source("R/_4.0_aggregating_flows.R")
 # file.exists("data/Leeds/graph_with_flows_unweighted.Rds")
 
 # Warning: takes several minutes to run
-file.edit("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
+# file.edit("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
 source("R/_5.0_identifying_cycle_infastructure_from_osm_tags.R")
 
 # file.edit("R/_6.0_comparing_weighting_profiles.R")
@@ -40,4 +40,5 @@ source("R/_8.0_growing_a_network.R")
 source("R/_8.1_growth_utilitarian.R")
 
 source("R/_8.2_growth_egalitarian.R")
+
 
