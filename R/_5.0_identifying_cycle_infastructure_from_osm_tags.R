@@ -232,7 +232,9 @@ graph_sf_cycle <-
 graph_sf <- dplyr::left_join(graph_sf, graph_sf_cycle, by = "edge_id")
 # all NA values in cycle_infra are those that had nothing to join to. It means they have no 
 # cycling infrastructure. We will give them a value of 0 for cycle_infra
-graph_sf$cycle_infra[is.na(graph_sf$cycle_infra)] <- 0
+if(any(is.na(graph_sf$cycle_infra))) {
+  graph_sf$cycle_infra[is.na(graph_sf$cycle_infra)] <- 0
+}
 
 # save it as an RDS
 saveRDS(graph_sf, file = paste0("data/", chosen_city, "/graph_with_flows_weighted.Rds"))

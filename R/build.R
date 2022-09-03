@@ -1,6 +1,7 @@
 # Aim: reproduce results for other UK cities
 
-chosen_city <- "Bradford"
+chosen_city <- "Manchester"
+# chosen_city <- "Bradford" # For a different city
 
 source("R/_1.0_get_flow_data.R")
 
@@ -19,7 +20,6 @@ source("R/_3.0_potential_demand.R")
 source("R/_3.1_plot_mode_shares.R")
 source("R/_3.2_plot_od_comparison.R")
 source("R/_3.3_plot_desire_lines_current_vs_potential.R")
-
 
 source("R/_4.0_aggregating_flows.R")
 
