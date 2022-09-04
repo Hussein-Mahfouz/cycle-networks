@@ -7,6 +7,13 @@ library(tmap)
 
 graph_sf <- readRDS(paste0("data/", chosen_city, "/graph_with_flows_weighted_communities.Rds"))
 
+# TODO: prevent this from happening upstream: https://github.com/Hussein-Mahfouz/cycle-networks/issues/13
+if("cycle_infra.x" %in% names(graph_sf)) {
+  graph_sf = graph_sf %>% 
+    rename(cycle_infra = cycle_infra.x) %>% 
+    select(-cycle_infra.y)
+}
+
 # we weigh the flow on each edge by its distance. We can then get how much of the commuter km are satisfied
 graph_sf$person_km <- graph_sf$flow * graph_sf$d
 
