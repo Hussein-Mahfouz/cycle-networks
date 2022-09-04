@@ -40,12 +40,20 @@ Open this file with the following command and run the code line-by-line.
 file.edit("R/build.R")
 ```
 
+From there you will run the code script-by-script, e.g. with the following line:
+
+```r
+source("R/_1.0_get_flow_data.R")
+```
+
+You can of course edit that file also to run it line-by-line for debugging.
+
 <!-- Todo: make the .zip download work for anyone, e.g. by uploading the data to the osf.io website alongside the preprint. -->
 
 You can select a city to build by executing the following command:
 
 ```{r}
-chosen_city <- "Leeds"
+chosen_city <- "Manchester"
 ```
 
 Replacing `Leeds` with any other city will make the script work for that city.

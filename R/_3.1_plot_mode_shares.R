@@ -3,7 +3,7 @@ library(waffle)
 library(patchwork)
 
 # read in the data
-flow <- readr::read_csv(paste0("data/",chosen_city,"/flows_for_desire_lines.csv"))
+flow <- readr::read_csv(paste0("data/", chosen_city, "/flows_for_desire_lines.csv"))
 
 #######################
 # PLOTTING MODE SHARE

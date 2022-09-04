@@ -1,0 +1,61 @@
+---
+title: "Response to Reviewers"
+author: "Hussein"
+date: "8/29/2022"
+output:
+  pdf_document:
+    #extra_dependencies: ["subcaption", "float"]
+    #keep_tex: true
+---
+
+# Reviewer 1
+
+*This paper presents an approach to help planners prioritize investments in cycling infrastructure.*
+
+-   *Now that I have read the full article, I would consider this a methods paper, as it presents and describes a proposed method. This wasn't clear from the outset, and I found it difficult to follow without a clear methods and results section (there are methods and results presented, but I am not sure where they begin and end - they seem to be combined).*
+
+We agree that this is a methods paper, and in fact focus on the **approach**​ (which could be implemented using different methods, we outline one) as highlighted below. We have rewritten relevant parts of the paper to emphasise the methodological advances outlined in the paper. Furthermore, we have demonstrated applying the methods to additional locations in the appendix. The abstract reads as follows (emphasis added to highlight the framing as a methods paper):
+
+"This paper demonstrates a new **approach** to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The **approach** combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. ***Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach***."
+
+-   *I see the merit of this paper, especially to policymakers, but I do wonder if the Journal of Transport Geography is the best fit for the paper. The contribution to geography is not especially clear. Perhaps Transport Policy, or some other policy-focused journal (or even a methods-focused journal) would be a better fit?*
+
+We think that this paper fits the remit of Transport Geography well (based on the aims and scope of the journal) as it presents a new methodological approach in planning cycling networks that is grounded in both GIS and literature on the impact of infrastructure on cycling uptake.
+
+-   *The inclusion of egalitarian principles in the paper was intriguing, but it was difficult to parse out exactly how this was done, how this approach differs from past work, and the implications/ benefits of using this approach.*
+
+[How this approach differs from past work:]{.ul}
+
+end of section 2.2: "while these approaches deal with continuity better, they look at the network as a whole when attempting to improve it, and in doing so fail to account for equitable distribution of infrastructure
+
+section 2.3: "This research attempts to propose an egalitarian framework for cycling network design. This is done by identifying the different sub-networks that exist within the larger network, and ensuring that each gets a fair share of investment"
+
+[How this was done/ benefits (bold is new text):]{.ul}
+
+"Our work builds on these community finding approaches by proposing a similar greedy network expansion algorithm for cycle network expansion within communities. We incorporate community finding methods for study area partitioning with weighted routing to avoid links that are stressful to cycle on. **In doing so, we propose an approach that ensures a better distribution investments across the study area** while also accounting for motivators and deterrents to cycling."
+
+a major challenge facing 'top-down' planning approaches is how to incorporate egalitarian principles by fairly distributing investments in cycling infrastructure. One way of quantifying this is to split up the city into smaller geospatial areas and target equal investment in each of those areas.....Community detection offers us a way to delineate such a split; cyclists are limited in their commuting distance (see Figure 6), and so trip attractors are more likely to have a local catchment area of cyclists. In our case, the network is the city; the nodes are the population-weighted MSOA centroids and the links connecting each MSOA pair are weighted by the potential cycling demand between them. The Louvain method (Blondel et al., 2008) is used to separate MSOAs into communities. Potential cycling demand is used since we assume that this is what the cycling demand will be once the cycling infrastructure is added"
+
+"the inclusion of egalitarian principles in scenarios of change encourages investment in cycling infrastructure to increase the connectivity of existing cycling infrastructure and investment that addresses geographical and social inequalities. This ability to address inequalities in network prioritization is particularly important given research showing substantial inequalities around transport provision in general and cycling uptake and investment in particular (Lucas et al., 2016; Vidal Tortosa et al., 2021
+
+-   *The big picture take aways from the work were also not clear...*
+
+We have added a couple of lines to the conclusion to emphasise the contribution
+
+# Reviewer 2
+
+This paper presents an interesting approach to network design for cycling infrastructure. I believe the proposed approach is really interesting and valid.
+
+-   *However, the paper still has some flaws which should be solved. I suggest the authors to revise the structure of the paper: in particular, readers may not be familiar with the Manchester case. Instead it is taken for granted by the authors, who introduce the applied methodology in section 2 without ever having presented the case study and its peculiarities; even some results (e.g. those relating to the calculation of the demand potential) are presented in section 2, before having concluded the description of the methodology. Authors should choose from one of the following structures: 1) presentation of the different steps of the methodology (theoretically) and subsequent application to the case study. 2) Presentation of the case study and step-by-step application of the methodology, however including a clear schematization of it and any procedures to ensure its scalability.*
+
+We have chosen option 2 as we think it is better to show the methodology and results for each sub-secion together. Some context was added on Manchester and its recent cycling and walking targets (specifically the Change a Region to Change a Nation report [[link](https://beeactive.tfgm.com/publications-and-downloads/)].
+
+We think that the methodology is generic enough to be scalable. The readme in the github page (linked in the paper) has step by step instructions for reproducibility, and the appendix includes examples fr two other UK cities.
+
+-   *I would also suggest that the authors to separate the literature review (currently in section 1.2) from the introduction, in order to better highlight what research gaps the article tries to solve.*
+
+This has been done now
+
+-   *Finally, a careful proofreading should be done, since the article currently has several typos.*
+
+This has been done as well
