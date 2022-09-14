@@ -862,7 +862,9 @@ approach is that it has relatively modest data requirements: only the
 road network (from OSM), its topography (from satellite imagery), and
 OD data (from the national census in this case) are
 needed, opening up the possibility of deploying the approach in other
-cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)].
+cities^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of the .zip file that accompanies this paper (Link to public github repo to be added when paper is published)].
+
+<!-- ^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in the **README** file in the R folder of this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]. -->
 
 <!-- [The results are easily reproducible for all UK cities, and can -->
 <!-- also be reproduced for cities elsewhere given the availability of -->

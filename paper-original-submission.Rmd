@@ -1,17 +1,17 @@
 ---
 title: A Road Segment Prioritization Approach for Cycling Infrastructure
-# author:
-#   - Hussein Mahfouz:
-#       email: h.mahfouz.19@ucl.ac.uk
-#       institute: casa
-#       correspondence: true
-#   - name: Elsa Arcaute
-#     institute: casa
-#   - name: Robin Lovelace
-#     institute: its
-# institute:
-#   - casa: Centre for Advanced Spatial Analysis (CASA), University College London, London, UK
-#   - its: Institute of Transport Studies, University of Leeds, Leeds, UK
+author:
+  - Hussein Mahfouz:
+      email: h.mahfouz.19@ucl.ac.uk
+      institute: casa
+      correspondence: true
+  - name: Elsa Arcaute
+    institute: casa
+  - name: Robin Lovelace
+    institute: its
+institute:
+  - casa: Centre for Advanced Spatial Analysis (CASA), University College London, London, UK
+  - its: Institute of Transport Studies, University of Leeds, Leeds, UK
 
 geometry: margin=2cm
 bibliography:
@@ -29,9 +29,9 @@ output:
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
       # https://stackoverflow.com/questions/52918716/authors-and-affiliations-in-the-yaml-of-rmarkdown
-      # pandoc_args:
-      # - '--lua-filter=extras/scholarly-metadata.lua'
-      # - '--lua-filter=extras/author-info-blocks.lua'
+      pandoc_args:
+      - '--lua-filter=extras/scholarly-metadata.lua'
+      - '--lua-filter=extras/author-info-blocks.lua'
       keep_tex:  true
 editor_options:
   markdown:
