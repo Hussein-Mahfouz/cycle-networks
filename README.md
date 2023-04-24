@@ -229,10 +229,9 @@ cyclist preferences and government priorities. Section
 partitioning the study area based on a community finding algorithm and
 routed cycling demand. It then introduces the network expansion
 algorithms, and compares an approach grounded in ‘egalitarianism’ to one
-grounded in ‘utilitarianism’. ithms, and compares an approach grounded
-in ‘egalitarianism’ to one grounded in ‘utilitarianism’. As mentioned
-above, Manchester is used as a case study. An overview of the steps
-involved is shown in Figure <a href="#fig:methodflowchart">3.1</a>.
+grounded in ‘utilitarianism’. As mentioned above, Manchester is used as
+a case study. An overview of the steps involved is shown in Figure
+<a href="#fig:methodflowchart">3.1</a>.
 
 <div class="figure" style="text-align: center">
 
