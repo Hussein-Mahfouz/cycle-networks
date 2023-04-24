@@ -62,18 +62,16 @@ fundamental changes to societies and economies are necessary to mitigate
 climate change. Like other sectors, transport is under substantial
 pressure to decarbonise, resulting in a number of technical innovations
 including electric vehicles. But new vehicle technologies can only go so
-far and do not tackle parallel problems such as congestion, road traffic
+far and fail to tackle parallel problems such as congestion, road traffic
 casualties and physical inactivity [@brand_climate_2020].
 
-In this context, interest and investment in active modes are growing.
-The benefits extend beyond congestion and the environment, as active
+In this context, interest and investment in active modes has grown substantially, especially with the growing realisation that the benefits extend beyond congestion and the environment, as active
 travel can also help alleviate what is referred to as the pandemic of
 global inactivity; physical inactivity is on the rise and has become the
 4th highest cause of death globally [@kohl2012pandemic]. Various
 studies have documented the association between active transport and
 lower risk of disease, including cancer and cardiovascular disease
-[@celis2017association; @jarrett2012effect;
-@patterson2020associations]. In the wake of the Covid-19 pandemic, and
+[@celis2017association; @jarrett2012effect; @patterson2020associations]. In the wake of the Covid-19 pandemic, and
 the resulting reduced capacity of public transport, the UK government
 has pledged to invest billions of pounds to improve walking and cycling
 infrastructure across the country. While this unprecedented sum is an
@@ -87,7 +85,7 @@ citizens, it does come with a warning:
  no meaningful space from more important road users, such as motor
  vehicles and pedestrians" [@departmentgearchange2020].
 
-The funding on its own is therefore no guarantee of a change in
+Funding alone is therefore no guarantee of a change in
 commuting across the country; it must be used to design adequate cycling
 infrastructure that is based on motivators and deterrents to cycling. In this paper we 
 propose an approach for planning a connected cycling network that is meant to 
