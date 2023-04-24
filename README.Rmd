@@ -88,11 +88,9 @@ citizens, it does come with a warning:
 Funding alone is therefore no guarantee of a change in
 commuting across the country; it must be used to design adequate cycling
 infrastructure that is based on motivators and deterrents to cycling. In this paper we 
-propose an approach for planning a connected cycling network that is meant to 
-be applicable to any city (as shown in the Appendix), and we use the city of Manchester as a case study. Greater 
-Manchester aims to become the first region to reach a carbon neutral transport network; 
-its local authorities have developed plans for a 1800 mile walking and cycling network 
-(Bee Network) that will be delivered over 10 years [@manchestercyclingbee2020]. While schemes 
+propose an approach for planning connected cycling networks that can be generalised to any city with appropriate input data (as shown in the Appendix).
+We used the city of Manchester as a case study due to its ambitions to become the first UK region with a carbon neutral transport network, supported by ambitious plans for a 1800 mile walking and cycling network 
+(the 'Bee Network') that will be delivered over 10 years [@manchestercyclingbee2020]. While schemes 
 have already been put in place for around a quarter of this network, the majority is yet to be built.
 
 # Literature Review
