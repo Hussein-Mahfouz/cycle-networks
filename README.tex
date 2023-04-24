@@ -4,14 +4,13 @@
 %
 \documentclass[
 ]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -34,15 +33,8 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={A Road Segment Prioritization Approach for Cycling Infrastructure},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=2cm]{geometry}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -69,6 +61,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{subcaption}
 \usepackage{longtable}
 \usepackage{float}
@@ -86,29 +101,16 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A Road Segment Prioritization Approach for Cycling Infrastructure},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{A Road Segment Prioritization Approach for Cycling Infrastructure}
 \author{}
@@ -117,11 +119,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on `filtered permeability' and `Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning.
-
-\par
-
-\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity
+Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on `filtered permeability' and `Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. ¶ \par ¶ \textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity
 \end{abstract}
 
 \hypertarget{introduction}{%
@@ -272,6 +270,12 @@ as a cornerstone of distributive justice, and contend that policies
 should aim to distribute investments in a way that minimizes spatial
 variations in accessibility.
 
+\hypertarget{method-and-application}{%
+\section{Method and Application}\label{method-and-application}}
+
+\hypertarget{method-overview}{%
+\subsection{Method overview}\label{method-overview}}
+
 This research attempts to propose an egalitarian framework for cycling
 network design. This is done by identifying the different sub-networks
 that exist within the larger network, and ensuring that each gets a fair
@@ -310,10 +314,20 @@ cyclist preferences and government priorities. Section
 \ref{road-segment-prioritization} outlines a method for partitioning the
 study area based on a community finding algorithm and routed cycling
 demand. It then introduces the network expansion algorithms, and compares an approach grounded in
-`egalitarianism' to one grounded in `utilitarianism.'
+`egalitarianism' to one grounded in `utilitarianism'. As mentioned above, Manchester is used as a case study.
+An overview of the steps involved is shown in Figure \ref{fig:methodflowchart}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{extras/methodology_flowchart} 
+
+}
+
+\caption{Flowchart of proposed methodology}\label{fig:methodflowchart}
+\end{figure}
 
 \hypertarget{calculating-potential-cycling-demand}{%
-\section{Calculating Potential Cycling Demand}\label{calculating-potential-cycling-demand}}
+\subsection{Calculating Potential Cycling Demand}\label{calculating-potential-cycling-demand}}
 
 Many of the cycling network studies mentioned above use demand data for cycling as a starting point.
 Some use existing cycling demand, some calculate potential cycling demand, and others ignore demand completely.
@@ -331,7 +345,9 @@ techniques such as spatial interaction models can be used to estimate
 travel volumes between zones (Black, 1995; Martínez and Viegas, 2013; Wilson, 1971). In this paper we use open access data from the UK
 census (ONS, 2011), which contains aggregate statistics on
 number of commuters between administrative zones --- Middle layer Super
-Output Areas (MSOA) --- by mode of travel. MSOAs have an average
+Output Areas (MSOA) --- by mode of travel (this is similar to the approach
+used by Grisé and El-Geneidy (2018)).
+MSOAs have an average
 population of just over 8000 (ONS, 2018).\footnote{ See
   \url{https://wicid.ukdataservice.ac.uk/} for open access to the OD data.}
 Figures \ref{fig:potdemhistograms} and \ref{fig:desirefacetcycling}
@@ -356,7 +372,7 @@ the following parameters:
 OD pair, and \(\alpha\) and all \(\beta\)s are parameters calculated by a regression
 model on the training data. The square and square-root distance terms
 ``capture the non-linear impact of distance on the likelihood of
-cycling,'' and interaction terms capture the combined effect of slope
+cycling'', and interaction terms capture the combined effect of slope
 and distance (Lovelace et al., 2017). Alternative cycling uptake
 models could be `plugged in' to our approach for different contexts or scenarios of change.
 
@@ -391,7 +407,7 @@ models could enable the approach to help plan for solutions such as e-bikes
 that enable trips covering longer distances and hillier roads.
 
 \hypertarget{routing}{%
-\section{Routing}\label{routing}}
+\subsection{Routing}\label{routing}}
 
 The next step in our approach is to route the potential cycling demand
 (\(\boldsymbol{C_{p}}\)) between all OD pairs onto the road network. We
@@ -456,9 +472,10 @@ To conduct routing, the following is considered:
 The above points are accounted for by using a weighted road network for
 routing. This has been previously done by multiplying all road segments
 without cycling infrastructure by a fixed impedance factor
-(Mauttone et al., 2017), or by assigning different weights to the road
-segments proportional to the investment cost of bringing them to an
-acceptable level of stress for cycling (Duthie and Unnikrishnan, 2014).
+(Mauttone et al., 2017), by assigning different weights to the road
+segments that are (a) proportional to the investment cost of bringing them to an
+acceptable level of stress for cycling (Duthie and Unnikrishnan, 2014), or (b) inversely proportional to
+perceived level of stress experienced by cyclists (Wysling and Purves, 2022).
 Perceived stress for cyclists has been found to be a function of vehicular traffic
 volume and speed (Sorton and Walsh, 1994), both of which vary predictably
 with road type. Gehrke et al. (2020) build on this information to use
@@ -473,6 +490,8 @@ infrastructure. We believe this to be more appropriate than the simplistic
 approach adopted by Mauttone et al. (2017) as it makes use of a hierarchy
 of road preference based on perceived stress levels, going beyond simply
 favouring roads with existing cycling infrastructure.
+It is also different to the weighting profile used by Wysling and Purves (2022) as it adds a larger
+weight on trunk and primary roads then other roads without cycling infrastructure.
 
 \begin{longtable}{lrrr}
 \caption{Weighting profiles}
@@ -493,7 +512,7 @@ Motorway                                & 1          & \textcolor{red}{0}       
 \end{longtable}
 
 \noindent A weighted distance \(d_{w}\) for each road
-segment is calculated as follows:\footnote{The \textbf{dodgr} r package
+segment is calculated as follows \footnote{The \textbf{dodgr} r package
   (Padgham, 2019) is used to route cycling demand onto the road
   network. The package uses the OpenStreetMaps (OSM) road network and
   allows the user to assign weights to roads based on their type. The
@@ -503,7 +522,7 @@ segment is calculated as follows:\footnote{The \textbf{dodgr} r package
   network, but the dodgr package divides by numbers between 0 and 1, which
   achieves the same result (road types with a weight of 0 are not routed on).
   For the sake of reproducibility, we stick to
-  the convention used in the package.}
+  the convention used in the package.}:
 
 \begin{equation}\label{eq:weight_distance}
     d_{w} = \frac{d_{unw}}{W}
@@ -653,7 +672,7 @@ from a young age is therefore key to achieving societal change in
 commuting habits.
 
 \hypertarget{road-segment-prioritization}{%
-\section{Road Segment Prioritization}\label{road-segment-prioritization}}
+\subsection{Road Segment Prioritization}\label{road-segment-prioritization}}
 
 After routing the potential cycling demand onto the road network using
 weighted shortest paths, we have estimates for the cumulative potential
@@ -677,7 +696,7 @@ approach, we use community detection to partition the study area and
 distribute investment over the different subdivisions.
 
 \hypertarget{community-detection}{%
-\subsection{Community Detection}\label{community-detection}}
+\subsubsection{Community Detection}\label{community-detection}}
 
 As explained in Section
 \ref{ethical-underpinnings-and-proposed-approach}, a major challenge
@@ -733,7 +752,7 @@ communities and one small one (Figure \ref{fig:communitiesmanchester}).
 ~
 
 \hypertarget{algorithm-1-utilitarian-expansion}{%
-\subsection{Algorithm 1: Utilitarian Expansion}\label{algorithm-1-utilitarian-expansion}}
+\subsubsection{Algorithm 1: Utilitarian Expansion}\label{algorithm-1-utilitarian-expansion}}
 
 The algorithm logic is as follows:
 
@@ -751,7 +770,7 @@ paths are those that have the highest flow passing through them (this is
 a result of the routing in Section \ref{routing}.
 
 \hypertarget{algorithm-2-egalitarian-expansion}{%
-\subsection{Algorithm 2: Egalitarian Expansion}\label{algorithm-2-egalitarian-expansion}}
+\subsubsection{Algorithm 2: Egalitarian Expansion}\label{algorithm-2-egalitarian-expansion}}
 
 The first algorithm focuses on connectivity and directness, but not on
 fairly distributing investment. The latter is not a requirement for
@@ -852,7 +871,7 @@ as expected from the weighting profile defined in Table
 \end{figure}
 
 \hypertarget{connectivity}{%
-\subsection{Connectivity}\label{connectivity}}
+\subsubsection{Connectivity}\label{connectivity}}
 
 Existing cycling infrastructure is made up of many disconnected
 components. Both Algorithm 1 and 2 start with all existing segregated
@@ -935,6 +954,7 @@ data-collecting organisations to make OD data more
 readily available).
 The potential demand calculation is also based on cycling in the traditional sense, and does not consider the
 effect of micro-mobility on reducing topology-related impedance to cycling. Given that we are proposing an approach which can accommodate any cycling uptake functions, this is an acceptable limitation.
+The network prioritization is based strongly on potential cycling demand calculations. While this provides a solid supplementary tool for network planning, it would be more useful as part of a multi-criteria approach that considers on-the ground information from existing cyclists, road geometries, and traffic analysis. Grisé and El-Geneidy (2018) propose a multi-criteria approach that includes the first of these points.
 
 The approach is also focused solely on the allocation of cycling
 infrastructure, and does not consider the larger political and
@@ -995,161 +1015,167 @@ for designing joined-up and cost-effective strategic cycle networks.
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-akbarzadeh2018designing}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-akbarzadeh2018designing}{}}%
 Akbarzadeh, M., Mohri, S.S., Yazdian, E., 2018. Designing bike networks using the concept of network clusters. Applied network science 3, 12.
 
-\leavevmode\hypertarget{ref-aldred2019impacts}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-aldred2019impacts}{}}%
 Aldred, R., Croft, J., Goodman, A., 2019. Impacts of an active travel intervention with a cycling focus in a suburban context: One-year findings from an evaluation of london's in-progress mini-hollands programme. Transportation research part A: policy and practice 123, 147--169.
 
-\leavevmode\hypertarget{ref-bao2017planning}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-bao2017planning}{}}%
 Bao, J., He, T., Ruan, S., Li, Y., Zheng, Y., 2017. Planning bike lanes based on sharing-bikes' trajectories, in: Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. pp. 1377--1386.
 
-\leavevmode\hypertarget{ref-black1995spatial}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-black1995spatial}{}}%
 Black, W.R., 1995. Spatial interaction modeling using artificial neural networks. Journal of Transport Geography 3, 159--166.
 
-\leavevmode\hypertarget{ref-blondel2008fast}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-blondel2008fast}{}}%
 Blondel, V.D., Guillaume, J.-L., Lambiotte, R., Lefebvre, E., 2008. Fast unfolding of communities in large networks. Journal of statistical mechanics: theory and experiment 2008, P10008.
 
-\leavevmode\hypertarget{ref-brand_climate_2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-brand_climate_2020}{}}%
 Brand, C., Dons, E., Anaya-Boig, E., Avila-Palencia, I., Clark, A., de Nazelle, A., Gascon, M., Gaupp-Berghausen, M., Gerike, R., Gotschi, T., 2020. The climate change mitigation effects of active travel. Preprint: researchsquare.com.
 
-\leavevmode\hypertarget{ref-broach2011bicycle}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-broach2011bicycle}{}}%
 Broach, J., Gliebe, J., Dill, J., 2011. Bicycle route choice model developed using revealed preference GPS data, in: 90th Annual Meeting of the Transportation Research Board, Washington, DC.
 
-\leavevmode\hypertarget{ref-caulfield2012determining}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-caulfield2012determining}{}}%
 Caulfield, B., Brick, E., McCarthy, O.T., 2012. Determining bicycle infrastructure preferences--a case study of dublin. Transportation research part D: transport and environment 17, 413--417.
 
-\leavevmode\hypertarget{ref-celis2017association}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-celis2017association}{}}%
 Celis-Morales, C.A., Lyall, D.M., Welsh, P., Anderson, J., Steell, L., Guo, Y., Maldonado, R., Mackay, D.F., Pell, J.P., Sattar, N., others, 2017. Association between active commuting and incident cardiovascular disease, cancer, and mortality: Prospective cohort study. bmj 357, j1456.
 
-\leavevmode\hypertarget{ref-crane2017longitudinal}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-crane2017longitudinal}{}}%
 Crane, M., Rissel, C., Standen, C., Ellison, A., Ellison, R., Wen, L.M., Greaves, S., 2017. Longitudinal evaluation of travel and health outcomes in relation to new bicycle infrastructure, sydney, australia. Journal of Transport \& Health 6, 386--395.
 
-\leavevmode\hypertarget{ref-departmentgearchange2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-departmentgearchange2020}{}}%
 DfT, 2020a. Gear change: A bold vision for cycling and walking.
 
-\leavevmode\hypertarget{ref-departmentcycleinfradesign2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-departmentcycleinfradesign2020}{}}%
 DfT, 2020b. Cycling infrastructure design.
 
-\leavevmode\hypertarget{ref-department2012guidance}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-department2012guidance}{}}%
 DfT, 2012. Guidance on road classification and the primary route network.
 
-\leavevmode\hypertarget{ref-dill2013four}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-dill2013four}{}}%
 Dill, J., McNeil, N., 2013. Four types of cyclists? Examination of typology for better understanding of bicycling behavior and potential. Transportation Research Record 2387, 129--138.
 
-\leavevmode\hypertarget{ref-duthie2014optimization}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-duthie2014optimization}{}}%
 Duthie, J., Unnikrishnan, A., 2014. Optimization framework for bicycle network design. Journal of Transportation engineering 140, 04014028.
 
-\leavevmode\hypertarget{ref-furth2016network}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-furth2016network}{}}%
 Furth, P.G., Mekuria, M.C., Nixon, H., 2016. Network connectivity for low-stress bicycling. Transportation research record 2587, 41--49.
 
-\leavevmode\hypertarget{ref-gehrke2020cycling}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-gehrke2020cycling}{}}%
 Gehrke, S.R., Akhavan, A., Furth, P.G., Wang, Q., Reardon, T.G., 2020. A cycling-focused accessibility tool to support regional bike network connectivity. Transportation research part D: transport and environment 85, 102388.
 
-\leavevmode\hypertarget{ref-goodman2019scenarios}{}%
-Goodman, A., Rojas, I.F., Woodcock, J., Aldred, R., Berkoff, N., Morgan, M., Abbas, A., Lovelace, R., 2019. Scenarios of cycling to school in england, and associated health and carbon impacts: Application of the {`propensity to cycle tool.'} Journal of Transport \& Health 12, 263--278.
+\leavevmode\vadjust pre{\hypertarget{ref-goodman2019scenarios}{}}%
+Goodman, A., Rojas, I.F., Woodcock, J., Aldred, R., Berkoff, N., Morgan, M., Abbas, A., Lovelace, R., 2019. Scenarios of cycling to school in england, and associated health and carbon impacts: Application of the {``propensity to cycle tool.''} Journal of Transport \& Health 12, 263--278.
 
-\leavevmode\hypertarget{ref-goodman2014new}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-goodman2014new}{}}%
 Goodman, A., Sahlqvist, S., Ogilvie, D., Consortium, iConnect, 2014. New walking and cycling routes and increased physical activity: One-and 2-year findings from the UK iConnect study. American journal of public health 104, e38--e46.
 
-\leavevmode\hypertarget{ref-gossling2013urban}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-gossling2013urban}{}}%
 Gössling, S., 2013. Urban transport transitions: Copenhagen, city of cyclists. Journal of Transport Geography 33, 196--206.
 
-\leavevmode\hypertarget{ref-manchestercyclingbee2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-manchestercyclingbee2020}{}}%
 Greater Manchester, T. for, 2020. Change a region to change a nation - greater manchester's walking and cycling investment plan.
 
-\leavevmode\hypertarget{ref-iacono2010measuring}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-grise2018if}{}}%
+Grisé, E., El-Geneidy, A., 2018. If we build it, who will benefit? A multi-criteria approach for the prioritization of new bicycle lanes in quebec city, canada. Journal of transport and land use 11, 217--235.
+
+\leavevmode\vadjust pre{\hypertarget{ref-iacono2010measuring}{}}%
 Iacono, M., Krizek, K.J., El-Geneidy, A., 2010. Measuring non-motorized accessibility: Issues, alternatives, and execution. Journal of Transport Geography 18, 133--140.
 
-\leavevmode\hypertarget{ref-jafino2020transport}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-jafino2020transport}{}}%
 Jafino, B.A., Kwakkel, J., Verbraeck, A., 2020. Transport network criticality metrics: A comparative analysis and a guideline for selection. Transport Reviews 40, 241--264.
 
-\leavevmode\hypertarget{ref-jarrett2012effect}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-jarrett2012effect}{}}%
 Jarrett, J., Woodcock, J., Griffiths, U.K., Chalabi, Z., Edwards, P., Roberts, I., Haines, A., 2012. Effect of increasing active travel in urban england and wales on costs to the national health service. The Lancet 379, 2198--2205.
 
-\leavevmode\hypertarget{ref-kohl2012pandemic}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-kohl2012pandemic}{}}%
 Kohl 3rd, H.W., Craig, C.L., Lambert, E.V., Inoue, S., Alkandari, J.R., Leetongin, G., Kahlmeier, S., Group, L.P.A.S.W., others, 2012. The pandemic of physical inactivity: Global action for public health. The lancet 380, 294--305.
 
-\leavevmode\hypertarget{ref-lovelace2017propensity}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-lovelace2017propensity}{}}%
 Lovelace, R., Goodman, A., Aldred, R., Berkoff, N., Abbas, A., Woodcock, J., 2017. The propensity to cycle tool: An open source online system for sustainable transport planning. Journal of transport and land use 10, 505--528.
 
-\leavevmode\hypertarget{ref-lucas2016method}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-lucas2016method}{}}%
 Lucas, K., Van Wee, B., Maat, K., 2016. A method to evaluate equitable accessibility: Combining ethical theories and accessibility-based approaches. Transportation 43, 473--490.
 
-\leavevmode\hypertarget{ref-marques2015infrastructure}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-marques2015infrastructure}{}}%
 Marqués, R., Hernández-Herrador, V., Calvo-Salazar, M., García-Cebrián, J., 2015. How infrastructure can promote cycling in cities: Lessons from seville. Research in Transportation Economics 53, 31--44.
 
-\leavevmode\hypertarget{ref-martinez2013new}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-martinez2013new}{}}%
 Martínez, L.M., Viegas, J.M., 2013. A new approach to modelling distance-decay functions for accessibility assessment in transport studies. Journal of Transport Geography 26, 87--96.
 
-\leavevmode\hypertarget{ref-mauttone2017bicycle}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-mauttone2017bicycle}{}}%
 Mauttone, A., Mercadante, G., Rabaza, M., Toledo, F., 2017. Bicycle network design: Model and solution algorithm. Transportation research procedia 27, 969--976.
 
-\leavevmode\hypertarget{ref-mesbah2012bilevel}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-mesbah2012bilevel}{}}%
 Mesbah, M., Thompson, R., Moridpour, S., 2012. Bilevel optimization approach to design of network of bike lanes. Transportation research record 2284, 21--28.
 
-\leavevmode\hypertarget{ref-nahmias2017integrating}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-nahmias2017integrating}{}}%
 Nahmias-Biran, B., Martens, K., Shiftan, Y., 2017. Integrating equity in transportation project assessment: A philosophical exploration and its practical implications. Transport reviews 37, 192--210.
 
-\leavevmode\hypertarget{ref-nello2020environmental}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-nello2020environmental}{}}%
 Nello-Deakin, S., 2020. Environmental determinants of cycling: Not seeing the forest for the trees? Journal of transport geography 85, 102704.
 
-\leavevmode\hypertarget{ref-olmos2020data}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-olmos2020data}{}}%
 Olmos, L.E., Tadeo, M.S., Vlachogiannis, D., Alhasoun, F., Alegre, X.E., Ochoa, C., Targa, F., González, M.C., 2020. A data science framework for planning the growth of bicycle infrastructures. Transportation Research Part C: Emerging Technologies 115, 102640.
 
-\leavevmode\hypertarget{ref-ofn2018population}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-ofn2018population}{}}%
 ONS, 2018. Population estimates for the UK, england and wales, scotland and northern ireland: Mid-2017. Hampshire: Office for National Statistics.
 
-\leavevmode\hypertarget{ref-ONS2011flowdata}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-ONS2011flowdata}{}}%
 ONS, 2011. 2011 census: Special workplace statistics (united kingdom).
 
-\leavevmode\hypertarget{ref-orozco2020data}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-orozco2020data}{}}%
 Orozco, L.G.N., Battiston, F., Iñiguez, G., Szell, M., 2020. Data-driven strategies for optimal bicycle network growth. Royal Society open science 7.
 
-\leavevmode\hypertarget{ref-padgham2019dodgr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-padgham2019dodgr}{}}%
 Padgham, M., 2019. Dodgr: An r package for network flow aggregation. Transport Findings. Network Design Lab.
 
-\leavevmode\hypertarget{ref-parkin2018designing}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-parkin2018designing}{}}%
 Parkin, J., 2018. Designing for cycle traffic. ICE Publishing. \url{https://doi.org/10.1680/dfct.63495}
 
-\leavevmode\hypertarget{ref-patterson2020associations}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-patterson2020associations}{}}%
 Patterson, R., Panter, J., Vamos, E.P., Cummins, S., Millett, C., Laverty, A.A., 2020. Associations between commute mode and cardiovascular disease, cancer, and all-cause mortality, and cancer incidence, using linked census data over 25 years in england and wales: A cohort study. The Lancet Planetary Health 4, e186--e194.
 
-\leavevmode\hypertarget{ref-pereira2017distributive}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-pereira2017distributive}{}}%
 Pereira, R.H., Schwanen, T., Banister, D., 2017. Distributive justice and equity in transportation. Transport reviews 37, 170--191.
 
-\leavevmode\hypertarget{ref-pucher2008making}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-pucher2008making}{}}%
 Pucher, J., Buehler, R., 2008. Making cycling irresistible: Lessons from the netherlands, denmark and germany. Transport reviews 28, 495--528.
 
-\leavevmode\hypertarget{ref-pucher2010infrastructure}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-pucher2010infrastructure}{}}%
 Pucher, J., Dill, J., Handy, S., 2010. Infrastructure, programs, and policies to increase bicycling: An international review. Preventive medicine 50, S106--S125.
 
-\leavevmode\hypertarget{ref-schoner2014missing}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-schoner2014missing}{}}%
 Schoner, J.E., Levinson, D.M., 2014. The missing link: Bicycle infrastructure networks and ridership in 74 US cities. Transportation 41, 1187--1204.
 
-\leavevmode\hypertarget{ref-sorton1994bicycle}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-sorton1994bicycle}{}}%
 Sorton, A., Walsh, T., 1994. Bicycle stress level as a tool to evaluate urban and suburban bicycle compatibility. Transportation Research Record 17--17.
 
-\leavevmode\hypertarget{ref-stinson2003commuter}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-stinson2003commuter}{}}%
 Stinson, M.A., Bhat, C.R., 2003. Commuter bicyclist route choice: Analysis using a stated preference survey. Transportation Research Record 1828, 107--115.
 
-\leavevmode\hypertarget{ref-agreement2015paris}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-agreement2015paris}{}}%
 UN, 2015. Paris agreement, in: Report of the Conference of the Parties to the United Nations Framework Convention on Climate Change (21st Session, 2015: Paris). Retrived December. HeinOnline, p. 2017.
 
-\leavevmode\hypertarget{ref-vidaltortosa_infrastructure_2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vidaltortosa_infrastructure_2020}{}}%
 Vidal Tortosa, E., Lovelace, R., Heinen, E., Mann, R.P., 2021. Infrastructure is not enough: Interactions between the environment, socioeconomic disadvantage and cycling participation in {England}. Journal of Transport and Land Use.
 
-\leavevmode\hypertarget{ref-wardman2007factors}{}%
-Wardman, M., Tight, M., Page, M., 2007. Factors influencing the propensity to cycle to work. Transportation Research Part A: Policy and Practice 41, 339--350.
+\leavevmode\vadjust pre{\hypertarget{ref-wardman2007factors}{}}%
+Wardman, M., Tight, M., Page, M., 2007. \href{https://doi.org/10.1016/j.tra.2006.09.011}{Factors influencing the propensity to cycle to work}. Transportation Research Part A: Policy and Practice 41, 339--350.
 
-\leavevmode\hypertarget{ref-wilson1971family}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-wilson1971family}{}}%
 Wilson, A.G., 1971. A family of spatial interaction models, and associated developments. Environment and Planning A 3, 1--32.
 
-\leavevmode\hypertarget{ref-winters2011motivators}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-winters2011motivators}{}}%
 Winters, M., Davidson, G., Kao, D., Teschke, K., 2011. Motivators and deterrents of bicycling: Comparing influences on decisions to ride. Transportation 38, 153--168.
 
-\leavevmode\hypertarget{ref-winters2010far}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-winters2010far}{}}%
 Winters, M., Teschke, K., Grant, M., Setton, E.M., Brauer, M., 2010. How far out of the way will we travel? Built environment influences on route selection for bicycle and car travel. Transportation Research Record 2190, 1--10.
+
+\leavevmode\vadjust pre{\hypertarget{ref-wysling2022improve}{}}%
+Wysling, L., Purves, R.S., 2022. Where to improve cycling infrastructure? Assessing bicycle suitability and bikeability with open data in the city of paris. Transportation research interdisciplinary perspectives 15, 100648.
 
 \end{CSLReferences}
 
