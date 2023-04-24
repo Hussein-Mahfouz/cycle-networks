@@ -39,6 +39,8 @@ editor_options:
 # elsevier style for referencing (from https://github.com/citation-style-language/styles)
 csl: extras/elsevier-harvard.csl
 always_allow_html: yes
+bibliography: references.bib
+bibliography: references.bib
 ---
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -76,10 +78,11 @@ While schemes have already been put in place for around a quarter of this networ
 
 ## Motivators and Deterrents to Cycling
 
-Much research has expores the question of what gets people to cycle.
-Segregated cycling infrastructure, which refers to road space that is allocated to cyclists only with physical separation to protect cyclists, is associated with cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure], with the separation from motorized vehicles being key [@winters2011motivators].
+Much research has explored the question of what gets people cycling.
+Segregated cycling infrastructure --- road space that is allocated to cyclists only with physical separation to protect cyclists --- is associated with cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure].
+Separation from motorized vehicles has found to be key [@winters2011motivators].
 Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal].
-However, such deviations are only considered if they do not considerably increase route circuitry; behaviour studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far].
+However, such deviations are only considered if they do not considerably increase route circuitry; behavior studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far].
 Another defining feature for cycling infrastructure is how well connected it is.
 Cyclists prefer cohesive infrastructure, particularly when cycling on arterial roads with high levels of motorized traffic [@stinson2003commuter].
 The lack of well-connected cycling infrastructure is one of the main obstacles to increasing cycling uptake [@caulfield2012determining].
@@ -108,15 +111,24 @@ The problem has also been solved by attempting to find the minimum cost of impro
 In this formulation, all origin-destination (OD) pairs need to be connected by roads that meet the desired LOS.
 A limitation of these approaches is that they do not explicitly solve for continuity.
 Continuity is addressed using either a constraint specifying that each link with a bike lane should be connected to at least one destination [@mesbah2012bilevel], a constraint on maximum deviation from shortest paths [@duthie2014optimization], or a discontinuity penalty to prioritize connected road segments [@mauttone2017bicycle].
-In this paper, continuity is analysed by looking at the connectivity of the network through the graph-theoretic concept of *connected components*. @orozco2020data study the existing cycling network in terms of its disconnected components.
-They propose two different algorithms to connect disconnected components; one connects the two largest components, and the other connects the largest component to its nearest neighbor.
-By measuring the growth of the largest connected component as a function of the kilometers of network added, they determine that these approaches are more effective at improving cycling network connectivity than random allocation of cycling infrastructure.
-The concept of connected components is also at the core of the methodology proposed by @olmos2020data. After routing the cycling demand onto the network links, they use percolation theory to filter out the links based on the aggregate flow passing through them, varying the flow threshold for filtering to identify the minimum flow at which the whole city is connected by a single component.
+In this paper, continuity is analysed by looking at the connectivity of the network through the graph-theoretic concept of *connected components*.
 
 [^2]: *flow* is used throughout this research to refer to the cycling demand when it is routed onto the road network.
     The flow on any road segment is the cumulative demand on it, resulting from cyclists commuting between various Origin-Destination (OD) pairs.
 
+@orozco2020data study the existing cycling network in terms of its disconnected components.
+They propose two different algorithms to connect disconnected components; one connects the two largest components, and the other connects the largest component to its nearest neighbor.
+By measuring the growth of the largest connected component as a function of the kilometers of network added, they determine that these approaches are more effective at improving cycling network connectivity than random allocation of cycling infrastructure.
+The concept of connected components is also at the core of the methodology proposed by @olmos2020data.
+After routing the cycling demand onto the network links, they use percolation theory to filter out the links based on the aggregate flow passing through them, varying the flow threshold for filtering to identify the minimum flow at which the whole city is connected by a single component.
 While these approaches deal with continuity better, they look at the network as a whole when attempting to improve it, and in doing so fail to account for equitable distribution of infrastructure.
+
+Other approaches have focused on characteristics of route segments as the basis of analysis to help prioritize investment in cycle infrastructure where it is most needed.
+@grisé2018 developed a multi-criteria approach, combined with estimated levels of usage, to highlight routes most in need of investment in Quebec City.
+@wysling2022 present a method that used open data from Paris to generate cycling suitability ratings based on 'bicycle suitability multipliers' associated with different types of road across the city, to support more effective interventions.
+
+None of the aforementioned studies explore the equity impacts of different network prioritization approaches.
+The following section highlights the importance of considering (often unstated) ethical assumptions underlying network optimisation and prioritization approaches of the type outlined above.
 
 ## Ethical Underpinnings and Proposed Approach
 
