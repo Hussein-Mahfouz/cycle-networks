@@ -141,7 +141,8 @@ optimize allocation of cycling lanes to the network without exceeding a
 set budget. They account for the effect of cycling lanes on car traffic,
 and attempt to maximize utilization of said lanes with minimal impact on
 car travel times. Safeguarding against increased car traffic may be counter-productive if the goal is to create a mode-shift, as research has shown that reducing road space for cars leads to less cars on the road, a phenomenon referred to as "traffic evaporation" [@nello2020environmental].
-On the other hand, @mauttone2017bicycle developed an optimization framework aiming at minimizing the total
+
+@mauttone2017bicycle developed an optimization framework aiming at minimizing the total
 user cost of cycling on the network without considering car usage. The aggregate flow^[*flow* is
 used throughout this research to refer to the cycling demand when it is
 routed onto the road network. The flow on any road segment is the
@@ -161,7 +162,6 @@ that each link with a bike lane should be connected to at least one
 destination [@mesbah2012bilevel], a constraint on maximum deviation
 from shortest paths [@duthie2014optimization], or a discontinuity
 penalty to prioritize connected road segments [@mauttone2017bicycle].
-
 In this paper, continuity is analysed by looking at the connectivity of
 the network through the graph-theoretic concept of *connected
 components*. @orozco2020data study the existing cycling network in terms of its disconnected
@@ -171,7 +171,9 @@ also at the core of the methodology proposed by @olmos2020data. After
 routing the cycling demand onto the network links, they use percolation
 theory to filter out the links based on the aggregate flow passing through them, varying the flow threshold for
 filtering to identify the minimum flow at which the whole city is
-connected by a giant component. While these approaches deal with
+connected by a single component. 
+
+While these approaches deal with
 continuity better, they look at the network as a whole when attempting
 to improve it, and in doing so fail to account for equitable
 distribution of infrastructure.
