@@ -97,11 +97,10 @@ have already been put in place for around a quarter of this network, the majorit
 
 ## Motivators and Deterrents to Cycling
 
-Much research has been done to understand what gets people to cycle.
-Segregated cycling infrastructure^[*Segregated cycling infrastructure*
-refers to road space that is allocated to cyclists only, with physical
-separation to protect cyclists from other modes of transport.] has been
-shown to increase cycling uptake [@aldred2019impacts; @goodman2014new;
+Much research has expores the question of what gets people to cycle.
+Segregated cycling infrastructure, which refers to road space that is
+allocated to cyclists only with physical separation to protect cyclists,
+is associated with cycling uptake [@aldred2019impacts; @goodman2014new;
 @marques2015infrastructure], with the separation from motorized
 vehicles being key [@winters2011motivators]. Revealed preference of
 cyclists shows that they are willing to deviate from the most efficient
