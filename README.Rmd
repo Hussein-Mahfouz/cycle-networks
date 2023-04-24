@@ -418,9 +418,10 @@ To conduct routing, the following is considered:
 The above points are accounted for by using a weighted road network for
 routing. This has been previously done by multiplying all road segments
 without cycling infrastructure by a fixed impedance factor
-[@mauttone2017bicycle], or by assigning different weights to the road
-segments proportional to the investment cost of bringing them to an
-acceptable level of stress for cycling [@duthie2014optimization].
+[@mauttone2017bicycle], by assigning different weights to the road
+segments that are (a) proportional to the investment cost of bringing them to an
+acceptable level of stress for cycling [@duthie2014optimization], or (b) inversely proportional to 
+perceived level of stress experienced by cyclists [@wysling2022improve].
 Perceived stress for cyclists has been found to be a function of vehicular traffic
 volume and speed [@sorton1994bicycle], both of which vary predictably
 with road type. @gehrke2020cycling build on this information to use
@@ -434,7 +435,9 @@ by @sorton1994bicycle and information from Table
 infrastructure. We believe this to be more appropriate than the simplistic
 approach adopted by @mauttone2017bicycle as it makes use of a hierarchy
 of road preference based on perceived stress levels, going beyond simply
-favouring roads with existing cycling infrastructure.
+favouring roads with existing cycling infrastructure. 
+It is also different to the weighting profile used by @wysling2022improve as it adds a larger
+weight on trunk and primary roads then other roads without cycling infrastructure.
 
 <!-- The approach is also in line with the creation of LTNs, as residential streets are those where motorized traffic is most likely to be banned in the creation of LTNs.  -->
 
