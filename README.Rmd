@@ -208,6 +208,10 @@ as a cornerstone of distributive justice, and contend that policies
 should aim to distribute investments in a way that minimizes spatial
 variations in accessibility.
 
+# Method and Application
+
+## Method overview
+
 This research attempts to propose an egalitarian framework for cycling
 network design. This is done by identifying the different sub-networks
 that exist within the larger network, and ensuring that each gets a fair
@@ -228,8 +232,6 @@ links to the solution until a budget limit is met. The benefit is the
 flow on the link, and each link is assigned a cost based on current road
 conditions.
 
-<!-- EDIT! Add more to limitations -->
-
 Our work builds on these community finding approaches by proposing a
 similar greedy network expansion algorithm for cycle network expansion
 *within communities*. We incorporate community finding methods for study
@@ -248,9 +250,15 @@ cyclist preferences and government priorities. Section
 \@ref(road-segment-prioritization) outlines a method for partitioning the
 study area based on a community finding algorithm and routed cycling
 demand. It then introduces the network expansion algorithms, and compares an approach grounded in
-'egalitarianism' to one grounded in 'utilitarianism'.
+'egalitarianism' to one grounded in 'utilitarianism'. As mentioned above, Manchester is used as a case study. 
+An overview of the steps involved is shown in Figure \@ref(fig:methodflowchart).
 
-# Calculating Potential Cycling Demand
+```{r methodflowchart, fig.cap="Flowchart of proposed methodology", out.width="80%", fig.show='hold', fig.align = "center", echo=FALSE}
+knitr::include_graphics("extras/methodology_flowchart.png")
+```
+
+
+## Calculating Potential Cycling Demand
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # scripts for potential demand
@@ -341,7 +349,7 @@ As discussed in Section \@ref(discussion-and-conclusions), using adapted uptake
 models could enable the approach to help plan for solutions such as e-bikes
 that enable trips covering longer distances and hillier roads.
 
-# Routing
+## Routing
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # scripts for routing
@@ -604,7 +612,7 @@ were those most likely to have cycled to school. Getting people to cycle
 from a young age is therefore key to achieving societal change in
 commuting habits.
 
-# Road Segment Prioritization
+## Road Segment Prioritization
 
 ```{r echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # scripts for cycle network algorithms
@@ -636,7 +644,7 @@ infrastructure. In order to incorporate egalitarian principles in our
 approach, we use community detection to partition the study area and
 distribute investment over the different subdivisions.
 
-## Community Detection
+### Community Detection
 
 As explained in Section
 \@ref(ethical-underpinnings-and-proposed-approach), a major challenge
@@ -685,7 +693,7 @@ knitr::include_graphics("data/Manchester/Plots/communities_alternative_Mancheste
 \  
 <!-- this prevents text from floating above figure -->
 
-## Algorithm 1: Utilitarian Expansion
+### Algorithm 1: Utilitarian Expansion
 
 The algorithm logic is as follows:
 
@@ -707,7 +715,7 @@ satisfies the directness criteria, since links on the weighted shortest
 paths are those that have the highest flow passing through them (this is
 a result of the routing in Section \@ref(routing).
 
-## Algorithm 2: Egalitarian Expansion 
+### Algorithm 2: Egalitarian Expansion 
 
 The first algorithm focuses on connectivity and directness, but not on
 fairly distributing investment. The latter is not a requirement for
@@ -813,7 +821,7 @@ knitr::include_graphics(c(
 
 ```
 
-## Connectivity
+### Connectivity
 
 Existing cycling infrastructure is made up of many disconnected
 components. Both Algorithm 1 and 2 start with all existing segregated
