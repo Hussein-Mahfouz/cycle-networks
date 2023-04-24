@@ -288,7 +288,9 @@ travel volumes between zones [@black1995spatial; @martinez2013new;
 @wilson1971family]. In this paper we use open access data from the UK
 census [@ONS2011flowdata], which contains aggregate statistics on
 number of commuters between administrative zones --- Middle layer Super
-Output Areas (MSOA) --- by mode of travel. MSOAs have an average
+Output Areas (MSOA) --- by mode of travel (this is similar to the approach 
+used by @grise2018if). 
+MSOAs have an average
 population of just over 8000 [@ofn2018population].^[ See
 <https://wicid.ukdataservice.ac.uk/> for open access to the OD data.]
 Figures \@ref(fig:potdemhistograms) and \@ref(fig:desirefacetcycling)
@@ -916,7 +918,8 @@ to more granular OD data (and for governments and other
 data-collecting organisations to make OD data more
 readily available).
 The potential demand calculation is also based on cycling in the traditional sense, and does not consider the 
-effect of micro-mobility on reducing topology-related impedance to cycling. Given that we are proposing an approach which can accommodate any cycling uptake functions, this is an acceptable limitation.
+effect of micro-mobility on reducing topology-related impedance to cycling. Given that we are proposing an approach which can accommodate any cycling uptake functions, this is an acceptable limitation. 
+The network prioritization is based strongly on potential cycling demand calculations. While this provides a solid supplementary tool for network planning, it would be more useful as part of a multi-criteria approach that considers on-the ground information from existing cyclists, road geometries, and traffic analysis. @grise2018if propose a multi-criteria approach that includes the first of these points.
 
 The approach is also focused solely on the allocation of cycling
 infrastructure, and does not consider the larger political and
