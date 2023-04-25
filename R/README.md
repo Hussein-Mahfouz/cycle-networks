@@ -237,7 +237,7 @@ for dedicated infrastructure. It is necessary to run this script before
 size of the city being analyzed (Script 8.2 takes almost 2 hours for
 Birmingham on a 2.7 GHz Intel Core i5 laptop with 8GB of RAM)
 
-#### \_\_*8.1\_plot\_network\_growth.R*
+#### \_\_*8.1\_growth\_utilitarian.R*
 
 Here we obtain results for the utilitarian growth function (Algorithms 1
 and 2 in the paper)
@@ -263,7 +263,7 @@ Logic:
 <!--   <img src="../data/Manchester/Plots/Growth_Results/growth_utilitarian_priority_all_FLOW.png" width="450" /> -->
 <!-- </p> -->
 
-#### \_\_*8.2\_plot\_network\_growth\_community.R*
+#### \_\_*8.2\_growth\_egalitarian.R*
 
 Here we obtain results for the egalitarian growth function (Algorithms 2
 in the paper). We also compare the connectivity of the network proposed
