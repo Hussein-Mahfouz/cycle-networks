@@ -78,7 +78,7 @@ While schemes have already been put in place for around a quarter of this networ
 
 Much research has explored the question of what gets people cycling.
 Segregated cycling infrastructure --- road space that is allocated to cyclists only with physical separation to protect cyclists --- is associated with cycling uptake [@aldred2019impacts; @goodman2014new; @marques2015infrastructure].
-Separation from motorized vehicles has found to be key [@winters2011motivators].
+Separation from motorized vehicles has been found to be key [@winters2011motivators].
 Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads [@crane2017longitudinal].
 However, such deviations are only considered if they do not considerably increase route circuitry; behavior studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route [@broach2011bicycle; @winters2010far].
 Another defining feature for cycling infrastructure is how well connected it is.
@@ -123,10 +123,10 @@ While these approaches deal with continuity better, they look at the network as 
 
 Other approaches have focused on characteristics of route segments as the basis of analysis to help prioritize investment in cycle infrastructure where it is most needed.
 @grise2018if developed a multi-criteria approach, combined with estimated levels of usage, to highlight routes most in need of investment in Quebec City.
-@wysling2022improve present a method that used open data from Paris to generate cycling suitability ratings based on 'bicycle suitability multipliers' associated with different types of road across the city, to support more effective interventions.
+@wysling2022improve present a method that used open data from Paris to generate cycling suitability ratings, based on 'bicycle suitability multipliers' associated with different types of road across the city, to support more effective interventions.
 
-None of the aforementioned studies explore the equity impacts of different network prioritization approaches.
-The following section highlights the importance of considering (often unstated) ethical assumptions underlying network optimisation and prioritization approaches of the type outlined above.
+With the exception of @grise2018if, the aforementioned studies do not explore the equity impacts of different network prioritization approaches.
+The following section highlights the importance of considering (often unstated) ethical assumptions underlying network optimization and prioritization approaches of the type outlined above.
 
 ## Ethical Underpinnings and Proposed Approach
 

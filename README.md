@@ -56,7 +56,7 @@ Much research has explored the question of what gets people cycling.
 Segregated cycling infrastructure — road space that is allocated to
 cyclists only with physical separation to protect cyclists — is
 associated with cycling uptake (Aldred et al., 2019; Goodman et al.,
-2014; Marqués et al., 2015). Separation from motorized vehicles has
+2014; Marqués et al., 2015). Separation from motorized vehicles has been
 found to be key (Winters et al., 2011). Revealed preference of cyclists
 shows that they are willing to deviate from the most efficient routes in
 order to commute on safer roads (Crane et al., 2017). However, such
@@ -145,15 +145,16 @@ infrastructure where it is most needed. Grisé and El-Geneidy (2018)
 developed a multi-criteria approach, combined with estimated levels of
 usage, to highlight routes most in need of investment in Quebec City.
 Wysling and Purves (2022) present a method that used open data from
-Paris to generate cycling suitability ratings based on ‘bicycle
+Paris to generate cycling suitability ratings, based on ‘bicycle
 suitability multipliers’ associated with different types of road across
 the city, to support more effective interventions.
 
-None of the aforementioned studies explore the equity impacts of
-different network prioritization approaches. The following section
-highlights the importance of considering (often unstated) ethical
-assumptions underlying network optimisation and prioritization
-approaches of the type outlined above.
+With the exception of Grisé and El-Geneidy (2018), the aforementioned
+studies do not explore the equity impacts of different network
+prioritization approaches. The following section highlights the
+importance of considering (often unstated) ethical assumptions
+underlying network optimization and prioritization approaches of the
+type outlined above.
 
 ## 2.3 Ethical Underpinnings and Proposed Approach
 
