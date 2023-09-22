@@ -5,16 +5,19 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -106,7 +109,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={A Road Segment Prioritization Approach for Cycling Infrastructure},
   hidelinks,
@@ -119,7 +122,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on `filtered permeability' and `Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. ¶ \par ¶ \textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity
+Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on `filtered permeability' and `Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning.\\
+\par\\
+\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity
 \end{abstract}
 
 \hypertarget{introduction}{%
@@ -151,7 +156,7 @@ While schemes have already been put in place for around a quarter of this networ
 
 Much research has explored the question of what gets people cycling.
 Segregated cycling infrastructure --- road space that is allocated to cyclists only with physical separation to protect cyclists --- is associated with cycling uptake (Aldred et al., 2019; Goodman et al., 2014; Marqués et al., 2015).
-Separation from motorized vehicles has found to be key (Winters et al., 2011).
+Separation from motorized vehicles has been found to be key (Winters et al., 2011).
 Revealed preference of cyclists shows that they are willing to deviate from the most efficient routes in order to commute on safer roads (Crane et al., 2017).
 However, such deviations are only considered if they do not considerably increase route circuitry; behavior studies have found that the probability of choosing a route decreases in proportion to its length relative to the shortest route (Broach et al., 2011; Winters et al., 2010).
 Another defining feature for cycling infrastructure is how well connected it is.
@@ -234,6 +239,7 @@ Section \ref{calculating-potential-cycling-demand} focuses on calculating potent
 Section \ref{routing} focuses on routing the demand onto the road network while accounting for cyclist preferences and government priorities.
 Section \ref{road-segment-prioritization} outlines a method for partitioning the study area based on a community finding algorithm and routed cycling demand.
 It then introduces the network expansion algorithms, and compares an approach grounded in `egalitarianism' to one grounded in `utilitarianism'.
+
 As mentioned above, Manchester is used as a case study.
 An overview of the steps involved is shown in Figure \ref{fig:methodflowchart}.
 
@@ -245,6 +251,99 @@ An overview of the steps involved is shown in Figure \ref{fig:methodflowchart}.
 
 \caption{Flowchart of proposed methodology}\label{fig:methodflowchart}
 \end{figure}
+
+\hypertarget{case-study-area}{%
+\subsection{Case study area}\label{case-study-area}}
+
+Manchester is a city in the North West of England.
+``Manchester'' can be used to refer to multiple things:
+
+\begin{itemize}
+\tightlist
+\item
+  Manchester City Council, which is a local government district that includes the city centre and surrounding areas.
+\item
+  The Greater Manchester region, which is a metropolitan county that includes the city of Manchester and 9 other local government districts.
+\item
+  The city of Manchester, which is used by visitors to refer to the city centre and surrounding areas. This definition if formalised in the Major Towns and Cities (TCITY) dataset provided by the Office for National Statistics.
+\end{itemize}
+
+We use the TCITY definition of Manchester, which was ``developed specifically for the production and analysis of statistics'' and which is shown in Figure \ref{fig:manchestermap}.
+
+\begin{verbatim}
+##   [1] "geo_code"                "geo_name"               
+##   [3] "lad11cd"                 "lad_name"               
+##   [5] "all"                     "bicycle"                
+##   [7] "foot"                    "car_driver"             
+##   [9] "car_passenger"           "motorbike"              
+##  [11] "train_tube"              "bus"                    
+##  [13] "taxi_other"              "govtarget_slc"          
+##  [15] "govtarget_sic"           "govtarget_slw"          
+##  [17] "govtarget_siw"           "govtarget_sld"          
+##  [19] "govtarget_sid"           "govtarget_slp"          
+##  [21] "govtarget_sip"           "govtarget_slm"          
+##  [23] "govtarget_sim"           "govtarget_slpt"         
+##  [25] "govtarget_sipt"          "govnearmkt_slc"         
+##  [27] "govnearmkt_sic"          "govnearmkt_slw"         
+##  [29] "govnearmkt_siw"          "govnearmkt_sld"         
+##  [31] "govnearmkt_sid"          "govnearmkt_slp"         
+##  [33] "govnearmkt_sip"          "govnearmkt_slm"         
+##  [35] "govnearmkt_sim"          "govnearmkt_slpt"        
+##  [37] "govnearmkt_sipt"         "gendereq_slc"           
+##  [39] "gendereq_sic"            "gendereq_slw"           
+##  [41] "gendereq_siw"            "gendereq_sld"           
+##  [43] "gendereq_sid"            "gendereq_slp"           
+##  [45] "gendereq_sip"            "gendereq_slm"           
+##  [47] "gendereq_sim"            "gendereq_slpt"          
+##  [49] "gendereq_sipt"           "dutch_slc"              
+##  [51] "dutch_sic"               "dutch_slw"              
+##  [53] "dutch_siw"               "dutch_sld"              
+##  [55] "dutch_sid"               "dutch_slp"              
+##  [57] "dutch_sip"               "dutch_slm"              
+##  [59] "dutch_sim"               "dutch_slpt"             
+##  [61] "dutch_sipt"              "ebike_slc"              
+##  [63] "ebike_sic"               "ebike_slw"              
+##  [65] "ebike_siw"               "ebike_sld"              
+##  [67] "ebike_sid"               "ebike_slp"              
+##  [69] "ebike_sip"               "ebike_slm"              
+##  [71] "ebike_sim"               "ebike_slpt"             
+##  [73] "ebike_sipt"              "base_slcyclehours"      
+##  [75] "govtarget_sicyclehours"  "govnearmkt_sicyclehours"
+##  [77] "gendereq_sicyclehours"   "dutch_sicyclehours"     
+##  [79] "ebike_sicyclehours"      "base_sldeath"           
+##  [81] "base_slyll"              "base_slvalueyll"        
+##  [83] "base_slsickdays"         "base_slvaluesick"       
+##  [85] "base_slvaluecomb"        "govtarget_sideath"      
+##  [87] "govtarget_siyll"         "govtarget_sivalueyll"   
+##  [89] "govtarget_sisickdays"    "govtarget_sivaluesick"  
+##  [91] "govtarget_sivaluecomb"   "govnearmkt_sideath"     
+##  [93] "govnearmkt_siyll"        "govnearmkt_sivalueyll"  
+##  [95] "govnearmkt_sisickdays"   "govnearmkt_sivaluesick" 
+##  [97] "govnearmkt_sivaluecomb"  "gendereq_sideath"       
+##  [99] "gendereq_siyll"          "gendereq_sivalueyll"    
+## [101] "gendereq_sisickdays"     "gendereq_sivaluesick"   
+## [103] "gendereq_sivaluecomb"    "dutch_sideath"          
+## [105] "dutch_siyll"             "dutch_sivalueyll"       
+## [107] "dutch_sisickdays"        "dutch_sivaluesick"      
+## [109] "dutch_sivaluecomb"       "ebike_sideath"          
+## [111] "ebike_siyll"             "ebike_sivalueyll"       
+## [113] "ebike_sisickdays"        "ebike_sivaluesick"      
+## [115] "ebike_sivaluecomb"       "base_slcarkm"           
+## [117] "base_slco2"              "govtarget_sicarkm"      
+## [119] "govtarget_sico2"         "govnearmkt_sicarkm"     
+## [121] "govnearmkt_sico2"        "gendereq_sicarkm"       
+## [123] "gendereq_sico2"          "dutch_sicarkm"          
+## [125] "dutch_sico2"             "ebike_sicarkm"          
+## [127] "ebike_sico2"             "perc_rf_dist_u10km"     
+## [129] "avslope_perc_u10km"      "geometry"               
+## [131] "pcycle"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: st_centroid assumes attributes are constant over geometries
+\end{verbatim}
+
+\includegraphics{README_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \hypertarget{calculating-potential-cycling-demand}{%
 \subsection{Calculating Potential Cycling Demand}\label{calculating-potential-cycling-demand}}

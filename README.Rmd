@@ -22,8 +22,8 @@ numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
 # keywords: "cycling networks, low-traffic neighborhoods, potential demand, routing"
 output:
- # bookdown::github_document2:
-   bookdown::pdf_document2:
+   bookdown::github_document2:
+#    bookdown::pdf_document2:
  # bookdown::word_document2:
       highlight: null   # to remove code highlighting in r chunks
       toc: false
@@ -48,6 +48,12 @@ citr::tidy_bib_file(rmd_file = "README.Rmd", messy_bibliography = "~/uaf/allrefs
 
 ```{r, echo=FALSE, eval=FALSE}
 file.rename("README.pdf", "cycle-network-paper.pdf")
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(tmap)
+knitr::opts_chunk$set(warning = FALSE)
 ```
 
 <!-- Highlights -->
@@ -161,13 +167,60 @@ Section \@ref(calculating-potential-cycling-demand) focuses on calculating poten
 Section \@ref(routing) focuses on routing the demand onto the road network while accounting for cyclist preferences and government priorities.
 Section \@ref(road-segment-prioritization) outlines a method for partitioning the study area based on a community finding algorithm and routed cycling demand.
 It then introduces the network expansion algorithms, and compares an approach grounded in 'egalitarianism' to one grounded in 'utilitarianism'. 
-As mentioned above, Manchester is used as a case study. 
 An overview of the steps involved is shown in Figure \@ref(fig:methodflowchart).
 
 ```{r methodflowchart, fig.cap="Flowchart of proposed methodology", out.width="80%", fig.show='hold', fig.align = "center", echo=FALSE}
 knitr::include_graphics("extras/methodology_flowchart.png")
 ```
 
+## Case study area
+
+Manchester is a city in the North West of England.
+"Manchester" can be used to refer to multiple things:
+
+- Manchester City Council, which is a local government district that includes the city centre and surrounding areas.
+- The Greater Manchester region, which is a metropolitan county that includes the city of Manchester and 9 other local government districts.
+- The city of Manchester, which is used by visitors to refer to the city centre and surrounding areas. This definition if formalised in the Major Towns and Cities (TCITY) dataset provided by the Office for National Statistics.
+
+We use the TCITY definition of Manchester, which was "developed specifically for the production and analysis of statistics" and which is shown in Figure \@ref(fig:manchestermap).
+Manchester is a cosmopolitan city with a large university population.
+As shown in Figure \@ref(fig:manchestermap) (right), the high density of the central area allows high levels of cycling, although the surrounding areas have low levels of cycling.
+Manchester and its surrounding have many deprived areas.
+
+
+```{r manchestermap, echo=FALSE, fig.cap="Maps of Greater Manchester (top) and the case study area (City of Manchester)"}
+greater_manchester = pct::get_pct_zones(region = "greater-manchester", geography = "msoa")
+greater_manchester = greater_manchester |>
+  mutate(pcycle = bicycle / all * 100)
+# names(greater_manchester)
+msoas = sf::read_sf("./data/Manchester/msoas_geometry.shp")
+msoas_union = sf::st_union(msoas)
+greater_manchester_lads = greater_manchester |>
+  group_by(lad_name) |>
+  summarise()
+?tm_scale_bar
+m1 = tm_shape(greater_manchester_lads) +
+  tm_polygons(col = "lad_name", palette = "Set1", alpha = 0.2, title = "") +
+  tm_layout(legend.position = c("left", "bottom")) +
+  tm_shape(msoas_union) +
+  tm_borders(col = "black", lwd = 2) +
+  tm_scale_bar(breaks = (0:3)*5)
+msoas_centroids = sf::st_centroid(msoas)
+pct_zones_in_manchester = greater_manchester[msoas_centroids, ] 
+m2 = tm_shape(greater_manchester, bb = msoas) +
+  tm_fill("pcycle", palette = "Blues", title = "% cycling to work\n(2011 Census)") +
+  tm_layout(legend.position = c("left", "bottom"), legend.bg.color = "white", legend.bg.alpha = 0.5) +
+  tm_shape(msoas_union) +
+  tm_borders(col = "black", lwd = 2) +
+  tm_scale_bar(breaks = 0:5)
+tmap_arrange(m1, m2, nrow = 1)
+```
+
+In the context of other cities defined in the TCITY dataset, Manchester is a large city, with a mid-level of cycling (see Figure \@ref(fig:manchestercyclinglevels)).
+
+```{r manchestercyclinglevels, echo=FALSE, fig.cap="Cycling levels in the case study area (City of Manchester)"}
+knitr::include_graphics("./extras/uk_cities_mode_share.png")
+```
 
 ## Calculating Potential Cycling Demand
 
