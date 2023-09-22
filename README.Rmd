@@ -216,6 +216,11 @@ m2 = tm_shape(greater_manchester, bb = msoas) +
 tmap_arrange(m1, m2, nrow = 1)
 ```
 
+In the context of other cities defined in the TCITY dataset, Manchester is a large city, with a mid-level of cycling (see Figure \@ref(fig:manchestercyclinglevels)).
+
+```{r manchestercyclinglevels, echo=FALSE, fig.cap="Cycling levels in the case study area (City of Manchester)"}
+knitr::include_graphics("./extras/uk_cities_mode_share.png")
+```
 
 ## Calculating Potential Cycling Demand
 
