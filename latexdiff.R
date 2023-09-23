@@ -25,3 +25,13 @@ rmarkdown::render("paper_round_1.Rmd")
 system("latexdiff paper_round_1.tex README.tex > tracked-changes_2.tex")
 tinytex::pdflatex("tracked-changes_2.tex")
 browseURL("tracked-changes_2.pdf")
+
+
+# ROUND 3: Hussein
+
+file.edit("paper_drafts/paper_round_2.Rmd")
+rmarkdown::render("paper_drafts/paper_round_2.Rmd")
+# compare with current version and create tracked changes
+system("latexdiff paper_round_2.tex README.tex > tracked-changes_3.tex")
+tinytex::pdflatex("tracked-changes_3.tex")
+browseURL("tracked-changes_3.pdf")

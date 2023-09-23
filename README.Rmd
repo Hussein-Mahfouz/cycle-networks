@@ -22,9 +22,9 @@ numbersections: true
 abstract: "Understanding the motivators and deterrents to cycling is essential for creating infrastructure that gets more people to adopt cycling as a mode of transport. This paper demonstrates a new approach to support the prioritization of cycling infrastructure and cycling network design, accounting for cyclist preferences and the growing emphasis on 'filtered permeability' and 'Low Traffic Neighborhood' interventions internationally. The approach combines distance decay, route calculation, and network analysis methods to examine where future cycling demand is most likely to arise, how such demand could be accommodated within existing street networks, and how to ensure a fair distribution of investment. Although each of these methods has been applied to cycling infrastructure prioritization in previous research, this is the first time that they have been combined, creating an integrated road segment prioritization approach. The approach, which can be applied to other cities, is demonstrated in a case study of Manchester, resulting in cycling networks that balance directness against the need for safe and stress-free routes under different investment scenarios. A key benefit of the approach from a policy perspective is its ability to support egalitarian and cost-effective strategic cycle network planning. \\par\\textbf{Keywords:} cycling networks, low-traffic neighborhoods, routing, transport equity"
 # keywords: "cycling networks, low-traffic neighborhoods, potential demand, routing"
 output:
-   bookdown::github_document2:
+   # bookdown::github_document2:
 #    bookdown::pdf_document2:
- # bookdown::word_document2:
+  bookdown::word_document2:
       highlight: null   # to remove code highlighting in r chunks
       toc: false
       extra_dependencies: ["subcaption", "longtable", "float", "multirow", "placeins", "multicol"]
@@ -75,7 +75,9 @@ While this unprecedented sum is an opportunity to reshape cities in a way that i
 
 Funding alone is therefore no guarantee of a change in commuting across the country; it must be used to design adequate cycling infrastructure that is based on motivators and deterrents to cycling.
 In this paper we propose an approach for planning connected cycling networks that can be generalised to any city with appropriate input data (as shown in the Appendix).
-We used the city of Manchester as a case study due to its ambitions to become the first UK region with a carbon neutral transport network, supported by ambitious plans for a 1800 mile walking and cycling network (the 'Bee Network') that will be delivered over 10 years [@manchestercyclingbee2020].
+We used the city of Manchester as a case study.
+The city is situated in the region of Greater Manchester, which has ambitions to become the first UK region with a carbon neutral transport network.
+These ambitions are supported by plans for a 1800 mile walking and cycling network (as part of the 'Bee Network') that will be delivered over 10 years [@manchestercyclingbee2020].
 While schemes have already been put in place for around a quarter of this network, the majority is yet to be built.
 
 # Literature Review
@@ -166,7 +168,7 @@ The current work addresses these limitations through the following organisation.
 Section \@ref(calculating-potential-cycling-demand) focuses on calculating potential cycling demand.
 Section \@ref(routing) focuses on routing the demand onto the road network while accounting for cyclist preferences and government priorities.
 Section \@ref(road-segment-prioritization) outlines a method for partitioning the study area based on a community finding algorithm and routed cycling demand.
-It then introduces the network expansion algorithms, and compares an approach grounded in 'egalitarianism' to one grounded in 'utilitarianism'. 
+It then introduces the network expansion algorithms, and compares an approach grounded in 'egalitarianism' to one grounded in 'utilitarianism'.
 An overview of the steps involved is shown in Figure \@ref(fig:methodflowchart).
 
 ```{r methodflowchart, fig.cap="Flowchart of proposed methodology", out.width="80%", fig.show='hold', fig.align = "center", echo=FALSE}
@@ -175,20 +177,18 @@ knitr::include_graphics("extras/methodology_flowchart.png")
 
 ## Case study area
 
-Manchester is a city in the North West of England.
+Manchester is a city in the North West of England, and is the most populous of the 10 metropolitan boroughs that make up Greater Manchester (\@ref(fig:manchestermap)).
 "Manchester" can be used to refer to multiple things:
 
-- Manchester City Council, which is a local government district that includes the city centre and surrounding areas.
-- The Greater Manchester region, which is a metropolitan county that includes the city of Manchester and 9 other local government districts.
-- The city of Manchester, which is used by visitors to refer to the city centre and surrounding areas. This definition if formalised in the Major Towns and Cities (TCITY) dataset provided by the Office for National Statistics.
+-   Manchester City Council, which is a local government district that includes the city centre and surrounding areas.
+-   The Greater Manchester region, which is a metropolitan county that includes the city of Manchester and 9 other local government districts.
+-   The city of Manchester, which is used by visitors to refer to the city centre and surrounding areas. This definition is formalised in the Major Towns and Cities (TCITY) dataset provided by the Office for National Statistics [@ons2015cities].
 
 We use the TCITY definition of Manchester, which was "developed specifically for the production and analysis of statistics" and which is shown in Figure \@ref(fig:manchestermap).
 Manchester is a cosmopolitan city with a large university population.
-As shown in Figure \@ref(fig:manchestermap) (right), the high density of the central area allows high levels of cycling, although the surrounding areas have low levels of cycling.
-Manchester and its surrounding have many deprived areas.
+As shown in Figure \@ref(fig:manchestermap) (right), the high density of the central area allows relatively high levels of cycling compared to the rest of the city.
 
-
-```{r manchestermap, echo=FALSE, fig.cap="Maps of Greater Manchester (top) and the case study area (City of Manchester)"}
+```{r manchestermap, echo=FALSE, fig.cap="Maps of Greater Manchester (left) and the case study area - City of Manchester (right)", fig.show='hold', fig.align="center"}
 greater_manchester = pct::get_pct_zones(region = "greater-manchester", geography = "msoa")
 greater_manchester = greater_manchester |>
   mutate(pcycle = bicycle / all * 100)
@@ -216,10 +216,13 @@ m2 = tm_shape(greater_manchester, bb = msoas) +
 tmap_arrange(m1, m2, nrow = 1)
 ```
 
-In the context of other cities defined in the TCITY dataset, Manchester is a large city, with a mid-level of cycling (see Figure \@ref(fig:manchestercyclinglevels)).
+In the context of other cities defined in the TCITY dataset, Manchester is a large city, with a mid-level of cycling (Figure \@ref(fig:manchestercyclinglevels)).
+If the ambitions of the Bee Network are realized in the coming years, this mode share could go up significantly.
 
-```{r manchestercyclinglevels, echo=FALSE, fig.cap="Cycling levels in the case study area (City of Manchester)"}
-knitr::include_graphics("./extras/uk_cities_mode_share.png")
+```{r manchestercyclinglevels, echo=FALSE, fig.cap="Cycling levels in cities across the country", out.width="85%", fig.show='hold', fig.align="center"}
+
+
+knitr::include_graphics("./data/uk_cities_mode_share_2021.png")
 ```
 
 ## Calculating Potential Cycling Demand
@@ -542,7 +545,7 @@ The algorithm logic is as follows:
 This algorithm ensures that the resulting network is connected.
 It also satisfies the directness criteria, since links on the weighted shortest paths are those that have the highest flow passing through them (this is a result of the routing in Section \@ref(routing).
 
-### Algorithm 2: Egalitarian Expansion 
+### Algorithm 2: Egalitarian Expansion
 
 The first algorithm focuses on connectivity and directness, but not on fairly distributing investment.
 The latter is not a requirement for increasing cycling uptake, but it is fundamental for spatial equity, as explained in Section \@ref(ethical-underpinnings-and-proposed-approach).
@@ -698,7 +701,9 @@ The level of detail is only as good as the granularity of the available data (in
 They also give rise to an \`ecological fallacy' whereby average characteristics are assumed to apply to all residents of the aggregated geographical area, suggesting a need for applying the methods to more granular OD data (and for governments and other data-collecting organisations to make OD data more readily available).
 The potential demand calculation is also based on cycling in the traditional sense, and does not consider the effect of micro-mobility on reducing topology-related impedance to cycling.
 Given that we are proposing an approach which can accommodate any cycling uptake functions, this is an acceptable limitation.
-The network prioritization is based strongly on potential cycling demand calculations. While this provides a solid supplementary tool for network planning, it would be more useful as part of a multi-criteria approach that considers on-the ground information from existing cyclists, road geometries, and traffic analysis. @grise2018if propose a multi-criteria approach that includes the first of these points.
+The network prioritization is based strongly on potential cycling demand calculations.
+While this provides a solid supplementary tool for network planning, it would be more useful as part of a multi-criteria approach that considers on-the ground information from existing cyclists, road geometries, and traffic analysis.
+@grise2018if propose a multi-criteria approach that includes the first of these points.
 
 The approach is also focused solely on the allocation of cycling infrastructure, and does not consider the larger political and regulatory environment that needs to exist to promote cycling; while segregated, connected, and direct cycling infrastructure is key to achieving high levels of cycling, research has shown that it cannot exist in a vacuum.
 @wardman2007factors developed a mode choice model for the UK and their results showed that improved cycling infrastructure on its own only had modest impacts on mode shift, and even the unlikely scenario of all urban routes being serviced by segregated bike lanes was forecast to increase cycling mode share by only 3%.

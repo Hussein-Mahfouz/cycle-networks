@@ -239,8 +239,7 @@ in Figure <a href="#fig:methodflowchart">3.1</a>.
 
 <p class="caption">
 
-<span id="fig:methodflowchart"></span>Figure 3.1: Flowchart of proposed
-methodology
+Figure 3.1: Flowchart of proposed methodology
 
 </p>
 
@@ -248,8 +247,10 @@ methodology
 
 ## 3.2 Case study area
 
-Manchester is a city in the North West of England. “Manchester” can be
-used to refer to multiple things:
+Manchester is a city in the North West of England, and is the most
+populous of the 10 metropolitan boroughs that make up Greater Manchester
+(<a href="#fig:manchestermap">3.2</a>). “Manchester” can be used to
+refer to multiple things:
 
 - Manchester City Council, which is a local government district that
   includes the city centre and surrounding areas.
@@ -257,44 +258,42 @@ used to refer to multiple things:
   includes the city of Manchester and 9 other local government
   districts.
 - The city of Manchester, which is used by visitors to refer to the city
-  centre and surrounding areas. This definition if formalised in the
+  centre and surrounding areas. This definition is formalised in the
   Major Towns and Cities (TCITY) dataset provided by the Office for
-  National Statistics.
+  National Statistics (“Major towns and cities,” 2015).
 
 We use the TCITY definition of Manchester, which was “developed
 specifically for the production and analysis of statistics” and which is
 shown in Figure <a href="#fig:manchestermap">3.2</a>. Manchester is a
 cosmopolitan city with a large university population. As shown in Figure
 <a href="#fig:manchestermap">3.2</a> (right), the high density of the
-central area allows high levels of cycling, although the surrounding
-areas have low levels of cycling. Manchester and its surrounding have
-many deprived areas.
+central area allows relatively high levels of cycling compared to the
+rest of the city.
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 
 <img src="README_files/figure-gfm/manchestermap-1.png" alt="Maps of Greater Manchester (top) and the case study area (City of Manchester)"  />
 
 <p class="caption">
 
-<span id="fig:manchestermap"></span>Figure 3.2: Maps of Greater
-Manchester (top) and the case study area (City of Manchester)
+Figure 3.2: Maps of Greater Manchester (top) and the case study area
+(City of Manchester)
 
 </p>
 
 </div>
 
 In the context of other cities defined in the TCITY dataset, Manchester
-is a medium-sized city, with a middle-to-low level of cycling (see
-Figure <a href="#fig:manchestercyclinglevels">3.3</a>).
+is a large city, with a mid-level of cycling (Figure
+<a href="#fig:manchestercyclinglevels">3.3</a>).
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 
-<img src="./extras/uk_cities_mode_share.png" alt="Cycling levels in the case study area (City of Manchester)" width="1729" />
+<img src="./data/uk_cities_mode_share_2021.png" alt="Cycling levels in cities across the country" width="75%" />
 
 <p class="caption">
 
-<span id="fig:manchestercyclinglevels"></span>Figure 3.3: Cycling levels
-in the case study area (City of Manchester)
+Figure 3.3: Cycling levels in cities across the country
 
 </p>
 
@@ -373,8 +372,7 @@ going back down for longer distances (see Figures
 
 <p class="caption">
 
-<span id="fig:potdemhistograms"></span>Figure 3.4: Distribution of
-potential cycling demand
+Figure 3.4: Distribution of potential cycling demand
 
 </p>
 
@@ -386,8 +384,7 @@ potential cycling demand
 
 <p class="caption">
 
-<span id="fig:desirefacetcycling"></span>Figure 3.5: Current and
-potential cycling demand
+Figure 3.5: Current and potential cycling demand
 
 </p>
 
@@ -491,8 +488,7 @@ demand passes through tertiary roads, as expected.
 
 <p class="caption">
 
-<span id="fig:flowsfacetunweighted"></span>Figure 3.6: Flow results
-based on unweighted shortest paths (Manchester)
+Figure 3.6: Flow results based on unweighted shortest paths (Manchester)
 
 </p>
 
@@ -504,8 +500,7 @@ based on unweighted shortest paths (Manchester)
 
 <p class="caption">
 
-<span id="fig:flowsfacetweighted"></span>Figure 3.7: Flow results based
-on weighted shortest paths (Manchester)
+Figure 3.7: Flow results based on weighted shortest paths (Manchester)
 
 </p>
 
@@ -576,8 +571,8 @@ necessary to avoid circuitous cycling networks (DfT, 2020a).
 
 <p class="caption">
 
-<span id="fig:boxplotcircuity"></span>Figure 3.8: Effect of banning
-cyclists from trunk and primary roads for all OD pairs (Manchester)
+Figure 3.8: Effect of banning cyclists from trunk and primary roads for
+all OD pairs (Manchester)
 
 </p>
 
@@ -663,8 +658,7 @@ are more likely to have a local catchment area of cyclists.
 
 <p class="caption">
 
-<span id="fig:cyclinghistmanc"></span>Figure 3.9: Cycling commuting
-distance - Manchester (2011 census data)
+Figure 3.9: Cycling commuting distance - Manchester (2011 census data)
 
 </p>
 
@@ -701,8 +695,8 @@ communities and one small one (Figure
 
 <p class="caption">
 
-<span id="fig:communitiesmanchester"></span>Figure 3.10: Communities
-based on potential cycling demand between MSOAs (Manchester)
+Figure 3.10: Communities based on potential cycling demand between MSOAs
+(Manchester)
 
 </p>
 
@@ -779,8 +773,7 @@ network is in community 5.
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 
-<span id="tab:personkmtable"></span>Table 3.1: Total person-km in
-different communities (Manchester)
+Table 3.1: Total person-km in different communities (Manchester)
 
 </caption>
 <thead>
@@ -909,8 +902,8 @@ Algorithm 2.
 
 <p class="caption">
 
-<span id="fig:growthtotal"></span>Figure 3.11: Comparing overall
-(dashed) and community level person-km satisfied (Manchester)
+Figure 3.11: Comparing overall (dashed) and community level person-km
+satisfied (Manchester)
 
 </p>
 
@@ -937,8 +930,8 @@ weighting profile defined in Table
 
 <p class="caption">
 
-<span id="fig:growth3MapandBar"></span>Figure 3.12: Road segment
-priority (left), disaggregated by road type (right) - egalitarian growth
+Figure 3.12: Road segment priority (left), disaggregated by road type
+(right) - egalitarian growth
 
 </p>
 
@@ -965,8 +958,7 @@ there is little difference between both algorithms.
 
 <p class="caption">
 
-<span id="fig:componentsandGCC"></span>Figure 3.13: Network
-characteristics
+Figure 3.13: Network characteristics
 
 </p>
 
@@ -1009,7 +1001,8 @@ the approach in other cities[^5].
 <!-- accompanies this paper (to be released as open source software when the -->
 <!-- paper is published).]. -->
 <!-- For after publishing 
-&#10;^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]. -->
+
+^[The results are easily reproducible for all UK cities, and can also be reproduced for cities elsewhere given the availability of commuter data. Instructions for reproducing the results are detailed in this [Github repository](https://github.com/Hussein-Mahfouz/cycle-networks)]. -->
 
 The approach can identify not only where there is high potential for
 cycling but also trade-offs between stress levels (related to motor
@@ -1339,6 +1332,12 @@ sustainable transport planning. Journal of transport and land use 10,
 Lucas, K., Van Wee, B., Maat, K., 2016. A method to evaluate equitable
 accessibility: Combining ethical theories and accessibility-based
 approaches. Transportation 43, 473–490.
+
+</div>
+
+<div id="ref-ons2015cities" class="csl-entry">
+
+Major towns and cities, 2015.
 
 </div>
 

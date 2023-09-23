@@ -1,0 +1,23 @@
+---
+title: "Response to Reviewers"
+#author: "Hussein"
+date: "23/09/2023"
+output:
+  pdf_document:
+    #extra_dependencies: ["subcaption", "float"]
+    #keep_tex: true
+---
+
+# Reviewer 2
+
+> *The article has been improved since the last revision; however, it is still difficult for the reader to understand the case study, which has not been described by the authors. Please introduce another section within your chapter 3 "3.2. Case study description" with more detail on the territorial context. Not all the readers are European, neither not everybody knows about Manchester socio-demographic patterns and transport habits.*
+
+We have included the recommended **Section 3.2. Case study area**. The section has maps and text on (a) the case study boundaries and a description of the city within greater Manchester, (b) cycling mode share in the city. We also added a plot in the same section that compares cycling mode share in the city of Manchester to other cities in the UK.
+
+We also have a couple of lines at the end of the Introduction that describe the transport plans of Greater Manchester and its ambitious targets for walking and cycling.
+
+# Reviewer 4
+
+> *Version submitted did not address the comments. Response to reviewers said the suggested papers were referenced and clear section stating differences was present. Did not see that at all in the submitted version.*
+
+This is incorrect. We had included both citations. Perhaps there was confusion between the old draft and the new one. This submitted draft has the citations mentioned. The citations and the text relevant to them have not been changed.
